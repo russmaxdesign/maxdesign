@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Using the required attribute with the select element - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About us</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/training/">Training</a></li>
+      <li><a href="/contact-us/">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Using the required attribute with the select element</h1>
+
+<p class="color-light font-small">Published: <time datetime="2012-11-03">3 November 2012</time></p>
+
+<p>I recently received the following question:</p>
+
+<blockquote>
+  <p>I tried to add the <code>"required"</code> attribute to the <code>&lt;select&gt;</code> element but now my page won't validate. Is the <code>"required"</code> not allowed on a <code>&lt;select&gt;</code> element?</p>
+</blockquote>
+
+<h3>Answer</h3>
+<p>First of all, the <code>"required"</code> attribute is used to specify that the element is a required part of the form submission.</p>
+<p>The <code>"required"</code> attribute can be written in the following ways:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;select required="required"&gt;
+&lt;select required='required'&gt;
+&lt;select required=required&gt;
+&lt;select required=""&gt;
+&lt;select required=''&gt;
+&lt;select required&gt;
+</code></pre>
+
+<p>The <code>&lt;select&gt;</code> element does allow the <code>"required"</code> attribute. However, there are some requirements associated with using the <code>"required"</code> attribute with the <code>&lt;select&gt;</code> element:</p>
+
+<blockquote>
+  <p style="margin-bottom: .5em;"><em>A &lt;select&gt; element with a required attribute and without a multiple attribute, and whose size is "1", must have a child option element.</em></p>
+  <p><em>The first child option element of a &lt;select&gt; element with a required attribute and without a multiple attribute, and whose size is “1”, must have either an empty value attribute, or must have no text content.</em></p>
+  <p class="source"><a href="http://www.w3.org/TR/html-markup/select.html">HTML: The Markup Language - select – option-selection form control</a></p>
+</blockquote>
+
+<p>So, if you are using the <code>"required"</code> attribute with a <code>&lt;select&gt;</code> element</p>
+
+<ul>
+  <li>you must have at least one child element</li>
+  <li>the first child element must have either an empty value attribute OR</li>
+  <li>the first child element must have no text content.</li>
+</ul>
+
+<h3>Example 1</h3>
+<p>The example below has a <code>&lt;select&gt;</code> element with the <code>"required"</code> attribute. This example is <strong>not</strong> considered valid as the first child element has no empty value attribute, or no content.</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+  &lt;div&gt;
+    &lt;label for="State"&gt;State&lt;/label&gt; 
+    &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
+      <strong>&lt;option&gt;Choose&lt;/option&gt;</strong>
+      &lt;option value="act"&gt;ACT&lt;/option&gt;
+      &lt;option value="nsw"&gt;NSW&lt;/option&gt;
+      &lt;option value="nt"&gt;NT&lt;/option&gt;
+      &lt;option value="qld"&gt;QLD&lt;/option&gt;
+      &lt;option value="sa"&gt;SA&lt;/option&gt;
+      &lt;option value="tas"&gt;TAS&lt;/option&gt;
+      &lt;option value="vic"&gt;VIC&lt;/option&gt;
+      &lt;option value="wa"&gt;WA&lt;/option&gt;
+      &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+<h3>Example 2</h3>
+<p>This example <strong>is</strong> considered valid as the first child element has an empty value attribute.</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+  &lt;div&gt;
+    &lt;label for="State"&gt;State&lt;/label&gt; 
+    &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
+      &lt;option <strong>value=""</strong>&gt;Choose&lt;/option&gt;
+      &lt;option value="act"&gt;ACT&lt;/option&gt;
+      &lt;option value="nsw"&gt;NSW&lt;/option&gt;
+      &lt;option value="nt"&gt;NT&lt;/option&gt;
+      &lt;option value="qld"&gt;QLD&lt;/option&gt;
+      &lt;option value="sa"&gt;SA&lt;/option&gt;
+      &lt;option value="tas"&gt;TAS&lt;/option&gt;
+      &lt;option value="vic"&gt;VIC&lt;/option&gt;
+      &lt;option value="wa"&gt;WA&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+<h3>Example 3</h3>
+<p>This example <strong>is also </strong> considered valid as the first child element has no content.</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+  &lt;div&gt;
+    &lt;label for="State"&gt;State&lt;/label&gt; 
+    &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
+      <strong>&lt;option&gt;&lt;/option&gt;</strong>
+      &lt;option value="act"&gt;ACT&lt;/option&gt;
+      &lt;option value="nsw"&gt;NSW&lt;/option&gt;
+      &lt;option value="nt"&gt;NT&lt;/option&gt;
+      &lt;option value="qld"&gt;QLD&lt;/option&gt;
+      &lt;option value="sa"&gt;SA&lt;/option&gt;
+      &lt;option value="tas"&gt;TAS&lt;/option&gt;
+      &lt;option value="vic"&gt;VIC&lt;/option&gt;
+      &lt;option value="wa"&gt;WA&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

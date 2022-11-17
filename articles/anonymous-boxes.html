@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Anonymous boxes - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About us</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/training/">Training</a></li>
+      <li><a href="/contact-us/">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Anonymous boxes</h1>
+
+<p class="color-light font-small">Published: <time datetime="2012-10-01">1 October 2012</time></p>
+
+<p><a href="http://www.w3.org/TR/CSS2/visuren.html#anonymous-block-level">Anonymous boxes</a> are defined as:</p>
+
+<ul>
+  <li>Any content that inside a block level parent element, but only content that is not wrapped directly inside another element</li>
+  <li>There is either one or more block level element or one or more inline element present inside the parent element.</li>
+</ul>
+
+<p>In the example below, the "some text" is defined as an anonymous box:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;div&gt;
+  <span class="highlight">Some text</span>
+  &lt;p&gt;Paragraph&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>In the example below, the "some text" is NOT defined as an anonymous box as there are no other elements present inside the parent element:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;div&gt;
+  Some text 
+&lt;/div&gt;
+</code></pre>
+
+<h2>Types of anonymous boxes</h2>
+
+<p>There are two types of anonymous boxes; anonymous block boxes and anonymous inline boxes. Whether the anonymous boxes are inline or block is determined by what types of elements are also inside the parent element.</p>
+
+<h2>Anonymous block boxes</h2>
+
+<p>In the example below:</p>
+<ul>
+  <li>The parent element, the &lt;div&gt;, is a block level box</li>
+  <li>The &lt;p&gt; elements are block level element.</li>
+  <li>The &lt;em&gt; element is an inline element</li>
+</ul>
+
+<pre class="code-sample"><code class="language-markup">&lt;div&gt;
+  <span class="highlight">Some text</span>
+  &lt;p&gt;Paragraph&lt;/p&gt; 
+  <span class="highlight">Some text</span>
+  &lt;p&gt;Paragraph&lt;/p&gt;
+  &lt;em&gt;some emphasis text&lt;/em&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>If there is one or more block level elements inside the block level parent element, then any content that is not wrapped in an element would be an "anonymous block box" - regardless of whether there are also inline elements present as well.</p>
+<p>The two instances of "Some text" are not wrapped inside any element - therefore they are anonymous boxes. As there are block level elements inside the parent, these instances of “some text” are anonymous block boxes</p>
+
+<h2>Anonymous inline boxes</h2>
+
+<p>In the example below:</p>
+<ul>
+  <li>The parent element, the &lt;div&gt;, is a block level element</li>
+  <li>The &lt;em&gt; and &lt;b&gt; elements are inline elements</li>
+</ul>
+
+<pre class="code-sample"><code class="language-markup">&lt;div&gt;
+  <span class="highlight">Some text</span> &lt;em&gt;emphasis&lt;/em&gt; <span class="highlight">Some text</span> &lt;b&gt;bold&lt;/b&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>If there are only inline elements inside the block level parent element, then any content that is not wrapped in an element would be an "anonymous inline box".</p>
+
+<p>The two instances of "Some text" are not wrapped inside any element - therefore they are anonymous boxes. As there are only inline elements inside the parent, these instances of “some text” are anonymous inline boxes</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

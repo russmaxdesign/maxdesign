@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ideal line length in ems - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link href="/assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About us</a></li>
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/training/">Training</a></li>
+      <li><a href="/contact-us/">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ideal line length in ems</h1>
+
+<p class="color-light font-small">Published: <time datetime="2013-06-21">21 May 2013</time></p>
+
+<p>Let's assume that you have a chunk of body copy and you place it inside a container.</p>
+
+<h2>Question 1: is there an optimal line length for copy?</h2>
+
+<p>The optimal line length for your body text is considered to be 50-70 characters per line.</p>
+
+<h2>Question 2: What type of unit should you use to control the container width?</h2>
+
+<p>The best unit for setting the width of the container is "em" units as they scale with the font-size.</p>
+
+<h2>Question 3: How do we convert 50-75 characters into ems?</h2>
+
+<p>This is the hardest question as the content itself can affect how many characters appear per line.</p>
+
+<p>I decided to do an experiment with a range of well known texts:</p>
+
+<ol>
+  <li>"de Finibus Bonorum et Malorum", by Cicero</li>
+  <li>"Far far away"</li>
+  <li>"The Sorrows of Werther", J. W. von Goethe</li>
+  <li>"Metamorphosis", Franz Kafka</li>
+  <li>"The quick brown fox" pangram</li>
+</ol>
+
+<p>I took ten lines of text from each of these different examples, and then measured how many characters appeared per line at a range of different "em" widths.</p>
+
+<p>Here is the <a href="http://maxdesign.com.au/jobs/sample-line-length/index.htm">sample page</a> to show how the measuring was done.</p>
+
+<p>Below is a table of the results, including an overall average across all five example texts.</p>
+
+<h2>Key to table</h2>
+
+<ul>
+  <li>01: Column width in ems</li>
+  <li>02: "de Finibus Bonorum et Malorum", by Cicero</li>
+  <li>03: "Far far away"</li>
+  <li>04" "The Sorrows of Werther", J. W. von Goethe</li>
+  <li>05: "Metamorphosis", Franz Kafka</li>
+  <li>06: "The quick brown fox" pangram</li>
+  <li>07: Average characters over 10 lines</li>
+  <li>08: Average characters per line</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>01</th>
+      <th>02</th>
+      <th>03</th>
+      <th>04</th>
+      <th>05</th>
+      <th>06</th>
+      <th>07</th>
+      <th>08</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>21</td>
+      <td>496</td>
+      <td>501</td>
+      <td>499</td>
+      <td>488</td>
+      <td>478</td>
+      <td>492.4</td>
+      <td><strong>49</strong></td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>510</td>
+      <td>509</td>
+      <td>529</td>
+      <td>534</td>
+      <td>514</td>
+      <td>519.2</td>
+      <td><strong>52</strong></td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>536</td>
+      <td>533</td>
+      <td>556</td>
+      <td>536</td>
+      <td>533</td>
+      <td>538.8</td>
+      <td><strong>54</strong></td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>576</td>
+      <td>579</td>
+      <td>581</td>
+      <td>565</td>
+      <td>554</td>
+      <td>571</td>
+      <td><strong>57</strong></td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>589</td>
+      <td>579</td>
+      <td>585</td>
+      <td>598</td>
+      <td>588</td>
+      <td>587.8</td>
+      <td><strong>59</strong></td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>612</td>
+      <td>608</td>
+      <td>606</td>
+      <td>610</td>
+      <td>605</td>
+      <td>608.2</td>
+      <td><strong>61</strong></td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>627</td>
+      <td>648</td>
+      <td>644</td>
+      <td>633</td>
+      <td>623</td>
+      <td>635</td>
+      <td><strong>64</strong></td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>659</td>
+      <td>659</td>
+      <td>666</td>
+      <td>663</td>
+      <td>652</td>
+      <td>659.8</td>
+      <td><strong>66</strong></td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>687</td>
+      <td>694</td>
+      <td>701</td>
+      <td>700</td>
+      <td>665</td>
+      <td>689.4</td>
+      <td><strong>69</strong></td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>713</td>
+      <td>716</td>
+      <td>714</td>
+      <td>716</td>
+      <td>699</td>
+      <td>711.6</td>
+      <td><strong>71</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As you can see, the average seems to suggest that your container width should be set between the narrowest width of <strong>21em</strong> (approx 49 characters per line) to the widest width of <strong>30em</strong> (approx 71 characters per line).</p>
+
+<p>I hope this is helpful for anyone asking the question "How wide should my columns be in ems".</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+
