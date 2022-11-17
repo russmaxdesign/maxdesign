@@ -41,7 +41,7 @@ main {
 footer {  
   margin: 0 2em;
   padding: 1em 0;
-  border-top: 1px solid #888;
+  border-top: 1px solid #969292;
 }
 
 footer ul {
@@ -68,7 +68,7 @@ body
 body {
   margin: 0;
   padding: 0;
-  color: #555;
+  color: #514D4D;
   background: #fff;
   font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif; 
   font-weight: 400;
@@ -84,7 +84,7 @@ headings
 h1,
 h2,
 h3 {
-  color: #444;
+  color: #787373;
   font-weight: 500;
 }
 
@@ -146,7 +146,10 @@ dd {
 }
 
 hr {
-  margin: 1em 0 3em;
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid #969292;
+  margin: 3em 0;
 }
 
 /* ---------------------
@@ -242,11 +245,11 @@ pre {
 code {
   color: green;
   font-family: Consolas, monaco, courier, monospace;
-  font-size: .95em;
 }
 
 pre code {
   color: #fff;
+  font-size: .95em;
 }
 
 
@@ -286,7 +289,7 @@ legend {
   display: block;
   width: 100%;
   padding: 0.5em;
-  border: 1px solid #999;
+  border: 1px solid #969292;
   font-size: 1em;
   line-height: 1;
   font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif; 
