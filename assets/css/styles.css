@@ -104,7 +104,7 @@ h3 {
 }
 
 h4 {
-  margin: 1em 0;
+  margin: 1em 0 .5em;
   font-size: 1em;
 }
 
@@ -133,11 +133,13 @@ li:last-of-type {
 
 dl {
   margin: 1em 0 1.5em;
+  line-height: 1.5;
 }
 
 dt {
   margin: 0 0 .5em;
   font-weight: bold;
+  line-height: 1.5;
 }
 
 dd {
@@ -211,6 +213,7 @@ table {
 }
 
 caption {
+  color: #787373;
   text-align: left;
   font-weight: bold;
   padding: 0 0 0.5em;
@@ -221,13 +224,19 @@ th,
 td {
   text-align: left;
   vertical-align: top;
-  border: 1px solid #aaa;
+  border: 1px solid #ccc;
   padding: .5em;
 }
 
-th {
+thead th {
+  font-weight: bold;
   background: #eee;
 }
+
+th {
+  font-weight: normal;
+}
+
 
 
 /* ---------------------
@@ -375,6 +384,17 @@ classes
   font-size: .8em;
   display: inline-block;
   margin: 0 0 0 .5em;
+}
+
+.metadetails-section {
+  color: #777;
+  font-size: .8em;
+  display: inline-block;
+  margin: 0;
+}
+
+.metadetails-paragraph {
+  margin: .2em 0 2em;
 }
 
 .sr-only,

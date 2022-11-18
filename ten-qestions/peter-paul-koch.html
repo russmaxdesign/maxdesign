@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Peter-Paul Koch - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Peter-Paul Koch</h1>
+
+<p class="metadetails">Published: <time>12 October 2006</time></p>
+
+<p>
+  <a href="http://www.quirksmode.org/" title="Quirksmode - for all your browser quirks">Peter-Paul Koch</a> has lived in Amsterdam, the Netherlands, all his life. He is a freelance web developer - which means you can hire him - specializing in client side programming - HTML, CSS, JavaScript, with emphasis on the latter. In addition he writes rather a lot and he teaches CSS and JavaScript courses whenever he can.
+</p>
+<dl>
+  <dt>[<a rel="bookmark" title="Permanent link: Question one" href="#one">1</a>] <a name="one"></a>Russ: You recently redesigned <a href="http://www.quirksmode.org/">www.quirksmode.org</a>. You have dropped the frames and have also decided to ignore IE6 issues. Why were these decisions made?</dt>
+  <dd> 
+    <p>Peter-Paul: The IE 6 issues are easily explained. Since Microsoft now has a browser that supports decent CSS, I don't see any reason to continue churning out workarounds, hacks, and other special measures to accomodate IE6. Sure, in a web site you create for paying clients that's not possible yet, but QuirksMode is my personal site, and I have more leeway there. I decided to use this leeway, drop IE6 support, and see what would happen next.</p>
+    <p>What happened next was that I created one single style sheet for all browsers, and It Just Worked! I never looked back to IE6 (except to make sure that people can click on links).</p>
+    <p>The frames issue is more complicated; not the reasons why I dropped them, but the reasons why I used them in the first place. Even back in 2003, when I created QuirksMode.org, frames were decidedly old-fashioned. Now I understand that back then I really wanted Ajax. Basically I wanted to give the impression of a single-page interface; and that was what the frames fad of 1996-9 was all about. (The DHTML hype happened for exactly the same reasons, BTW.)</p>
+    <p>In any case, we're all groping around for a technique that allows us to blend the best aspects of a single-page interface and a document-based Web. I tried it with frames, and it didn't work. I'm now trying it with simple (repeat simple) Ajax, and we'll have to see what happens next.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question two" href="#two">2</a>] <a name="two"></a>Russ: You launched <a href="http://www.quirksmode.org/blog/archives/2006/07/browser_detect.html">Browser detect 2.0</a> a while ago. Why were you concerned about releasing it to the public? Does it contain too many calories?</dt>
+  <dd> 
+    <p>Peter-Paul: Definitely! A diet of browser detects leads to obese sites that don't respond well to unexpected stimuli (say, a firefox fleeing from a safari of opera aficionados).</p>
+    <p>Seriously, though, browser detects are tricky, both technically and in their consequences. We all know that you should never use a browser detect and we also know that entire flocks of amateur web developers use them wholesale nonetheless. Do I encourage the amateurs by publishing a browser detect that's better than any of the others? I hope not; it's unlikely they read my site.</p>
+    <p>Besides, there were important reasons to publish my research. I discovered that the existence of the <code>navigator.vendor</code> property makes JavaScript browser detects more reliable than server side browser detects. Briefly, this property always identifies Safari, something a <code>navigator.userAgent</code>-based detect not necessarily does: Safari users can change their identification string easily and totally. All server side detects depend on <code>navigator.userAgent</code>, since that's the only string that's sent to the server; all server side detects are therefore less reliable than JavaScript detects.</p>
+    <p>This is the most important change in browser detection techniques for years, and therefore I decided to publish. A few days later, though, someone had the gall to suggest a browser detect for solving CSS issues! Can you picture it? We must use an (incorrect) JavaScript detect in order to decide which CSS a browser can handle. This flagrant nonsense should be rooted out once and for all.</p>
+    <p>So that's my dilemma in a nutshell. On the one hand, an important technical change should be documented. On the other, this might encourage people to use browser detects. I published, but I still don't know if that was the right decision.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question three" href="#three">3</a>] <a name="three"></a>Russ: You new book <a href="http://www.quirksmode.org/book/">ppk on JavaScript</a> just hit the shelves. What aspects of JavaScript will you cover in the book?</dt>
+  <dd> 
+    <p>Peter-Paul: All aspects &lt;g&gt;. When I started planning I had this idea of treating a few intermediate to advanced topics, but the book kind of grew into its own without me having much to do with the process. My advance planning was good; I spent the first month of work on selecting and grooming the example scripts, and deciding on the overall book structure. Nonetheless, once I actually started writing, the book became somewhat different than I'd expected.</p>
+    <p>As a consequence it gives you all the details that, in my opinion, you need to become an accomplished overall JavaScript programmers. Although the technical chapters of course form the meat of my book, the first four chapters hardly talk about code, but try to embed JavaScript in its natural habitat. What is its purpose? Its context? What about the browsers? How do you prepare a script efficiently and have it cooperate smoothly with the HTML structural and the CSS presentation layers?</p>
+    <p>In addition the book uses eight example scripts I wrote for real-world clients who paid me real-world money. That means the scripts actually do something that other people perceive as useful, instead of only illustrating a few topics. As far as I know this has never been done before in a JavaScript book.</p>
+    <p>The book doesn't talk about libraries at all, by the way. Nonetheless, any library writer must understand everything that's in my book, and any library user really ought to, too.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question four" href="#four">4</a>] <a name="four"></a>Russ: Who is the book aimed at - beginner, intermediate or hard core JavaScripters?</dt>
+  <dd> 
+    <p>Peter-Paul: That's a tricky question. By plan, it's aimed at intermediate and hard core scripters, and during the writing I deliberately didn't consider the wishes and needs of beginners at all. Nonetheless, now that it's finished and I'm able to appreciate the result, I've started wondering about the beginners again. Right now I just don't know; I'll have to get some feedback from readers who've never done any JavaScript at all.</p>
+    <p>If you're a total beginner without any programming experience whatsoever, it might be best to read Jeremy Keith's <a href="http://domscripting.com/book/">DOM Scripting</a> book first, and mine only afterwards. Jeremy has aimed his book straight at beginners; I haven't.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question five" href="#five">5</a>] <a name="five"></a>Russ: What do you think of the Ajax hype? Will it change the Web as much as its proponents claim?</dt>
+  <dd> 
+    <p>Peter-Paul: Frankly, I think the Ajax hype has reached its zenith. From now on it can only go down. We've got countless frameworks and libraries that do simple things in unimaginably complex ways; we've got countless sites implementing Ajax cluelessly--it's the DHTML hype reborn. Apparently the web development community needs such a hype every five years or so.</p>
+    <p>Of course there are a few sites that use Ajax in a truly innovative way, and we should study their interface carefully in order to understand how Ajax can enhance a site's usability, but the vast majority out there goes only for the wow-factor, and doesn't stop to think about the Why instead of the How.</p>
+    <p>To me, the question is not whether the Ajax hype will end, but when and how. Right now I think that Ajax's second birthday in February 2007 will see the appearance of the first critical articles on major sites, and that interest will gradually dwindle during the rest of 2007, until the hype will kind of fall apart in its components: a bit of JavaScript and a lot of hot air. I could be a few months off either way, though, but the span of its life is measured in months, not years.</p>
+    <p>The end of the Ajax hype will have both good and bad consequences. Once the hype ends, all kinds of fortune-seekers and authors of framework bloatware will recede into the shadows, and that's good. However, many people that in recent years came to JavaScript from other disciplines, notably the "hard" server side languages, will also drift back to their native languages, and I have mixed feelings about that.</p>
+    <p>On the one hand I feel that many libraries written by such programmers take a far too complex view of JavaScript, don't consider accessibility at all, and address browser problems by creating yet more herds of Java-like objects (if they want to program Java, they should program Java, and not JavaScript!).</p>
+    <p>On the other hand, though, these programmers know far more of application design and its multitude of problems, knowledge the average web developer lacks. I'd really like some of the better programmers to stick around and teach us, but once the hype is ended they might all disappear.</p>
+    <p>What the Ajax hype will leave us is a slight hangover, a technical trick that occasionally has some usability benefits, and a few libraries that are better than the common run and will inspire web developers to structure their scripts better.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question six" href="#six">6</a>] <a name="six"></a>Russ: What do you think of JavaScript libraries in general and are there any that you would recommend?</dt>
+  <dd> 
+    <p>Peter-Paul: I don't use libraries, so I can't recommend any of them. That said, I'm still planning to look closer into <a href="http://prototype.conio.net/">Prototype</a> and <a href="http://jquery.com/">jQuery</a>, just to see how they're built and what their purpose is. I'm not sure when I'll actually do that, though.</p>
+    <p>As to my general opinion of JavaScript libraries, I think it's common knowledge by now that I don't really like them, for several reasons:</p>
+    <ol>
+      <li>The average library is just too complicated and inserts too many abstraction layers between the web developer and the browser he's trying to influence.</li>
+      <li>If you totally rely on libraries, once something breaks you don't have the faintest idea how to mend it because you've never worked with browsers.</li>
+      <li>Most libraries spring from the axioma that JavaScript, as a programming language, is somehow Wrong and must be made Right (which usually means "more like Java"). I'm getting quite tired of this arrogant attitude; if you want to use JavaScript, learn JavaScript, and don't try to make the language behave as another language.</li>
+      <li>Sometimes (especially, I think, by non-Web ICT companies that want to hitch a ride on the Ajax hype), JavaScript libraries are used as a substitute for actually learning JavaScript. In "hard" programming environments JavaScript is a very low-status language, and in order to get programmers of intermediate or senior level to work with it is  nearly impossible. Therefore complex abstraction layers are necessary to solve an essentially social problem. I wonder why these companies don't just hire a competent JavaScripter.</li>
+    </ol>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question seven" href="#seven">7</a>] <a name="seven"></a>Russ: Let's talk JavaScript and accessibility. What accessibility issues should developers be aware of when using JavaScript solutions?</dt>
+  <dd> 
+    <p>Peter-Paul: Although <a href="http://boxofchocolates.ca/">Derek Featherstone</a> and <a href="http://brothercake.co.uk/">James Edwards</a>, especially, are doing ground-breaking work by defining the problems screen readers and keyboard users have with JavaScript, the first and most important accessibility issue remains: What happens when JavaScript is not supported?</p>
+    <p>Basically there are two ways of dealing with this problem:</p>
+    <ol>
+      <li>Make sure the JavaScript is used only for extra features, while the basic HTML contains all necessary ingredients for bare-bones surfing. "Accessible" does not mean "no JavaScript used", it just means that JavaScript is used responsibly and that there's a noscript fallback, even though this fallback will likely be less usable than the scripted site. </li>
+      <li>Make a scripted and a noscript version of the site. This solution is usually quite expensive in terms of time and money, so to me the first solution seems to be the better one. </li>
+    </ol>
+    <p>I vastly prefer option 1, and I'm trying to implement it in any site I create. After all, accessibility is a necessary ingredient of unobtrusive scripting.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question eight" href="#eight">8</a>] <a name="eight"></a>Russ: What is your definition of "unobtrusiveness" and how does it relate to JavaScript? Does it, as Cameron Adams has often suggested, involve Ninjas?</dt>
+  <dd> 
+    <p>Peter-Paul: Right, Cameron was bound to bring up that matter. I haven't forgotten <a href="http://flickr.com/photos/ianlloyd/170007138/">his attempt to steal my hair</a> earlier this year in London, and since anything I say will be used against him in a court of law I prefer not to comment on the Ninjas issue without consulting my thrillingly expensive lawyers, who unfortunately are out of office right now.</p>
+    <p>Lawyers or not, an unobtrusive script should be:</p>
+    <ul>
+      <li>usable; ie. it confers a usability benefit on a site</li>
+      <li>accessible; ie. if the script doesn't work, the site can still be used, even though loss of some usability is inevitable</li>
+      <li>easy to implement; ie. web developers should only have to add the script file and a few strategic hooks such as ID</li>
+      <li>separate; ie. it should reside in its own .js file and not mess up the HTML structural layer</li>
+    </ul>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question nine" href="#nine">9</a>] <a name="nine"></a>Russ: What is your opinion of IE7 - especially in relation it its JavaScript support.</dt>
+  <dd> 
+    <p>Peter-Paul: IE7's JavaScript support hardly differs from IE6's, except that the memory leak problem that was in fashion a year ago has been solved. As far as I've understood, JavaScript changes will come only in the next version.</p>
+    <p>In CSS, the differences are huge, and my opinion of the browser is good. True, it still has the least CSS support of the Big Four, but where there was a yawning gulf between IE6 and the rest, there's only a modest gully between IE7 and the rest.</p>
+    <p>I wish standards-aware web developers were more supportive of Chris Wilson and his team. Yes, there are still quite a few problems to be solved, but the MSIE team is aware of that fact, gets its information from the web standards community, and has already solved a significant amount of tricky issues. There is no reason to assume their pace will slacken.</p>
+    <p>I mean, what more can we ask for?</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Question ten" href="#ten">10</a>] <a name="ten"></a>Russ: What's next? Any exciting projects, articles or presentation in the pipeline?</dt>
+  <dd> 
+    <p>Peter-Paul: Well, for starters I'm planning to go to SxSW, and in order to save the admission cost I want to host a panel over there. While writing this I'm not sure yet if I'm selected; we'll see.</p>
+    <p>Other than that there are book release parties in Amsterdam and London, and a whole slew of articles I'd like to write ... one day. Unfortunately, writing a book seriously diminishes your desire to write other, lesser stuff (and after a book an article definitely counts as "lesser"). It's been three months now since I stopped writing the book, and I just wrote a bunch of blog posts and this interview, despite having at least three ideas that are worthy of a solid article on a major Web development site.</p>
+    <p>As to projects, for the last year or so I've been working on an interesting one, but I can't post about it before some serious accessibility issues have been solved.</p>
+    <p>So yes, there's definitely something coming next, but I'm not quite sure what or when.</p>
+  </dd>
+  <dt>Russ: Thank you for the interview!</dt>
+  <dd>Peter-Paul: It was a pleasure; thanks so much.</dd>
+</dl>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

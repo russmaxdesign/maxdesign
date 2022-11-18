@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Anatomy of a comment - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Anatomy of a comment</h1>
+
+<p class="metadetails">Published: <time datetime="2008-02-02">2 February 2008</time></p>
+
+<p>The Australian Museum web team recently began looking at commenting. We wanted to see what sort of items could appear in a comment.</p>
+
+<p>After a look around a wide variety of sites, we came up with a list of possible aspects that could be included in a comment:</p>
+
+<ol>
+  <li>Author name: who wrote the comment</li>
+  <li>Authors url: the authors website</li>
+  <li>Authors <a href="http://en.wikipedia.org/wiki/Avatar_(virtual_reality)">avatar</a>: the digital representation of the author</li>
+  <li><a href="http://en.wikipedia.org/wiki/Permalink">Permalink</a>: a permanent link to the specific comment</li>
+  <li>Number: A reference number for the specific comment</li>
+  <li>Date: date of comment</li>
+  <li>Time: time of comment</li>
+  <li>Comment: the actual comment</li>
+  <li>Edit this comment: allows authors to edit their comments (suggested by <a href="http://www.technotext.nl/blog/">IM</a>)</li>
+  <li>Other comments by this person: <a href="http://www.snook.ca/comments/byperson/ce0f8df84e1e4edb3d9999740472261a">see example</a></li>
+  <li>Site owner flagging: some sort of visual distinction to shows comments from the site owner/s</li>
+</ol>
+
+<p>The biggest surprises for me was the number of sites that did not include a permalink to each comment. I was also surpirsed by the variety of methods used to "house" the permalink. These included:</p>
+
+<ol>
+  <li>Date</li>
+  <li>Time</li>
+  <li>Date and time (by far the most common option used by the 70 sample sites below)</li>
+  <li>A graphic icon</li>
+  <li>The # symbol</li>
+  <li>The word "permalink"</li>
+  <li>Comment title</li>
+</ol>
+
+<table>
+  <caption>Comment comparison chart</caption>
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Author</th>
+      <th>Avatar</th>
+      <th>Permalink</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Comment</th>
+      <th>Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><a href="http://www.zeldman.com/">Jeffrey Zeldman</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.456bereastreet.com/">456 Berea Street</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using number</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.andybudd.com/">Andy Budd</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.hicksdesign.co.uk/journal/">Hicksdesign</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.clagnut.com/">clagnut</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes - using icon</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://annevankesteren.nl/">Weblog about Markup &amp; Style</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using " permalink"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.meyerweb.com/">meyerweb.com</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using number</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.mezzoblue.com/">mezzoblue</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.37signals.com/svn/">Signal vs. Noise</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://nick.typepad.com/">Nick Bradbury</a></th>
+      <td>yes</td>
+      <td>no</td>
+      <td>yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.meryl.net/blog/index.php">Meryl's notes</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.adampolselli.com/">AdamPolselli.com</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.themaninblue.com/writing/">The Man in Blue</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://jessey.net/blog/">Si-blog</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://superfluousbanter.org/">SuperfluousBanter</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.ryanbrill.com/">Ryan Brill</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using "#"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.cameronmoll.com/">Authentic Boredom</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.veen.com/jeff/">Jeffrey Veen</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.molly.com/">Molly.com</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://blogs.msdn.com/ie/default.aspx">IEBlog</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using "#"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.mikeindustries.com/blog/">Mike Davidson</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.jasonsantamaria.com/">Jason Santa Maria</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using icon</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://hivelogic.com/">The Hivelogic Narrative</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.collylogic.com/">CollyLogic</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.shauninman.com/">ShaunInman.com</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.zooibaai.nl/b/">Zooiblog</a></th>
+      <td>yes</td>
+      <td class="no">yes</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://boxofchocolates.ca/">box of chocolates</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.allinthehead.com/">drew mclellan</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.boxesandarrows.com/">Boxes and Arrows</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.evolt.org/">evolt.org</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.sitepoint.com/">SitePoint</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://usabletype.com/">UsableType</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.brainstormsandraves.com/">Brainstorms and Raves</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using word "permalink"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.karmakars.com/">Karmakars.com</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.juicystudio.com/">Juicy Studio</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using "url string"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.mattcutts.com/blog/">Matt Cutts</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.scottberkun.com/blog/">Berkun blog</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.brucelawson.co.uk/">Bruce Lawson's personal site</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://pen-and-ink.ca/">Pen and Ink</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.rachelandrew.co.uk/">rachelandrew</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.fberriman.com/">f berriman</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://fadtastic.net/">fadtastic</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes -using "#"</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.diaryofawebsite.com/">Diary of a website</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.snook.ca/jonathan/">snook.ca</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://lesscode.org/">lesscode.org</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://citizenagency.com/blog/">Citizen Agency</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using word "permalink"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.thepickards.co.uk/">ThePickards</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://presentationzen.blogs.com/presentationzen/">Presentation Zen</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.dkeithrobinson.com/">D. Keith Robinson</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://radar.oreilly.com/">O'Reilly Radar</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://tetlaw.id.au/view/">Dexagogo</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://weblog.200ok.com.au/">the 200ok weblog</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://webkit.org/blog/">Surfin' Safari</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.wait-till-i.com/">Wait till I come!</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.findability.org">findability</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://meiert.com/en/">Jens Meiert</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://neosmart.net/blog/">The NeoSmart Files</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://raveaboutit.blogspot.com/">Rave About It Blog</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using "#"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.cross-mediaentertainment.com/">Cross-Media Entertainment</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://benbalbo.com/">Ben Balbo</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://jchyip.blogspot.com/">Jason Yip</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://bokardo.com/archives/infoprefixation/">Bokardo</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://factoryjoe.com/blog/">FactoryCity</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td>yes - using word "permalink"</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.readwriteweb.com/">Read/WriteWeb</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://blog.moltn.com/">Molt:n Core</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://blog.sessions.edu/">Notes on Design</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.smashingmagazine.com/">Smashingmagazine</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">no</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.alistapart.com/">A List Apart</a></th>
+      <td>yes</td>
+      <td class="no">no</td>
+      <td class="no">yes - using comment title</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.standardzilla.com/">Standardzilla</a></th>
+      <td>Yes</td>
+      <td class="no">no</td>
+      <td>yes - using time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+    <tr>
+      <th><a href="http://www.engadget.com/">Engadget</a></th>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">yes - using date/time</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td class="no">no</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>70/70</th>
+      <th>11/70</th>
+      <th>45/70</th>
+      <th>68/70</th>
+      <th>54/70</th>
+      <th>70/70</th>
+      <th>25/70</th>
+    </tr>
+  </tfoot>
+</table>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

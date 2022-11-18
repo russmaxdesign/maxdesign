@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Joe Clark - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Joe Clark</h1>
+
+<p class="metadetails">Published: <time>12 May 2005</time></p>
+
+<p><a href="http://www.joeclark.org/">Joe Clark</a> is a Toronto journalist, author, and accessibility consultant and has been dubbed <cite><a href="http://www.theatlantic.com/issues/2001/09/erard.htm" title="The King of Closed Captions">the king of closed captions</a></cite> by the Atlantic Monthly. Joe is the author of one of the most informative and detailed books on accessibility - <cite><a href="http://www.joeclark.org/book/">Building Accessible Websites</a></cite>. An occasionally-sought-after speaker and accessibility consultant for major organizations in Canada and the US, Joe has written over 400 articles for online and print journals and spoken around the world. 
+</p>
+<dl>
+  <dt>[<a rel="bookmark" title="Permanent link: Caption fonts" href="#fonts">1</a>] <a name="fonts"></a>Russ: What are the best fonts currently available for captioning and subtitling? Are these fonts adequate?</dt>
+  <dd>
+    <p>Joe: There aren't any "best fonts." That's the problem. And, mother of God, don't come back to me with the word "Tiresias." Maybe in the next few weeks I'll put in the couple of days' work needed to document the near-total lack of research support for this homely and unpalatable font, which is so antitypographic it doesn't even have an italic. (In the <a href="http://www.bitstream.com/font_rendering/products/dev_fonts/tiresias.html" title="Tiresias Screenfont">Tiresias Screenfont</a> variant, at least, which is what we're talking about.) Even the upcoming Cyrillic version won't have an italic, based on a firsthand report.</p>
+    <p>Really, though, we can't expect anything rational from our dear British friends when it comes to captioning (or, as they consistently misname it, "subtitling"), so we should not be surprised that a font from a Royal National Institute for the Blind researcher would be such shite. The surprising thing is that people fall for the marketing.</p>
+    <p>Anyway, the lack of such fonts is why I started <a href="http://screenfont.ca/" title="All about fonts for captions and subtitles">Screenfont.ca</a>. It's the thin end of the wedge of my larger research project, which requires a paltry 400,000 Canadian pesos to get started and a mere five to seven mil over its lifespan. Things are not going well in that respect. So I decided to put one component of that project out there for discussion. And the site is already <em>the</em> definitive reference source on the topic. I've got a few type designers conceptually onboard already, though nothing's been written down yet.</p>
+    <p>Getting back to surprises: It concerns me that the first manufacturer of captioning/subtitling software I talked to said that people could use any font they want. Well, yeah, that's the problem - and since these are Windows people we're dealing with, they think Arial Narrow is an actual "font" and use that!</p>
+    <p>Anyway, I don't want to ramble here. I end up sounding like a maudlin drunk, or maybe Sideshow Bob. But here's a bit of advice to readers: If you ever find captions or subtitles hard to read - and your eyeglass prescription is up to date and you're not sitting excessively far from the screen - then it's somebody else's fault. And it's something we can fix with custom-made and -tested fonts. Believe it.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: more links" href="#more">2</a>] <a name="more"></a>Russ: Many sites repeatedly use the link label "more" for more information on the same page. Why is this a problem?</dt>
+  <dd>
+    <p>Joe: [shrug] Well, is it? (And "link <em>text</em>," shurely?!)</p>
+    <p>You find this mostly on news sites, right? You read the hed, the dek, and the <a href="http://www.mediabistro.com/bbs/cache/t20024_1.asp" title="Why is ‘lede’ spelled that way?">lede</a>, and you then decide whether or not to read the rest of the story. You're already right there when you encounter the "More" link. What's the problem? You select the link or you don't. If you don't, you go on to the next item.</p>
+    <p>Now, if you're using a screen reader or Opera or something that can pull links out of the document and show you a list of them, well, fine, maybe it's confusing. But:</p>
+    <ol>
+      <li>Use a <code>title</code> attribute and the problem is solved. (What's that? Jaws doesn't show you the <code>title</code>? Why are you still using it?)</li>
+      <li>Why are we supposed to construct nice valid semantic documents that have a viable reading order and that <em>also</em> function equally well in the opposite case, when some program comes along and busts up and remixes our markup? Why are we expected to create documents that support <var>X</var> and also anti-<var>X</var>? I'd like the proponents of this function to tear out and randomly rearrange book pages and come back and tell us how well it works.</li>
+    </ol>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: New window" href="#new-window">3</a>] <a name="new-window"></a>Russ: Is opening new browser windows without prior notification a problem?</dt>
+  <dd>
+    <p>Joe: Yeah. It's annoying as hell, and if you're blind or learning-disabled you have to sit there and figure out what just happened. Life's too short, isn't it?</p>
+    <p>There are a few occasions when you need a popup window, as with a help screen or a calendar popup on an airline site (all of which are veritable banquets of tag soup). Usually you don't need them, and you always have to warn people beforehand, which need not be a big song-and-dance.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Skip links" href="#skip-links">4</a>] <a name="skip-links"></a>Russ: Should we be using skip links and if so, when?</dt>
+  <dd>
+    <p>Joe: Yes, when you've got a lot of navigation to skip over, or a large code sample, or - and this is a recurring favourite of the WCAG Working Group, and indicates what they spend their time worrying about - ASCII art.</p>
+    <p>One way to obviate the problem is to put navigation on the right-hand side and/or at the tail end of the source code. (This assumes a language that reads from left to right, but reminding you of that is a bit annoying, isn't it?) Or think about it this way: If you need to skip navigation, do you maybe have too much navigation? <em>Simplify, man!</em></p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: source order" href="#source-order">5</a>] <a name="source-order"></a>Russ: I have heard different opinions on source order. Some blind users prefer navigation before content. What is your opinion?</dt>
+  <dd>
+    <p>Joe: Listen, I dunno. This is one of the mysteries of CSS layouts that I've never had explained properly. (When it comes to CSS layouts, I am a joke.)</p>
+    <p>I've tried to learn about this. When I asked Tantek about it on <cite lang="fr">messagerie instantanée</cite>, he gave me an overly severe and taciturn response. We need somebody to write a nice big article about source-code order and its current support in screen readers and suchlike, paying attention to floated layouts in particular. That article would have to use real-world sites as examples (many from the Zen Garden would be fun) and do genuine testing. There might be four or five offices in the world that could even do that testing, let alone write the article.</p>
+    <p>I think the following  null hypothesis makes the most sense for sequential reading: A content order of bare-minimum navigation <em>followed by</em> search <em>followed by</em> main content <em>followed by</em> every other bit of navigation. Now, how do you get all that to happen in a nice CSS layout, especially when your screen reader finally grows enough brain cells to interpret that layout correctly? I <em>just... don't... know</em>.</p>
+    <p>Somebody want to work on this? Cameron Adams? Dez? Bueller? Anyone?</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: titles" href="#titles">6</a>] <a name="titles"></a>Russ: Titles - are they of any real value?</dt>
+  <dd>
+    <p>Joe: As more of a usability aid than anything. <span title="BRISBANE LIONS 4EVAH!">Plus a way to put a bit of cheek into your document.</span></p>
+    <p>There is an issue in accessibility compliance here. We've only recently <a href="http://lists.w3.org/Archives/Public/w3c-wai-gl/2004OctDec/0607.html" title="Mailing-list message">discovered</a> that a <a href="http://www.w3.org/TR/WAI-USERAGENT/" id="UAAG-a1" title="User Agent Accessibility Guidelines 1.0">UAAG</a>-compliant device could render the <code>title</code> of a link <em>instead of</em> the link text. A profoundly irrational thing to do, but we live in an epoch where IE/Win renders <code>alt</code> as tooltip and Windoids think that's just fine and dandy. Anything could happen.</p>
+    <p>I think the  interface for screen-reader users to indicate the presence of a <code>title</code> could be improved. This looks like a job for a <a href="http://emacspeak.sourceforge.net/raman/" title="T.V. Raman">T.V. Raman</a>-style auditory user interface. You could hear a tiny little tone or hum or ding when you hit a <code>title</code>, perhaps. A simple keystroke could read the last <code>title</code> and what it applied to. (You could stress-test that interface  with a few fun examples of <code>title</code>s within <code>title</code>s, as with the sequence <code>&lt;div title=""&gt;&lt;a title=""&gt;&lt;img title=""&gt;&lt;/a&gt;&lt;/div&gt;</code>.)</p>
+    <p>By the way, if you use <code>alt</code> and <code>title</code> on the very few pictures of text you have judiciously chosen for your Web page, then you pretty much eliminate any accessibility problems. The complaint there is that you can't resize the text in the image. Well, Opera can already do that, so I guess that was another reiteration of "IE/Win doesn't do it, so it's impossible." Readers can examine the <code>alt</code> or <code>title</code> if they can't read the picture of text. But since the author has responsibly limited such usage to logotypes or other rare cases where display typography really matters, who really cares if you can't read it? You can read the rest of the page. It's expendable.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: PDF's" href="#pdf">7</a>] <a name="pdf"></a>Russ: The accessibility of PDFs has improved significantly. Is it now safe to assume that PDFs on  sites can be accessed by assistive technology users?</dt>
+  <dd>
+    <p>Joe: It's not "safe," no - not <em>categorically</em>. It <em>can</em> be, but, since PDFs are misused, it usually is not.</p>
+    <p>I am finishing a giant piece for Zeldman on this topic. But I will say this: The Human Rights and Equal Opportunity Commission is totally wrong about PDF, and anybody in Australia who's hauled in front of them to answer for their "inaccessible" PDFs really should read my upcoming article, and possibly fly me down there to face off against HREOC mandarins in a hearing.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Forms" href="#forms">8</a>] <a name="forms"></a>Russ: With forms, if the form <code>label</code> and control are explicitly associated (with <code>label for</code>), is it still necessary to ensure that they are correctly positioned?</dt>
+  <dd>
+    <p>Joe: To my knowledge, the issue is rational reading order rather than positioning, at least for a totally-blind person.  You can generally achieve this through source-code ordering. I think there are very rare cases when using a table for layout is OK, but CSS can usually do it. Keep in mind that forms on the Web really want to be vertical, not side-by-side. Nice tidy positioning helps someone with a learning disability, as does breaking up a long form into smaller forms. I'd definitely consider a <a href="http://www.alistapart.com/articles/lowvision/" title="Big, Stark &amp; Chunky">zoom layout</a> for a large form, or at least some mechanism to make sure it works with giant fonts.</p>
+    <p>My esteemed colleague Jim Thatcher <a href="http://www.jimthatcher.com/webcourse8.htm" title="Accessible Forms">advises</a> putting <code>title</code>s on everything even if you're using perfect markup, as even really broken screen readers can figure things out that way. This, however, is a topic that should also be tested and written about. (Bueller?)</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Data tables" href="#tables">9</a>] <a name="tables"></a>Russ: With complex data tables, what is the most effective way to associate different-level headers and data cells?</dt>
+  <dd>
+    <p>Joe: <code><a href="http://www.ferg.org/section508/accessible_tables.html" title="Techniques for Accessible HTML Tables">scope</a></code>.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Pipeline" href="#pipeline">10</a>] <a name="pipeline"></a>Russ: Finally, what's in the pipeline?</dt>
+  <dd>
+    <ol>
+      <li><a href="http://www.atmedia2005.co.uk/speakers.php#clark" title="@media 2005">Speaking in London</a> in June '05.</li>
+      <li>Books two and three, neither of which is a computer book.</li>
+      <li>Having a dysfunctional family relationship with the WCAG Working Group. My Invited Expert status was recently approved. (In an Orwellian twist, one must apply to be invited.) I have thus  changed from being the <span lang="fr">bête noire</span> of WAI to being the <span lang="fr">bête noire</span> <em>inside</em> WAI. Within a 24-hour period I can receive E-mails telling me to STFU and others asking how to do things in HTML. I wish some new people would sign on. (Maybe somebody reading this would like <a href="http://www.bestkungfu.com/archive/date/2005/04/quittin-time/" title="Quittin’ time">Matt May's job</a>?)</li>
+      <li>Trying to raise an embarrassingly small amount of money for my research project.</li>
+      <li>Continuing to fight really <em>quite</em> shitty captioning and description in Canada, which is most of it.</li>
+      <li>Deciding if I still do not mind being single. This rather up in the air at the moment. (My best friend counsels me not to include this item in my response.)</li>
+      <li>Missing Australia. This is not a joke. I think about it every time I watch your quality televisual exports, like <cite>Kath &amp; Kim</cite>, <cite>The Block</cite>, and <cite>Surfing the Menu</cite>. Did you know we've now got guys in Toronto putting "Aussies are hot" in their personal ads? When can I go back?</li>
+    </ol>
+  </dd>
+  <dt>Russ: Thank's for the interview. I hope to see you back soon!</dt>
+  <dd>Joe: Me too, even if it means another 20 hours on a plane. Thanks for having me.</dd>
+</dl>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

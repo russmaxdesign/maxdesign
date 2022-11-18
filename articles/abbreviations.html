@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Styling abbreviations and acronyms - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Styling abbreviations</h1>
+
+<p class="metadetails">Published: <time datetime="2006-07-16">16 July 2006</time></p>
+
+<p>This article discusses types of abbreviations, how to mark them up and how to style them.</p>
+
+<ul>
+  <li><a href="#whyuse">Why use the <code>&lt;abbr&gt;</code> element?</a></li>
+  <li><a href="#types">Types of abbreviations</a></li>
+  <li><a href="#confusion">Confusion over the <code>&lt;abbr&gt;</code> element and "abbr" attribute</a></li>
+  <li><a href="#styling">Styling the <code>&lt;abbr&gt;</code> elements</a></li>
+  <li><a href="#related">Related articles and information</a></li>
+</ul>
+
+<hr>
+<h2 id="whyuse">Why use the <code>&lt;abbr&gt;</code> element?</h2>
+
+<p>These elements are used to add additional meaning to web content. The element is wrapped around the relevant content and the title attribute is then used to provide the additional information. For example:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+</code></pre>
+
+<p>Theoretically two groups of users can benefit from <code>&lt;abbr&gt;</code> elements:</p>
+
+<ul>
+  <li>Users of assistive devices such as screen readers and refreshable Braille devices - although it has been shown that many users of these technologies <a href="http://www.paciellogroup.com/blog/?p=718">cannot access the title attribute</a>.</li>
+  <li>Sighted users who do not understand what the abbreviation or acronym means.</li>
+</ul>
+
+<hr>
+<h2 id="types">Types of abbreviations</h2>
+
+<p>The word "abbreviation" comes from the Late Latin word <em>abbreviare</em> (to shorten) which is related to <em>brevi</em> (short). While some people disagree, all methods of shortening words or phrases are subsets of abbreviation.</p>
+
+<p>Some of these subsets include:</p>
+
+<ul>
+  <li>Initialisms</li>
+  <li>Contractions</li>
+  <li>Acronyms</li>
+</ul>
+
+<h3>Abbreviations</h3>
+<p>Defined as: A shortened form of a word or phrase used for brevity in place of the whole, consisting of the first letter, or the first few letters, followed by a period (full stop).</p>
+
+<p>Examples:</p>
+<ul>
+  <li><strong>assoc</strong>. is an abbreviation for association</li>
+</ul>
+
+<p>Example marked up:</p>
+<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+</code></pre>
+
+<h3>Initialisms</h3>
+<p>Defined as: An abbreviation pronounced as the names of the individual letters formed only from the initial letter of constituent words. This distinction is supported by many dictionary definitions, but not by all. The first recorded use of the word initialism in the Oxford English Dictionary (OED) is in 1899.</p>
+
+<p>Examples:</p>
+<ul>
+  <li><strong>USA</strong> is an initialism for United States of America</li>
+  <li><strong>IE</strong> is an initialism for Internet Explorer</li>
+  <li><strong>CSS</strong> is an initialism for Cascading Style Sheets</li>
+  <li><strong>IRS</strong> is an initialism for Internal Revenue Service</li>
+</ul>
+
+<p>As there is no HTML "initialism" element, the content would be marked up with the "abbr" element. Example marked up:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
+</code></pre>
+
+<h3>Contractions</h3>
+<p>Contractions come in two forms.</p>
+<ol>
+  <li>Shortened form of a word that ends in the same letter as the word itself.</li>
+  <li>Short way to write two words as one by writing the two words together, leaving out one or more letters and replacing the missing letters by an apostrophe.</li>
+</ol>
+
+<p>Examples:</p>
+<ul>
+  <li><strong>Ave</strong> is a contraction of Avenue (type 1)</li>
+  <li><strong>can't</strong> is a contraction of cannot (type 2)</li>
+  <li><strong>won't</strong> is a contraction of will not (type 2)</li>
+</ul>
+
+<p>There is no (X)HTML "contraction" element. However, it is probably very rare that anyone would want to specifically mark up a contracted word.</p>
+
+<h3>Acronyms</h3>
+<p>Acronyms are a subset of abbreviations, as they are still shortened words. However, they are more specific. An acronym is defined as a WORD formed from the initial letters of a multi-word name. The important point here is that an acronym must be a WORD - this means that the joined initial letters must be able to be pronounced.</p>
+
+<p>Examples:</p>
+<ul>
+<li><strong>OPAC</strong> is an acronym for Online Public Access Catalog</li>
+<li><strong>Qantas</strong> was originally an acronym for Queensland and Northern Territory Aerial Services Ltd</li>
+<li><strong>Modem</strong> is an acronym for Modulator-Demodulator</li>
+</ul>
+
+<p>Example marked up:</p>
+<pre class="code-sample"><code class="language-markup">&lt;acronym title="Radio Detecting And Ranging"&gt;radar&lt;/acronym&gt;
+</code></pre>
+
+<hr>
+<h2 id="confusion">Confusion over the <code>&lt;abbr&gt;</code> element and "abbr" attribute</h2>
+
+<p>ABBR is confusing as it is both an HTML element as well as an attribute. But more importantly, they play completely opposite roles.</p>
+
+<p>The <code>&lt;abbr&gt;</code> element is used to provide additional information about abbreviations, initialisms and contractions using the title attribute. For example:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+</code></pre>
+
+<p>The "abbr" attribute is used to provide shorter information to assistive devices such as screen readers when they are "reading out" tabular information. For example:</p>
+
+<pre class="code-sample"><code class="language-markup">&lt;th abbr="screws"&gt;Long pointy screws&lt;/th&gt;
+</code></pre>
+
+<hr>
+<h2 id="styling">Styling the <code>&lt;abbr&gt;</code> and <code>&lt;acronym&gt;</code> elements</h2>
+
+<p>The<code>&lt;abbr&gt;</code> element are often styled with a dotted underline as opposed to the solid underline used for hyperlinks. This shows the user that they can interact with the element, but that it is not a standard hypertext link.</p>
+
+<p>This can be achieved with a shorthand CSS rule like:</p>
+
+<pre class="code-sample"><code class="language-css">abbr, acronym {
+  border-bottom: .1em dotted;
+}
+</code></pre>
+
+<h3>Why use ems instead of pixels?</h3>
+<p>Using a value specifed in ems will allow the width of the border to match the relevant font size, no matter how large or small.</p>
+
+<h3>Why is there no color specified?</h3>
+<p>The shorthand border-bottom property allows three values to be definied at once. These are:</p>
+
+<ul>
+  <li><code>border-width</code></li>
+  <li><code>border-style</code></li>
+  <li><code>border-color</code></li>
+</ul>
+
+<p>Each of these values has an "initial value" - a value that will be applied by the browser if it is not specified by the author. The initial values are:</p>
+
+<ul>
+  <li>border-width has an initial value of "medium"</li>
+  <li>border-style has an initial value of "none"</li>
+  <li>border-color has an initial value of the 'color' property</li>
+</ul>
+
+<p>If no color is specified by the author, the initial value is used. For border-color, the initial value is "the value of the color property". This means that the border color will always match the color of the text.</p>
+<p>If the colour of your text changes in different areas of the site or even within a particular page, then leaving the border-bottom color unspecified is an advantage as it does not have to be re-specified every time the content changes color.</p>
+
+<h3>Changing the cursor</h3>
+<p>You can also assist users by changing the cursor type when an abbreviation is in a state of hover using:</p>
+
+<pre class="code-sample"><code class="language-css">abbr {
+  border-bottom: .1em dotted;
+  cursor: help;
+}
+</code></pre>
+
+<hr>
+<h2 id="related">Related articles and information</h2>
+
+<ul>
+  <li><a href="http://www.w3.org/TR/html4/struct/text.html#edef-ABBR">The <code>&lt;abbr&gt;</code> element</a></li>
+  <li><a href="http://www.sovavsiti.cz/css/abbr.html">Styling <code>&lt;abbr&gt;</code> in IE</a></li>
+  <li><a href="http://dean.edwards.name/my/abbr-cadabra.html">abbr-cadabra</a></li>
+  <li><a href="http://annevankesteren.nl/2003/08/improved-styling-abbr-in-ie">Improved styling abbr in IE</a></li>
+  <li><a href="http://javascript.internet.com/css/styling-abbr-in-ie.html">Styling <code>&lt;abbr&gt;</code> in IE: The JavaScript source</a></li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

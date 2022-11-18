@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Jeremy Keith - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Jeremy Keith</h1>
+
+<p class="metadetails">Published: <time>20 October 2005</time></p>
+
+<p>Jeremy Keith is a web developer living and working in Brighton, England. He works hard (with <a href="http://www.clearleft.com/">Clearleft</a>) and he plays hard (with <a href="http://www.saltercane.com/">Salter Cane</a>). Jeremy is a member of the <a href="http://webstandards.org/">Web Standards Project</a> where he serves as joint leader of the <a href="http://domscripting.webstandards.org/">DOM Scripting Task Force</a>.</p>
+
+<p>His online home is <a href="http://adactio.com/">adactio.com</a> where he writes about web standards, accessibility and whatever the hell else he feels like writing about (although not usually in the third person).</p>
+
+<dl>
+  <dt>[<a rel="bookmark" title="Permanent link: DOM" href="#dom">1</a>] <a name="dom"></a>Russ: What the hell is the <abbr title="Document Object Model">DOM</abbr>?
+  </dt>
+  <dd> 
+    <p>Jeremy: I could give you the very unhelpful answer that it's an <abbr title="Application Programming Interface">API</abbr>, but I would just be exchanging one acronym for another.</p>
+    <p>Basically, the Document Object Model is a way of looking at a document. In that sense, it isn't all that different to <abbr title="Cascading Style Sheets">CSS</abbr>, which uses another kind of mental model. CSS uses the idea of selectors to interact with a document. The DOM, on the other hand, views a document as a tree of nodes: element nodes, attribute nodes and text nodes. The DOM provides a vocabulary for targeting and manipulating those nodes.</p>
+    <p>If a programming language supports the DOM then you can use that same vocabulary to address any kind of markup document.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Javascript" href="#javascript">2</a>] <a name="javascript"></a>Russ: OK, then what is Javascript and how does it work with the DOM?</dt>
+  <dd> 
+    <p>Jeremy: JavaScript is just one of many programming languages with DOM support. What makes the combination of JavaScript and the DOM so exciting is the environment where they are used. Whereas most programming languages do all their work on the server side, putting together pages to be sent to the browser, JavaScript runs <em>in the browser</em>.</p>
+    <p>That means you can use JavaScript to manipulate the contents of a web page (the components of its node tree, to use the DOM terminology), even after the page has been sent from the server. JavaScript also introduces the idea of event handlers. These are triggers that can be used to associate JavaScript actions with specific events. So when the user clicks on a certain link, you can execute a certain function.</p>
+    <p>That's what JavaScript handles best: behaviour. In the same way that CSS can be used to add a presentation layer on top of an existing <abbr title="(eXtensible) HyperText Markup Language">(X)HTML</abbr> structure, DOM Scripting adds a behaviour layer.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Ecmascript" href="#ecmascript">3</a>] <a name="ecmascript"></a>Russ: What about this Ecmascript stuff? Is it just a daggy version of Javascript?</dt>
+  <dd> 
+    <p>Jeremy: It's more like the other way around: JavaScript is a (not so daggy) version of ECMAScript.</p>
+    <p>You have to remember that, technically, JavaScript only refers to the language in Netscape/Mozilla browsers. Officially, Microsoft use something called JScript. Netscape wisely decided to submit the JavaScript specification to <abbr title="European Computer Manufacturers Association">ECMA</abbr> so that the language could be standardised. That helped prevent the language <abbr title="multiple independently targetable re-entry vehicle">mirv</abbr>ing into a host of competing technologies.</p>
+    <p>JavaScript isn't the only version of ECMAScript either. Actionscript, familiar to Flash programmers, is another flavour of ECMAScript.</p>
+    <p>If we were going to be really pedantic then whenever we talk about cross-browser JavaScript, we should really be talking about ECMAScript. But even I'm not that much of a pedant.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: A bad reputation" href="#reputation">4</a>] <a name="reputation"></a>Russ: Why does Javascript have such a bad reputation. Has it been sleeping around too much?</dt>
+  <dd> 
+    <p>Jeremy: Oh, that's your attitude, is it? <cite>"Look at that language with its easy syntax and powerful capabilities: it's clearly asking for it."</cite></p>
+    <p>It's true that JavaScript has been abused but that's no reason to blame the victim. Remember, JavaScript doesn't kill websites: people with JavaScript kill websites. JavaScript is like any other powerful technology: in the right hands, it can bring enormous benefits. In the wrong hands, it can wreak terrible damage.</p>
+    <p>It reminds me of Flash in some ways. There's nothing inherently bad about Flash at all. But after years of being abused to create bloated intro pages, the technology itself garnered a reputation for being nasty.</p>
+    <p>In fact, the problem doesn't lie with the technology at all, be it Flash or JavaScript. It's really a <abbr title="Public Relations">PR</abbr> problem caused by developers using a technology in a haphazard slapdash way, without thinking through all of the consequences.</p>
+    <p>The most prevelant example of this is the ubiquitous use of <code>&lt;a href="javascript:…"&gt;</code> or <code>&lt;a href="#"&gt;</code>. It breaks the most fundamental idea of the Web: documents joined together with hyperlinks. No thought has been given to what happens when JavaScript isn't available. Even if you're okay with the thought of turning away human beings without JavaScript, do really want to send searchbots packing when they show up at your site?</p>
+    <p>Thankfully, with a little forethought, the behaviour layer can be added in such a way that it degrades gracefully.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Javascript for good" href="#good">5</a>] <a name="good"></a>Russ: Can Javascript be used for good instead of evil? If so, could you give me some examples?</dt>
+  <dd> 
+    <p>Jeremy: See, that's such a loaded question! The implication is that most uses of JavaScript are evil. Actually, thinking about it, many uses of JavaScript <em>are</em> evil (see above).</p>
+    <p>But anyway, the point is: you wouldn't ask, <cite>"Can CSS be used for good instead of evil?"</cite> You would expect that the default usage of CSS would be to make sites look good, not bad. That's partly because most developers don't use CSS to make ten foot tall green text on a red background but it's mostly because there are sites like the <a href="http://csszengarden.com/">CSS Zen Garden</a> as well as high-profile commercial sites using CSS for good, not evil.</p>
+    <p>There may not be a DOM Scripting Zen Garden (yet) but there's no shortage of high-profile sites using JavaScript. <a href="http://maps.google.com/">Google Maps</a> uses JavaScript for its dragging interface. When you add notes to photos in <a href="http://flickr.com/">Flickr</a>, that's JavaScript too.</p>
+    <p>But, to be honest, my favourite uses of JavaScript are the little things. Like when you click inside an input field that contains some default text and, through the magic of JavaScript, that text disappears. Or there's Aaron Gustafson's clever little bit of DOM Scripting that <a href="http://www.alistapart.com/articles/improvingprint">displays links for printing</a>. It's the cumulative effect of all these little usability enhancements that really showcase JavaScript as a power for good.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Where do you suggest starting" href="#starting">6</a>] <a name="starting"></a>Russ: For someone like me who knows nothing about Javascript and wants to learn more, where would you suggest starting?</dt>
+  <dd> 
+    <p>Jeremy: Well, it must be said, it's pretty slim pickings compared to the wealth of CSS resources. Any developer just starting out with CSS can Google a phrase and find an embarrassment of riches. If you try that with JavaScript, you're likely to end up with a list of outdated resources, some of which give out advice that's downright dangerous.</p>
+    <p>The <abbr title="Web Standards Project">WaSP</abbr>'s <a href="http://domscripting.webstandards.org/">DOM Scripting Task Force</a> has been set up to redress this balance. Part of our plan is to provide resources for developers looking to learn about JavaScript. To that end, we will be publishing articles on best practices as well as blogging about cool JavaScript techniques wherever we come across them.</p>
+    <p>But really, there's only so much that one group of people can do. In order to create a landscape of useful DOM Scripting resources, the developers themselves will need to share what they learn on blogs and mailing lists. That's what happened with CSS: there wasn't one central authority coming up with all the best practices and techniques. Instead, it was an ad-hoc peer-to-peer network of enthusiastic web developers eager to share their knowledge. I'd really like to see the same thing happen for DOM Scripting. I'm hoping that the task force will help create the right kind of atmosphere for that kind of activity.</p>
+    <p>In the meantime, there are some great books out there promoting a standards-based approach to JavaScript. Stuart Langridge's <a href="http://www.sitepoint.com/books/dhtml1/"><abbr title="Dynamic HTML">DHTML</abbr> Utopia</a> is well worth a read if you've already got a good solid grounding in JavaScript. Your fellow Aussie <a href="http://www.themaninblue.com/">Cameron Adams</a> is joining forces with <a href="http://www.brothercake.co.uk/">James Edwards</a> to produce a cookbook of practical DOM Scripting examples. That's bound to be a winner.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: I hear rumours" href="#rumours">7</a>] <a name="rumours"></a>Russ: I hear rumours about you and a book called DOM Scripting. Is this true, or just another tabloid beat-up?</dt>
+  <dd> 
+    <p>Jeremy: Yes, it's true. <a href="http://domscripting.com/book/">I've written a book.</a> It was modesty, not shame, that prevented me from mentioning it sooner.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Book addresses? " href="#address">8</a>] <a name="address"></a>Russ: What sort of issues do you address in your book and is it suitable for a range of skill levels?</dt>
+  <dd> 
+    <p>Jeremy: There are three cornerstones in the book:</p>
+    <ol>
+      <li>Unobtrusive JavaScript</li>
+      <li>Progressive enhancement</li>
+      <li>Graceful degradation</li>
+    </ol>
+    <p>Those ideas permeate all the examples shown in the book. The examples themselves are quite straightforward although they do increase in complexity as the book progresses. At the end, there's <a href="http://domscripting.com/domsters/index.html">a finished website</a> showcasing a lot of the techniques.</p>
+    <p>It's aimed very much at designers rather than programmers. Specifically, it's aimed at designers who are already appreciating the value of web standards like CSS and semantic markup. The book isn't really intended for advanced programmers. It would probably bore them to tears.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Liquid?" href="#liquid">9</a>] <a name="liquid"></a>Russ: Now, your friends tell me you obsessed with liquid layouts. Have you built real sites using liquid layouts and how have you addressed IE and its uncanny ability to drop floating columns?</dt>
+  <dd> 
+    <p>Jeremy: Oh, my &lt;airquotes&gt;friends&lt;/airquotes&gt; told you that, did you? I'll have to have a talk with those "friends".</p>
+    <p>You know what my problem is? I can't help rooting for the underdog. Five years ago, everyone was using <code>table</code>s to layout their websites. I started using CSS partly because I saw a worthy cause that needed to be championed. It's a similar situation now with DOM Scripting. I can see the enormous benefits that this technology can offer if it's just used correctly and I want to spread the word.</p>
+    <p>Liquid layouts are the underdog of the design world. Designers will come up with all sorts of spurious excuses as to why they won't use them but in most cases, they are simply scared. Firstly, liquid layouts are difficult. That makes them scary enough. Mostly though, designers are scared of giving up control. This fear is the last bastion of the Web 1.0 mentality of control and it's one I hope will loosen its grip soon.</p>
+    <p>Yes, I've built real sites using liquid layouts. For most information-based sites, it's the clear choice. Really, designers should have to come up with reasons <strong>not</strong> to use flexible layouts when they'e designing for a flexible medium like the World Wide Web.</p>
+    <p>So, you want me to name names, huh? There's my personal site, <a href="http://adactio.com/">Adactio</a>. There are a whole bunch of different themes on offer. All but one of them are liquid. My <a href="http://adactio.com/portfolio/">portfolio</a> is up there too so you can peruse that for more examples of liquid layouts. Just recently, for the <a href="http://www.clearleft.com/">Clearleft</a> website, I created a liquid environment for <a href="http://www.andybudd.com/">Andy</a>'s design and <a href="http://www.clagnut.com/">Richard</a>'s words.</p>
+    <p>To be honest, I've never had that many problems with <abbr title="Internet Explorer">IE</abbr>'s decision to rearrange floated columns from side-by-side to one on top of the other. The problem is usually caused by large fixed-width content, like images. Either I've used background images or set the width of the images in percentages (as is the case with the <a href="http://www.clearleft.com/about/">Clearleft</a> site).</p>
+    <p>Maybe I'm being unduly optimistic but I have a feeling that liquid layouts might be having something of a resurgence. <a href="http://www.simplebits.com/">Dan Cederholm</a> devoted a whole chapter of <a href="http://simplebits.com/publications/bulletproof/">his new book</a> to the topic, someone has a started <a href="http://liquid.rdpdesign.com/">a liquid layout showcase site</a> and then there was <a href="http://www.maxdesign.com.au/presentation/liquid-layouts/">your excellent presentation at Web Essentials</a>. Personally, I think every web designer on the planet should read John Allsop's <a href="http://www.alistapart.com/articles/dao/">A Dao Of Web Design</a> — it's five years old but it's never been more relevant.</p>
+    <p>Well, I bet you're regretting that you ever raised the subject now. Maybe I am slightly obsessed. I'll shut up now. Thanks for giving me the chance to vent.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Next?" href="#next">10</a>] <a name="next"></a>Russ: So, now you are a celebrated author... what's next?</dt>
+  <dd> 
+    <p>Jeremy: A scandalous lifestyle filled with debauchery and drugs would be my preferred next step. Failing that, I guess I'll just continue to make websites and drone on incessently about JavaScript, pausing only to have the occasional rant about liquid layouts.</p>
+    <p>What I really want to do is take the DOM Scripting show on the road. After speaking at <a href="http://www.skillswap.org/">Skillswap</a>, <a href="http://atmedia2005.co.uk/">@media</a> and <a href="http://sxsw.com/">South by SouthWest</a>, I really got a taste for speaking to a captive audience. I plan to do more of that. I've been giving day-long DOM Scripting <a href="http://www.vivabit.co.uk/training/domscripting/">training courses</a>, which I've enjoyed immensely. I'll also be speaking again at <abbr title="South by SouthWest">SxSW</abbr> again next year.</p>
+    <p>But my real ambition is to speak at <a href="http://webessentials.org/">a certain conference</a> held in Sydney (hint, hint).</p>
+  </dd>
+  <dt>Russ: Thanks for the interview, Jeremy!</dt>
+  <dd>Jeremy: My pleasure, Russ.</dd>
+</dl>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

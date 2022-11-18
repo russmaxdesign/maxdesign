@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Anne van Kesteren - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Anne van Kesteren</h1>
+
+<p class="metadetails">Published: <time>04 May 2004</time></p>
+
+<p>Anne van Kesteren lives in Zeist in The Netherlands where he runs his own web development company, <a href="http://limpid.nl/" title="Limpid - Anne van Kesteren's company">Limpid</a>. However, Anne, is more widely known through his <a href="http://annevankesteren.nl/" title="Anne van Kesteren's weblog">Weblog about markup  style</a>, where he explores the depths of XML, XHTML and CSS.</p>
+
+<dl>
+  <dt>[<a rel="bookmark" title="Permanent link: serving mime types" href="#serving-mime-types">1</a>] <a name="serving-mime-types"></a>Russ: Let's start by setting the record straight. When should you send XHTML as 'text/html', and when should you send it as 'application/xhtml+xml'?</dt>
+  <dd> 
+    <p>Anne: When possible, send it with the (specific) XML content-type, 'application/xhtml+xml'. That way you are sure that your document is well-formed. This is quite important, since most people (including me) still rely on browser results and not on the validator. What I mean is, they do trust the validator, but don't validate their pages when the browser does not have any problems displaying their pages.</p>
+    <p>Using the correct content-type, the better browsers will give you a not well-formed error, which automatically leads to updating that page (having errors on your page is not that cool).</p>
+    <p>Another problem with 'text/html' is that your document is treated as HTML, not as XHTML. There are some <a href="http://annevankesteren.nl/archives/2004/02/canvas" title="Anna van Kesteren talks about Canvas">small differences</a> in handling of CSS that you might not understand the first time you use 'application/xhtml+xml'. To name an example: in HTML documents, the 'background' property applied to the BODY element will be "re-applied" by the browser to the 'viewport' so that the image or color covers the entire screen and not just the BODY element. You might have guessed it, in XML this is different. The BODY element hasn't got any special treatments at all in such documents and behaves like it was a DIV with some default styling ('padding', 'margin').</p>
+    <p>To conclude, I think it is ok if you are sending your XHTML 1.0 documents as 'text/html' as long as you are aware what problems it might give in the future.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Work around" href="#work-around">2</a>] <a name="work-around"></a>Russ: If you choose to serve 'application/xhtml+xml', how do you work around browsers that don't support it?</dt>
+  <dd> 
+    <p>Anne: There are multiple options. The most extensive one I have seen is written in <a href="http://keystonewebsites.com/articles/mime_type.php" title="Serving up XHTML with the correct MIME type">PHP</a>. This one takes into account the vary header, which is too complicated to explain here. Other solutions have been provided long ago in a column from Mark Pilgrim: "<a href="http://www.xml.com/pub/a/2003/03/19/dive-into-xml.html" title="The Road to XHTML 2.0: MIME Types">The Road to XHTML 2.0: MIME Types</a>". A real world example can be found at the <a href="http://www.w3.org/" title="World Wide Web Consortium">W3C</a>.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Why use XHTML" href="#why-use-xhtml">3</a>] <a name="why-use-xhtml"></a>Russ: Why use XHTML instead of HTML? What are the advantages and is HTML still appropriate in some cases?</dt>
+  <dd> 
+    <p>Anne: Probably the most difficult question. I think people will have to choose this for themselves, what they like best. Personally, I like XHTML, because the syntax is very easy compared to the SGML syntax.</p>
+    <p>Sometimes however, I really like the way you can minimalize everything in HTML (and I don't mean writing crappy code). Leaving out both start and end tags of an element (HTML, HEAD and BODY element), leaving out the end tags of LI, P etc.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Well-formed" href="#well-formed">4</a>] <a name="well-formed"></a>Russ: You have talked about pages that are not well-formed being a bigger problem than invalid pages. Why is that?</dt>
+  <dd> 
+    <p>Anne: Most of the pages that are invalid are not well-formed. Using the correct content-type on these pages will make the browser return an error (not well-formed). Trying to retrieve some information from a page (without using HTML Tidy) with XSLT and your parser will return an error. If a page is well-formed, but invalid you won't have these problems.</p>
+    <p>One of the major advantages of XML (and therefore XHTML) is that it does not need to validate. It needs to conform to a set of easy rules and that's it. (Of course, rules get more complicated if you want to do more specific things, but those are mostly never possible with SGML anyway.)</p>
+    <p>HTML however, needs to be valid, otherwise, it can't be parsed. Well, it can, thanks to quirks mode, which solves a lot of problems older web pages have (and some newer pages have those problem as well, unfortunately).</p>
+    <p>Currently, we can't take advantage of invalid, well-formed XHTML since there is at least one browser that doesn't support it. It will parse the XHTML just as HTML and therefore XHTML needs to be valid. In the future, we could create documents, where we skip some elements that are unnecessary for the document. Simple example:</p>
+<pre><code>&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+  title&gt;Webstandards Group!&lt;/title&gt;
+  &lt;p&gt;An example of minimalized markup.&lt;/p&gt;
+&lt;/html&gt;</code></pre>
+    <p>(Note: Mozilla supports this really well)</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: XHTML is not the future" href="#xhtml-is-not-the-future">5</a>] <a name="xhtml-is-not-the-future"></a>Russ: Recently you wrote that XHTML is not a step between now and the future? Could you elaborate?</dt>
+  <dd> 
+    <p>Anne: There are some books I bought that had this little "preview" in what was coming after HTML, XML. Between now, HTML, and then, XML, web authors could play with XHTML to get used to the XML syntax.</p>
+    <p>Of course, XHTML showed us how XML would be and what we could do with it. (The specification tells about XSLT and related advantages.) However, that doesn't mean that every author will use his own custom version of XML in the future. An important aspect of modern web design are semantics of a web page.</p>
+    <p>If we have two examples:</p>
+    <ol>
+      <li><code>&lt;h1&gt;Header&lt;/h1&gt;</code></li>
+      <li><code>&lt;header&gt;Header&lt;/header&gt;</code></li>
+    </ol>
+    <p>In example one it might be less obvious what the content is for a human being. The second example tells that with more detail, the content is a 'header' and the value is 'Header'. From that point of view, we could say that the second example, which is a pure XML example, has more semantics.</p>
+    <p>The first example however, is understood by far more software (and some HTML authors who really used elements, rather than some <code>&lt;p&gt;&lt;b&gt;Header&lt;/b&gt;&lt;/p&gt;</code> construct). Software can't read the content, but it can sort content by value. Most search engines recognize HTML elements, like H1, which is a quite important element on the page. Google (to pick a search engine), doesn't recognize HEADER, it can't read like you and me.</p>
+    <p>So until someone invents a language that can describe the semantics of XML elements and that language would be understood by software, XHTML will be your first choice.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Content" href="#content">6</a>] <a name="content"></a>Russ: When creating markup, you often start by studying the content first (then taking your dog for a walk)? Why is that?</dt>
+  <dd> 
+    <p>Anne: Well, the dog needs fresh air now and then... I think that content is the most important aspect of a web page. I should not generalize that, I think that for informative web sites (like a book store, a news site, etc.) content is the most important thing.</p>
+    <p>The reason people visit your page, is that they want to find information as quick as possible. To give them such an experience, you need to know something about the content that will eventually end on the site, so you can (in co-operation with the company) organize it in the most optimal form.</p>
+    <p>Markup comes after that and personally, I think it is quite important that every piece of content has the correct element. If that is done and it works together with the design (obviously, document order affects the layout), the site is as compact as possible and ready for Google.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Personal Opinion" href="#personal-opinions">7</a>] <a name="personal-opinions"></a>Russ: You have said in the past 'Markup is all about personal opinions'. There seems to be many ways to mark up content. How do you decide the right element for the job? And is there a perfectly marked up website?</dt>
+  <dd> 
+    <p>Anne: For most of the document content, there are HTML elements available that cover the semantics the elements need. Of course, everything could be more specific, like NL from XHTML 2.0 instead of UL, but with the current available and implanted markup most of the 'content items' can be described. (It is debatable if navigation is actually a part of the content.)</p>
+    <p>In some situations this gets quite tricky. For example, sometimes the content would really benefit from a definition list construct, but it would be "bad" from a semantic point of view (the structure is nice, but the element has the wrong name). Personally, I choose (most of the time) elements with the structure that is needed, over elements like DIV, which might be better from a semantic point of view.</p>
+    <p>A perfectly marked up website? No, I don't think there is any. For me, when I think about this subject, I see multiple markup languages, each designed for a specific job, combined together using namespaces in a single document.</p>
+    <p>On the current web, leaving the design of a site aside, I like web pages with a minimum of markup. I don't have a specific site I like most.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Accessibility" href="#accessibility">8</a>] <a name="accessibility"></a>Russ: Is perfect accessibility possible on a website?</dt>
+  <dd> 
+    <p>Anne: Tricky question. To answer it we have to know what we understand under accessibility. For me, this is something in the lines of: "all document content including images and other multi-media must be available for everyone".</p>
+    <p>In that case, accessibility isn't that difficult. Actually, every site could be accessible if people knew how to use HTML (that is for today's web, where all pages are delivered in some form of HTML). Most designers don't understand it, they think it is a tool for displaying their layout. They don't understand that they give the wrong semantics to a web document using tables. They don't understand how to use the IMG element and that an ALT attribute is required. (It must be said though, that IMG is quite poorly designed.)</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Develop in Mozilla" href="#develop-in-mozilla">9</a>] <a name="develop-in-mozilla"></a>Russ: Is it true you develop in Mozilla then test in Internet Explorer? Do you think it is better to start with a standards compliant browser and work backwards?</dt>
+  <dd> 
+    <p>Anne: Both are indeed correct. Actually, for my personal site, I don't even bother to test in IE anymore (It must be said that every browser has some kind of strange behaviour on that site).</p>
+    <p>I used to develop with Internet Explorer when I started. I mean, why not, it is the browser most people use and those people will be your audience most of the time. The problem was however, that I was coding for IE and all it's specific behaviours and quirks. When I tested it in Mozilla afterwards, everything was different.</p>
+    <p>That is not an example that standards don't work, they do. It is an example of a developer who thinks the browser is right and codes to the browser. Now I'm working in Mozilla, I will still code to some browser quirks (although I know most of them, since I follow lots of HTML/CSS bugs in Bugzilla), but Mozilla is *much* more standard compliant than IE is. Since most people who create a couple of sites know what a browser supports and what not and most people have a list of workarounds it is fairly easy to create a standard compliant site.</p>
+  </dd>
+  <dt>[<a rel="bookmark" title="Permanent link: Semantic meaning" href="#semantic-meaning">10</a>] <a name="semantic-meaning"></a>Russ: Finally, following on from a recent post of yours, do divs and spans have semantic meaning?</dt>
+  <dd> 
+    <p>Anne: I was in the opinion that they didn't have any semantic meaning at all, but <a href="http://liorean.web-graphics.com/" title="Liorean at web-graphics.com">Liorean</a> changed my mind:</p>
+    <blockquote cite="http://annevankesteren.nl/archives/2004/03/re-the-myth-of-css#comment-913">
+      And I want to point out that neither div nor span is without semantic meaning, and neither do they play a different role in XHTML2 than they do in XHTML1. A div has the role of a generic division of a document, a section of content. There's very few documents on the web where there is no place it's semantically correct to place a div to wrap sections. The span has a little weaker meaning, only meaning a generic grouping of text. Note that their explicit semantic meaning is a generic one, in difference to the specific semantics of all other HTML elements. The XHTML2 section element differs in meaning to div in that it is not a generic section of a document, but a generic section of text/content. 
+    </blockquote>
+  </dd>
+  <dt>Russ: Thanks for your time, Anne!</dt>
+  <dd>Anne: My pleasure, lets hope we can use some of the above on a "real" website some day :-)</dd>
+</dl>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
