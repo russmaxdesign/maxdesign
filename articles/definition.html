@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Definition lists - misused or misunderstood? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Definition lists - misused or misunderstood?</h1>
+
+<p class="metadetails">Published: <time datetime="2004-01-27">27 January 2004</time></p>
+
+<h2>What are definition lists?</h2>
+
+<p>Definition lists consist of two parts: a <strong>term</strong> and a <strong>description</strong>. To mark up a definition list, you need three HTML elements; a container <code>&lt;dl&gt;</code>, a definition term <code>&lt;dt&gt;</code>, and a definition description <code>&lt;dd&gt;</code>. For example:</p>
+
+<pre><code>&lt;<b>dl</b>&gt;
+  &lt;<b>dt</b>&gt;Frog&lt;/<b>dt</b>&gt;
+  &lt;<b>dd</b>&gt;Wet green thing&lt;/<b>dd</b>&gt;
+  &lt;<b>dt</b>&gt;Rabbit&lt;/<b>dt</b>&gt;
+  &lt;<b>dd</b>&gt;Warm fluffy thing&lt;/<b>dd</b>&gt;
+&lt;/<b>dl</b>&gt;</code></pre>
+
+<p>You can use multiples of <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code> within a definition list:</p>
+
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Punt&lt;/dt&gt;
+  <b>&lt;dd&gt;</b>Kick a ball<b>&lt;/dd&gt;</b>
+  <b>&lt;dd&gt;</b>Take a bet<b>&lt;/dd&gt;</b>
+&lt;/dl&gt;</code></pre>
+
+<pre><code>&lt;dl&gt;
+  <b>&lt;dt&gt;</b>Color<b>&lt;/dt&gt;</b>
+  <b>&lt;dt&gt;</b>Colour<b>&lt;/dt&gt;</b>
+  &lt;dd&gt;Any hue except white or black&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+
+<p>Block level content can also be placed inside the <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code> elements.</p>
+
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;Frog&lt;/dt&gt;
+  &lt;dd&gt;
+    <b>&lt;ul&gt;</b>
+      <b>&lt;li&gt;</b>Wet<b>&lt;/li&gt;</b>
+      <b>&lt;li&gt;</b>Green<b>&lt;/li&gt;</b>
+      <b>&lt;li&gt;</b>Croak<b>&lt;/li&gt;</b>
+    <b>&lt;/ul&gt;</b>
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+
+<hr>
+<h2>When are definition lists appropriate?</h2>
+
+<p>There are two points of view about the use of definition lists. Some people believe that definition lists should only be used for <strong>terms and definitions</strong>. Others believe that definition lists can be used to tie together any items that have a <strong>direct relationship with each other</strong> (name/value sets). This second point of view is supported by an example within the W3C specifications:</p>
+
+<blockquote>
+  <p>Another application of DL, for example, is for marking up dialogues, with each DT naming a speaker, and each DD containing his or her words.</p>
+  <p class="metadetails"><cite><a href="http://www.w3.org/TR/REC-html40/struct/lists.html">Lists in HTML documents</a></cite></p>
+</blockquote>
+
+<p>Although some people disagree with this example, it does suggest that definition lists can be used for more than simple terms and definitions, as long as there is a direct relationship between the items. Following this arguement, all the examples below could be marked up using definition lists:</p>
+
+<dl>
+  <dt>DT: Speaker</dt>
+  <dd>DD: Quotation</dd>
+</dl>
+
+<dl>
+  <dt>DT: Image</dt>
+  <dd>DD: Description</dd>
+  <dd>DD: Location</dd>
+  <dd>DD: Photographer</dd>
+</dl>
+
+<dl>
+  <dt>DT: Term</dt>
+  <dd>DD: Descriptive image</dd>
+  <dd>DD: Description</dd>
+</dl>
+
+<dl>
+  <dt>DT: Website (link)</dt>
+  <dd>DD: Description</dd>
+</dl>
+
+<dl>
+  <dt>DT: Date</dt>
+  <dd>DD: Event</dd>
+</dl>
+
+<dl>
+  <dt>DT: Event</dt>
+  <dd>DD: Date</dd>
+  <dd>DD: Description</dd>
+  <dd>DD: Venue</dd>
+</dl>
+
+<dl>
+  <dt>DT: Internal links</dt>
+  <dd>DD: Home</dd>
+  <dd>DD: Section 1</dd>
+  <dd>DD: Section 2</dd>
+  <dt>DT: External links</dt>
+  <dd>DD: External link 1</dd>
+  <dd>DD: External link 2</dd>
+</dl>
+
+<hr>
+<h2>Are there downsides of using definition lists?</h2>
+
+<p>Before using a definition list, you should be aware that it may not be the best option in every case.</p>
+
+<p>Although definition lists can be styled to look like tabular data, they cannot contain screen reader accessibility features such as “labels” and “headers” to tie information together. For this reason, they should not be used to replace complex tabular data.</p>
+
+<hr>
+<h2>Examples of styled definition lists</h2>
+
+<ul>
+  <li><a href="https://cdpn.io/pen/debug/oNyoeZB">Styling defininition lists</a></li>
+</ul>
+
+<hr>
+<h2>Other examples and further reading</h2>
+
+<ul>
+  <li><a href="http://pompage.net/pompe/listesdefinitions/">Les listes de dèfinitions : mal utilisèes ou mal comprises ?</a></li>
+  <li><a href="http://www.simiandesign.com/blog-fu/2003/05/001600.cfm">Simian Design - Style Definition Lists </a></li>
+  <li><a href="http://www.moronicbajebus.com/playground/cssplay/dl/">Seamus Leahy - Sensually Styled Definition Lists</a></li>
+  <li><a href="http://www.xdevdesign.com/Better_MS_Menu.htm">Terry Melanson - Definition List</a></li>
+  <li><a href="http://www.simplebits.com/archives/2004/01/02/simplequiz_part_xi_image_floating.html">SimpleQuiz - Part XI - Image Floating </a></li>
+  <li><a href="http://www.simplebits.com/archives/2003/09/05/simplequiz_part_iii_heading_and_list.html#comment34">Doug Bowman on definition lists</a></li>
+  <li><a href="http://www.cs.tut.fi/~jkorpela/def.html">Definition : a definition and an analysis</a></li>
+  <li><a href="http://www.w3.org/TR/REC-html40/struct/lists.html#h-10.3">HTML 4.01 Specification - Definition lists</a></li>
+</ul>
+
+<hr>
+<h2>Translations</h2>
+
+<ul>
+  <li><a href="http://www.maujor.com/blog/2006/04/26/dl-lists/">Brazilian Portuguese thanks to Mauricio Samy Silva</a></li>
+  <li><a href="http://xhtml.developpez.com/tutoriels/liste-definition/">French thanks to Rodrigue Hunel and the developpez.com team</a></li>
+</ul>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

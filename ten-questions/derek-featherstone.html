@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Derek Featherstone - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Derek Featherstone</h1>
+
+<p class="metadetails">Published: <time datetime="2005-05-23">23 May 2005</time></p>
+
+<p><a href="http://boxofchocolates.ca/">Derek Featherstone</a> left the world of teaching high school in 1999 to start his own business as a freelance technical trainer. He taught and wrote a number of courses on topics varying from basic HTML, to CSS and JavaScript, database design and Active Server Pages as well as Web Accessibility - all with a web standards focus.</p>
+
+<p>Now there really isn't just one thing that he does - in addition to training, delivering seminars and writing, he runs his own <a href="http://furtherahead.com/">web development company</a>, spends a lot of time as a <a href="http://www.wats.ca/">web accessibilty consultant</a>, and writes at <a href="http://boxofchocolates.ca/">his blog</a>. And that's all between spending time with his family. He's a father of three, and husband to one...</p>
+
+<dl>
+  <dt id="question1">1. I've heard rumours that you used to be a <a href="http://www.boxofchocolates.ca/archives/2004/10/01/what-i-used-to-be">high school teacher</a> before you moved into web developer and web accessibility consultant?</dt>
+  <dd>
+    <p>Derek: <a href="http://www.oct.ca/pubreg/en/MemberResults.asp?Registry=205079">Substantiated fact</a>, actually. After university I taught high school science and computers for 4 years. For a number of reasons I decided it was time for some changes. I put my background in education to use right away with a number of freelance training contracts in desktop applications and then web development courses. Doing that training lead to more contacts that wanted me to develop for them instead of just teach them.</p>
+  </dd>
+  <dt id="question2">2. What exactly does a web accessibility consultant do?</dt>
+  <dd>
+    <p>Derek: The short answer is "whatever my clients need me to do that is accessibility related."</p>
+    <p>The long answer is that my time is divided unequally between training developers, managers, content creators in accessibility, performing various size accessibility audits and assessments of web sites and applications, strategy and process work, and finally, hands-on work retro-fitting and building web sites and applications.</p>
+  </dd>
+  <dt id="question3">3. Was there anything in particular that sparked your interested in accessibility?</dt>
+  <dd>
+    <p>Derek: When I was still teaching high school I spent quite a bit of time buildling online resources for my students. I found it ridiculously frustrating that things that I was doing in one browser wouldn't work in another - this was 1997-98 and I was upset at IE for being so forgiving and Netscape 3.04 Gold for being so strict. These were the days when Netscape would not display your page if you had a missing &lt;/td&gt;. That lead me to validation, which lead to web standards in general (though it wasn't called web standards back then). Working with students of all abilities got me interested in multiple intelligence theory and I was intrigued at how that might apply to learning resources on the web and how I could create materials that would help everyone. Accessibility followed naturally from that.</p>
+  </dd>
+  <dt id="question4">4. Does semantically correct mark-up aid accessibility?</dt>
+  <dd>
+    <p>Derek: Absolutely - it is the foundation of web standards and the base upon which accessibility is built. Simple things like using headings and lists where appropriate can contribute significantly to making the web better for all users.</p>
+  </dd>
+  <dt id="question5">5. I've heard you are not a fan of the <a href="http://www.wats.ca/articles/keyboardusageandtabindex/62">Tabindex</a>. Why is that?</dt>
+  <dd>
+    <p>Derek: It isn't so much <a href="http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex">tabindex</a> that I don't like, it's just that in most cases it simply isn't needed. What we see happen often is the implementation of "rules" that someone has seen somewhere without considering context. It is funny because the <a href="http://www.w3.org/TR/WCAG10/#tech-tab-order">checkpoint</a> that actually refers to tabindex essentially says "specify tab order via the "tabindex" attribute or ensure a logical page design". Often people seem to forget about the logical tab order that almost always exists and is reasonable. In fact, I'd say you have to work pretty hard to actually <em>need</em> to go outside the logical order that naturally exists within standards-based sites. Further, when people do implement tabindex, often it breaks expected interaction because the order is either non-intuitive or it is completely out of line with where you think you are headed next.</p>
+    <p>That's right - go check your blog or your contact forms right now. Try to use your own comment form using only the keyboard. See how upset and frustrated you get when you are in the comment area and you hit tab to go to the preview or submit button and all of a sudden you are back at the top of the page. If you are going to use it, use it correctly. Not using tabindex is better than using one that breaks expected interactions for people.</p>
+  </dd>
+  <dt id="question6">6. I've asked <a href="http://webstandardsgroup.org/features/joe-clark.cfm#skip-links">Joe Clark</a> this, and now its your turn. Do you use skip links, and are there any particular phrases you would recommend?</dt>
+  <dd>
+    <p>Derek: I don't use them, actually. I've got very little in the way of navigation on most sites that I build, so I've honestly just not bothered.</p>
+    <p>If you are going to use skip links, then I generally recommend that skip links (like all other links) should clearly identify their target. Which of the following more clearly defines the target: "skip navigation" or "skip to main content"? Plus there are the reports that "skip to content" is read by many screen readers with the emphasis on the second syllable, so it sounds like a link phrase meaning "skip to happy"</p>
+  </dd>
+  <dt id="question7">7. Using different colours to distinguish visited and unvisited links can be an accessibility issue as we "<a href="http://www.w3.org/TR/1999/WAI-WEBCONTENT-19990505/#gl-color">should not rely on colour alone</a>". So how can we distinguish between these two link styles?</dt>
+  <dd>
+    <p>Derek: You could also use (in CSS terms) a different font-weight, or a different border-bottom style, or you might try something adventurous and creative like <a href="http://www.collylogic.com/index.php?/weblog/comments/ticked_off_links_reloaded/">Colly's Ticked Off Links</a>. Incidentally I didn't like that technique for links in the body of the page at first, but I found it very easy to get used to and much less obtrusive than you might think. <a href="http://www.mikeindustries.com/">Mike Davidson</a> uses it in the body of his blog posts and it works much better than I thought it would.</p>
+    <p>I'm all for other ways of noting the difference, and hopefully as time goes on someone else will come up with creative ways of solving that problem. I'm sure someone is working on an extension or add-on for a browser right now that will help.</p>
+  </dd>
+  <dt id="question8">8, Why is the &lt;link /&gt; element the <a href="http://www.wats.ca/articles/missinglink/49">unsung hero of (X)HTML</a>? How do relationship links aid the average user?</dt>
+  <dd>
+    <p>Derek: Unfortunately <a href="http://www.w3.org/TR/html401/struct/links.html#edef-LINK">&lt;link&gt;</a> relationships aren't used by very many people. We talk about semantics when it comes to marking up information within our documents but we often fall short when it comes to marking up information about our documents and how they relate to other documents. Add to that new link relationships (a la <a href="http://gmpg.org/xfn/">XFN</a> courtesy of <a href="http://www.meyerweb.com/">Eric Meyer</a>, <a href="http://photomatt.net/">Matt Mullenweg</a> and <a href="http://tantek.com/log/">Tantek Celik</a>) and you have some pretty powerful ways of expressing relationships.</p>
+    <p>Here's some thoughts on how I'd love to see it used:</p>
+    <ul>
+      <li>use appropriate link relationships to define alternate types for media that could be used in conjunction with a set of browser preferences to deliver preferred content (i.e., I want .mov instead of .avi, or .pdf instead of .doc when both are available)</li>
+      <li>use appropriate link relationships to define help for form fields</li>
+      <li>use appropriate link relationships to define glossary items and then load the relevant terms into a sidebar for easy access</li>
+    </ul>
+    <p>I guess I just see it as potentially the most useful element we have at our disposal in terms of establishing relationships between one thing on the web and another. It could do so much more for us than associating our stylesheets with our documents.</p>
+  </dd>
+  <dt id="question9">9. With accessibility, are we still stumbling in the dark, making unfounded assumptions?</dt>
+  <dd>
+    <p>Derek: To some degree. Many of the things we do in the name of accessibility are based on mythology. We make some fairly standard assumptions when doing accessibility work, and many of them may be unfounded.</p>
+    <p>That sounds harsh, but let me explain with a quick example. Consider a simple technique like adding title attributes to links. Despite the fact that we may use the attribute correctly, the effectiveness of doing so is unknown. Yet we take it for granted that it helps.</p>
+    <p>We don't have a clue how many screen reader users have their software configured to read the title attribute in the first place. It is quite possible that a title attribute could be read in place of or in addition to the link text. Or it might not be read at all. Without at least some research, we'll never know. While the onus is also on the user to know how their software works, things like enabling title attributes to be read is a very minute detail. I suspect that most people using screen readers can do some customization of their settings, but it may be that configuring title attributes to be read just isn't done. Again, we simply don't know, and it would be useful to find out.</p>
+    <p>The limited research that does exist isn't always helpful to developers. Most people are becoming more aware of web accessibility. There are many developers out there that want to do the right thing, but they don't necessarily know how. Because there are technical details that impact on accessibility, we need to see more from research studies than just screen shots. As developers, we need to be able to look at the actual pages that were used, or relevant code at a minimum so that we have a better understanding of what solutions have been tried, and how we might improve the accessibility of web sites and applications.</p>
+    <p>We are all making educated guesses right now -- I just think we need more data that we can use to make more informed decisions about the techniques we use. We all know there is more to accessibility than just considering people that are blind or visually impaired using screen readers, but take a look at the title attributes in screen readers example again.</p>
+    <p>What if we found that 60% of screen reader users aren't configured to read the title attribute, and that the 40% that are configured to read title attributes have it setup such that the title attribute is read out <em>in place of</em> the link text? Would that change the way you used the title attribute on links? And how (if at all) would that change over time? These are all questions that need to be asked and at least partially answered.</p>
+  </dd>
+  <dt id="question10">10. Finally, what's in the pipeline?</dt>
+  <dd>
+    <ul>
+      <li>I'm heading to London for <a href="http://www.atmedia2005.co.uk/">@media</a>, and to Sydney for <a href="http://we05.com/">Web Essentials 05</a>, and likely speaking at some other smaller local conferences here at home</li>
+      <li>I'm currently doing some writing and tech editing for an upcoming book</li>
+      <li>Like Joe, trying to tackle the research funding problem. If anyone has a source of some funding for research and wants to partake in some interesting work, let me know. </li>
+      <li>Some new initiatives and ventures for my company that possibly involve some national and international partnerships with other companies, and will hopefully let me get more sleep at night (how's that for vague?)</li>
+      <li>Some redesign coming up as well; I completely missed B. Adam Howell's <a href="http://www.cssreboot.com/">CSS Reboot</a> and wish I hadn't. In all honesty, the more I write the more I think that I need to change the way my blog functions. </li>
+    </ul>
+  </dd>
+  <dt>Thanks for the interview, Derek</dt>
+  <dd>Derek: Thanks for asking me, Russ. The pleasure was all mine.</dd>
+</dl>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

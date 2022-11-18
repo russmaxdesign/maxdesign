@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ten questions for Tommy Ollson - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ten questions for Tommy Ollson</h1>
+
+<p class="metadetails">Published: <time datetime="2005-04-26">26 Apr 2005</time></p>
+
+<p>Tommy Olsson lives in a tiny hamlet, called Åsnorrbodarna, in central Sweden. After 14 years of software development and consulting, he now works as a technical webmaster at the Swedish Companies Registration Office in Sundsvall. In his spare time, he writes about web standards and accessibility on his blog: <a href="http://autisticcuckoo.net/">The Autistic Cuckoo</a>.</p>
+
+<dl>
+  <dt id="question1">1. Let's jump straight into the deep end. What are the advantages of XHTML over HTML?</dt>
+  <dd>
+    <p>For most designers and developers: none. XHTML, being XML, offers some theoretical advantages by allowing the author to mix in elements from other XML namespaces, such as <a href="http://www.w3.org/Graphics/SVG/">SVG</a> or <a href="http://www.w3.org/Math/">MathML</a>. Since few browsers support XHTML, and none natively support SVG or MathML at this time, the importance of this is often overestimated. (Opera 8 includes native support for SVG.)</p>
+    <p>XHTML <strong>could</strong> offer significant advantages for those who make authoring tools, since XHTML is easier both to read and to write than HTML. Also, some authors who publish lots of code could theoretically benefit from using <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.2">CDATA</a> sections. I say theoretically, because real XHTML cannot be served to most browsers. In particular, the most commonly used browser today - Internet Explorer - does not support XHTML at all, which makes XHTML useful only for narrow niche markets.</p>
+  </dd>
+  <dt id="question2">2. How should XHTML be served? More importantly, can strict, transitional and frameset be served in different ways?</dt>
+  <dd>
+    <p>Tommy: XHTML should be served as <a href="http://www.w3.org/TR/xhtml-media-types/#application-xhtml-xml">application/xhtml+xml</a>, or possibly <a href="http://www.w3.org/TR/xhtml-media-types/#application-xml">application/xml</a>. XHTML 1.0 which fulfills all requirements in <a href="http://www.w3.org/TR/xhtml1/#guidelines">Appendix C</a> of the XHTML 1.0 specification <strong>may</strong> be served as text/html if you have a good enough reason to do so. It should be noted, though, that this means the document will be parsed and treated as HTML. In other words, any small benefit from using XHTML is lost. That may be a small problem, but a bigger problem (although few developers see it as a problem) is that all the old-school HTML-only techniques will still work, because it <strong>is</strong> still HTML.</p>
+    <p>There is no difference related to the three flavours of the <a href="http://www.w3.org/TR/xhtml1/">XHTML 1.0 DTD</a>, but <a href="http://www.w3.org/TR/xhtml11/">XHTML 1.1</a> should not be served as text/html since it is not fully backwards-compatible with HTML.</p>
+    <p>One other thing to note is that the text/xml media type should be avoided. It has a default character encoding of US-ASCII, which cannot be overridden by an XML declaration (and of course not by a META element).</p>
+    <p>Finally, it's important to know that you cannot set the content type with a simple <code>&lt;meta/&gt;</code> element in your markup; it has to be sent by the web server (in an HTTP header). There is lots of confusion about doctype declarations, content types, character encodings and namespaces. This is how they tie together:</p>
+    <ul>
+      <li>The doctype declaration tells a validator which grammar the document claims conformance with. It is required if you want to validate your markup. Browsers <strong>may</strong> read a specified DTD, but they are not required to (and most don't). That means you should not use HTML character entities like <code>&amp;nbsp;</code> in XHTML, since they are declared in the DTD. Use numeric references instead (e.g. <code>&amp;#160;</code> or <code>&amp;#xA0;</code>).</li>
+      <li>The content type (a.k.a. media type or MIME type) sent by the server tells a user agent what type of content the document contains and, optionally, which character encoding is used. If the content type is application/xhtml+xml or application/xml, the document is recognised as XML.</li>
+      <li>The XML declaration, if any, can specify the character encoding if it is not sent by the server. This is also useful if the document is read from a local hard drive rather than from a web server. The XML declaration is required if the encoding is anything but UTF-8 or UTF-16 (unless it is sent by the server).</li>
+      <li>The XML namespace declaration (the xmlns attribute of the <code>&lt;html&gt;</code> tag) is what tells the user agent that the document is XHTML, not just any generic XML.</li>
+    </ul>
+  </dd>
+  <dt id="question3">3. Let's talk <a href="http://www.w3.org/2003/01/xhtml-mimetype/content-negotiation">content negotiation</a>? In particular, should you serve Internet Explore XHTML with application/xhtml+xml or HTML4.01?</dt>
+  <dd>
+    <p>Tommy: Serving XHTML as application/xhtml+xml to Internet Explorer for Windows is a very efficient way to lose visitors to your site. Since IE does not support that media type, it will usually prompt you to download the file. There are registry hacks that will make IE accept application/xhtml+xml, but it will still treat it as HTML.</p>
+    <p>If you serve XHTML as application/xml to Internet Explorer, it will recognise it as XML, but not as XHTML. If you desperately need to use some XML-only features of XHTML, this may be a workaround, but be prepared to add a lot of rules to your style sheet, since it is generic XML to IE. I haven't yet looked into the impact, if any, of this technique with respect to assistive technologies.</p>
+    <p>HTML-compatible XHTML 1.0 (any DTD) can be served as text/html to IE, but, as I mentioned before, that means it will be treated as HTML. HTML 4.01 is the latest standard with reasonable support in IE. It doesn't fully support it, but close enough for most uses. Whether you choose HTML 4.01 or XHTML 1.0 served as text/html doesn't really matter all that much; both will be treated exactly the same by IE.</p>
+    <p>An important thing to remember, though, is that even if you serve your XHTML markup as text/html, it must still work properly when served as application/xhtml+xml to compliant browsers. Most of the 'XHTML' sites on the web today fail miserably at this, and do in fact <strong>require</strong> that they be served as text/html. This is definitely not a step forward for web standards.</p>
+  </dd>
+  <dt id="question4">4. Why do you like HTML 4.01 strict? Isn't it SO last season?</dt>
+  <dd>
+    <p>Tommy: That may be so, but it's still a valid W3C 'standard,' and it is the latest standard with any widespread support. I think most people overestimate the benefits of XHTML, at the same time as they underestimate the benefits of using a Strict DTD. In my opinion, using a Strict DTD, either HTML 4.01 Strict or XHTML 1.0 Strict, is far more important for the quality of the future web than whether or not there is an X in front of the name. The Strict DTD promotes a separation of structure and presentation, which makes a site so much easier to maintain. You can re-style a site completely by updating a single CSS file, rather than making identical changes to 10,000 pages with presentational markup.</p>
+    <p>It also has lots of benefits for the user (quicker download) and the server (less bandwidth), as well as for search engines (better content-to-markup ratio). Last but not least, it makes it a lot easier to create an accessible site.</p>
+    <p>The main cause of confusion seems to be that many web authors think that HTML <strong>must</strong> be written as 'tag soup.' The truth is that you can - and should! - write HTML 4.01 that is almost identical to XHTML 1.0. Just because HTML allows some shortcuts doesn't mean that you should use them. There are even beginners who have been conned into believing that CSS can only be used with XHTML, not with HTML!</p>
+  </dd>
+  <dt id="question5">5. Let's move on to a topic that is far less contentious... abbreviations. Specifically, what is an abbreviation and what is an acronym?</dt>
+  <dd>
+    <p>Tommy: I wish I knew, Russ. HTML has two element types for marking up abbreviated forms: <a href="http://www.w3.org/TR/REC-html40/struct/text.html#edef-ABBR">ABBR</a> and <a href="http://www.w3.org/TR/REC-html40/struct/text.html#edef-ACRONYM">ACRONYM</a>. The question is: what do the W3C mean by 'abbreviation' and what do they mean by 'acronym'?</p>
+    <p>If you look at the HTML 4.01 specification, you will find that it contradicts itself. The first definitions seem to indicate that ACRONYM should only be used for abbreviated forms that can be pronounced as a word. This is the common dictionary definition of 'acronym.' But only a few paragraphs further down, they seem to be using the term 'acronym' as it is used in daily American parlance: for initialisms (abbreviations made up by the initial letters from consecutive words, like 'FBI').</p>
+    <p>The origin of this problems harks back to the browser war era. There was neither ABBR nor ACRONYM in HTML 2.0, the first HTML standard. Netscape invented ABBR, while Microsoft invented ACRONYM, and both types meant the same thing. Then the W3C incorporated both in HTML 3, but with subtly different semantics. Microsoft's meaning of ACRONYM was replaced by something different, which made the people at Microsoft so furious that to this day they still don't support the ABBR element type!</p>
+    <p>Since Microsoft's browsers are by far the most widely used today, and since most web authors don't bother reading the W3C specifications (probably because they care about their mental health), lots of initialisms and other abbreviations are marked up with ACRONYM. Whether this is correct according to the W3C specifications is rather difficult to say.</p>
+    <p>I find this challenging. The main reason for marking up abbreviations in the first place is to help assistive technologies, like screen readers, or so I thought. Oh yes, you can also add a TITLE attribute to show the expansion in a tooltip, but you could use SPAN elements for that. But if that's the intended meaning, what is the rationale for ACRONYM? You don't need to mark something up to be read as a word, since that is the default behaviour.</p>
+    <p>I thought that if I had misunderstood the intended use for ACRONYM all these years, things would make a lot more sense. If ACRONYM actually meant 'initialism,' it might actually be useful. Then ABBR could be used for other types of abbreviations, like 'Inc.' After discussing this at length with the knowledgeable people over at <a href="http://www.accessifyforum.com/">Accessify Forum</a>, however, I now think that my original beliefs are, unfortunately, correct.</p>
+    <p>Limiting ACRONYM to abbreviated forms that can be pronounced as words is not as easy as it may seem, either. Certain abbreviations are spelled-out by some, and read as words by others. One example is SQL, which some pronounce as 'sequel,' while others say 'ess-cue-ell.' And how is a screen reader supposed to know that <code>&lt;acronym&gt;</code>PNG<code>&lt;/acronym&gt;</code> is supposed to be read as 'ping'?</p>
+    <p>Many authors only use ACRONYM, because that's the only one that IE supports, and they want to use the TITLE. If you want to use only one element type, however, it would be more semantically correct to stick with ABBR. All acronyms are abbreviations, but not vice versa.</p>
+  </dd>
+  <dt id="question6">6. Are floated items removed from the normal flow and if so, where do they go? Do they sit on layers like absolutely positioned items?</dt>
+  <dd>
+    <p>Tommy: Floated elements are taken out of the normal flow, and they are shifted as far as possible to the left or to the right, depending on the value of the float property. They are not really layered, though; you can't have one float on top of another. A floated element will sit on top of a block-level element, but there can be no actual content in the normal flow above or beneath it.</p>
+    <p>Unlike absolutely positioned elements, they still have some impact on elements - boxes, really - in the flow. They don't affect block boxes at all, but line boxes adjacent to a floated box are shortened. This is a useful behaviour, but it can lead to unexpected results in some cases if you're not aware of it. Particularly when borders and backgrounds are applied to the parent element or a subsequent block element. The behaviour of vertical margins in combination with a cleared element is also somewhat unintuitive to the unwary.</p>
+  </dd>
+  <dt id="question7">7. You've written three articles on <a href="http://www.autisticcuckoo.net/archive.php?id=2005/01/11/block-vs-inline-1">inline and block elements</a> now. Can you explain your obsession with the subject?</dt>
+  <dd>
+    <p>Tommy: Actually, it's not an obsession at all. I wrote an article about float theory, where I mentioned that stuff about inline boxes being shortened and all that. I only mentioned it in passing, but it resulted in several requests to explain the difference between block and inline elements, between block and inline boxes, and between elements and boxes.</p>
+    <p>As soon as I started planning that article, I realised that the subject was far too complicated to cover in a single article. Splitting it in three seemed reasonable, because I could find natural places for those breaks.</p>
+  </dd>
+  <dt id="question8">8. You have a problem with people <a href="http://www.autisticcuckoo.net/archive.php?id=2004/07/06/aaa-accessibility">claiming AAA compliance</a>? Why is that?</dt>
+  <dd>
+    <p>Tommy: Because they are almost never <a href="http://www.w3.org/WAI/WCAG1AAA-Conformance">AAA compliant</a>. They run their pages through an automated accessibility 'validator' like <a href="http://bobby.watchfire.com/bobby/html/en/index.jsp">Bobby</a> or <a href="http://www.contentquality.com/">Cynthia Says</a>, see a Triple-A icon in the report and slap it on their site. What they forget is to do the manual checks that these reports instruct you to perform. And even if they do check, they apply a very lenient interpretation of those checkpoints, just so that they can boast AAA.</p>
+    <p>Level-A compliance is easy to achieve if you use web standards (CSS with HTML or XHTML) and are a decent writer. AA compliance is definitely achievable for most sites. Quite a few of the priority-3 checkpoints are also fairly straightforward, but there are some that are very tough. I'll go so far as to say that most 'normal' designers and developers cannot reach AAA, because we have neither the skills nor the resources that are necessary.</p>
+    <p>The major problem is <a href="http://www.w3.org/TR/WCAG10-TECHS/#tech-icons">checkpoint 14.2</a>: 'Supplement text with graphic or auditory presentations where they will facilitate comprehension of the page.' Some authors think that putting in a few decorative images is enough to satisfy this checkpoint, but I'd say that's a bit too optimistic. Checkpoint 14.2 is more or less the reverse of <a href="http://www.w3.org/TR/WCAG10-TECHS/#tech-text-equivalent">checkpoint 1.1</a>, which says you must provide a text equivalent for every non-text element. What 14.2 means is that you need to provide non-text equivalents for all important blocks of text. This can be a diagram or a graph that illustrates statistics; images or a video clip that illustrate a procedure of steps; icons that symbolise certain keywords; a video clip where the text is translated into sign language; or sound files where the text is read out loud.</p>
+  </dd>
+  <dt id="question9">9. Is it possible to achieve a site that is completely accessible to all users?</dt>
+  <dd>
+    <p>Tommy: No. There are still a few billion people who don't own a computer, for starters. Seriously, though, you cannot achieve 100% accessibility; there are too many different - and often conflicting - requirements and needs. You can definitely achieve a <strong>reasonable</strong> level of accessibility, without too much work. Accessibility is mainly about not putting up barriers for your visitors. If you require Flash or JavaScript, you automatically shut out a certain percentage of the users. If you require the user to click on an image map, you shut out those with visual impairments, those with mobility impairments, and those who cannot see images (e.g. because they use a text browser or have disabled images because they're on a slow dial-up connection).</p>
+    <p>Some seem to believe that this automatically means that an accessible site must be plain and boring, text only, and no JavaScript. That's not true at all. You can have a stunning visual design, images, JavaScript, Flash and whatnot ... as long as it degrades gracefully. A user who cannot take advantage of the flashy stuff should still be able to access the <strong>content</strong>. That's what it's all about.</p>
+  </dd>
+  <dt id="question10">10. You have been wrestling with your site recently, and have even threatened to stop blogging. What's causing all this stress?</dt>
+  <dd>
+    <p>Tommy: Well, as traffic to my blog has been increasing over the last few months, it has also become interesting, apparently, to spammers. I built my own blogging system in PHP, and I didn't pay much attention to spam prevention, because I didn't anticipate that I'd become a target. Some unscrupulous person figured out how to post comments to my blog through scripting, and suddenly there were dozens of inane comments recommending my readers to visit some online casino or other.</p>
+    <p>I quickly tired of deleting this rubbish, so I had to disable comments. At that time, I didn't feel too much motivation to keep going, but the response from many of my readers was overwhelming. So now I'm hacking away on a completely new system which will be superior from a technical point of view, and also provide a multi-tiered comment spam defence system. It's an ambitious approach, and I'm still not certain that I'll be able to pull it off. Furthermore, it will take some time to write, and I just have to hope that my readers will bear with me during this period.</p>
+  </dd>
+  <dt>Thank you for the interview. I'll never look at a mime-type the same way again.</dt>
+  <dd>Tommy: Thank you for asking! It's been a pleasure and an honour.</dd>
+</dl>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p class="metadetails-paragraph">Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

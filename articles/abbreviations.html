@@ -45,7 +45,7 @@
 
 <p>These elements are used to add additional meaning to web content. The element is wrapped around the relevant content and the title attribute is then used to provide the additional information. For example:</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+<pre><code>&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
 </code></pre>
 
 <p>Theoretically two groups of users can benefit from <code>&lt;abbr&gt;</code> elements:</p>
@@ -77,7 +77,7 @@
 </ul>
 
 <p>Example marked up:</p>
-<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+<pre><code>&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
 </code></pre>
 
 <h3>Initialisms</h3>
@@ -93,7 +93,7 @@
 
 <p>As there is no HTML "initialism" element, the content would be marked up with the "abbr" element. Example marked up:</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
+<pre><code>&lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
 </code></pre>
 
 <h3>Contractions</h3>
@@ -123,7 +123,7 @@
 </ul>
 
 <p>Example marked up:</p>
-<pre class="code-sample"><code class="language-markup">&lt;acronym title="Radio Detecting And Ranging"&gt;radar&lt;/acronym&gt;
+<pre><code>&lt;acronym title="Radio Detecting And Ranging"&gt;radar&lt;/acronym&gt;
 </code></pre>
 
 <hr>
@@ -133,12 +133,12 @@
 
 <p>The <code>&lt;abbr&gt;</code> element is used to provide additional information about abbreviations, initialisms and contractions using the title attribute. For example:</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
+<pre><code>&lt;abbr title="association"&gt;assoc.&lt;/abbr&gt;
 </code></pre>
 
 <p>The "abbr" attribute is used to provide shorter information to assistive devices such as screen readers when they are "reading out" tabular information. For example:</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;th abbr="screws"&gt;Long pointy screws&lt;/th&gt;
+<pre><code>&lt;th abbr="screws"&gt;Long pointy screws&lt;/th&gt;
 </code></pre>
 
 <hr>
@@ -148,7 +148,7 @@
 
 <p>This can be achieved with a shorthand CSS rule like:</p>
 
-<pre class="code-sample"><code class="language-css">abbr, acronym {
+<pre><code>abbr, acronym {
   border-bottom: .1em dotted;
 }
 </code></pre>
@@ -179,7 +179,7 @@
 <h3>Changing the cursor</h3>
 <p>You can also assist users by changing the cursor type when an abbreviation is in a state of hover using:</p>
 
-<pre class="code-sample"><code class="language-css">abbr {
+<pre><code>abbr {
   border-bottom: .1em dotted;
   cursor: help;
 }

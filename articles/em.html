@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ideal line length for content - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About us</a></li>
+      <li><a href="../services/index.html">Services</a></li>
+      <li><a href="../training/index.html">Training</a></li>
+      <li><a href="../contact-us/index.html">Contact us</a></li>
+    </ul>
+  </nav>
+  <main>
+
+<h1>Ideal line length for content</h1>
+
+<p class="metadetails">Published: <time datetime="2003-05-03">3 May 2003</time></p>
+
+<h2>Is there an ideal line length for content?</h2>
+
+<p>To quote a passage from "Web Style Guide - Basic design principles for creating web sites".</p>
+
+<blockquote>
+  <p>The ideal line length for text layout is based on the physiology of the human eye... At normal reading distance the arc of the visual field is only a few inches - about the width of a well-designed column of text, or about 12 words per line. Research shows that reading slows and retention rates fall as line length begins to exceed the ideal width, because the reader then needs to use the muscles of the eye and neck to track from the end of one line to the beginning of the next line. If the eye must traverse great distances on the page, the reader is easily lost and must hunt for the beginning of the next line. Quantitative studies show that moderate line lengths significantly increase the legibility of text.</p>
+  <p class="metadetails">Web Style Guide - Basic Design Principles for Creating Website, Patrick J. Lynch and Sarah Horton, 2nd edition, page 97.</p>
+</blockquote>
+
+<h2>The challenge</h2>
+
+<p>I'd like to design a site that uses optimal line lengths. I also want the line length to stay within the optimal range no matter what default font size the user has set in their browser. Is it possible?</p>
+
+<h2>Layout methods</h2>
+
+<p>Most websites lay out content used either fixed width (set to an absolute measurement) or flexible width (set to a percentage of the screen, so that it scales in or out based on the browser window). Both of these methods have problems where line-length and differing default font sizes are concerned.</p>
+
+<p>Fixed-width columns can be used to set column widths that are ideal if users have their fonts set to browser defaults. An example would be a column set to 420 pixels wide. This is almost an ideal line length for users who have their fonts set to around 14-16px - normal browser defaults, but less than ideal for users who have their fonts set much larger or smaller. Pixels are an absolute measurement that does not take into account the size of the font.</p>
+
+<p>Flexible-width columns also have problems. You cannot control the users browser window, so column widths will vary greatly from user to user. This is often touted as the ideal solution, as users have control over the width of their browser window and can decide for themselves a comfortable line length. There are two problems with this.</p>
+
+<p>The first problem is having to drag your browser window in and out as you jump around from site to site - although it sounds trivial, it can become a drag, and why should users have to change their window size to view a site?</p>
+
+<p>The second problem is placing the responsibility on the user. Some users do not know that they can rescale their browser window, and may assume they have to read very wide lines of content. This is less than ideal.</p>
+
+<h2>A solution</h2>
+
+<p>The solution may be to set column widths using <code>em</code>'s. To understand why <code>em</code>'s can create an ideal line width we first need to establish what exactly is an <code>em</code>...</p>
+
+<p>In traditional typesetting, an <code>em</code> is defined as the width of the uppercase M in the current face and point size. An <code>em-dash</code> was traditionally the width of the capital M, an <code>en-dash</code> was half the width of a capital M and an <code>em quad</code>, a unit of spacing material usually used for paragraph indentation, was the square of a capital M.</p>
+
+<p>In screen representation, an <code>em</code> is more properly defined as simply the current point size. For example, in 12-point type, an em is a distance of 12 points. An <code>em quad</code> is always a square of the size of type to which it belongs. So, an <code>em quad</code> of 12pt type is 12pt high x 12pt wide.</p>
+
+<p>In CSS, an <code>em</code> is a relative measure of length that inherits size information from parent elements. If the parent element is the <code>BODY</code> then the size of the element is actually determined by the user's browser font settings. So, in a default Internet Explorer install (where the default font size is 16px), 1em will be 16px.</p>
+
+<p>Using a standard piece of text like "Lorem ipsum..." it seems that an ideal like length in <code>em</code>'s is about 30-35ems. This is expressed with the rule:</p>
+
+<pre><code>body {
+  width: 30em;
+}
+</code></pre>
+
+<p>The beauty of this is that this measurement relates the users font size. If you come to a site with a default font size of smaller or larger, the column width will always stay within the optimal range.</p>
+
+<h2>One step further</h2>
+
+<p>To take this one step further, the ultimate flexibility would be to specify column widths within a range. This allows the user some degree of control over the line length, but never lets it exceed comfortable reading lengths.</p>
+<p>This could be defined with the following rules:</p>
+
+<pre><code>body {
+  min-width: 25em;
+  max-width: 33em;
+}
+</code></pre>
+
+<h2>Translations</h2>
+
+<ul>
+  <li><a href="http://cssmake.ru/component/content/article/6/98.html">Russian</a> thanks to <a href="http://cssmake.ru/">Nickolas Loiko</a></li>
+  <li><a href="http://www.magnificaweb.it/lunghezza-ideale-per-una-riga-di-contenuto/">Italian</a> thanks to <a href="http://www.magnificaweb.it/">Luca Magnani</a></li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

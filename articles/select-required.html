@@ -40,7 +40,7 @@
 <p>First of all, the <code>"required"</code> attribute is used to specify that the element is a required part of the form submission.</p>
 <p>The <code>"required"</code> attribute can be written in the following ways:</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;select required="required"&gt;
+<pre><code>&lt;select required="required"&gt;
 &lt;select required='required'&gt;
 &lt;select required=required&gt;
 &lt;select required=""&gt;
@@ -53,7 +53,7 @@
 <blockquote>
   <p style="margin-bottom: .5em;"><em>A &lt;select&gt; element with a required attribute and without a multiple attribute, and whose size is "1", must have a child option element.</em></p>
   <p><em>The first child option element of a &lt;select&gt; element with a required attribute and without a multiple attribute, and whose size is “1”, must have either an empty value attribute, or must have no text content.</em></p>
-  <p class="source"><a href="http://www.w3.org/TR/html-markup/select.html">HTML: The Markup Language - select – option-selection form control</a></p>
+  <p class="metadetails"><a href="http://www.w3.org/TR/html-markup/select.html">HTML: The Markup Language - select – option-selection form control</a></p>
 </blockquote>
 
 <p>So, if you are using the <code>"required"</code> attribute with a <code>&lt;select&gt;</code> element</p>
@@ -67,7 +67,7 @@
 <h3>Example 1</h3>
 <p>The example below has a <code>&lt;select&gt;</code> element with the <code>"required"</code> attribute. This example is <strong>not</strong> considered valid as the first child element has no empty value attribute, or no content.</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+<pre><code>&lt;form action="#" method="post"&gt;
   &lt;div&gt;
     &lt;label for="State"&gt;State&lt;/label&gt; 
     &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
@@ -88,7 +88,7 @@
 <h3>Example 2</h3>
 <p>This example <strong>is</strong> considered valid as the first child element has an empty value attribute.</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+<pre><code>&lt;form action="#" method="post"&gt;
   &lt;div&gt;
     &lt;label for="State"&gt;State&lt;/label&gt; 
     &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
@@ -109,7 +109,7 @@
 <h3>Example 3</h3>
 <p>This example <strong>is also </strong> considered valid as the first child element has no content.</p>
 
-<pre class="code-sample"><code class="language-markup">&lt;form action="#" method="post"&gt;
+<pre><code>&lt;form action="#" method="post"&gt;
   &lt;div&gt;
     &lt;label for="State"&gt;State&lt;/label&gt; 
     &lt;select <strong>required</strong> aria-required="true" id="State" name="State"&gt;
