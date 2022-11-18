@@ -176,18 +176,18 @@ a:visited {
 
 a:hover {
   color: #5E7F1F;
-  background: transparent;
+  background-color: transparent;
 }
 
 a:focus {
   color: #fff;
-  background: #000;
+  background-color: #000;
   outline: 0;
 }
 
 a:active {
   color: #6D0E53;
-  background: transparent;
+  background-color: transparent;
 }
 
 
@@ -448,6 +448,27 @@ classes
 
 .metadetails-paragraph {
   margin: .2em 0 2em;
+}
+
+.external {
+  display: inline-block;
+  padding: 0 1.3em 0 0;
+  background-image: url(../img/external-static.png);
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 12px 12px;
+}
+
+.external:hover {
+  background-image: url(../img/external-hover.png);
+}
+
+.external:focus {
+  background-image: url(../img/external-focus.png);
+}
+
+.external:active {
+  background-image: url(../img/external-active.png);
 }
 
 .sr-only,
