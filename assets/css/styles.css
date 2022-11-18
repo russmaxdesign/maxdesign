@@ -83,7 +83,8 @@ headings
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   color: #787373;
   font-weight: 500;
 }
@@ -94,12 +95,12 @@ h1 {
 }
 
 h2 {
-  margin: 1.3333333em 0 1em;
-  font-size: 1.5em;
+  margin: 2.14285714285714em 0 0.714285714285714em;
+  font-size: 1.4em;
 }
 
 h3 {
-  margin: 1.6em 0 1.2em;
+  margin: 1.666666em 0 0.833333333333333em;
   font-size: 1.2em;
 }
 
@@ -160,6 +161,7 @@ iframe {
   width: 100%;
 }
 
+
 /* ---------------------
 links
 ----------------------*/
@@ -186,6 +188,49 @@ a:focus {
 a:active {
   color: #6D0E53;
   background: transparent;
+}
+
+
+/* ---------------------
+details
+----------------------*/
+
+details summary{
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.5em .75em .5em 1.7em;
+  border: 0;
+  background-color: #DCDADA;
+  background-image: url(../img/arrrow01.png);
+  background-repeat: no-repeat;
+  background-position: 5px 50%;
+  background-size: 16px 16px;
+  color: #514D4D;
+  text-decoration: none;
+  border-radius: 0.2em;
+  font-size: .8em;
+  line-height: 1;
+  font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif; 
+}
+
+details[open] summary {
+  background-image: url(../img/arrrow02.png);
+}
+
+details summary:hover {
+  background-color: #5E7F1F;
+  color: #fff;
+}
+
+details summary:focus {
+  background-color: #000;
+  color: #fff;
+  outline: none;
+}
+
+details summary:active {
+  background-color: #6D0E53;
+  color: #fff;
 }
 
 
@@ -222,8 +267,9 @@ caption {
   color: #787373;
   text-align: left;
   font-weight: bold;
-  padding: 0 0 0.5em;
-  font-size: 1.1em;
+  padding: 0 0 0.833333333333333em;
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
 th,
@@ -252,7 +298,7 @@ pre
 pre {
   margin: 1.5em 0;
   color: #fff;
-  background: #000;
+  background: #3A3636;
   padding: 1.5em;
   line-height: 1.5;
   overflow-y: scroll;

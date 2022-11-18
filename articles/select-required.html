@@ -36,7 +36,8 @@
   <p>I tried to add the <code>"required"</code> attribute to the <code>&lt;select&gt;</code> element but now my page won't validate. Is the <code>"required"</code> not allowed on a <code>&lt;select&gt;</code> element?</p>
 </blockquote>
 
-<h3>Answer</h3>
+<h2>Answer</h2>
+
 <p>First of all, the <code>"required"</code> attribute is used to specify that the element is a required part of the form submission.</p>
 <p>The <code>"required"</code> attribute can be written in the following ways:</p>
 
@@ -64,7 +65,8 @@
   <li>the first child element must have no text content.</li>
 </ul>
 
-<h3>Example 1</h3>
+<h2>Example 1</h2>
+
 <p>The example below has a <code>&lt;select&gt;</code> element with the <code>"required"</code> attribute. This example is <strong>not</strong> considered valid as the first child element has no empty value attribute, or no content.</p>
 
 <pre><code>&lt;form action="#" method="post"&gt;
@@ -85,7 +87,8 @@
 &lt;/form&gt;
 </code></pre>
 
-<h3>Example 2</h3>
+<h2>Example 2</h2>
+
 <p>This example <strong>is</strong> considered valid as the first child element has an empty value attribute.</p>
 
 <pre><code>&lt;form action="#" method="post"&gt;
@@ -106,7 +109,8 @@
 &lt;/form&gt;
 </code></pre>
 
-<h3>Example 3</h3>
+<h2>Example 3</h2>
+
 <p>This example <strong>is also </strong> considered valid as the first child element has no content.</p>
 
 <pre><code>&lt;form action="#" method="post"&gt;
