@@ -17,19 +17,7 @@ header {
 }
 
 nav {
-  padding: 1em 2em;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: .8em;
-}
-
-nav li {
-  display: inline-block;
-  margin: 0 1em 0 0;
+  padding: 0 2em;
 }
 
 main {
@@ -181,7 +169,7 @@ a:hover {
 
 a:focus {
   color: #fff;
-  background-color: #000;
+  background-color: #2C2D30;
   outline: 0;
 }
 
@@ -223,7 +211,7 @@ details summary:hover {
 }
 
 details summary:focus {
-  background-color: #000;
+  background-color: #2C2D30;
   color: #fff;
   outline: none;
 }
@@ -362,7 +350,7 @@ legend {
 }
 
 .input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #2C2D30;
 }
 
 .button {
@@ -384,7 +372,7 @@ legend {
 }
 
 .button:focus {
-  background: #000;
+  background: #2C2D30;
   color: #fff;
   outline: none;
 }
@@ -392,6 +380,119 @@ legend {
 .button:active {
   background: #6D0E53;
   color: #fff;
+}
+
+
+/* ---------------------
+banner
+----------------------*/
+
+.banner {
+  background-color: #2C2D30;
+  background-image: url(../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left 50%;
+  margin: 0;
+  padding: 4em 2em;
+}
+
+.banner-inner {
+  background-color: #2C2D30;
+  background-image: url(../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left 50%;
+  padding: 2em;
+  margin: 0;
+}
+
+.banner-content {
+  max-width: 36em;
+  border-radius: .3em;
+}
+
+.banner h1 {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: 400;
+  margin: 0 0 .3em;
+}
+
+.banner-inner h1 {
+  color: #fff;
+  margin: 0;
+}
+
+.banner p {
+  color: #fff;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.main-home {
+  padding-top: 0;
+}
+
+
+/* ---------------------
+nav
+----------------------*/
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: .8em;
+}
+
+nav li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  display: inline-block;
+  padding: 1em 2em;
+  text-decoration: none;
+}
+
+nav a:link,
+nav a:visited
+{
+  color: #005685;
+  background-color: #fff;
+}
+
+nav a:hover {
+  color: #fff;
+  background-color: #5E7F1F;
+}
+
+nav a:focus {
+  color: #fff;
+  background-color: #2C2D30;
+}
+
+nav a:active {
+  color: #fff;
+  background-color: #6D0E53;
+}
+
+nav a.current {
+  position: relative;
+}
+
+nav a.current:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 5px;
+  content: "";
+  display: block;
+  background-color: #2C2D30;
 }
 
 
@@ -486,49 +587,3 @@ classes
   white-space: nowrap !important;
 }
 
-.banner {
-  background-color: #2C2D30;
-  background-image: url(../img/banner.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left 50%;
-  margin: 0;
-  padding: 4em 2em;
-}
-
-.banner-inner {
-  background-color: #2C2D30;
-  background-image: url(../img/banner.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left 50%;
-  padding: 2em;
-  margin: 0;
-}
-
-.banner-content {
-  max-width: 36em;
-  border-radius: .3em;
-}
-
-.banner h1 {
-  color: #fff;
-  font-size: 2.5em;
-  font-weight: 400;
-  margin: 0 0 .3em;
-}
-
-.banner-inner h1 {
-  color: #fff;
-  margin: 0;
-}
-
-.banner p {
-  color: #fff;
-  margin: 0;
-  font-size: 1.1em;
-}
-
-.main-home {
-  padding-top: 0;
-}
