@@ -13,22 +13,22 @@ containers
 
 header {
   background: #DCDADA;
-  padding: 1em 2em;
+  padding: .5em 1em;
 }
 
 nav {
-  padding: 0 2em;
+  padding: 0 1em;
 }
 
 main {
-  max-width: 38em;
-  margin: 0 2em;
-  padding: 3em 0;
+  margin: 0 1em;
+  padding: 1em 0;
 }
 
+
 footer {  
-  margin: 0 2em;
-  padding: 1em 0;
+  margin: 0 1em;
+  padding: .5em 0;
   border-top: 1px solid #969292;
 }
 
@@ -48,6 +48,27 @@ footer p {
   font-size: .8em;
 }
 
+@media screen and (min-width: 600px) {
+  header {
+    padding: 1em 2em;
+  }
+
+  nav {
+    padding: 0 2em;
+  }
+
+  main {
+    max-width: 38em;
+    margin: 0 2em;
+    padding: 3em 0;
+  }
+
+  footer {  
+    margin: 0 2em;
+    padding: 1em 0;
+  }
+}
+
 
 /* ---------------------
 body
@@ -60,8 +81,14 @@ body {
   background: #fff;
   font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif; 
   font-weight: 400;
-  font-size: 1.25em;
+  font-size: 1em;
   line-height: 1.25;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    font-size: 1.25em;
+  }
 }
 
 
@@ -454,7 +481,7 @@ nav li {
 
 nav a {
   display: inline-block;
-  padding: 1em;
+  padding: 1em .5em;
   text-decoration: none;
 }
 
@@ -495,6 +522,15 @@ nav a.current:after {
   background-color: #2C2D30;
 }
 
+@media screen and (min-width: 600px) {
+  nav ul {
+    font-size: .8em;
+  }
+
+  nav a {
+    padding: 1em;
+  }
+}
 
 
 /* ---------------------
@@ -503,10 +539,10 @@ external
 
 .external {
   display: inline-block;
-  padding: 0 1.3em 0 0;
+  padding: 0 0 0 1.1em;
   background-image: url(../img/external-static.png);
   background-repeat: no-repeat;
-  background-position: right 5px center;
+  background-position: left center;
   background-size: 12px 12px;
 }
 
@@ -554,6 +590,16 @@ metadetails
 /* ---------------------
 classes
 ----------------------*/
+
+.list-no-bullets {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-spaced li {
+  margin: 0 0 1em;
+}
 
 .help-text {
   display: block;
