@@ -485,3 +485,45 @@ classes
   width: 1px !important;
   white-space: nowrap !important;
 }
+
+.banner {
+  background-color: #2C2D30;
+  background-image: url(../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left 50%;
+  margin: 0;
+  padding: 4em 2em;
+}
+
+.banner-inner {
+  background-color: #2C2D30;
+  background-image: url(../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left 50%;
+  margin: 0;
+  height: 60px;
+}
+
+.banner-content {
+  max-width: 30em;
+  border-radius: .3em;
+}
+
+.banner h1 {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: 400;
+  margin: 0 0 .3em;
+}
+
+.banner p {
+  color: #fff;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.main-home {
+  padding-top: 0;
+}
