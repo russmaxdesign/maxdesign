@@ -23,7 +23,7 @@ nav {
 main {
   max-width: 38em;
   margin: 0 2em;
-  padding: 2em 0;
+  padding: 3em 0;
 }
 
 footer {  
@@ -103,7 +103,7 @@ general elements
 ----------------------*/
 
 p {
-  margin: 1em 0 1.5em;
+  margin: 0 0 1.5em;
   line-height: 1.5;
 }
 
@@ -496,6 +496,61 @@ nav a.current:after {
 }
 
 
+
+/* ---------------------
+external
+----------------------*/
+
+.external {
+  display: inline-block;
+  padding: 0 1.3em 0 0;
+  background-image: url(../img/external-static.png);
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 12px 12px;
+}
+
+.external:hover {
+  background-image: url(../img/external-hover.png);
+}
+
+.external:focus {
+  background-image: url(../img/external-focus.png);
+}
+
+.external:active {
+  background-image: url(../img/external-active.png);
+}
+
+
+/* ---------------------
+metadetails
+----------------------*/
+
+.metadetails {
+  color: #777;
+  font-size: .8em;
+}
+
+.metadetails-list {
+  color: #777;
+  font-size: .8em;
+  display: inline-block;
+  margin: 0 0 0 .5em;
+}
+
+.metadetails-section {
+  color: #777;
+  font-size: .8em;
+  display: inline-block;
+  margin: 0;
+}
+
+.metadetails-paragraph {
+  margin: .2em 0 2em;
+}
+
+
 /* ---------------------
 classes
 ----------------------*/
@@ -526,50 +581,6 @@ classes
 .highlight {
   color: yellow;
   background: rgba(255,255,0,.3);
-}
-
-.metadetails {
-  color: #777;
-  font-size: .8em;
-}
-
-.metadetails-list {
-  color: #777;
-  font-size: .8em;
-  display: inline-block;
-  margin: 0 0 0 .5em;
-}
-
-.metadetails-section {
-  color: #777;
-  font-size: .8em;
-  display: inline-block;
-  margin: 0;
-}
-
-.metadetails-paragraph {
-  margin: .2em 0 2em;
-}
-
-.external {
-  display: inline-block;
-  padding: 0 1.3em 0 0;
-  background-image: url(../img/external-static.png);
-  background-repeat: no-repeat;
-  background-position: right 5px center;
-  background-size: 12px 12px;
-}
-
-.external:hover {
-  background-image: url(../img/external-hover.png);
-}
-
-.external:focus {
-  background-image: url(../img/external-focus.png);
-}
-
-.external:active {
-  background-image: url(../img/external-active.png);
 }
 
 .sr-only,
