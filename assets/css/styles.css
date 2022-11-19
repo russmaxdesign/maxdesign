@@ -210,13 +210,13 @@ a:active {
 details
 ----------------------*/
 
-details summary{
+details summary {
   cursor: pointer;
   display: inline-block;
   padding: 0.5em .75em .5em 1.7em;
   border: 0;
   background-color: #DCDADA;
-  background-image: url(../img/arrrow01.png);
+  background-image: url(../img/details-arrow-closed.png);
   background-repeat: no-repeat;
   background-position: 5px 50%;
   background-size: 16px 16px;
@@ -229,7 +229,7 @@ details summary{
 }
 
 details[open] summary {
-  background-image: url(../img/arrrow02.png);
+  background-image: url(../img/details-arrow-open.png);
 }
 
 details summary:hover {
@@ -422,6 +422,7 @@ banner
   background-position: left 50%;
   margin: 0;
   padding: 4em 2em;
+  border-bottom: 5px solid #DCDADA;
 }
 
 .banner-inner {
@@ -432,6 +433,7 @@ banner
   background-position: left 50%;
   padding: 2em;
   margin: 0;
+  border-bottom: 5px solid #DCDADA;
 }
 
 .banner-content {
@@ -555,6 +557,21 @@ external
 
 .external:active {
   background-image: url(../img/external-active.png);
+}
+
+.bullet-icon {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.bullet-icon li a {
+  display: inline-block;
+  padding: 0 0 0 1em;
+  background-image: url(../img/arrow-right.png);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 12px 12px;
 }
 
 
