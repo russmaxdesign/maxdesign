@@ -101,7 +101,7 @@ h2,
 h3,
 h4 {
   color: #787373;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 h1 {
@@ -110,13 +110,13 @@ h1 {
 }
 
 h2 {
-  margin: 2.14285714285714em 0 0.714285714285714em;
+  margin: 2.14285714285714em 0 .714285714285714em;
   font-size: 1.4em;
 }
 
 h3 {
-  margin: 1.666666em 0 0.833333333333333em;
-  font-size: 1.2em;
+  margin: 1.81818181818182em 0 .909090909090909em;
+  font-size: 1.1em;
 }
 
 h4 {
@@ -442,7 +442,6 @@ banner
 .banner h1 {
   color: #fff;
   font-size: 2.5em;
-  font-weight: 400;
   margin: 0 0 .3em;
 }
 
@@ -575,6 +574,10 @@ metadetails
   margin: 0 0 0 .5em;
 }
 
+.metadetails-heading {
+  margin: 2.27272727272727em 0 .454545454545455em;
+}
+
 .metadetails-section {
   color: #777;
   font-size: .8em;
@@ -598,7 +601,7 @@ classes
 }
 
 .list-spaced li {
-  margin: 0 0 1em;
+  margin: 0 0 .7em;
 }
 
 .help-text {
