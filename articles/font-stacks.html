@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS font stacks - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>CSS font stacks</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2010-04-24">24 April 2010</time></p>
+
+<p>Font stacks are about creating a relevant and comprehensive list of fall-back fonts - based on aspect ratio, platforms, operating systems etc.</p>
+
+<p>What's a bad example of a CSS font stack?</p>
+
+<pre><code>body {
+  font-family: Verdana, Arial, sans-serif;
+}</code></pre>
+
+<p>What’s wrong here?</p>
+
+<ul>
+  <li>Problem 1: There are a limited number of fallback fonts.</li>
+  <li>Problem 2: The fonts used may not be available for all operating systems (eg. Windows, Mac, Linux).</li>
+  <li>Problem 3: The fonts used have different “aspect ratios”</li>
+</ul>
+
+<h2>What is aspect ratio?</h2>
+
+<p>Some fonts, especially those specifically designed for screen, may appear wider and/or taller than other fonts.</p>
+
+<p>An example would be the difference between Verdana and Helvetica. Verdana has a larger x-height and overall size. This means that these fonts have a larger aspect ratio.</p>
+
+<p>If you use font’s with different aspect ratio, some people may see your pages with a much smaller font size than others  -depending on their available fonts.</p>
+
+<pre><code>body {
+  font-family: Verdana, Arial, sans-serif;
+}</code></pre>
+
+<p>Ideally, your font stacks should include a range of fonts that have a similar aspect ratio.</p>
+
+<h2>The basic font stacks based on aspect ratio</h2>
+
+<ul>
+  <li>Wide sans-serif stacks eg: Verdana, Geneva</li>
+  <li>Narrow sans-serif stacks eg: Tahoma, Arial, Hevetica</li>
+  <li>Wide serif stacks eg: Georgia, Utopia</li>
+  <li>Narrow serif stacks eg: Times, Times New Roman</li>
+  <li>Monospace stacks eg: Consolas, Courier, Courier New</li>
+</ul>
+
+<h2>Some steps to creating a good font stack</h2>
+
+<p>1. Pick the font you like:</p>
+<p><em>eg. Helvetica Neue</em></p>
+
+<p>2. Determine which aspect ratio category it belongs to:</p>
+<p><em>eg. Narrow sans-serif</em></p>
+
+<p>3. Choose a preferred Linux variation and a highly available variation</p>
+<p><em>eg. DejaVu Sans - 90.76% availability on Linux</em></p>
+
+<p>4. Choose a preferred Macintosh variation and highly available variation</p>
+<p><em>eg. Helvetica Neue - 95.11% availability on Mac</em></p>
+
+<p>5. Choose a preferred Windows variation and a highly available variation</p>
+<p><em>eg. Arial - 99.32% availability on Win</em></p>
+
+<p>6. Include the generic font family</p>
+<p><em>eg. sans-serif</em></p>
+
+<p>7. Make sure fonts with white-space in names are wrapped in single or double quotes.</p>
+<p><em>(eg. “Microsoft Sans-serif”)</em></p>
+
+<h2>A better font stack?</h2>
+
+<code><pre>body {
+font-family:
+  "DejaVu Sans",
+  "URW Gothic L",
+  "Helvetica Neue”,
+  Helvetica,
+  Arial,
+  "Microsoft Sans Serif",
+  sans-serif;
+}</pre></code>
+
+<h2>Some example font stacks?</h2>
+
+<p>The Helvetica-based sans serif stack: </p>
+
+<code><pre>Frutiger, ‘Frutiger Linotype’, Univers, Calibri, ‘Gill Sans’, ‘Gill Sans MT’, ‘Myriad Pro’, Myriad, ‘DejaVu Sans Condensed’, ‘Liberation Sans’, Tahoma, Geneva, ‘Helvetica Neue’, Helvetica, Arial, sans-serif</pre></code>
+
+<b>The Verdana-based sans serif stack:</b>
+
+<code><pre>Corbel, ‘Lucida Grande’, ‘Lucida Sans Unicode’, ‘DejaVu Sans’, ‘Bitstream Vera Sans’, ‘Liberation Sans’, Verdana, ‘Verdana Ref’, sans-serif</pre></code>
+
+<p>A Times-based serif stack:</p> 
+
+<code><pre>Cambria, ‘Hoefler Text’, Utopia, ‘Liberation Serif’, Times, ‘Times New Roman’, serif</pre></code>
+
+<p>A Garamond-based serif stack: </p>
+
+<code><pre>Palatino, Palladio, ‘URW Palladio L’, ‘Book Antiqua’, Baskerville, Garamond, ‘Apple Garamond’, ‘New Century Schoolbook’, Georgia, serif</pre></code>
+
+<p>The Monospace stack:</p>
+
+<code><pre>Consolas, ‘Andale Mono WT’, ‘Andale Mono’, ‘Lucida Console’, ‘Lucida Sans Typewriter’, ‘DejaVu Sans Mono’, ‘Bitstream Vera Sans Mono’, ‘Liberation Mono’, ‘Nimbus Mono L’, Monaco, ‘Courier New’, Courier, monospace</pre></code>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+
+
+

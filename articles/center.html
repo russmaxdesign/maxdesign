@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS centering - fun for all! - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>CSS centering - fun for all!</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2003-11-08">8 November 2003</time></p>
+
+<p>How do you center a containing block on a page using CSS? There are two main methods and the choice should be made based on whether your page layout is liquid (will move in and out depending on the size of the browser window) or fixed width.</p>
+
+<h2>Centering liquid layouts</h2>
+
+<p>Liquid layouts are easy to center using margins on each side of the containing box. The margins can be set with em, pixel or percentage units.</p>
+
+<pre class="codesample"><code>.container {
+  margin-left: 10%;
+  margin-right: 10%;
+}</code></pre>
+
+<h2>Centering fixed-width layouts</h2>
+
+<p>Theoretically, you should be able to apply auto margins to the left and right of the containing block and it should center on the page.</p>
+
+<p>The W3C <a href="http://www.w3.org/TR/CSS21/visudet.html#q6">Visual formatting model</a> states: “If both ‘margin-left’ and ‘margin-right’ are ‘auto’, their used values are equal. This horizontally centers the element with respect to the edges of the containing block.”</p>
+
+<p>So, a containing block should be able to be centered using the following rules:</p>
+
+<pre class="codesample"><code>.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50em;
+}</code></pre>
+
+<p>Or, a shorthand version using the margin property:</p>
+
+<pre class="codesample"><code>.container {
+  margin: 0 auto;
+  width: 50em;
+}</code></pre>
+
+<p><a class="button" href="https://cdpn.io/pen/debug/VwdypLa" target="_blank">CodePen demo</a></p>
+
+<h3>
+  Translations<br>
+</h3>
+<ul>
+  <li><a href="http://maxdesign.developpez.com/tutoriels/css/centrer-bloc/">French</a> by <a href="http://maxdesign.developpez.com/">Rodrigue</a></li>
+  <li><a href="http://www.karalamalar.net/css-ile-ortalama/">Turkish</a> by <a href="http://www.karalamalar.net/">Kara</a></li>
+  <li><a href="http://cssmake.ru/component/content/article/4/100.html">Russian</a> by <a href="http://cssmake.ru/">Nickolas Loiko</a></li>
+  <li><a href="http://www.bjornenki.com/articles/md_presentation_center">Norwegian</a> by <a href="http://www.bjornenki.com/">Bjorn Enki</a></li>
+  <li><a href="http://greencoma.ru/CSS/CSSCenter.htm">Ukrainian</a> by <a href="http://greencoma.ru/">Alex</a></li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

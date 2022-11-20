@@ -7,45 +7,87 @@ RewriteRule ^(.*)$ http://www.maxdesign.com.au/$1 [r=301,nc]
 #Custom 400 errors
 ErrorDocument 404 /404.html
 
-#301 Redirect Old File
-
+#301 Redirect Pages
 Redirect 301 /contact.cfm /contact-us/index.html
-Redirect 301 /articles/external /articles/external.html
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 
-Redirect 301 /articles/abbreviations/ /articles/abbreviations.html
-Redirect 301 /2006/07/25/styling-abbreviations-2/ /articles/abbreviations.html
-Redirect 301 /articles/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /2006/01/17/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /articles/accessibility/ /articles/accessibility.html
-Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /articles/benefits/ /articles/benefits.html
-Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
-
+#301 checklist
 Redirect 301 /articles/checklist/ /articles/checklist.html
 Redirect 301 /2004/08/05/webstandards-checklist/ /articles/checklist.html
 Redirect 301 /2007/01/15/webstandards-checklist-more/ /articles/checklist.html
 Redirect 301 /presentation/checklist.htm /articles/checklist.html
 Redirect 301 /presentation/checklist/ /articles/checklist.html
 Redirect 301 /news/checklist/ /articles/checklist.html
+Redirect 301 /presentation/checklist.cfm /articles/checklist.html
 
-Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
-Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
-Redirect 301 /articles/definition/ /articles/definition.html
-Redirect 301 /2004/01/27/definition-lists/ /articles/definition.html
-Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
-Redirect 301 /articles/em/ /articles/em.html
+#301 ideal line length
 Redirect 301 /articles/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
 Redirect 301 /2013/05/25/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
 Redirect 301 /2003/05/03/ideal-line-length/ /articles/ideal-line-length-in-ems.html
+
+#301 benefits
+Redirect 301 /articles/benefits/ /articles/benefits.html
+Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
+
+#301 abbreviations
+Redirect 301 /articles/abbreviations/ /articles/abbreviations.html
+Redirect 301 /2006/07/25/styling-abbreviations-2/ /articles/abbreviations.html
+Redirect 301 /presentation/abbreviations.cfm /articles/abbreviations.html
+Redirect 301 /presentation/abbreviations/ /articles/abbreviations.html
+Redirect 301 /news/abbreviations/ /articles/abbreviations.html
+
+#301 about-structural-labels
+Redirect 301 /articles/about-structural-labels/ /articles/about-structural-labels.html
+Redirect 301 /2006/01/17/about-structural-labels/ /articles/about-structural-labels.html
+Redirect 301 //articles/articles/about-structural-labels/ /articles/about-structural-labels.html
+
+#301 comment anatomy
+Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
+Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
+
+#301 definition
+Redirect 301 /articles/definition/ /articles/definition.html
+Redirect 301 /2004/01/27/definition-lists/ /articles/definition.html
+Redirect 301 /presentation/definition/ /articles/definition.html
+Redirect 301 /presentation/definition/index.htm /articles/definition.html
+
+#301 select required
 Redirect 301 /articles/select-required/ /articles/select-required.html
 Redirect 301 /2012/11/03/select-required/ /articles/select-required.html
+
+#301 sign in
 Redirect 301 /articles/sign-in/ /articles/sign-in.html
 Redirect 301 /2008/12/12/sign-in/ /articles/sign-in.html
+
+#301 responsive table
 Redirect 301 /articles/simple-responsive-table/ /articles/simple-responsive-table.html
 Redirect 301 /2013/03/22/simple-responsive-table/ /articles/simple-responsive-table.html
+
+#301 em
+Redirect 301 /articles/em/ /articles/em.html
+Redirect 301 /presentation/em/ /articles/em.html
+
+#301 external
+Redirect 301 /articles/external/ /articles/external.html
+Redirect 301 /presentation/external/ /articles/external.html
+
+#301 hr
+Redirect 301 /presentation/hr/ /articles/hr.html
+Redirect 301 /articles/hr/ /articles/hr.html
+
+#301 font-stacks
+Redirect 301 /articles/font-stacks/ /articles/index.html
+
+#301 general
 Redirect 301 /articles/vertical-align/ /articles/vertical-align.html
 Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
+Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
+Redirect 301 /articles/accessibility/ /articles/accessibility.html
+Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
+Redirect 301 /articles/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
+Redirect 301 /img/maxdesign.png /assets/img/maxdesign.png
+
+#301 interviews
 Redirect 301 /2007/04/14/ten-for-lachlan-hunt/ /articles/interview-lachlan-hunt.html
 Redirect 301 /2007/03/21/ten-for-sarah-blow/ /articles/interview-sarah-blow.html
 Redirect 301 /2004/06/22/ten-for-molly-holzschlag/ /articles/interview-molly-holzschlag.html
@@ -67,6 +109,7 @@ Redirect 301 /2004/05/04/ten-for-anne-van-kesteren/ /articles/interview-anne-van
 Redirect 301 /2005/06/04/ten-for-russ-weakley/ /articles/interview-russ-weakley.html
 Redirect 301 /2005/05/12/ten-for-joe-clark/ /articles/interview-joe-clark.html
 Redirect 301 /2005/05/06/ten-for-jason-santa-maria/ /articles/interview-jason-santa-maria.html
+Redirect 301 /news/ten-for-jason-santa-maria/ /articles/interview-jason-santa-maria.html
 Redirect 301 /2005/04/25/ten-for-tommy-olsson/ /articles/interview-tommy-olsson.html
 Redirect 301 /2004/11/22/ten-for-cameron-adams/ /articles/interview-cameron-adams.html
 Redirect 301 /2004/11/16/ten-for-roger-johansson/ /articles/interview-roger-johansson.html

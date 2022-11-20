@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Styling the HR element - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Styling the <code>&lt;hr&gt;</code> element</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2002-11-23">23 November 2002</time></p>
+
+<p>The <code>&lt;hr&gt;</code> element causes a horizontal rule to be <a href="https://www.w3.org/TR/html401/present/graphics.html#edef-HR">rendered by visual user agents</a>. However, user agents (such as browsers) may render this element in different ways and with different vertical space.</p>
+
+<p>So, how can we style this element consistently across browsers?</p>
+
+<h2>Method 1</h2>
+
+<p>The horizontal rule can be given a height, a background color and margins to the top and bottom of the element:</p>
+
+<pre><code>hr {
+  height: 1px; 
+  margin: 2em 0;
+  color: red;
+  background: red;
+  border: 0;
+}</code></pre>
+
+<h2>Method 2</h2>
+
+<p>The horizontal rule can be given no height, a border across the bottom, and margins to the top and bottom of the element:</p>
+<pre><code>hr {
+  height: 0;
+  margin: 2em 0;
+  border: 0;
+  border-bottom: 1px solid blue;
+}</code></pre>
+
+<p><a class="button" href="https://cdpn.io/pen/debug/VwdrMVR" target="_blank">CodePen demo</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

@@ -452,6 +452,11 @@ banner
   margin: 0;
 }
 
+.banner h1 code,
+.banner-inner h1 code {
+  color: #fff;
+}
+
 .banner p {
   color: #fff;
   margin: 0;
