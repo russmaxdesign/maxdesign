@@ -2,9 +2,8 @@
 /news/checked-inputs/
 /articles/inline/
 /sites/
-/presentation/center/01.htm
 /articles/css-reset/
-/articles/center/
+
 /articles/multiple-classes/
 /articles/specialise-or-cross-skill/
 /em/sample01/
@@ -52,5 +51,4 @@ https://web.archive.org/web/20130217100632/http://www.maxdesign.com.au/articles/
 /presentation/multiple-classes/
 
 ## accessibility
-/category/accessibility
 /category/accessibility
