@@ -10,6 +10,7 @@ ErrorDocument 404 /404.html
 #301 Redirect Pages
 Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
+Redirect 301 /about.php /about/index.html
 
 #301 caa layouts
 Redirect 301 /css-layouts/ /css-layouts/index.html
@@ -60,6 +61,12 @@ Redirect 301 /articles/about-structural-labels/ /articles/about-structural-label
 Redirect 301 /2006/01/17/about-structural-labels/ /articles/about-structural-labels.html
 Redirect 301 //articles/articles/about-structural-labels/ /articles/about-structural-labels.html
 
+#301 articles
+Redirect 301 /presentation/ /presentations/index.html
+Redirect 301 /articles/presentations/index.html /presentations/index.html
+Redirect 301 /articles/articles/index.html /articles/index.html
+Redirect 301 /articles/resources/index.html /resources/index.html
+
 #301 comment anatomy
 Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
 Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
@@ -92,6 +99,10 @@ Redirect 301 /presentation/external/ /articles/external.html
 Redirect 301 /presentation/hr/ /articles/hr.html
 Redirect 301 /articles/hr/ /articles/hr.html
 
+# iframe scrollbars and html5
+Redirect 301 /articles/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
+Redirect 301 /2011/03/10/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
+
 #301 font-stacks
 Redirect 301 /articles/font-stacks/ /articles/index.html
 
@@ -101,7 +112,6 @@ Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
 Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
 Redirect 301 /articles/accessibility/ /articles/accessibility.html
 Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /articles/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
 Redirect 301 /img/maxdesign.png /assets/img/maxdesign.png
 
 #301 interviews

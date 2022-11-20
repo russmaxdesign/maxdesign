@@ -15,9 +15,9 @@
 /liquid__trashed/liquid-sample7/
 /liquid__trashed/liquid-sample8/
 /presentation/more-links/
-/presentation/process
 /presentation/process/index_intro.cfm
 /presentation/tree-table/
+
 
 
 ## css-layouts
@@ -41,6 +41,11 @@ https://web.archive.org/web/20130217100632/http://www.maxdesign.com.au/articles/
 ## remote
 /presentation/remote/
 /presentation/remote/
+
+## process
+
+/presentation/process
+/presentation/process/index.cfm
 
 ## multiple-classes
 /articles/multiple-classes/

@@ -416,24 +416,24 @@ banner
 
 .banner {
   background-color: #2C2D30;
-  background-image: url(../img/banner.jpg);
+  background-image: url(../img/banner-water.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: left 50%;
+  background-position: right 50%;
   margin: 0;
   padding: 4em 2em;
-  border-bottom: 5px solid #DCDADA;
+  border-bottom: 5px solid #5CA4BF;
 }
 
 .banner-inner {
   background-color: #2C2D30;
-  background-image: url(../img/banner.jpg);
+  background-image: url(../img/banner-water.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left 50%;
   padding: 2em;
   margin: 0;
-  border-bottom: 5px solid #DCDADA;
+  border-bottom: 5px solid #5CA4BF;
 }
 
 .banner-content {
@@ -500,7 +500,7 @@ nav a:visited
 
 nav a:hover {
   color: #fff;
-  background-color: #5E7F1F;
+  background-color: #00709B;
 }
 
 nav a:focus {
@@ -525,7 +525,7 @@ nav a.current:after {
   height: 5px;
   content: "";
   display: block;
-  background-color: #2C2D30;
+  background-color: #00709B;
 }
 
 @media screen and (min-width: 600px) {
