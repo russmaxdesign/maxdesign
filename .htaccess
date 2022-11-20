@@ -11,6 +11,23 @@ ErrorDocument 404 /404.html
 Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 
+#301 caa layouts
+Redirect 301 /css-layouts/ /css-layouts/index.html
+Redirect 301 /css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /presentation/page_layouts/ /css-layouts/index.html
+Redirect 301 /presentation/css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /presentation/css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /presentation/css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /presentation/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /articles/css-layouts/ /css-layouts/index.html
+Redirect 301 /articles/css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /articles/css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /articles/css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /articles/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+
 #301 checklist
 Redirect 301 /articles/checklist/ /articles/checklist.html
 Redirect 301 /2004/08/05/webstandards-checklist/ /articles/checklist.html
@@ -20,21 +37,23 @@ Redirect 301 /presentation/checklist/ /articles/checklist.html
 Redirect 301 /news/checklist/ /articles/checklist.html
 Redirect 301 /presentation/checklist.cfm /articles/checklist.html
 
-#301 ideal line length
-Redirect 301 /articles/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /2013/05/25/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /2003/05/03/ideal-line-length/ /articles/ideal-line-length-in-ems.html
-
-#301 benefits
-Redirect 301 /articles/benefits/ /articles/benefits.html
-Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
-
 #301 abbreviations
 Redirect 301 /articles/abbreviations/ /articles/abbreviations.html
 Redirect 301 /2006/07/25/styling-abbreviations-2/ /articles/abbreviations.html
 Redirect 301 /presentation/abbreviations.cfm /articles/abbreviations.html
 Redirect 301 /presentation/abbreviations/ /articles/abbreviations.html
 Redirect 301 /news/abbreviations/ /articles/abbreviations.html
+
+#301 definition
+Redirect 301 /articles/definition/ /articles/definition.html
+Redirect 301 /2004/01/27/definition-lists/ /articles/definition.html
+Redirect 301 /presentation/definition/ /articles/definition.html
+Redirect 301 /presentation/definition/index.htm /articles/definition.html
+
+#301 ideal line length
+Redirect 301 /articles/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
+Redirect 301 /2013/05/25/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
+Redirect 301 /2003/05/03/ideal-line-length/ /articles/ideal-line-length-in-ems.html
 
 #301 about-structural-labels
 Redirect 301 /articles/about-structural-labels/ /articles/about-structural-labels.html
@@ -45,11 +64,9 @@ Redirect 301 //articles/articles/about-structural-labels/ /articles/about-struct
 Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
 Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
 
-#301 definition
-Redirect 301 /articles/definition/ /articles/definition.html
-Redirect 301 /2004/01/27/definition-lists/ /articles/definition.html
-Redirect 301 /presentation/definition/ /articles/definition.html
-Redirect 301 /presentation/definition/index.htm /articles/definition.html
+#301 benefits
+Redirect 301 /articles/benefits/ /articles/benefits.html
+Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
 
 #301 select required
 Redirect 301 /articles/select-required/ /articles/select-required.html
