@@ -8,6 +8,11 @@ RewriteRule ^(.*)$ http://www.maxdesign.com.au/$1 [r=301,nc]
 ErrorDocument 404 /404.html
 
 #301 Redirect Old File
+
+Redirect 301 /contact.cfm /contact-us/index.html
+Redirect 301 /articles/external /articles/external.html
+Redirect 301 /about_russ.cfm /about/russweakley/index.html
+
 Redirect 301 /articles/abbreviations/ /articles/abbreviations.html
 Redirect 301 /2006/07/25/styling-abbreviations-2/ /articles/abbreviations.html
 Redirect 301 /articles/about-structural-labels/ /articles/about-structural-labels.html
@@ -16,9 +21,14 @@ Redirect 301 /articles/accessibility/ /articles/accessibility.html
 Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
 Redirect 301 /articles/benefits/ /articles/benefits.html
 Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
+
 Redirect 301 /articles/checklist/ /articles/checklist.html
 Redirect 301 /2004/08/05/webstandards-checklist/ /articles/checklist.html
 Redirect 301 /2007/01/15/webstandards-checklist-more/ /articles/checklist.html
+Redirect 301 /presentation/checklist.htm /articles/checklist.html
+Redirect 301 /presentation/checklist/ /articles/checklist.html
+Redirect 301 /news/checklist/ /articles/checklist.html
+
 Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
 Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
 Redirect 301 /articles/definition/ /articles/definition.html

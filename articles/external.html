@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple, accessible external links - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Simple, accessible external links</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2005-12-11">11 December 2005</time></p>
+
+<p>The Web Content Accessibility Guidelines 1.0 state:</p>
+
+<blockquote cite="http://www.w3.org/TR/WCAG10/">
+  <p>“Clearly identify the target of each link. [Priority 2] Link text (The rendered text content of a link) should be meaningful enough to make sense when read out of context — either on its own or as part of a sequence of links. Link text should also be terse.”</p>
+  <p class="source"><a href="http://www.w3.org/TR/WCAG10/">Web Content Accessibility Guidelines 1.0</a></p>
+</blockquote>
+
+<p>Depending on how this checkpoint is read, this could mean that every external link should be identified within the link text itself. For example, you could use ” (off-site link)” or “(external link)” within any link text that points to any external resource.</p>
+
+<h2>The problem</h2>
+
+<p>Is there a way to add descriptive text to all external links and then replace this text with a small icon for CSS supporting browsers?</p>
+
+<h2>The solution</h2>
+
+<p>1. Give the external link a class.</p>
+
+<pre><code>&lt;a <strong>class="external"</strong> href="#"&gt;Hello world&lt;/a&gt;</code></pre>
+
+
+<p>2. A <a href="http://www.sf.id.au/ozewai/">study on titles</a> by Steve Faulkner has shown that the <code>title</code> attribute is not displayed in a device independent way across devices. However, in this case, the title could be used to inform non-sighted users that this is an external link.</p>
+
+<pre><code>&lt;a class="external" href="#" title="External"&gt;Hello world&lt;/a&gt;</code></pre>
+
+<p>3. Create variations of your icon each link state. For example:</p>
+
+<p class="external-link-demo">
+  <img src="../assets/img/external-static.png" alt="Static external link">
+  <img src="../assets/img/external-hover.png" alt="Hover external link">
+  <img src="../assets/img/external-focus.png" alt="Focus external link">
+  <img src="../assets/img/external-active.png" alt="Active external link"></p>
+
+<p>4. Create a CSS rule to add a background image icon to the external link:</p>
+
+<pre><code>.external {
+  padding-right: .9em;
+  margin-right: .2em;
+  background-image: url(../img/external-static.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 12px 12px;
+}
+</code> </pre>
+
+<p>5. Create CSS rules for the other states:</p>
+
+<pre><code>.external:hover {
+  background-image: url(../img/external-hover.png);
+}
+
+.external:focus {
+  background-image: url(../img/external-focus.png);
+}
+
+.external:active {
+  background-image: url(../img/external-active.png);
+}
+</code></pre>
+
+<h2>Example</h2>
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea ullam eos corporis quaerat aliquam, tempora id. Iste, veritatis. <a href="#" class="external-right">Hello world</a> Molestias reiciendis veritatis dolore minus at illo, reprehenderit perferendis consequuntur exercitationem laudantium.
+  
+</p>
+  </main>
+  <footer>
+    <ul>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+
+

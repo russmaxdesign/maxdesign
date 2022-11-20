@@ -559,6 +559,28 @@ external
   background-image: url(../img/external-active.png);
 }
 
+.external-right {
+  padding-right: .9em;
+  margin-right: .2em;
+  background-image: url(../img/external-static.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 12px 12px;
+}
+
+.external-right:hover {
+  background-image: url(../img/external-hover.png);
+}
+
+.external-right:focus {
+  background-image: url(../img/external-focus.png);
+}
+
+.external-right:active {
+  background-image: url(../img/external-active.png);
+}
+
+
 .bullet-icon {
   margin-left: 0;
   padding-left: 0;
@@ -647,6 +669,15 @@ classes
 .highlight {
   color: yellow;
   background: rgba(255,255,0,.3);
+}
+
+.external-link-demo {
+  background-color: #9E9A9A;
+  padding: 1em;
+}
+
+.external-link-demo img {
+  width: 30px;
 }
 
 .sr-only,
