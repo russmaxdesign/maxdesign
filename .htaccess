@@ -12,22 +12,31 @@ Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 Redirect 301 /about.php /about/index.html
 
-#301 caa layouts
+#301 css layouts
 Redirect 301 /css-layouts/ /css-layouts/index.html
 Redirect 301 /css-layouts/one-fixed/ /css-layouts/one-fixed.html
 Redirect 301 /css-layouts/one-liquid/ /css-layouts/one-liquid.html
 Redirect 301 /css-layouts/two-fixed/ /css-layouts/two-fixed.html
 Redirect 301 /css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-liquid.html
 Redirect 301 /presentation/page_layouts/ /css-layouts/index.html
 Redirect 301 /presentation/css-layouts/one-fixed/ /css-layouts/one-fixed.html
 Redirect 301 /presentation/css-layouts/one-liquid/ /css-layouts/one-liquid.html
 Redirect 301 /presentation/css-layouts/two-fixed/ /css-layouts/two-fixed.html
 Redirect 301 /presentation/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /presentation/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-liquid.html
 Redirect 301 /articles/css-layouts/ /css-layouts/index.html
 Redirect 301 /articles/css-layouts/one-fixed/ /css-layouts/one-fixed.html
 Redirect 301 /articles/css-layouts/one-liquid/ /css-layouts/one-liquid.html
 Redirect 301 /articles/css-layouts/two-fixed/ /css-layouts/two-fixed.html
 Redirect 301 /articles/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /articles/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-liquid.html
 
 #301 checklist
 Redirect 301 /articles/checklist/ /articles/checklist.html
@@ -103,10 +112,8 @@ Redirect 301 /articles/hr/ /articles/hr.html
 Redirect 301 /articles/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
 Redirect 301 /2011/03/10/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
 
-#301 font-stacks
-Redirect 301 /articles/font-stacks/ /articles/index.html
-
 #301 general
+Redirect 301 /articles/font-stacks/ /articles/index.html
 Redirect 301 /articles/vertical-align/ /articles/vertical-align.html
 Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
 Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html

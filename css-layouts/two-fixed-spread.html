@@ -56,7 +56,6 @@ a:active {
 .container {
   margin: 0 auto;
   max-width: 70em;
-  background: #fff;
 }
 
 .header-primary {
@@ -105,7 +104,7 @@ a:active {
   padding: 2em;
   background: #fff;
   min-height: 0;
-  display: inline-block;
+  overflow: hidden;
 }
 
 .content-aside h3 {
@@ -132,19 +131,23 @@ a:active {
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header-primary">
+  <header class="header-primary">
+    <div class="container">
       <h1>Site name</h1>
-    </header>
-    <nav class="navigation-primary" aria-label="Primary">
+    </div>
+  </header>
+  <nav class="navigation-primary" aria-label="Primary">
+    <div class="container">
       <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Contact us</a></li>
       </ul>
-    </nav>
-    <div class="content-container">    
+    </div>
+  </nav>
+  <div class="content-container">    
+    <div class="container">
       <main class="content-main">
         <h2>Page heading</h2>
         <p>Lorem ipsum dolor sit amet <a href="#">consect etuer adipi</a> scing elit sed diam nonummy nibh euismod tinunt ut laoreet dolore magna aliquam erat volut. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
@@ -155,9 +158,11 @@ a:active {
         <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan.</p>
       </aside>
     </div>
-    <footer class="footer-primary">
-      Copyright &copy; Site name, 20XX
-    </footer>
   </div>
+  <footer class="footer-primary">
+    <div class="container">
+      Copyright &copy; Site name, 20XX
+    </div>
+  </footer>
 </body>
 </html>
