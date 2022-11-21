@@ -415,7 +415,7 @@ banner
 ----------------------*/
 
 .banner {
-  background-color: #2C2D30;
+  background-color: #00709B;
   background-image: url(../img/banner-water.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -426,7 +426,7 @@ banner
 }
 
 .banner-inner {
-  background-color: #2C2D30;
+  background-color: #00709B;
   background-image: url(../img/banner-water.jpg);
   background-size: cover;
   background-repeat: no-repeat;

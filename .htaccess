@@ -15,6 +15,7 @@ Redirect 301 /presentation/ /presentations/index.html
 Redirect 301 /articles/presentations/index.html /presentations/index.html
 Redirect 301 /articles/articles/index.html /articles/index.html
 Redirect 301 /articles/resources/index.html /resources/index.html
+Redirect 301 /articles/about/index.html /about/index.html
 
 #301 css layouts
 Redirect 301 /css-layouts/ /css-layouts/index.html
