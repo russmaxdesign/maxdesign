@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checked inputs and attribute minimization - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Checked inputs and attribute minimization</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2008-06-18">18 June 2008</time></p>
+
+<p>Note: This article was written before boolean arttributes were allowed - especially when writing XHTML.</p>
+
+<p>I was recently sent this question:</p>
+
+<blockquote>
+  <p>I tried to use “checked” in an XHTML page. When I validated the page, this showed up as invalid. Why?</p>
+</blockquote>
+
+<h2>Answer:</h2>
+
+<p>The use of “checked” in this way is referred to as “attribute minimization”. This means the author has used the attribute’s name but has not specifying a value.</p>
+
+<pre><code>&lt;input name="name" type="checkbox" <strong>checked</strong> /&gt;</code></pre>
+
+<p>For a document to be valid XHTML, attributes cannot be minimized. The W3C XHTML 1.0 spec states:</p>
+
+<blockquote>
+   <p>XML does not support attribute minimization. Attribute-value pairs must be written in full. Attribute names such as compact and checked cannot occur in elements without their value being specified.</p>
+   <p class="metadetails"><a href="https://web.archive.org/web/20100204063515/http://www.w3.org/TR/xhtml1/#h-4.5">http://www.w3.org/TR/xhtml1/#h-4.5</a></p>
+</blockquote>
+
+<p>So, the correct way to write this code would be:</p>
+
+<pre><code>&lt;input name="name" type="checkbox" <strong>checked="checked"</strong> /&gt;</code></pre>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

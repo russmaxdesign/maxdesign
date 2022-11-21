@@ -1,13 +1,9 @@
 /articles/css-line-height/
-/news/checked-inputs/
 /articles/inline/
-/sites/
 /articles/css-reset/
-
 /articles/multiple-classes/
-/articles/specialise-or-cross-skill/
-/em/sample01/
-/em/sample02/
+/presentation/process/index_intro.cfm
+
 /jobs/sample-accessibility/05-forms/input-text.html
 /liquid__trashed/liquid-sample2/
 /liquid__trashed/liquid-sample6/
@@ -22,6 +18,8 @@
 ## css-layouts
 
 https://web.archive.org/web/20130217100632/http://www.maxdesign.com.au/articles/css-layouts/
+
+https://web.archive.org/web/20090119021527/http://maxdesign.com.au/presentation/more-links/
 
 ## liquid
 /articles/liquid/

@@ -181,26 +181,31 @@ iframe {
 links
 ----------------------*/
 
-a:link {
+a:link,
+a:link code {
   color: #006CA8;
 }
 
-a:visited {
+a:visited,
+a:visited code{
   color: #005685;
 }
 
-a:hover {
+a:hover,
+a:hover code {
   color: #5E7F1F;
   background-color: transparent;
 }
 
-a:focus {
+a:focus,
+a:focus code {
   color: #fff;
   background-color: #2C2D30;
   outline: 0;
 }
 
-a:active {
+a:active, 
+a:active code {
   color: #6D0E53;
   background-color: transparent;
 }
@@ -635,8 +640,64 @@ metadetails
 
 
 /* ---------------------
+external-link-demo
+----------------------*/
+
+.external-link-demo {
+  background-color: #9E9A9A;
+  padding: 1em;
+}
+
+.external-link-demo img {
+  width: 30px;
+}
+
+
+/* ---------------------
+slides
+----------------------*/
+
+.slide {
+  border: 1px solid #000;
+  padding: 1em;
+  margin-bottom: 3em;
+}
+
+.slide h2 {
+  margin: 0 0 1em;
+}
+
+.slide h3 {
+  margin: 0 0 1em;
+}
+
+.slide h2:last-of-type {
+  margin: 0;
+}
+
+.slide img {
+  width: 95%;
+  border: 1px solid #000;
+}
+
+.slide p {
+  margin: 0 0 1em;
+}
+
+.slide p:last-of-type {
+  margin-bottom: 0;
+}
+
+
+/* ---------------------
 classes
 ----------------------*/
+
+.example {
+  margin: 1.5em 0;
+  padding: 1em;
+  background-color: #E1DFDF;
+}
 
 .list-no-bullets {
   margin-left: 0;
@@ -674,15 +735,6 @@ classes
 .highlight {
   color: yellow;
   background: rgba(255,255,0,.3);
-}
-
-.external-link-demo {
-  background-color: #9E9A9A;
-  padding: 1em;
-}
-
-.external-link-demo img {
-  width: 30px;
 }
 
 .sr-only,

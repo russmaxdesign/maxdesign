@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The hidden and aria-hidden attributes - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>The <code>hidden</code> and <code>aria-hidden</code> attributes</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-07-14">14 November 2022</time></p>
+
+<p>What's the difference between the <code>hidden</code> and <code>aria-hidden</code> attributes?</p>
+<p>The <code>hidden</code> attribute indicates that browsers should not display the contents of the element.</p>
+<p>If the <code>aria-hidden</code> attribute is set to <code>true</code>, this indicates that the element should not be exposed to accessibility APIs, and should not be available in the accessibility tree.</p>
+
+<h2>Example 1: Default</h2>
+
+<p>The <code>&lt;span&gt;</code> and <code>&lt;button&gt;</code> elements below should be:</p>
+
+<ul>
+  <li>Available in the DOM</li>
+  <li>Visible on-screen</li>
+  <li>Available in the accessibility tree</li>
+</ul>
+
+<div class="example">
+  <span>Hello world</span>
+  <button>Hello world</button>
+</div>
+
+<pre><code>&lt;span&gt;Hello world&lt;/span&gt;
+&lt;button&gt;Hello world&lt;/button&gt;</code></pre>
+
+<h2>Example 2: Using the <code>hidden</code> attribute</h2>
+
+<p>The <code>&lt;span&gt;</code> and <code>&lt;button&gt;</code> elements below have the <code>hidden</code> attribute applied, and should be:</p>
+
+<ul>
+  <li>Available in the DOM</li>
+  <li>Hidden on-screen</li>
+  <li>Hidden from the accessibility tree</li>
+</ul>
+
+<div class="example">
+  <span hidden>Hello world</span>
+  <button hidden>Hello world</button>
+</div>
+
+<pre><code>&lt;span <span class="highlight">hidden</span>&gt;Hello world&lt;/span&gt;
+&lt;button <span class="highlight">hidden</span>&gt;Hello world&lt;/button&gt;</code></pre>
+
+<h2>Example 3: Using the <code>aria-hidden</code> attribute</h2>
+
+<p>The <code>&lt;span&gt;</code> element below has the <code>aria-hidden="true"</code> attribute applied, and should be:</p>
+<ul>
+  <li>Available in the DOM</li>
+  <li>Visible on-screen</li>
+  <li>Hidden from the accessibility tree</li>
+</ul>
+
+<div class="example">
+  <span aria-hidden="true">Hello world</span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">aria-hidden="true"</span>&gt;Hello world&lt;/span&gt;</code></pre>
+
+<p>Note: there is no <code>&lt;button&gt;</code> included as part of "Example 3" as <code>aria-hidden="true"</code> should not be used on elements that can receive focus.</p>
+
+<p><a class="button" href="https://codepen.io/russweakley/pen/PoajEKr" target="_blank">CodePren Demo</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

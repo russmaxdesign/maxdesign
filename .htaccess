@@ -7,8 +7,7 @@ RewriteRule ^(.*)$ http://www.maxdesign.com.au/$1 [r=301,nc]
 #Custom 400 errors
 ErrorDocument 404 /404.html
 
-#301 Redirect Pages
-Redirect 301 /contact.cfm /contact-us/index.html
+#301 pages
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 Redirect 301 /about.php /about/index.html
 Redirect 301 /presentation/ /presentations/index.html
@@ -16,40 +15,40 @@ Redirect 301 /articles/presentations/index.html /presentations/index.html
 Redirect 301 /articles/articles/index.html /articles/index.html
 Redirect 301 /articles/resources/index.html /resources/index.html
 Redirect 301 /articles/about/index.html /about/index.html
+Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
+Redirect 301 /img/maxdesign.png /assets/img/maxdesign.png
 
-#301 css layouts
-Redirect 301 /css-layouts/ /css-layouts/index.html
-Redirect 301 /css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /presentation/page_layouts/ /css-layouts/index.html
-Redirect 301 /presentation/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /presentation/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /presentation/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /presentation/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /presentation/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /articles/css-layouts/ /css-layouts/index.html
-Redirect 301 /articles/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /articles/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /articles/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /articles/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /articles/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /news/css-layouts/ /css-layouts/index.html
-Redirect 301 /news/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /news/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /news/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /news/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /news/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-liquid.html
+#301 contact
+Redirect 301 /contact/ /contact-us/index.html
+Redirect 301 /contact.cfm /contact-us/index.html
+Redirect 301 /contact.htm /contact-us/index.html
+
+#301 contact
+Redirect 301 /book /articles/book.html
+Redirect 301 /book.cfm /articles/book.html
+Redirect 301 /book.htm /articles/book.html
+
+#301 dumbing down
+Redirect 301 /presentation/dumbing-down/ /articles/dumbing-down.html
+Redirect 301 /presentation/dumbing-down.cfm /articles/dumbing-down.html
+Redirect 301 /presentation/dumbing-down.htm /articles/dumbing-down.html
+Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
+Redirect 301 /articles/dumbing-down.cfm /articles/dumbing-down.html
+Redirect 301 /articles/dumbing-down.htm /articles/dumbing-down.html
+Redirect 301 /news/dumbing-down/ /articles/dumbing-down.html
+Redirect 301 /news/dumbing-down.cfm /articles/dumbing-down.html
+Redirect 301 /news/dumbing-down.htm /articles/dumbing-down.html
+
+#301 danonymous boxes
+Redirect 301 /presentation/anonymous-boxes/ /articles/anonymous-boxes.html
+Redirect 301 /presentation/anonymous-boxes.cfm /articles/anonymous-boxes.html
+Redirect 301 /presentation/anonymous-boxes.htm /articles/anonymous-boxes.html
+Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
+Redirect 301 /articles/anonymous-boxes.cfm /articles/anonymous-boxes.html
+Redirect 301 /articles/anonymous-boxes.htm /articles/anonymous-boxes.html
+Redirect 301 /news/anonymous-boxes/ /articles/anonymous-boxes.html
+Redirect 301 /news/anonymous-boxes.cfm /articles/anonymous-boxes.html
+Redirect 301 /news/anonymous-boxes.htm /articles/anonymous-boxes.html
 
 #301 checklist
 Redirect 301 /presentation/checklist/ /articles/checklist.html
@@ -115,7 +114,7 @@ Redirect 301 /news/about-structural-labels.htm /articles/about-structural-labels
 Redirect 301 /2006/01/17/about-structural-labels/ /articles/about-structural-labels.html
 Redirect 301 /articles/articles/about-structural-labels/ /articles/about-structural-labels.html
 
-# center
+#301 center
 Redirect 301 /presentation/center/ /articles/center.html
 Redirect 301 /presentation/center.cfm /articles/center.html
 Redirect 301 /presentation/center.htm /articles/center.html
@@ -128,6 +127,17 @@ Redirect 301 /news/center/ /articles/center.html
 Redirect 301 /news/center.cfm /articles/center.html
 Redirect 301 /news/center.htm /articles/center.html
 Redirect 301 /news/center/01.htm /articles/center.html
+
+#301 checked inputs
+Redirect 301 /presentation/checked-inputs/ /articles/checked-inputs.html
+Redirect 301 /presentation/checked-inputs.cfm /articles/checked-inputs.html
+Redirect 301 /presentation/checked-inputs.htm /articles/checked-inputs.html
+Redirect 301 /articles/checked-inputs/ /articles/checked-inputs.html
+Redirect 301 /articles/checked-inputs.cfm /articles/checked-inputs.html
+Redirect 301 /articles/checked-inputs.htm /articles/checked-inputs.html
+Redirect 301 /news/checked-inputs/ /articles/checked-inputs.html
+Redirect 301 /news/checked-inputs.cfm /articles/checked-inputs.html
+Redirect 301 /news/checked-inputs.htm /articles/checked-inputs.html
 
 #301 comment anatomy
 Redirect 301 /presentation/comment-anatomy/ /articles/comment-anatomy.html
@@ -211,7 +221,7 @@ Redirect 301 /news/external/ /articles/external.html
 Redirect 301 /news/external.cfm /articles/external.html
 Redirect 301 /news/external.htm /articles/external.html
 
-#301 hr
+# hr
 Redirect 301 /presentation/hr/ /articles/hr.html
 Redirect 301 /presentation/hr.cfm /articles/hr.html
 Redirect 301 /presentation/hr.htm /articles/hr.html
@@ -222,7 +232,7 @@ Redirect 301 /news/hr.cfm /articles/hr.html
 Redirect 301 /news/hr.htm /articles/hr.html
 Redirect 301 /news/hr.htm /articles/hr.html
 
-# iframe scrollbars and html5
+#301 iframe scrollbars and html5
 Redirect 301 /presentation/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
 Redirect 301 /presentation/iframe-scrollbars-and-html5.cfm /articles/iframe-scrollbars-and-html5.html
 Redirect 301 /presentation/iframe-scrollbars-and-html5.htm /articles/iframe-scrollbars-and-html5.html
@@ -234,14 +244,72 @@ Redirect 301 /news/iframe-scrollbars-and-html5.cfm /articles/iframe-scrollbars-a
 Redirect 301 /news/iframe-scrollbars-and-html5.htm /articles/iframe-scrollbars-and-html5.html
 Redirect 301 /2011/03/10/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
 
-#301 general
-Redirect 301 /articles/font-stacks/ /articles/index.html
+#301 font stacks
+Redirect 301 /presentation/font-stacks/ /articles/font-stacks.html
+Redirect 301 /presentation/font-stacks.cfm /articles/font-stacks.html
+Redirect 301 /presentation/font-stacks.htm /articles/font-stacks.html
+Redirect 301 /articles/font-stacks/ /articles/font-stacks.html
+Redirect 301 /articles/font-stacks.cfm /articles/font-stacks.html
+Redirect 301 /articles/font-stacks.htm /articles/font-stacks.html
+Redirect 301 /news/font-stacks/ /articles/font-stacks.html
+Redirect 301 /news/font-stacks.cfm /articles/font-stacks.html
+Redirect 301 /news/font-stacks.htm /articles/font-stacks.html
+
+#301 vertical align
+Redirect 301 /presentation/vertical-align/ /articles/vertical-align.html
+Redirect 301 /presentation/vertical-align.cfm /articles/vertical-align.html
+Redirect 301 /presentation/vertical-align.htm /articles/vertical-align.html
 Redirect 301 /articles/vertical-align/ /articles/vertical-align.html
-Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
-Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
+Redirect 301 /articles/vertical-align.cfm /articles/vertical-align.html
+Redirect 301 /articles/vertical-align.htm /articles/vertical-align.html
+Redirect 301 /news/vertical-align/ /articles/vertical-align.html
+Redirect 301 /news/vertical-align.cfm /articles/vertical-align.html
+Redirect 301 /news/vertical-align.htm /articles/vertical-align.html
+
+#301 accessibility
+Redirect 301 /presentation/accessibility/ /articles/accessibility.html
+Redirect 301 /presentation/accessibility.cfm /articles/accessibility.html
+Redirect 301 /presentation/accessibility.htm /articles/accessibility.html
 Redirect 301 /articles/accessibility/ /articles/accessibility.html
-Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /img/maxdesign.png /assets/img/maxdesign.png
+Redirect 301 /articles/accessibility.cfm /articles/accessibility.html
+Redirect 301 /articles/accessibility.htm /articles/accessibility.html
+Redirect 301 /news/accessibility/ /articles/accessibility.html
+Redirect 301 /news/accessibility.cfm /articles/accessibility.html
+Redirect 301 /news/accessibility.htm /articles/accessibility.html
+
+#301 css layouts
+Redirect 301 /css-layouts/ /css-layouts/index.html
+Redirect 301 /css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-liquid.html
+Redirect 301 /presentation/page_layouts/ /css-layouts/index.html
+Redirect 301 /presentation/css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /presentation/css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /presentation/css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /presentation/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /presentation/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-liquid.html
+Redirect 301 /articles/css-layouts/ /css-layouts/index.html
+Redirect 301 /articles/css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /articles/css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /articles/css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /articles/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /articles/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-liquid.html
+Redirect 301 /news/css-layouts/ /css-layouts/index.html
+Redirect 301 /news/css-layouts/one-fixed/ /css-layouts/one-fixed.html
+Redirect 301 /news/css-layouts/one-liquid/ /css-layouts/one-liquid.html
+Redirect 301 /news/css-layouts/two-fixed/ /css-layouts/two-fixed.html
+Redirect 301 /news/css-layouts/two-liquid/ /css-layouts/two-liquid.html
+Redirect 301 /news/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
+Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-fixed.html
+Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-liquid.html
 
 #301 interviews
 Redirect 301 /2007/04/14/ten-for-lachlan-hunt/ /articles/interview-lachlan-hunt.html

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Concatenated accessible names - fun for all! - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Concatenated accessible names</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2003-11-09">9 November 2003</time></p>
+
+<p>Did you know that the <code>&lt;button&gt;</code> element's content, and the content of its decendants may be concatenated to create an accessible name.</p>
+
+<p>Lets start by looking at the different methods that can be used to generate an accessible name for the <code>&lt;button&gt;</code>.</p>
+
+<h2>Option 1</h2>
+<p>If an <code>aria-labelledby</code> is present, the contents of one or more another elements could be used to generate an accessible name:</p>
+<div class="example">
+  <button aria-labelledby="aaa">&nbsp;</button>
+  <p id="aaa">Hello world</p>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="aaa"</span>&gt;&lt;/button&gt;
+&lt;p <span class="highlight">id="aaa"</span>&gt;Hello world&lt;/p&gt;</code></pre>
+
+
+<h2>Option 2</h2>
+<p>If there is no <code>aria-labelledby</code> present, the content of the <code>aria-label</code> attribute could be used:</p>
+<div class="example">
+  <button aria-label="Hello world">&nbsp;</button>
+</div>
+<pre><code>&lt;button <span class="highlight">aria-label="Hello world"</span>&gt;&lt;/button&gt;</code></pre>
+
+
+<h2>Option 3</h2>
+<p>If there is no <code>aria-labelledby</code> or <code>aria-label</code> present, the <code>&lt;button&gt;</code> element's content could be used. This is the preferred method as it provides a matching visible text label and accessible name.</p>
+<div class="example">
+  <button>Hello world</button>
+</div>
+<pre><code>&lt;button&gt;<span class="highlight">Hello world</span>&lt;/button&gt;</code></pre>
+
+
+<h2>Option 4</h2>
+<p>And finally, if there is no <code>aria-labelledby</code>, <code>aria-label</code> or content present, the content of the <code>title</code> attribute could be used.</p>
+<div class="example">
+  <button title="Hello world">&nbsp;</button>
+</div>
+<pre><code>&lt;button <span class="highlight">title="Hello world"</span>&gt;&lt;/button&gt;</code></pre>
+
+
+<h2>More on button content</h2>
+
+<p>Let's look more closely at "Option 3", where the <code>&lt;button&gt;</code> element's content is used for the accessible name.</p>
+
+<p>This accessible name is concatenated from:</p>
+
+<ul>
+  <li>Any content (text strings) directly within the element</li>
+  <li>The accessible names of all child or descendant elements, if relevant</li>
+</ul>
+
+<p>The result of these two possible sources generates the final accessible name, expressed as text strings.</p>
+
+<p>The <code>&lt;button&gt;</code> element below has 6 child elements. For each of these, any possible accessible name must be calculated before being applied to the overall accessible name.</p>
+
+<p>In this case, the final accessible name is: <em>"Hello how are you doing today?"</em></p>
+
+<div class="example">
+  <button>
+    Hello
+    <span>how</span>
+    <span>are</span>
+    <span>you</span>
+    <span aria-label="doing"></span>
+    <span aria-labelledby="bbb"></span>
+    <span title="?"></span>
+  </button>
+  <p id="bbb">today</p>
+</div>
+<pre><code>&lt;button&gt;
+  <span class="highlight">Hello</span>
+  &lt;span&gt;<span class="highlight">how</span>&lt;/span&gt;
+  &lt;span&gt;<span class="highlight">are</span>&lt;/span&gt;
+  &lt;span&gt;<span class="highlight">you</span>&lt;/span&gt;
+  &lt;span aria-label="<span class="highlight">doing</span>"&gt;&lt;/span&gt;
+  &lt;span aria-labelledby="bbb"&gt;&lt;/span&gt;
+  &lt;span title="<span class="highlight">?</span>"&gt;&lt;/span&gt;
+&lt;/button&gt;
+&lt;p id="bbb"&gt;<span class="highlight">today</span>&lt;/p&gt;</code></pre>
+
+<p><a class="button" href="https://codepen.io/russweakley/pen/rNKjeqe" target="_blank">CodePen demo</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

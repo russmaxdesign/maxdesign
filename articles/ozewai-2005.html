@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page source order and accessibility - Max Design</title>
+  <meta name="viewport" content="width=device
+  june 16 2006-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Page source order and accessibility</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2005-12-09">9 December 2005</time></p>
+
+<p>Slides from a presentation by Roger Hudson and Russ Weakley at OZeWAI 2005.</p>
+
+<div class="slide">
+  <h2>Part 1: Page source order and accessibility</h2>
+</div>
+
+<div class="slide">
+  <h3>Question 1</h3>
+  <p>Is source order important for screen reader users?</p>
+</div>
+
+<div class="slide">
+  <h3>Question 2:</h3>
+  <p>Are skip links a waste of time?</p>
+</div>
+
+<div class="slide">
+  <h3>Question 3:</h3>
+  <p>What are structural labels and do they help?</p>
+</div>
+
+<div class="slide">
+  <h3>What did we do?</h3>
+  <p>We visit a site with preconceived notions about how it is likely to work</p>
+</div>
+
+<div class="slide">
+  <h3>Preconceived notions</h3>
+  <p>Our preconceived notions are either confirmed, refined or replaced as we learn to use the site</p>
+</div>
+
+<div class="slide">
+  <h3>Over the last four years we have noticed:</h3>
+  <ul>
+    <li>Screen reader users often rely on a notion of ‘what a site is like' when developing a mental picture of the site they are using.</li>
+    <li>Learning the structure of sites that don't fit this notion can be very difficult.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <ul>
+    <li>CSS = accessibility</li>
+    <li>CSS = Source order freedom</li>
+    <li>Source order freedom = accessibility?</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Who says?</h3>
+  <p>"Providing page content before navigation is good for screen reader users."</p>
+</div>
+
+<div class="slide">
+  <h3>Assumptions are assumptions</h3>
+  <p>Endless repetition does not make them true</p>
+</div>
+
+<div class="slide">
+  <h3>Three stage process to test the assumption "screen reader users want content first"</h3>
+  <ul>
+    <li>Stage 1: Source order expectations (survey)</li>
+    <li>Stage 2: Task-based user testing (observation)</li>
+    <li>Stage 3: Source order preference (survey)</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Stage 1: Source order expectations (survey)</h3>
+</div>
+
+<div class="slide">
+  <h3>Survey of expectations</h3>
+  <ul>
+    <li>18 Screen reader users</li>
+    <li>5 Text browser users</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Process</h3>
+  <p>Each participant sent an email survey on their expectation about how three components of web pages will be ordered;</p>
+  <ul>
+    <li>Navigation to the main site areas</li>
+    <li>Local navigation to pages within an area</li>
+    <li>Informational content of the page.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <div class="sample">
+    <p>Survey scenario: Imagine you are about to visit a site with five main areas and each of these areas has a number of sub-sections or pages. Each page of the site contains the site navigation to the five main areas, local navigation to the sub-sections or pages within that area, and the informational content of the page.
+    </p>
+    <p>Now, based on you past experiences of the web please provide a Y (yes) or N (no) response to the following statements. (Please note, the statements do not relate to how you would prefer page components to be presented but to your expectations about what is likely to happen).
+    </p>
+    <ol>
+      <li>I would expect the site navigation to the main site areas to be presented first: </li>
+      <li>I would expect the information content of the page to be presented first: </li>
+      <li>I would expect the site navigation to the main areas and the local navigation to pages within an area to be separate and easy to identify: </li>
+      <li>I would expect the site navigation to the main areas to be presented first, followed by the local navigation within that area, and then the information content: </li>
+      <li>I would expect the site navigation to be presented first, followed by the information content and then the local navigation: </li>
+      <li>I would expect the information content to be presented first, followed by the site navigation and then the local navigation: </li>
+    </ol>
+  </div>
+</div>
+
+<div class="slide">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th class="width50" colspan="2">18 Screen reader users</th>
+        <th class="width50" colspan="2">5 Text Browser users</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>YES</th>
+        <th>NO</th>
+        <th>YES</th>
+        <th>NO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight1">
+        <td>1. I would expect the site navigation to the main site areas to be presented first:</td>
+        <td>18</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>2. I would expect the information content of the page to be presented first:</td>
+        <td>0</td>
+        <td>18</td>
+        <td>0</td>
+        <td>5</td>
+      </tr>
+      <tr class="highlight2">
+        <td>3. I would expect the site navigation to the main areas and the local navigation to pages within an area to be separate and easy to identify:</td>
+        <td>4</td>
+        <td>14</td>
+        <td>3</td>
+        <td>2</td>
+      </tr>
+      <tr class="highlight3">
+        <td>4. I would expect the site navigation to the main areas to be presented first, followed by the local navigation within that area, and then the information content:</td>
+        <td>15</td>
+        <td>3</td>
+        <td>5</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>5. I would expect the site navigation to be presented first, followed by the information content and then the local navigation:</td>
+        <td>4</td>
+        <td>14</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>6. I would expect the information content to be presented first, followed by the site navigation and then the local navigation:</td>
+        <td>1</td>
+        <td>17</td>
+        <td>0</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="slide">
+  <h3>Expectation Survey results:</h3>
+  <ul>
+    <li>All participants believe main site navigation will be presented before the information content.</li>
+    <li>Some screen reader users had problems differentiating between site and local navigation menus.</li>
+    <li>Four of the screen reader users said they thought pages that presented the content first would be easier to use.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Stage 2: Task-based user testing (observation) </h3>
+</div>
+
+<div class="slide">
+  <h3>Task-based user testing</h3>
+  <ul>
+    <li>Source order of content and navigation</li>
+    <li>Use of skip links</li>
+    <li>Use of structural labels</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Four test sites:</h3>
+  <ul>
+    <li>Navigation followed by informational content
+      <ul>
+        <li><a href="birds/index.htm">Birds (version 1)</a></li>
+        <li><a href="birds2/index.htm">Birds (version 2)</a></li>
+      </ul>
+    </li>
+    <li>
+      Informational content followed by navigation
+      <ul>
+        <li><a href="frogs/index.htm">Frogs (version 1)</a></li>
+        <li><a href="frogs2/index.htm">Frogs (version 2)</a></li>
+      </ul>
+    </li>
+  </ul>
+  <p>What is the difference between version 1 and version 2?</p>
+</div>
+
+<div class="slide">
+  <h3>Four test participants</h3>
+  <ul>
+    <li>Very experienced Window Eyes user (audio)</li>
+    <li>Very experienced JAWS user (Braille)</li>
+    <li>Moderately experienced JAWS user (audio)</li>
+    <li>Beginner JAWS user (audio)</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Participants were observed using the sites for the test tasks</h3>
+  <p>Only the beginner JAWS user had problems doing the tasks.</p>
+</div>
+
+<div class="slide">
+  <h3>Which sites did the participants find the easiest to use:</h3>
+  <ul>
+    <li>2 testers preferred Birds (navigation before content)</li>
+    <li>1 tester preferred Frogs (content before navigation)</li>
+    <li>1 tester had no preference</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Skill with the technology determined how well a participant was able to do the tasks</h3>
+  <p>Beginner JAWS user found the presentation of navigation after content (frogs) made the site much more confusing and difficult to use.</p>
+</div>
+
+<div class="slide">
+  <h3>Different strokes for different folks</h3>
+  <ul>
+    <li>The participants used various strategies to do the tasks.</li>
+    <li>Most employed different screen reader techniques when using the sites.</li>
+    <li>Only the beginner JAWS user relied on "reading” the content of the page.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Skip Links</h3>
+  <ul>
+    <li>Very experienced screen reader users did not use them at all.</li>
+    <li>Moderately experienced user used them extensively</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Structural labels for different levels of navigation </h3>
+  <p>All participants said these were very useful <br>
+    (but two most experienced testers did not appear to use them) </p>
+</div>
+
+<div class="slide">
+  <h3>Stage 3: Source order preference (survey)</h3>
+</div>
+
+<div class="slide">
+  <h3>Follow up email survey to determine:</h3>
+  <ul>
+    <li>Source order preference (navigation or content first)</li>
+    <li>Usefulness of skip links</li>
+    <li>Usefulness of structural labels for navigation menus</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <div class="sample">
+    <p>At this stage, we are asking people to consider two different sites and use each one for a simple task. Each site presents the navigation and content in a different order. Both sites contain skip links to either navigation or content and headings identifying the different levels of navigation.</p>
+    <p>After you have used both sites we would like you to answer four questions.</p>
+    
+    <h4>Site 1: Birds.  http://www.maxdesign.com.au/jobs/source-order/birds2/index.htm
+    </h4>
+    <p>This site presents the navigation menus first followed by the information on the page.</p>
+    <p>Task: What similarity is there in the feeding habits of the Purple Swamphen and the Green Catbird?</p>
+    <h4>Site 2: Frogs. http://www.maxdesign.com.au/jobs/source-order/frogs2/index.htm</h4>
+    <p>This site presents the information on the page first followed by the navigation menus.</p>
+    <p>Task: What similarity is there in the habitat of the Cascade Tree frog and the Common Mist frog?</p>
+    <p>Please answer the following questions. We will be very grateful for any additional comments you might wish to make.</p>    
+    <h4>Questions:</h4>
+    <ul>
+      <li>1. Were you able to complete the tasks on both sites: Yes or No: If no, on which sites were you not able to complete the task.</li>
+      <li>2. Which site did you find the easiest to use. Frogs, Birds or both the same:</li>
+      <li>3. Did you use the skip to content or skip to navigation links: Yes or No</li>
+      <li>4. Did you find the headings identifying the different levels of navigation on the sites useful: Yes or No</li>
+    </ul>
+  </div>
+</div>
+
+<div class="slide">
+  <h3>Eight people responded to the survey</h3>
+  <p>
+    All respondents were able to complete the test tasks.</p>
+</div>
+
+<div class="slide">
+  <h3>Which site did you find easiest to use?</h3>
+  <ul>
+    <li>Frogs: 3</li>
+    <li>Birds: 2</li>
+    <li>The same: 3</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Did you use the skip links?</h3>
+  <ul>
+    <li>Yes: 5</li>
+    <li>No: 3</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Participant comments:</h3>
+  <ul class="listquotes">
+    <li>"Yes, I always read through a new site to get a feel for its' layout and then use any available navigation links"</li>
+    <li>"Yes, after accessing the initial web pages of the sites"</li>
+    <li>"I used them on the frogs site. Didn't find I needed to on the birds"</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Did you find the headings identifying the different levels of navigation useful?</h3>
+  <ul>
+    <li>Yes: 8</li>
+    <li>No: 0</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Participant comments:</h3>
+  <ul class="listquotes">
+    <li>"Yes, headings are always useful"</li>
+    <li>"Yes, extremely!"</li>
+    <li>"Yes. I found these very useful"</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Research observations and outcomes</h3>
+  <p>The majority of screen reader users EXPECT navigation to be presented before the content. </p>
+</div>
+
+<div class="slide">
+  <h3>Outcomes?</h3>
+  <p>Our research showed no clear overall preference of source order</p>
+  <ul>
+    <li>4 testers prefered navigation before content</li>
+    <li>4 testers preferred content before navigation</li>
+    <li>4 testers had no preference</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Inexperienced users</h3>
+  <p>These users may find presentation of content before navigation disorientating</p>
+  <p>The screen reader user with the least experience relied heavily on expectations of the source order.</p>
+  <p>This tester found it difficult to use the site that presented the content before the navigation. </p>
+</div>
+
+<div class="slide">
+  <h3>Experiences users</h3>
+  <p>These users source order seems to be irrelevant</p>
+  <p>Assistive technology users have a variety of techniques they can use when navigating a site or locating information on a page. </p>
+  <p>The effectiveness of these techniques depends on: </p>
+  <ul>
+    <li>Valid page code</li>
+    <li>Appropriate use of headings and links</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Screen reader users and skip links</h3>
+  <p>Some screen reader users are likely to find skip links useful</p>
+  <p>50% of test-site research participants said they were useful.</p>
+</div>
+
+<div class="slide">
+  <h3>Structural labels</h3>
+  <p>Structural labels will benefit most screen reader users</p>
+  <p>77% of expectation survey participants indicated difficulty in differentiating between different navigation menus on web pages. </p>
+  <p>100% of test-site participants reported the labels identifying the different levels of navigation on the sites where useful. </p>
+</div>
+
+<div class="slide">
+  <h3>Recommendations</h3>
+  <ul>
+    <li>Place navigation before content to benefit some screen reader users</li>
+    <li>Include skip links</li>
+    <li>Use meaningful headings</li>
+    <li>Use descriptive links</li>
+    <li>Use structural labels to identify navigational components of web pages.</li>
+    <li>Use semantically correct and valid page code.</li>
+    <li>Adhere to the Web Content Accessibility Guidelines.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Thank you</h3>
+  <p>Roger Hudson</p>
+</div>
+
+<hr>
+<div class="slide">
+  <h2>Part 2: Marking up and styling an HTML document</h2>
+</div>
+
+<div class="slide">
+  <h3>What's this about?</h3>
+  <p>This presentation will demonstrate various methods for marking up and styling a document.</p>
+</div>
+
+<div class="slide">
+  <h3>The content</h3>
+  <p>For this exercise we will make the assumption that an average page could include:</p>
+  <ul>
+    <li>Logo</li>
+    <li>Heading</li>
+    <li>Main navigation</li>
+    <li>Secondary navigation</li>
+    <li>Content</li>
+    <li>Additional content</li>
+    <li>Footer information</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Logo options</h3>
+  <p>Option a: inline image</p>
+<pre><code>&lt;h1&gt;<strong>&lt;img src="logo.gif" alt=""&gt;</strong>Australian Birds&lt;/h1&gt;</code></pre>
+  <p>Option b: background image</p>
+<pre><code>&lt;h1&gt; Australian Birds&lt;/h1&gt;
+#header { background: <strong>url(logo.gif)</strong> no-repeat 10px 1.5em; }</code></pre>
+  <p>For this exercise the <strong>option b</strong> has been chosen.</p>
+</div>
+
+<div class="slide">
+  <h3>Skip link choices</h3>
+  <p>Option a: single skip link</p>
+<pre><code>&lt;a href="#content"&gt;Skip to content&lt;/a&gt;</code></pre>
+  <p>Option b: two skip links</p>
+<pre><code>&lt;a href="#content"&gt;Skip to content&lt;/a&gt;
+&lt;a href="#sitenav"&gt;Skip to navigation&lt;/a&gt;</code></pre>
+  <p>Option c: three skip links</p>
+<pre><code>&lt;a href="#content"&gt;Skip to content&lt;/a&gt;
+&lt;a href="#sitenav"&gt;Skip to main navigation&lt;/a&gt;
+&lt;a href="#secondarynav"&gt;Skip to page navigation&lt;/a&gt;</code></pre>
+  <p>For this exercise the <strong>option b</strong> has been chosen.</p>
+</div>
+
+<div class="slide">
+  <h3>Skip link placement within the markup</h3>
+  <p>Option a: skip link before main heading</p>
+<pre><code><strong>&lt;a href="#content"&gt;Skip to content&lt;/a&gt;</strong>
+&lt;h1&gt;Australian Birds&lt;/h1&gt;</code></pre>
+  <p>Option b: skip link after main heading</p>
+<pre><code>&lt;h1&gt;Australian Birds&lt;/h1&gt;
+<strong>&lt;a href="#content"&gt;Skip to content&lt;/a&gt;</strong></code></pre>
+  <p>For this exercise the <strong>option b</strong> has been chosen.</p>
+</div>
+
+<div class="slide">
+  <h3>Visible or invisible skip link</h3>
+  <blockquote>
+    <p>"Skip links are beneficial to keyboards users, people with mobility problems, and possibly other groups too. The most usable means of implementing skip links is to leave them visible, so that people who require them are aware they exist."
+    </p>
+    <p class="source"><a href="hhttp://juicystudio.com/article/skip-links.php">Juicystudios</a></p>
+  </blockquote>
+  <p>For this exercise <strong>visible skip links</strong> will be used.</p>
+</div>
+
+<div class="slide">
+  <h3>On-screen skip link positioning </h3>
+  <p>For low vision users who come to a site using magnification, positioning skip links in the top left corner means that they will be immediately accessible. </p>
+  <p>For this exercise <strong>left-aligned skip</strong> links will be used. </p>
+</div>
+
+<div class="slide">
+  <h3>Skip links pointing to "name" or "id"</h3>
+  <p>Option a: floating named element</p>
+<pre><code><strong>&lt;a name="content"&gt;&lt;/a&gt;</strong></code></pre>
+  <p>Option b: named element inside heading</p>
+<pre><code>&lt;h2&gt;<strong>&lt;a name="content"&gt;</strong>Common name: Australian Pelican<strong>&lt;/a&gt;</strong>&lt;/h2&gt;</code></pre>
+  <p>Option c: content area</p>
+<pre><code><strong>&lt;div id="content"&gt;</strong></code></pre>
+  <p>For this exercise the <strong>option c</strong> has been chosen.</p>
+</div>
+
+<div class="slide">
+  <h3>Structural labels</h3>
+  <ul>
+    <li>What are they</li>
+    <li>Why are they beneficial</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h3>Structural labels – markup</h3>
+<pre><code><strong>&lt;h2 class="structurelabel"&gt;
+    Site navigation
+&lt;/h2&gt;</strong>
+&lt;ul id="sitenav"&gt;
+  &lt;li&gt;&lt;a href="index.htm"&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="water.htm"&gt;Water birds&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="land.htm"&gt;Land birds&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="urban.htm"&gt;Urban birds&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<div class="slide">
+  <h3>Structural labels – CSS</h3>
+  <p>Option a:</p>
+<pre><code>display: none;</code></pre>
+  <p>Option b:</p>
+<pre><code>.structurelabel {
+  position: absolute;
+  left: -5000px;
+  width: 4000px;
+}</code></pre>
+  <p>For this exercise the <strong>option b</strong> has been chosen. More details on the <a href="hhttp://www.access-matters.com/screen-reader-test-results/">off-left method</a>.</p>
+</div>
+
+<div class="slide">
+  <h3>Navigation markup options</h3>
+  <p>Option a: Standard nested list</p>
+  <p>Option b: Two separate lists</p>
+  <p>Option c: Two separate lists with structural labels</p>
+  <p>For this exercise the option c has been chosen.</p>
+</div>
+
+<div class="slide">
+  <h3>Navigation markup</h3>
+<pre><code><strong>&lt;h2 class="structurelabel"&gt;
+  Site navigation
+&lt;/h2&gt;</strong>
+&lt;ul id="sitenav"&gt;
+  &lt;li&gt;&lt;a href="index.htm"&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="water.htm"&gt;Water birds&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="land.htm"&gt;Land birds&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="urban.htm"&gt;Urban birds&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+<strong>&lt;h2 class="structurelabel"&gt;
+  Water birds navigation
+&lt;/h2&gt;
+</strong>&lt;ul id="secondarynav"&gt;
+  &lt;li&gt;&lt;a href="birds01.htm"&gt;Australian Pelican&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="birds02.htm"&gt;Black Swan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="birds03.htm"&gt;Little Pied Cormorant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="birds04.htm"&gt;Purple Swamphen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="birds05.htm"&gt;Musk Duck&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<div class="slide">
+  <h3>Adding semantic divisions</h3>
+<pre><code>&lt;div id="container"&gt;
+  &lt;div id="header"&gt;&lt;/div&gt;
+  &lt;ul id="sitenav"&gt;&lt;/ul&gt;
+  &lt;ul id="secondarynav"&gt;&lt;/ul&gt;
+  &lt;div id="content"&gt;&lt;/div&gt;
+  &lt;div id="extras"&gt;&lt;/div&gt;
+  &lt;div id="footer"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<div class="slide">
+  <h3>Thank you!</h3>
+  <p>Russ Weakley</p>
+</div>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
