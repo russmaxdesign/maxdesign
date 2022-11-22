@@ -34,12 +34,12 @@
 </url>
 <url>
   <loc>https://maxdesign.com.au/articles/index.html</loc>
-  <lastmod>2022-11-22T15:08:32+00:00</lastmod>
+  <lastmod>2022-11-22T17:18:56+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://maxdesign.com.au/sitemap.html</loc>
-  <lastmod>2022-11-22T15:07:28+00:00</lastmod>
+  <lastmod>2022-11-22T17:18:26+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
@@ -159,12 +159,7 @@
 </url>
 <url>
   <loc>https://maxdesign.com.au/articles/ozewai-2005.html</loc>
-  <lastmod>2022-11-22T15:08:53+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://maxdesign.com.au/articles/book.html</loc>
-  <lastmod>2022-11-22T15:08:19+00:00</lastmod>
+  <lastmod>2022-11-22T15:50:52+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
@@ -174,7 +169,7 @@
 </url>
 <url>
   <loc>https://maxdesign.com.au/articles/checklist.html</loc>
-  <lastmod>2022-11-22T15:08:21+00:00</lastmod>
+  <lastmod>2022-11-22T15:50:53+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
@@ -360,6 +355,11 @@
 <url>
   <loc>https://maxdesign.com.au/articles/ideal-line-length-in-ems-tests.html</loc>
   <lastmod>2022-11-22T15:08:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://maxdesign.com.au/book/index.html</loc>
+  <lastmod>2022-11-22T17:18:33+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>

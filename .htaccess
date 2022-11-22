@@ -30,9 +30,9 @@ Redirect 301 /img/apple-touch-icon-144x144-precomposed.png /apple-touch-icon-144
 Redirect 301 /img/apple-touch-icon-precomposed.png /apple-touch-icon-precomposed.png
 
 #301 contact
-Redirect 301 /book /articles/book.html
-Redirect 301 /book.cfm /articles/book.html
-Redirect 301 /book.htm /articles/book.html
+Redirect 301 /book /book/index.html
+Redirect 301 /book.cfm /book/index.html
+Redirect 301 /book.htm /book/index.html
 
 #301 dumbing down
 Redirect 301 /presentation/dumbing-down/ /articles/dumbing-down.html
