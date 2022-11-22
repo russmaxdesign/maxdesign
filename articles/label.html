@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The label element - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="The label element including which elements need labelling explicit vs implicit labelling and more">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>The <code>&lt;label&gt;</code> element</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-11-22">22 November 2022</time></p>
+
+<p>This article takes a look at the <code>&lt;label&gt;</code> element, including which elements need labelling, explicit vs implicit labelling and more.</p>
+
+<h2>Which form elements need a <code>&lt;label&gt;</code>?</h2>
+
+<p>The <code>&lt;label&gt;</code> element is used to provide a visible text label and accessible name for some specific HTML elements such as:</p>
+
+<ul>
+  <li><code>&lt;button&gt;</code></li>
+  <li><code>&lt;input&gt;</code> (except for <code>type="hidden"</code>)</li>
+  <li><code>&lt;meter&gt;</code></li>
+  <li><code>&lt;output&gt;</code></li>
+  <li><code>&lt;progress&gt;</code></li>
+  <li><code>&lt;select&gt;</code></li>
+  <li><code>&lt;textarea&gt;</code></li>
+</ul>
+
+<h2>Explicit or implicit?</h2>
+
+<p>If a <code>&lt;label&gt;</code> is associated with any of these form controls, it should be <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
+
+<pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;Name&lt;/label&gt;
+&lt;input <span class="highlight">id="aaa"</span> type="text"&gt;</code></pre>
+
+<p>Or, the form control can be <i>implicitly associated</i> if it is placed inside its <code>&lt;label&gt;</code>:</p>
+
+<pre><code>&lt;label&gt;
+  Name
+  <span class="highlight">&lt;input type="text"&gt;</span>
+&lt;/label&gt;</code></pre>
+
+<h2>Which form elements don’t need a <code>&lt;label&gt;</code>?</h2>
+
+<p>There are many form-based elements that do not require a <code>&lt;label&gt;</code>. In some of these cases, adding a <code>&lt;label&gt;</code> would either be invalid, or confusing for assistive technologies.</p>
+
+<p>For the <code>&lt;input&gt;</code> elements with a type of <code>button</code>, <code>reset</code> and <code>submit</code>, a label can be provided by the contents of the <code>value</code> attribute.</p>
+
+<pre><code>&lt;input type="button" <span class="highlight">value="Login"</span>&gt;
+&lt;input type="reset" <span class="highlight">value="Reset form"</span>&gt;
+&lt;input type="submit" <span class="highlight">value="Submit"</span>&gt;</code></pre>
+
+<p>For the <code>&lt;input&gt;</code> element with a type of <code>image</code>, a label can be provided by the contents of the <code>alt</code> attribute.</p>
+
+<pre><code>&lt;input type="image" src="ball.png" <span class="highlight">alt="Ball"</span>&gt;</code></pre>
+
+<p>For the <code>&lt;input&gt;</code> element with a type of hidden, there should be no associated label <code>&lt;label&gt;</code> as this form control is never presented to the user.</p>
+
+<pre><code>&lt;input <span class="highlight">type="hidden"</span>&gt;</code></pre>
+
+<p>While it is allowed, the <code>&lt;button&gt;</code> does not require a <code>&lt;label&gt;</code> as its content be used instead.</p>
+
+<pre><code>&lt;button><span class="highlight">Content</span>&lt;/button&gt;</code></pre>
+
+<p>The <code>&lt;fieldset&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as the contents of the <code>&lt;legend&gt;</code> provides its name.</p>
+
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;<span class="highlight">Content</span>&lt;/legend&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+<p>The <code>&lt;legend&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as it is used to provide a caption for the content of its parent <code>&lt;fieldset&gt;</code> element.</p>
+
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Content&lt;/legend&gt;
+&lt;/fieldset&gt;</code></pre>
+
+<p>The <code>&lt;option&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as its contents is used instead.</p>
+
+<pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
+&lt;select id="aaa"&gt;
+  &lt;option&gt;<span class="highlight">Tyrannosaurus</span>&lt;/option&gt;
+  &lt;option&gt;Velociraptor&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+<p>The <code>&lt;optgroup&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as the contents of the <code>label</code> attribute is used instead.</p>
+
+<pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
+&lt;select id="aaa"&gt;
+  &lt;optgroup <span class="highlight">label="Theropods"</span>&gt;
+    &lt;option&gt;Tyrannosaurus&lt;/option&gt;
+    &lt;option&gt;Velociraptor&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+
+<p>The <code>&lt;datalist&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as it should always be associated with a labelled <code>&lt;input&gt;</code>.</p>
+
+<pre><code><span class="highlight">&lt;label for="aaa"&gt;Choose a flavor:&lt;/label&gt;</span>
+&lt;input id="aaa" list="bbb"&gt;
+&lt;datalist id="bbb"&gt;
+  &lt;option value="Chocolate"&gt;
+  &lt;option value="Mint"&gt;
+&lt;/datalist&gt;</code></pre>
+
+<h2>Which elements are allowed as descendants of the <code>&lt;label&gt;</code> element?</h2>
+
+<p>The <code>&lt;label&gt;</code> element only allows <a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element" target="_blank">specific types of Phrasing content</a>:</p>
+
+<ul>
+  <li>no descendant <code>&lt;label&gt;</code> elements.</li>
+  <li>no descendant labelable elements (unless it is the element's labeled control).</li>
+</ul>
+
+<p>So, no flow elements are allowed as descendats of the <code>&lt;label&gt;</code>:</p>
+
+<pre><code>&lt;label&gt;
+  <s>&lt;div&gt;&lt;/div&gt;</s>
+&lt;/label&gt;</code></pre>
+
+<pre><code>&lt;label&gt;
+  <s>&lt;p&gt;&lt;/p&gt;</s>
+&lt;/label&gt;</code></pre>
+
+<p>And a <code>&lt;label&gt;</code> is not allowed as a descendant of the <code>&lt;label&gt;</code>:</p>
+
+<pre><code>&lt;label&gt;
+  <s>&lt;label&gt;&lt;/label&gt;</s>
+&lt;/label&gt;</code></pre>
+
+<p>Labelable elements, such as the <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meter&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;textarea&gt;</code>, are allowed, but only if they are the element's labeled control.</p>
+
+<p>So, adding a single instance of any of these elements inside the <code>&lt;label&gt;</code> is allowed.</p>
+
+<pre><code>&lt;label&gt;
+  <span class="highlight">&lt;input&gt;</span>
+&lt;/label&gt;</code></pre>
+
+<p>But the <code>&lt;label&gt;</code> cannot contain more than one of these elements, as they would not be the element's labelled control:</p>
+
+<pre><code>&lt;label&gt;
+  &lt;input&gt;
+  <s>&lt;input&gt;</s>
+&lt;/label&gt;</code></pre>
+
+<p>And that's it for the <code>&lt;label&gt;</code> element today!</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+
+
+

@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <title>A simple (and very rough) responsive table solution - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="../favicon.ico">
   <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A simple method for creating responsive tables without the need to radicially alter the table content or layout">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -62,8 +68,7 @@
 
 <p>And then add some simple rules:</p>
 
-<pre><code>.table-container
-{
+<pre><code>.table-container {
   width: 100%;
   overflow-y: auto;
   _overflow: auto;
@@ -75,15 +80,13 @@
 
 <p>If you look at the demo above on an iOS device, like an iPhone, you will see that there are no scrollbars present. While users can swipe the table to scroll, this is not immediately obvious. We can fix that by adding some additional CSS.</p>
 
-<pre><code>.table-container::-webkit-scrollbar
-{
+<pre><code>.table-container::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
 }
 
-.table-container::-webkit-scrollbar-thumb
-{
+.table-container::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 3px solid #fff;
   background-color: rgba(0, 0, 0, .3);
@@ -118,10 +121,11 @@
 
 <p>And then some additional CSS</p>
 
-<pre><code>.table-container-outer { position: relative; }
+<pre><code>.table-container-outer {
+  position: relative;
+}
 
-.table-container-fade
-{
+.table-container-fade {
   position: absolute;
   right: 0;
   width: 30px;

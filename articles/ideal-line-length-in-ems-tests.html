@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <title>Ideal line length in ems - tests - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="../favicon.ico">
   <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Tests to determine ideal line length for content">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -43,6 +49,10 @@
       top: 0;
       height: 15em;
       outline: 1px solid red;
+    }
+
+    table {
+      max-width: 40em;
     }
   </style>
 </head>
@@ -97,6 +107,31 @@
 <p>766 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>35 em</th>
+      <td>794</td>
+      <td>765</td>
+      <td>777</td>
+      <td>766</td>
+      <td>775.5</td>
+      <td>77.6</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>34 em</h2>
 
@@ -123,6 +158,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras fermentum odio eu feugiat pretium nibh. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Sit amet</span> nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>741 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>34 em</th>
+      <td>757</td>
+      <td>739</td>
+      <td>745</td>
+      <td>741</td>
+      <td>745.5</td>
+      <td>74.6</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>33 em</h2>
@@ -151,6 +211,31 @@
 <p>723 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>33 em</th>
+      <td>720</td>
+      <td>712</td>
+      <td>745</td>
+      <td>723</td>
+      <td>725</td>
+      <td>72.5</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>32 em</h2>
 
@@ -177,6 +262,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras fermentum odio eu feugiat pretium nibh. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing</span> at in tellus integer. Sit amet nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>710 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>32 em</th>
+      <td>720</td>
+      <td>692</td>
+      <td>708</td>
+      <td>710</td>
+      <td>707.5</td>
+      <td>70.8</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>31 em</h2>
@@ -205,6 +315,31 @@
 <p>674 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>31 em</th>
+      <td>692</td>
+      <td>672</td>
+      <td>676</td>
+      <td>674</td>
+      <td>678.5</td>
+      <td>67.9</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>30 em</h2>
 
@@ -231,6 +366,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras fermentum odio eu feugiat pretium nibh. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam</span> phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Sit amet nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>637 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>30 em</th>
+      <td>682</td>
+      <td>664</td>
+      <td>651</td>
+      <td>637</td>
+      <td>658.5</td>
+      <td>65.9</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>29 em</h2>
@@ -259,6 +419,31 @@
 <p>637 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>29 em</th>
+      <td>629</td>
+      <td>611</td>
+      <td>651</td>
+      <td>637</td>
+      <td>632</td>
+      <td>63.2</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>28 em</h2>
 
@@ -285,6 +470,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras fermentum odio eu feugiat pretium nibh. Vulputate mi sit amet mauris Lectus vestibulum mattis</span> ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Sit amet nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>605 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>28 em</th>
+      <td>603</td>
+      <td>600</td>
+      <td>601</td>
+      <td>605</td>
+      <td>602.25</td>
+      <td>60.2</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>27 em</h2>
@@ -313,6 +523,31 @@
 <p>568 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>27 em</th>
+      <td>587</td>
+      <td>585</td>
+      <td>591</td>
+      <td>568</td>
+      <td>582.75</td>
+      <td>58.3</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>26 em</h2>
 
@@ -339,6 +574,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras fermentum odio eu feugiat pretium nibh. Vulputate</span> mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Sit amet nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>561 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>26 em</th>
+      <td>572</td>
+      <td>546</td>
+      <td>573</td>
+      <td>561</td>
+      <td>563</td>
+      <td>56.3</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>25 em</h2>
@@ -367,6 +627,31 @@
 <p>551 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>25 em</th>
+      <td>525</td>
+      <td>536</td>
+      <td>558</td>
+      <td>551</td>
+      <td>542.5</td>
+      <td>54.3</td>
+    </tr>
+  </tbody>
+</table>
+
 <hr>
 <h2>24 em</h2>
 
@@ -393,6 +678,31 @@
 <p><span class="ten-highlight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat lacus laoreet non curabitur. Fermentum posuere urna nec tincidunt praesent semper. Odio pellentesque diam volutpat commodo sed egestas. Risus ultricies tristique nulla aliquet enim tortor at auctor urna. Eleifend mi in nulla posuere sollicitudin aliquam ultrices. In nisl nisi scelerisque eu ultrices vitae auctor. Amet nulla facilisi morbi tempus iaculis urna id volutpat. Cras</span> fermentum odio eu feugiat pretium nibh. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Sit amet nisl suscipit adipiscing bibendum est. Diam vulputate ut pharetra sit amet aliquam id diam maecenas.  Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vulputate mi sit amet mauris Lectus vestibulum mattis ullamcorper velit sed. Non diam phasellus vestibulum lorem sed risus ultricies. Risus viverra adipiscing at in tellus integer. Gravida arcu ac tortor dignissim convallis aenean. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est.</p>
 <p>511 characters over 10 lines</p>
 </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>24 em</th>
+      <td>510</td>
+      <td>518</td>
+      <td>513</td>
+      <td>511</td>
+      <td>513</td>
+      <td>51.3</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr>
 <h2>23 em</h2>
@@ -421,6 +731,30 @@
 <p>511 characters over 10 lines</p>
 </div>
 
+<table>
+  <thead>
+    <tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <th>23 em</th>
+      <td>500</td>
+      <td>480</td>
+      <td>498</td>
+      <td>511</td>
+      <td>497.25</td>
+      <td>49.7</td>
+    </tr>
+  </tbody>
+</table>
 
   </main>
   <footer>

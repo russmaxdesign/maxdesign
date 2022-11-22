@@ -23,6 +23,12 @@ Redirect 301 /contact/ /contact-us/index.html
 Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /contact.htm /contact-us/index.html
 
+#301 favicons
+Redirect 301 /img/apple-touch-icon-72x72-precomposed.png /apple-touch-icon-72x72-precomposed.png
+Redirect 301 /img/apple-touch-icon-114x114-precomposed.png /apple-touch-icon-114x114-precomposed.png
+Redirect 301 /img/apple-touch-icon-144x144-precomposed.png /apple-touch-icon-144x144-precomposed.png
+Redirect 301 /img/apple-touch-icon-precomposed.png /apple-touch-icon-precomposed.png
+
 #301 contact
 Redirect 301 /book /articles/book.html
 Redirect 301 /book.cfm /articles/book.html
