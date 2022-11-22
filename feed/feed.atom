@@ -1,0 +1,46 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<title>Max Design</title>
+<subtitle>Max Design</subtitle>
+<link href="http://fetchrss.com/rss/637d08bee70c4f5b59207fa2637d08a947762d0d235b7af2.atom" rel="self"/>
+<link href="https://maxdesign.com.au" rel="alternate" type="text/html"/>
+<link href="http://fetchrss.com/rss/637d08bee70c4f5b59207fa2637d08a947762d0d235b7af2.xml" rel="alternate" type="application/rss+xml"/>
+<id>http://fetchrss.com/rss/637d08bee70c4f5b59207fa2637d08a947762d0d235b7af2.xml</id>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<generator uri="https://fetchrss.com" version="1.0">FetchRSS</generator>
+<icon>https://www.google.com/s2/favicons?domain=https://maxdesign.com.au</icon>
+<entry>
+<title>HTML test cases</title>
+<link href="https://russmaxdesign.github.io/accessible-forms/" rel="alternate"/>
+<content type="html"><a class="external" href="https://russmaxdesign.github.io/accessible-forms/" target="_blank">HTML test cases</a><br/><br/><span style="font-size:12px; color: gray;">(Feed generated with <a href="https://fetchrss.com" target="_blank">FetchRSS</a>)</span></content>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<id>https://russmaxdesign.github.io/accessible-forms/</id>
+</entry>
+<entry>
+<title>Accessible chat windows</title>
+<link href="https://www.slideshare.net/maxdesign/accessible-chat-windows" rel="alternate"/>
+<content type="html"><a class="external" href="https://www.slideshare.net/maxdesign/accessible-chat-windows" target="_blank">Accessible chat windows</a><br/><br/><span style="font-size:12px; color: gray;">(Feed generated with <a href="https://fetchrss.com" target="_blank">FetchRSS</a>)</span></content>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<id>https://www.slideshare.net/maxdesign/accessible-chat-windows</id>
+</entry>
+<entry>
+<title>Accessible Names and Descriptions</title>
+<link href="https://www.youtube.com/watch?v=DnG4LLWdsno&ab_channel=Intopia" rel="alternate"/>
+<content type="html"><a class="external" href="https://www.youtube.com/watch?v=DnG4LLWdsno&ab_channel=Intopia" target="_blank">Accessible Names and Descriptions</a><br/><br/><span style="font-size:12px; color: gray;">(Feed generated with <a href="https://fetchrss.com" target="_blank">FetchRSS</a>)</span></content>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<id>https://www.youtube.com/watch?v=DnG4LLWdsno&ab_channel=Intopia</id>
+</entry>
+<entry>
+<title>Everything you want to know about the accessibility tree</title>
+<link href="https://www.youtube.com/watch?v=Kv2l_u4NDB8" rel="alternate"/>
+<content type="html"><a class="external" href="https://www.youtube.com/watch?v=Kv2l_u4NDB8" target="_blank">Everything you want to know about the accessibility tree</a><br/><br/><span style="font-size:12px; color: gray;">(Feed generated with <a href="https://fetchrss.com" target="_blank">FetchRSS</a>)</span></content>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<id>https://www.youtube.com/watch?v=Kv2l_u4NDB8</id>
+</entry>
+<entry>
+<title>HTML elements and accessible names</title>
+<link href="https://russmaxdesign.github.io/html-elements-names/" rel="alternate"/>
+<content type="html"><a class="external" href="https://russmaxdesign.github.io/html-elements-names/" target="_blank">HTML elements and accessible names</a><br/><br/><span style="font-size:12px; color: gray;">(Feed generated with <a href="https://fetchrss.com" target="_blank">FetchRSS</a>)</span></content>
+<updated>2022-11-22T17:36:41+00:00</updated>
+<id>https://russmaxdesign.github.io/html-elements-names/</id>
+</entry>
+</feed>

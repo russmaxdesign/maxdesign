@@ -336,6 +336,7 @@ Redirect 301 /2004/06/01/ten-for-simon-willison/ /articles/interview-simon-willi
 Redirect 301 /2004/09/19/ten-for-jon-hicks/ /articles/interview-jon-hicks.html
 Redirect 301 /2004/11/08/ten-for-john-allsopp/ /articles/interview-john-allsopp.html
 Redirect 301 /2004/05/04/ten-for-anne-van-kesteren/ /articles/interview-anne-van-kesteren.html
+Redirect 301 /news/ten-for-anne-van-kesteren/ /articles/interview-anne-van-kesteren.html
 Redirect 301 /2005/06/04/ten-for-russ-weakley/ /articles/interview-russ-weakley.html
 Redirect 301 /2005/05/12/ten-for-joe-clark/ /articles/interview-joe-clark.html
 Redirect 301 /2005/05/06/ten-for-jason-santa-maria/ /articles/interview-jason-santa-maria.html
