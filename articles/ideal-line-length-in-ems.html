@@ -35,167 +35,159 @@
 
 <p>This article looks at the optimal line length for your body copy, the best unit for setting the width, and how many characters should be presented per line.</p>
 
-<h2>Question 1: is there an optimal line length for copy?</h2>
-
-<p>The optimal line length for your body text is considered to be 50-70 characters per line.</p>
-
-<h2>Question 2: What type of unit should you use to control the container width?</h2>
-
-<p>The best unit for setting the width of the container is "em" units as they scale with the font-size.</p>
-
-<h2>Question 3: How do we convert 50-75 characters into ems?</h2>
+<p>The optimal line length for body copy is <a href="https://baymard.com/blog/line-length-readability" target="_blank">considered to be 50-70 characters per line</a>. And, the best unit for setting the width of the container is "em" units as they scale with the font-size. So, how do we convert 50-75 characters into ems?</p>
 
 <p>This is the hardest question as the content itself can affect how many characters appear per line.</p>
 
-<p>I decided to do an experiment with a range of well known texts:</p>
+<p>I decided to do an experiment with four well-known texts:</p>
 
-<ol>
-  <li>"de Finibus Bonorum et Malorum", by Cicero</li>
-  <li>"Far far away"</li>
-  <li>"The Sorrows of Werther", J. W. von Goethe</li>
-  <li>"Metamorphosis", Franz Kafka</li>
-  <li>"The quick brown fox" pangram</li>
-</ol>
+<ul>
+  <li><b>Source 1</b>: <a href="https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cicero/de_Finibus/1*.html" target="_blank">"De Finibus Bonorum et Malorum"</a> by Cicero</li>
+  <li><b>Source 2</b>: <a href="https://www.janeausten.org/emma/chapter-1.php" target="_blank">"Emma"</a> by Jane Austen</li>
+  <li><b>Source 3</b>: <a href="https://www.owleyes.org/text/metamorphosis/read/chapter-i#root-219133-4" target="_blank">"Metamorphosis"</a> Franz Kafka</li>
+  <li><b>Source 4</b>: <a href="https://loremipsum.io/generator/?n=5&amp;t=p" target="_blank">Lorem Ipsum</a></li>
+</ul>
 
 <p>I took ten lines of text from each of these different examples, and then measured how many characters appeared per line at a range of different "em" widths.</p>
 
-<p>Here is the <a href="http://maxdesign.com.au/jobs/sample-line-length/index.htm">sample page</a> to show how the measuring was done.</p>
+<p><a class="button" href="ideal-line-length-in-ems-tests.html">Demo page</a></p>
 
 <p>Below is a table of the results, including an overall average across all five example texts.</p>
-
-<h2>Key to table</h2>
-
-<ul>
-  <li>01: Column width in ems</li>
-  <li>02: "de Finibus Bonorum et Malorum", by Cicero</li>
-  <li>03: "Far far away"</li>
-  <li>04" "The Sorrows of Werther", J. W. von Goethe</li>
-  <li>05: "Metamorphosis", Franz Kafka</li>
-  <li>06: "The quick brown fox" pangram</li>
-  <li>07: Average characters over 10 lines</li>
-  <li>08: Average characters per line</li>
-</ul>
 
 <table>
   <thead>
     <tr>
-      <th>01</th>
-      <th>02</th>
-      <th>03</th>
-      <th>04</th>
-      <th>05</th>
-      <th>06</th>
-      <th>07</th>
-      <th>08</th>
-    </tr>
+      <th>Width</th>
+      <th>Source 1</th>
+      <th>Source 2</th>
+      <th>Source 3</th>
+      <th>Source 4</th>
+      <th>Sum</th>
+      <th>Av</th>
+    </tr>    
   </thead>
   <tbody>
     <tr>
-      <td>21</td>
-      <td>496</td>
-      <td>501</td>
-      <td>499</td>
-      <td>488</td>
-      <td>478</td>
-      <td>492.4</td>
-      <td><strong>49</strong></td>
+      <th>35 em</th>
+      <td>794</td>
+      <td>765</td>
+      <td>777</td>
+      <td>766</td>
+      <td>775.5</td>
+      <td>77.6</td>
     </tr>
     <tr>
-      <td>22</td>
-      <td>510</td>
-      <td>509</td>
-      <td>529</td>
-      <td>534</td>
-      <td>514</td>
-      <td>519.2</td>
-      <td><strong>52</strong></td>
+      <th>34 em</th>
+      <td>757</td>
+      <td>739</td>
+      <td>745</td>
+      <td>741</td>
+      <td>745.5</td>
+      <td>74.6</td>
     </tr>
     <tr>
-      <td>23</td>
-      <td>536</td>
-      <td>533</td>
-      <td>556</td>
-      <td>536</td>
-      <td>533</td>
-      <td>538.8</td>
-      <td><strong>54</strong></td>
+      <th>33 em</th>
+      <td>720</td>
+      <td>712</td>
+      <td>745</td>
+      <td>723</td>
+      <td>725</td>
+      <td>72.5</td>
     </tr>
     <tr>
-      <td>24</td>
-      <td>576</td>
-      <td>579</td>
-      <td>581</td>
-      <td>565</td>
-      <td>554</td>
-      <td>571</td>
-      <td><strong>57</strong></td>
+      <th>32 em</th>
+      <td>720</td>
+      <td>692</td>
+      <td>708</td>
+      <td>710</td>
+      <td>707.5</td>
+      <td>70.8</td>
     </tr>
     <tr>
-      <td>25</td>
-      <td>589</td>
-      <td>579</td>
-      <td>585</td>
-      <td>598</td>
-      <td>588</td>
-      <td>587.8</td>
-      <td><strong>59</strong></td>
+      <th>31 em</th>
+      <td>692</td>
+      <td>672</td>
+      <td>676</td>
+      <td>674</td>
+      <td>678.5</td>
+      <td>67.9</td>
     </tr>
     <tr>
-      <td>26</td>
-      <td>612</td>
-      <td>608</td>
-      <td>606</td>
-      <td>610</td>
+      <th>30 em</th>
+      <td>682</td>
+      <td>664</td>
+      <td>651</td>
+      <td>637</td>
+      <td>658.5</td>
+      <td>65.9</td>
+    </tr>
+    <tr>
+      <th>29 em</th>
+      <td>629</td>
+      <td>611</td>
+      <td>651</td>
+      <td>637</td>
+      <td>632</td>
+      <td>63.2</td>
+    </tr>
+    <tr>
+      <th>28 em</th>
+      <td>603</td>
+      <td>600</td>
+      <td>601</td>
       <td>605</td>
-      <td>608.2</td>
-      <td><strong>61</strong></td>
+      <td>602.25</td>
+      <td>60.2</td>
     </tr>
     <tr>
-      <td>27</td>
-      <td>627</td>
-      <td>648</td>
-      <td>644</td>
-      <td>633</td>
-      <td>623</td>
-      <td>635</td>
-      <td><strong>64</strong></td>
+      <th>27 em</th>
+      <td>587</td>
+      <td>585</td>
+      <td>591</td>
+      <td>568</td>
+      <td>582.75</td>
+      <td>58.3</td>
     </tr>
     <tr>
-      <td>28</td>
-      <td>659</td>
-      <td>659</td>
-      <td>666</td>
-      <td>663</td>
-      <td>652</td>
-      <td>659.8</td>
-      <td><strong>66</strong></td>
+      <th>26 em</th>
+      <td>572</td>
+      <td>546</td>
+      <td>573</td>
+      <td>561</td>
+      <td>563</td>
+      <td>56.3</td>
     </tr>
     <tr>
-      <td>29</td>
-      <td>687</td>
-      <td>694</td>
-      <td>701</td>
-      <td>700</td>
-      <td>665</td>
-      <td>689.4</td>
-      <td><strong>69</strong></td>
+      <th>25 em</th>
+      <td>525</td>
+      <td>536</td>
+      <td>558</td>
+      <td>551</td>
+      <td>542.5</td>
+      <td>54.3</td>
     </tr>
     <tr>
-      <td>30</td>
-      <td>713</td>
-      <td>716</td>
-      <td>714</td>
-      <td>716</td>
-      <td>699</td>
-      <td>711.6</td>
-      <td><strong>71</strong></td>
+      <th>24 em</th>
+      <td>510</td>
+      <td>518</td>
+      <td>513</td>
+      <td>511</td>
+      <td>513</td>
+      <td>51.3</td>
+    </tr>
+    <tr>
+      <th>23 em</th>
+      <td>500</td>
+      <td>480</td>
+      <td>498</td>
+      <td>511</td>
+      <td>497.25</td>
+      <td>49.7</td>
     </tr>
   </tbody>
 </table>
 
-<p>As you can see, the average seems to suggest that your container width should be set between the narrowest width of <strong>21em</strong> (approx 49 characters per line) to the widest width of <strong>30em</strong> (approx 71 characters per line).</p>
-
-<p>I hope this is helpful for anyone asking the question "How wide should my columns be in ems".</p>
+<p>As you can see, the averages suggest that your container should be <b>set to a width of between 23em - 34em</b>.</p>
 
   </main>
   <footer>
