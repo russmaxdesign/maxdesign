@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Max Design articles</title>
+		<description>A list of HTML, CSS and accessibility articles</description>
+		<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+		<link>https://maxdesign.com.au/articles/</link>
+		<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml" />
+		<generator>https://fetchrss.com</generator>
+		<image>
+			<link>https://maxdesign.com.au/articles/</link>
+			<url>https://maxdesign.com.au/apple-touch-icon-precomposed.png</url>
+			<title>Max Design articles</title>
+		</image>
+
+		<item>
+			<title>The label element</title>
+			<link>https://maxdesign.com.au/articles/label.html</link>
+			<description>A deep dive into the label  element, including which elements need labelling, explicit vs implicit labelling and more</description>
+			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/label.html</guid>
+		</item>
+		<item>
+			<title>Concatenated accessible names</title>
+			<link>https://maxdesign.com.au/articles/concatenated.html</link>
+			<description>Did you know that the button element's content, and the content of its decendants may be concatenated to create an accessible name</description>
+			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/concatenated.html</guid>
+		</item>
+		<item>
+			<title>The hidden and aria-hidden attributes</title>
+			<link>https://maxdesign.com.au/articles/hidden.html</link>
+			<description>Do you know the difference between the hidden and aria-hidden attributes?</description>
+			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/hidden.html</guid>
+		</item>
+		<item>
+			<title>Ideal line length in ems</title>
+			<link>https://maxdesign.com.au/articles/ideal-line-length-in-ems.html</link>
+			<description>What is the optimal line length for your body copy? How many characters should be presented per line?</description>
+			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/ideal-line-length-in-ems.html</guid>
+		</item>
+		<item>
+			<title>A simple, and very rough responsive table solution</title>
+			<link>https://maxdesign.com.au/articles/simple-responsive-table.html</link>
+			<description>Is there a simple method for creating responsive tables, without the need to radicially alter the table content or layout?</description>
+			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/simple-responsive-table.html</guid>
+		</item>
+
+	</channel>
+</rss>

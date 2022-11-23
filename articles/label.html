@@ -39,7 +39,7 @@
 
 <p class="metadetails">Published: <time datetime="2022-11-23">23 November 2022</time></p>
 
-<p>This article takes a look at the <code>&lt;label&gt;</code> element, including which elements need labelling, explicit vs implicit labelling and more.</p>
+<p>This article takes a look at the <code>&lt;label&gt;</code> element, including which elements need labeling, explicit vs implicit labeling, and more.</p>
 
 <h2>Which form elements need a <code>&lt;label&gt;</code>?</h2>
 
@@ -55,23 +55,9 @@
   <li><code>&lt;textarea&gt;</code></li>
 </ul>
 
-<h2>Explicit or implicit?</h2>
-
-<p>If a <code>&lt;label&gt;</code> is associated with any of these form controls, it should be <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
-
-<pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;Name&lt;/label&gt;
-&lt;input <span class="highlight">id="aaa"</span> type="text"&gt;</code></pre>
-
-<p>Or, the form control can be <i>implicitly associated</i> if it is placed inside its <code>&lt;label&gt;</code>:</p>
-
-<pre><code>&lt;label&gt;
-  Name
-  <span class="highlight">&lt;input type="text"&gt;</span>
-&lt;/label&gt;</code></pre>
-
 <h2>Which form elements don’t need a <code>&lt;label&gt;</code>?</h2>
 
-<p>There are many form-based elements that do not require a <code>&lt;label&gt;</code>. In some of these cases, adding a <code>&lt;label&gt;</code> would either be invalid, or confusing for assistive technologies.</p>
+<p>Many form-based elements don't require a <code>&lt;label&gt;</code>. In some of these cases, adding a <code>&lt;label&gt;</code> would either be invalid or confusing for assistive technologies.</p>
 
 <p>For the <code>&lt;input&gt;</code> elements with a type of <code>button</code>, <code>reset</code> and <code>submit</code>, a label can be provided by the contents of the <code>value</code> attribute.</p>
 
@@ -83,7 +69,7 @@
 
 <pre><code>&lt;input type="image" src="ball.png" <span class="highlight">alt="Ball"</span>&gt;</code></pre>
 
-<p>For the <code>&lt;input&gt;</code> element with a type of hidden, there should be no associated label <code>&lt;label&gt;</code> as this form control is never presented to the user.</p>
+<p>For the <code>&lt;input&gt;</code> element with a type of hidden, there should be no associated <code>&lt;label&gt;</code> as this form control is never presented to the user.</p>
 
 <pre><code>&lt;input <span class="highlight">type="hidden"</span>&gt;</code></pre>
 
@@ -104,7 +90,7 @@
   &lt;legend&gt;Content&lt;/legend&gt;
 &lt;/fieldset&gt;</code></pre>
 
-<p>The <code>&lt;option&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as its contents is used instead.</p>
+<p>The <code>&lt;option&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as its contents are used instead.</p>
 
 <pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
 &lt;select id="aaa"&gt;
@@ -112,7 +98,7 @@
   &lt;option&gt;Velociraptor&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 
-<p>The <code>&lt;optgroup&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as the contents of the <code>label</code> attribute is used instead.</p>
+<p>The <code>&lt;optgroup&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as the contents of the <code>label</code> attribute are used instead.</p>
 
 <pre><code>&lt;label for="aaa"&gt;Choose a dinosaur:&lt;/label&gt;
 &lt;select id="aaa"&gt;
@@ -122,7 +108,7 @@
   &lt;/optgroup&gt;
 &lt;/select&gt;</code></pre>
 
-<p>The <code>&lt;datalist&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as it should always be associated with a labelled <code>&lt;input&gt;</code>.</p>
+<p>The <code>&lt;datalist&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as it should always be associated with a labeled <code>&lt;input&gt;</code>.</p>
 
 <pre><code><span class="highlight">&lt;label for="aaa"&gt;Choose a flavor:&lt;/label&gt;</span>
 &lt;input id="aaa" list="bbb"&gt;
@@ -130,6 +116,55 @@
   &lt;option value="Chocolate"&gt;
   &lt;option value="Mint"&gt;
 &lt;/datalist&gt;</code></pre>
+
+<h2>Explicit or implicit?</h2>
+
+<p>If a <code>&lt;label&gt;</code> is associated with any of these form controls, it should be <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
+
+<pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;Name&lt;/label&gt;
+&lt;input <span class="highlight">id="aaa"</span> type="text"&gt;</code></pre>
+
+<p>Or, the form control can be <i>implicitly associated</i> if it is placed inside its <code>&lt;label&gt;</code>:</p>
+
+<pre><code>&lt;label&gt;
+  Name
+  <span class="highlight">&lt;input type="text"&gt;</span>
+&lt;/label&gt;</code></pre>
+
+<p>You can place form controls inside the label and also make them <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
+
+<pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;
+  Name
+  &lt;input <span class="highlight">id="aaa"</span> type="text"&gt;
+&lt;/label&gt;</code></pre>
+
+<h2>Label order</h2>
+
+<p>For <code>&lt;input&gt;</code> elements with a type of <code>radio</code> or <code>checkbox</code>, the <code>&lt;label&gt;</code> element must be positioned after the form control.</p>
+
+<pre><code>&lt;input type="radio" id="yes"&gt;
+<span class="highlight">&lt;label for="yes"&gt;Yes&lt;/label&gt;</span></code></pre>
+
+<p>For all other form controls, the <code>&lt;label&gt;</code> element must be positioned before the form control.</p>
+
+<pre><code><span class="highlight">&lt;label for="name"&gt;Full name&lt;/label&gt;</span>
+&lt;input type="text" id="name"&gt;</code></pre>
+
+<p>When form controls are positioned inside the <code>&lt;label&gt;</code>, the order of its content rather than the <code>&lt;label&gt;</code> itself becomes critical.</p>
+
+<p>For <code>&lt;label&gt;</code> elements with a type of <code>radio</code> or <code>checkbox</code>, the <code>&lt;label&gt;</code> content must be positioned after the form control.</p>
+
+<pre><code>&lt;label for="yes"&gt;
+  &lt;input type="radio" id="yes"&gt;
+  <span class="highlight">Yes</span>
+&lt;/label&gt;</code></pre>
+
+<p>For all other form controls, the <code>&lt;label&gt;</code> content must be positioned before the form control.</p>
+
+<pre><code>&lt;label for="name"&gt;
+  <span class="highlight">Full name</span>
+  &lt;input type="text" id="name"&gt;
+&lt;/label&gt;</code></pre>
 
 <h2>Which elements are allowed as descendants of the <code>&lt;label&gt;</code> element?</h2>
 
@@ -140,7 +175,7 @@
   <li>no descendant labelable elements (unless it is the element's labeled control).</li>
 </ul>
 
-<p>So, no flow elements are allowed as descendats of the <code>&lt;label&gt;</code>:</p>
+<p>So, no flow elements are allowed as descendants of the <code>&lt;label&gt;</code>:</p>
 
 <pre><code>&lt;label&gt;
   <s>&lt;div&gt;&lt;/div&gt;</s>
@@ -156,7 +191,7 @@
   <s>&lt;label&gt;&lt;/label&gt;</s>
 &lt;/label&gt;</code></pre>
 
-<p>Labelable elements, such as the <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meter&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;textarea&gt;</code>, are allowed, but only if they are the element's labeled control.</p>
+<p>Labelable elements, such as the <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meter&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;textarea&gt;</code> are allowed as descendants - but only if they are the element's labeled control.</p>
 
 <p>So, adding a single instance of any of these elements inside the <code>&lt;label&gt;</code> is allowed.</p>
 
@@ -164,7 +199,7 @@
   <span class="highlight">&lt;input&gt;</span>
 &lt;/label&gt;</code></pre>
 
-<p>But the <code>&lt;label&gt;</code> cannot contain more than one of these elements, as they would not be the element's labelled control:</p>
+<p>But the <code>&lt;label&gt;</code> cannot contain more than one of these elements, as they would not be the element's labeled control:</p>
 
 <pre><code>&lt;label&gt;
   &lt;input&gt;

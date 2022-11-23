@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Liquid layouts the easy way - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../presentations/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Liquid layouts the easy way</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2003-07-30">30 December 2003</time></p>
+
+<p>This article explains one method of achieving a successful liquid layout as well as providing basic definitions of liquid, fixed-width and em-driven layouts.</p>
+
+<h2>Some definitions</h2>
+
+<h4>Liquid layout</h4>
+
+<p>All containers on the page have their widths defined in percents – meaning that they are completely based on the width of the viewport rather than any containing block. A liquid layout will reflow as you resize your browser window.</p>
+
+<ul>
+  <li><a href="liquid-sample1.html">Liquid layout example</a></li>
+</ul>
+
+<h4>Combination liquid and fixed layouts</h4>
+
+<p>Similar to liquid layouts, except one or more of the containers on the page have fixed widths.</p>
+
+<ul>
+  <li><a href="liquid-sample2.html">Liquid/fixed layout example</a></li>
+</ul>
+
+<h4>Fixed-width layouts</h4>
+
+<p>All containers on the page have their widths defined in pixels or other fixed units. They are completely independent of the viewport. A fixed layout will not move in and out when you resize your browser window.</p>
+
+<ul>
+  <li><a href="liquid-sample3.html">Fixed-width example</a></li>
+</ul>
+
+<h4>Em-driven layouts</h4>
+
+<p>All containers on the page have their widths defined in ems. They will be scaled according to the users default browser font size. They are completely independent of the viewport.</p>
+
+<ul>
+  <li><a href="liquid-sample4.html">Em-driven layout example</a></li>
+</ul>
+
+<p>You can also use combinations of the above.</p>
+
+<h2>The secret of liquid layouts</h2>
+
+<p>Liquid layouts are easy to achieve if you follow some basic rules.</p>
+
+<ol>
+  <li>Work out a basic layout grid before you begin coding.</li>
+  <li>include gutters so that your columns will not spread too wide.</li>
+  <li>use percentage units for widths of all containers and gutters.</li>
+  <li>Do not define containers that use the full width of a page – allow for browser rendering issues (such as percentage rounding).</li>
+</ol>
+
+<h2>Step 1 – Start with a layout grid</h2>
+
+<p>It is a good idea to start by sketching (on paper or using some imaging software) a rough layout grid.</p>
+
+<p>You can start by doing a grid at 800 pixels wide. Columns and gutters can be adjusted until you are happy with the layout. When happy, these pixel-based measurements are then converted to percentage units.</p>
+
+<p>If you want to achieve a basic three-column layout, your sketch could look like this:</p>
+
+<p><img src="../assets/img/liquid.gif" alt="Liquid layout sample"></p>
+
+<p>The basic column grid for this mockup is:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>column</th>
+      <th>pixel width</th>
+      <th>percentage width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gutter 1</th>
+      <td>24px</td>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 1</th>
+      <td>384px</td>
+      <td>48%</td>
+    </tr>
+    <tr>
+      <th>gutter 2</th>
+      <td>24px</td>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 2</th>
+      <td>160px</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <th>gutter 3</th>
+      <td>24px</td>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 3</th>
+      <td>160px</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <th>gutter 4</th>
+      <td>24px</td>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>800px</td>
+      <td>100%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As you can see, there has been an allowance made for gutters between each column. This will add some space to the page and stop the columns from becoming too wide in very wide browser windows. This is important, as <a href="http://www.maxdesign.com.au/presentation/em/">line length affects readability</a>.</p>
+
+<h2>Step 2 – Leaving space</h2>
+
+<p>One problem with percentage widths is that they have to be calculated by the browser so there will be some degree of rounding up or down of the percentage measurements. For this reason, it is always good to leave some free space on the page so there is room for error. In this case, you will simply leave "gutter 4" undefined, so there is 3% of free space at the right of the layout.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>column</th>
+      <th>percentage width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gutter 1</th>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 1</th>
+      <td>48%</td>
+    </tr>
+    <tr>
+      <th>gutter 2</th>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 2</th>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <th>gutter 3</th>
+      <td>3%</td>
+    </tr>
+    <tr>
+      <th>column 3</th>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <th><b>gutter 4</b></th>
+      <td><b>undefined</b></td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>97%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Step 3 – Making containers</h2>
+
+<p>You now have three gutters and three columns. The gutters can be converted to left margins for each of the columns:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>column</th>
+      <th>margin-left</th>
+      <th>column width</th>
+      <th>total width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>column 1</th>
+      <td>3%</td>
+      <td>48%</td>
+      <td>51%</td>
+    </tr>
+    <tr>
+      <th>column 2</th>
+      <td>3%</td>
+      <td>20%</td>
+      <td>23%</td>
+    </tr>
+    <tr>
+      <th>column 3</th>
+      <td>3%</td>
+      <td>20%</td>
+      <td>23%</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td></td>
+      <td></td>
+      <td>97%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These three columns can be converted into <code>&lt;div&gt;</code> containers. You can then apply a <code>width</code>, <code>margin-left</code> and <code>float: left</code> to each of them:</p>
+
+<h4>HTML code</h4>
+
+<pre><code>&lt;body&gt;
+  &lt;div id="col1"&gt;&lt;/div&gt;
+  &lt;div id="col2"&gt;&lt;/div&gt;
+  &lt;div id="col3"&gt;&lt;/div&gt;
+&lt;/body&gt;</code> 
+</pre>
+
+<h4>CSS code</h4>
+
+<pre><code>#col1 {
+  float: left;
+  width: 48%;
+  margin-left: 3%;
+}
+  
+#col2 {
+  float: left;
+  width: 20%;
+  margin-left: 3%; 
+}
+
+#col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+}</code></pre>
+
+<h2>Step 4 – Fixing an Internet Explorer bug</h2>
+
+<p>You may have noticed that there is a problem with the sample above in Internet Explorer 5, 5.5 and 6 for Windows. The left margin is wider in these browsers. Internet Explorer 5, 5.5 and 6 for Windows have issues with margins applied to floated items that touch the left or right edge of the viewport. These browsers will sometimes double these margin widths – so a 3% left-margin will become a 6% left-margin.</p>
+
+<p>All other standards-compliant browsers will render a 100px left margin, but Internet Explorer 5, 5.5 and 6 for Windows will render a 200px wide margin.</p>
+
+<p>This rendering issue can sometimes cause the third column to drop below the other two columns. Luckily, there is a work-arounds for this problem. In this case you can add <code>display: inline</code> to column 1 and the double float bug will disappear in Internet Explorer 5, 5.5 and 6.</p>
+
+<h4>CSS code</h4>
+
+<pre><code>#col1 {
+  float: left;
+  width: 48%;
+  margin-left: 3%;
+  <span class="highlight">display: inline;</span class="highlight">
+}
+  
+#col2 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+}
+  
+#col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+}</code></pre>
+<h2>
+  <a name="headers"></a>Step 5 – Adding headers and footers<br>
+</h2>
+
+<p>It is easy to add headers and footers to this example. The header <code>&lt;div&gt;</code> will naturally sit above these floated columns and gutters as long as it is not floated. The footer must be cleared from the floated item by applying <code>clear: both</code>.</p>
+
+<h4>HTML code</h4>
+
+<pre><code>&lt;body&gt;
+  <span class="highlight">&lt;div id="header"&gt;&lt;/div&gt;</span>
+    &lt;div id="col1"&gt;&lt;/div&gt;
+    &lt;div id="col2"&gt;&lt;/div&gt;
+    &lt;div id="col3"&gt;&lt;/div&gt;
+  <span class="highlight">&lt;div id="footer"&gt;&lt;/div&gt;</span>
+&lt;/body&gt;</code></pre>
+
+<h4>CSS code</h4>
+
+<pre><code><span class="highlight">#header {
+  margin-bottom: 10px;
+}</span>
+  
+#col1 {
+  float: left;
+  width: 48%;
+  margin-left: 3%;
+  display: inline;
+}
+  
+#col2 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+}
+  
+#col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+}
+
+<span class="highlight">#footer {
+  clear: both;
+}</span></code></pre>
+
+<h2>Step 6 – Working around the box model</h2>
+
+<p>If you want to inset text within these three columns and you want to apply padding to the containers, you need to remember that Internet Explorer 5 and 5.5 for Windows incorrectly render the box model.</p>
+
+<p>One way to avoid this problem is apply padding to items within the containers rather than to the containers themselves. This can be done with a rule set such as:</p>
+
+<pre><code>h2, p {
+  margin-left: 7px;
+  margin-right: 7px;
+}</code> </pre>
+
+<p>Or, if you want to be more specific, you can choose to target a specific column:</p>
+
+<pre><code>#col1 h2, #col1 p {
+  margin-left: 7px;
+  margin-right: 7px;
+}</code></pre>
+
+<h2>Final result</h2>
+
+<ul>
+  <li><a href="liquid-sample5.html">Final result</a></li>
+</ul>
+
+<p>Once you have established the basic layout, you can swap columns, or add borders as needed:</p>
+
+<ul>
+  <li><a href="liquid-sample6.html">Variation – wide middle column</a></li>
+  <li><a href="liquid-sample7.html">Variation – wide right column</a></li>
+  <li><a href="liquid-sample8.html">Variation – wide left column with borders</a></li>
+</ul>
+
+<h2>Liquid insanity</h2>
+
+<p>When you understand how to set up column widths for liquid layouts, it becomes easy to do more advanced layouts with multiple liquid options:</p>
+<ul>
+  <li><a href="liquid-sample9.html">Liquid insanity</a></li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+

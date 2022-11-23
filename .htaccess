@@ -1,11 +1,46 @@
-#Rewrite to www
+#FollowSymLinks
 Options +FollowSymLinks
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^maxdesign.com.au[nc]
-RewriteRule ^(.*)$ http://www.maxdesign.com.au/$1 [r=301,nc]
 
 #Custom 400 errors
 ErrorDocument 404 /404.html
+
+#301 feed
+Redirect 301 /feed/ /feed.xml
+Redirect 301 /feed /feed.xml
+Redirect 301 /news/feed/ /feed.xml
+Redirect 301 /news/feed /feed.xml
+Redirect 301 /news/feed.xml /feed.xml
+Redirect 301 /articles/feed/ /feed.xml
+Redirect 301 /articles/feed /feed.xml
+Redirect 301 /articles/feed.xml /feed.xml
+Redirect 301 /presentation/feed/ /feed.xml
+Redirect 301 /presentation/feed /feed.xml
+Redirect 301 /presentation/feed.xml /feed.xml
+Redirect 301 /category/news/feed/ /feed.xml
+Redirect 301 /category/news/feed /feed.xml
+Redirect 301 /category/news/feed.xml /feed.xml
+edirect 301 /category/articles/feed/ /feed.xml
+Redirect 301 /category/articles/feed /feed.xml
+Redirect 301 /category/articles/feed.xml /feed.xml
+Redirect 301 /articles/atom/ /feed.xml
+Redirect 301 /articles/atom /feed.xml
+Redirect 301 /articles/atom.xml /feed.xml
+Redirect 301 /feed/atom/ /feed.xml
+Redirect 301 /feed/atom /feed.xml
+Redirect 301 /feed/atom.xml /feed.xml
+Redirect 301 /news/atom/ /feed.xml
+Redirect 301 /news/atom /feed.xml
+Redirect 301 /news/atom.xml /feed.xml
+Redirect 301 /articles/rss/ /feed.xml
+Redirect 301 /articles/rss /feed.xml
+Redirect 301 /articles/rss.xml /feed.xml
+Redirect 301 /feed/rss/ /feed.xml
+Redirect 301 /feed/rss /feed.xml
+Redirect 301 /feed/rss.xml /feed.xml
+Redirect 301 /news/rss/ /feed.xml
+Redirect 301 /news/rss /feed.xml
+Redirect 301 /news/rss.xml /feed.xml
+
 
 #301 pages
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
@@ -45,7 +80,57 @@ Redirect 301 /news/dumbing-down/ /articles/dumbing-down.html
 Redirect 301 /news/dumbing-down.cfm /articles/dumbing-down.html
 Redirect 301 /news/dumbing-down.htm /articles/dumbing-down.html
 
-#301 danonymous boxes
+#301 liquid
+Redirect 301 /liquid/ /liquid/index.html
+Redirect 301 /liquid.cfm /liquid/index.html
+Redirect 301 /liquid.htm /liquid/index.html
+Redirect 301 /presentation/liquid/ /liquid/index.html
+Redirect 301 /presentation/liquid.cfm /liquid/index.html
+Redirect 301 /presentation/liquid.htm /liquid/index.html
+Redirect 301 /articles/liquid/ /liquid/index.html
+Redirect 301 /articles/liquid.cfm /liquid/index.html
+Redirect 301 /articles/liquid.htm /liquid/index.html
+Redirect 301 /news/liquid/ /liquid/index.html
+Redirect 301 /news/liquid.cfm /liquid/index.html
+Redirect 301 /news/liquid.htm /liquid/index.html
+Redirect 301 /liquid/liquid-sample1/ /liquid/liquid-sample1.html
+Redirect 301 /liquid/liquid-sample2/ /liquid/liquid-sample2.html
+Redirect 301 /liquid/liquid-sample3/ /liquid/liquid-sample3.html
+Redirect 301 /liquid/liquid-sample4/ /liquid/liquid-sample4.html
+Redirect 301 /liquid/liquid-sample5/ /liquid/liquid-sample5.html
+Redirect 301 /liquid/liquid-sample6/ /liquid/liquid-sample6.html
+Redirect 301 /liquid/liquid-sample7/ /liquid/liquid-sample7.html
+Redirect 301 /liquid/liquid-sample8/ /liquid/liquid-sample8.html
+Redirect 301 /liquid/liquid-sample9/ /liquid/liquid-sample9.html
+Redirect 301 /presentation/liquid/liquid-sample1/ /liquid/liquid-sample1.html
+Redirect 301 /presentation/liquid/liquid-sample2/ /liquid/liquid-sample2.html
+Redirect 301 /presentation/liquid/liquid-sample3/ /liquid/liquid-sample3.html
+Redirect 301 /presentation/liquid/liquid-sample4/ /liquid/liquid-sample4.html
+Redirect 301 /presentation/liquid/liquid-sample5/ /liquid/liquid-sample5.html
+Redirect 301 /presentation/liquid/liquid-sample6/ /liquid/liquid-sample6.html
+Redirect 301 /presentation/liquid/liquid-sample7/ /liquid/liquid-sample7.html
+Redirect 301 /presentation/liquid/liquid-sample8/ /liquid/liquid-sample8.html
+Redirect 301 /presentation/liquid/liquid-sample9/ /liquid/liquid-sample9.html
+Redirect 301 /articles/liquid/liquid-sample1/ /liquid/liquid-sample1.html
+Redirect 301 /articles/liquid/liquid-sample2/ /liquid/liquid-sample2.html
+Redirect 301 /articles/liquid/liquid-sample3/ /liquid/liquid-sample3.html
+Redirect 301 /articles/liquid/liquid-sample4/ /liquid/liquid-sample4.html
+Redirect 301 /articles/liquid/liquid-sample5/ /liquid/liquid-sample5.html
+Redirect 301 /articles/liquid/liquid-sample6/ /liquid/liquid-sample6.html
+Redirect 301 /articles/liquid/liquid-sample7/ /liquid/liquid-sample7.html
+Redirect 301 /articles/liquid/liquid-sample8/ /liquid/liquid-sample8.html
+Redirect 301 /articles/liquid/liquid-sample9/ /liquid/liquid-sample9.html
+Redirect 301 /news/liquid/liquid-sample1/ /liquid/liquid-sample1.html
+Redirect 301 /news/liquid/liquid-sample2/ /liquid/liquid-sample2.html
+Redirect 301 /news/liquid/liquid-sample3/ /liquid/liquid-sample3.html
+Redirect 301 /news/liquid/liquid-sample4/ /liquid/liquid-sample4.html
+Redirect 301 /news/liquid/liquid-sample5/ /liquid/liquid-sample5.html
+Redirect 301 /news/liquid/liquid-sample6/ /liquid/liquid-sample6.html
+Redirect 301 /news/liquid/liquid-sample7/ /liquid/liquid-sample7.html
+Redirect 301 /news/liquid/liquid-sample8/ /liquid/liquid-sample8.html
+Redirect 301 /news/liquid/liquid-sample9/ /liquid/liquid-sample9.html
+
+#301 anonymous boxes
 Redirect 301 /presentation/anonymous-boxes/ /articles/anonymous-boxes.html
 Redirect 301 /presentation/anonymous-boxes.cfm /articles/anonymous-boxes.html
 Redirect 301 /presentation/anonymous-boxes.htm /articles/anonymous-boxes.html

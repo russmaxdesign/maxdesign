@@ -1,0 +1,506 @@
+/* -----------------------------------
+general
+----------------------------------- */
+
+body {
+  margin: 0;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+  color: #000;
+}
+
+/* -----------------------------------
+example01
+----------------------------------- */
+
+#example01 #header {
+  height: 50px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example01 #nav {
+  float: left;
+  width: 25%;
+  height: 150px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+}
+
+#example01 #content {
+  float: left;
+  margin-left: 5%;
+  width: 65%;
+  height: 150px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+}
+
+#example01 #footer {
+  clear: both;
+  height: 50px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------
+example02
+----------------------------------- */
+
+#example02 #header {
+  height: 50px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example02 #nav {
+  float: left;
+  width: 180px;
+  height: 150px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+}
+
+#example02 #content {
+  margin: 0 30px 10px 210px;
+  height: 150px;
+  background-color: #ccc;
+}
+
+#example02 #footer {
+  clear: both;
+  height: 50px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------
+example03
+----------------------------------- */
+
+#example03 #header {
+  height: 50px;
+  width: 700px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example03 #nav {
+  float: left;
+  width: 180px;
+  height: 150px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+}
+
+#example03 #content {
+  margin-left: 210px;
+  height: 150px;
+  width: 490px;
+  background-color: #ccc;
+}
+
+#example03 #footer {
+  clear: both;
+  height: 50px;
+  width: 700px;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------
+example04
+----------------------------------- */
+
+#example04 #header {
+  height: 50px;
+  width: 44em;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example04 #nav {
+  float: left;
+  width: 11em;
+  height: 150px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+}
+
+#example04 #content {
+  margin-left: 13em;
+  height: 150px;
+  width: 31em;
+  background-color: #ccc;
+}
+
+#example04 #footer {
+  clear: both;
+  height: 50px;
+  width: 44em;
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------
+example05
+----------------------------------- */
+
+#example05 #header {
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example05 #gutter {
+  float: left;
+  width: 3%;
+  height: 1px;
+}
+
+#example05 #col1 {
+  float: left;
+  width: 48%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example05 #col2 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example05 #col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example05 #footer {
+  clear: both;
+  height: 50px;
+  background-color: #999;
+}
+
+#example05 h1 {
+  margin: 0;
+  padding: 5px;
+}
+
+#example05 h2 {
+  margin-top: 0;
+  padding-top: 7px;
+}
+
+#example05 h2, #example05 p {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+/* -----------------------------------
+example06
+----------------------------------- */
+
+#example06 #header {
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example06 #gutter {
+  float: left;
+  width: 3%;
+  height: 1px;
+}
+
+#example06 #col1 {
+  float: left;
+  width: 48%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+  margin-left: 3%;
+}
+
+#example06 #col2 {
+  float: left;
+  width: 20%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example06 #col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example06 #footer {
+  clear: both;
+  height: 50px;
+  background-color: #999;
+}
+
+#example06 h1 {
+  margin: 0;
+  padding: 5px;
+}
+
+#example06 h2 {
+  margin-top: 0;
+  padding-top: 7px;
+}
+
+#example06 h2, #example06 p {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+/* -----------------------------------
+example07
+----------------------------------- */
+
+#example07 #header {
+  background-color: #999;
+  margin-bottom: 10px;
+}
+
+#example07 #gutter {
+  float: left;
+  width: 3%;
+  height: 1px;
+}
+
+#example07 #col1 {
+  float: left;
+  width: 48%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+  margin-left: 3%;
+}
+
+#example07 #col2 {
+  float: left;
+  width: 20%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example07 #col3 {
+  float: left;
+  width: 20%;
+  margin-left: 3%;
+  background-color: #bbb;
+  margin-bottom: 10px;
+}
+
+#example07 #footer {
+  clear: both;
+  height: 50px;
+  background-color: #999;
+}
+
+#example07 h1 {
+  margin: 0;
+  padding: 5px;
+}
+
+#example07 h2 {
+  margin-top: 0;
+  padding-top: 7px;
+}
+
+#example07 h2, #example07 p {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+/* -----------------------------------
+example08
+----------------------------------- */
+
+#example08 #header {
+  margin-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+  background-color: #ddd;
+}
+
+#example08 #gutter {
+  float: left;
+  width: 3%;
+  height: 1px;
+}
+
+#example08 #col1 {
+  float: left;
+  width: 44%;
+  margin-bottom: 1em;
+  border-right: 1px solid #ccc;
+  padding-right: 3%;
+}
+
+#example08 #col2 {
+  float: left;
+  width: 19%;
+  margin-left: 3%;
+  margin-bottom: 1em;
+  border-right: 1px solid #ccc;
+  padding-right: 3%;
+}
+
+#example08 #col3 {
+  float: left;
+  width: 19%;
+  margin-left: 3%;
+  margin-bottom: 1em;
+}
+
+#example08 #footer {
+  clear: both;
+  height: 50px;
+  border-top: 1px solid #ccc;
+  padding: .5em;
+  text-align: right;
+}
+
+#example08 h1 {
+  margin: 0;
+  padding: .5em;
+}
+
+#example08 h2 { margin-top: 0; }
+
+/* -----------------------------------
+example09
+----------------------------------- */
+
+#example09 #banner {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  float: left;
+  width: 94%;
+  background-color: #ddd;
+}
+
+#example09 .clearboth { clear: both; }
+
+#example09 .spacer {
+  float: left;
+  width: 3%;
+}
+
+#example09 #row1col1 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  width: 46%;
+  background-color: #bbb;
+}
+
+#example09 #row1col2 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  margin-left: 3%;
+  width: 45%;
+  background-color: #bbb;
+}
+
+#example09 #row2col1 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  margin-left: 3%;
+  width: 48%;
+  background-color: #ddd;
+}
+
+#example09 #row2col2 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  width: 20%;
+  background-color: #ddd;
+}
+
+#example09 #row2col3 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  margin-left: 3%;
+  width: 20%;
+  background-color: #ddd;
+}
+
+#example09 #row3col1 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  width: 71%;
+  background-color: #bbb;
+}
+
+#example09 #row3col2 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  margin-left: 3%;
+  width: 20%;
+  background-color: #bbb;
+}
+
+#example09 #row4col1 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  width: 20%;
+  background-color: #ddd;
+}
+
+#example09 #row4col2 {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  margin-left: 3%;
+  width: 71%;
+  background-color: #ddd;
+}
+
+#example09 #footer {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+  float: left;
+  width: 94%;
+  background-color: #bbb;
+  text-align: right;
+}
+
+#example09 h1, #example09 h2, #example09 h3, #example09 h4, #example09 h5, #example09 h6, #example09 p, #example09 ul, #example09 ol, #example09 dl {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+#example09 h1, #example09 h2, #example09 h3, #example09 h4, #example09 h5, #example09 h6 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+#example09 h1+p, #example09 h2+p, #example09 h3+p, #example09 h4+p { margin-top: .2em; }
