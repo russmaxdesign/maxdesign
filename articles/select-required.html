@@ -32,7 +32,7 @@
   </nav>
   <div class="banner-inner">
     <div class="banner-content">
-      <h1>Using the required attribute with the select element</h1>    
+      <h1>Using the <code>required</code> attribute with the select element</h1>    
     </div>
   </div>  
   <main>
@@ -42,13 +42,13 @@
 <p>I recently received the following question:</p>
 
 <blockquote>
-  <p>I tried to add the <code>"required"</code> attribute to the <code>&lt;select&gt;</code> element but now my page won't validate. Is the <code>"required"</code> not allowed on a <code>&lt;select&gt;</code> element?</p>
+  <p>I tried to add the <code>required</code> attribute to the <code>&lt;select&gt;</code> element but now my page won't validate. Is the <code>required</code> not allowed on a <code>&lt;select&gt;</code> element?</p>
 </blockquote>
 
 <h2>Answer</h2>
 
-<p>First of all, the <code>"required"</code> attribute is used to specify that the element is a required part of the form submission.</p>
-<p>The <code>"required"</code> attribute can be written in the following ways:</p>
+<p>First of all, the <code>required</code> attribute is used to specify that the element is a required part of the form submission.</p>
+<p>The <code>required</code> attribute can be written in the following ways:</p>
 
 <pre><code>&lt;select required="required"&gt;
 &lt;select required='required'&gt;
@@ -58,7 +58,7 @@
 &lt;select required&gt;
 </code></pre>
 
-<p>The <code>&lt;select&gt;</code> element does allow the <code>"required"</code> attribute. However, there are some requirements associated with using the <code>"required"</code> attribute with the <code>&lt;select&gt;</code> element:</p>
+<p>The <code>&lt;select&gt;</code> element does allow the <code>required</code> attribute. However, there are some requirements associated with using the <code>required</code> attribute with the <code>&lt;select&gt;</code> element:</p>
 
 <blockquote>
   <p style="margin-bottom: .5em;"><em>A &lt;select&gt; element with a required attribute and without a multiple attribute, and whose size is "1", must have a child option element.</em></p>
@@ -66,7 +66,7 @@
   <p class="metadetails"><a href="http://www.w3.org/TR/html-markup/select.html">HTML: The Markup Language - select – option-selection form control</a></p>
 </blockquote>
 
-<p>So, if you are using the <code>"required"</code> attribute with a <code>&lt;select&gt;</code> element</p>
+<p>So, if you are using the <code>required</code> attribute with a <code>&lt;select&gt;</code> element</p>
 
 <ul>
   <li>you must have at least one child element</li>
@@ -76,7 +76,7 @@
 
 <h2>Example 1</h2>
 
-<p>The example below has a <code>&lt;select&gt;</code> element with the <code>"required"</code> attribute. This example is <strong>not</strong> considered valid as the first child element has no empty value attribute, or no content.</p>
+<p>The example below has a <code>&lt;select&gt;</code> element with the <code>required</code> attribute. This example is <strong>not</strong> considered valid as the first child element has no empty value attribute, or no content.</p>
 
 <pre><code>&lt;form action="#" method="post"&gt;
   &lt;div&gt;

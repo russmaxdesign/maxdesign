@@ -629,19 +629,34 @@ metadetails
   margin: 0 0 0 .5em;
 }
 
-.metadetails-heading {
-  margin: 2.27272727272727em 0 .454545454545455em;
+
+
+/* ---------------------
+article
+----------------------*/
+
+.article {
+  margin: 2em 0 0;
+  padding: 0 0 2em;
+  border-bottom: 1px solid #969292;
 }
 
-.metadetails-section {
+.article:last-of-type {
+  border-bottom: 0;
+}
+
+.article-heading {
+  margin: 0 0 .454545454545455em;
+}
+
+.article-metadetails {
   color: #777;
   font-size: .8em;
-  display: inline-block;
   margin: 0;
 }
 
-.metadetails-paragraph {
-  margin: .2em 0 2em;
+.article-description {
+  margin: .25em 0 0;
 }
 
 
