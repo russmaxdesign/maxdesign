@@ -1,5 +1,8 @@
-#FollowSymLinks
+#Rewrite to www
 Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^maxdesign.com.au [NC]
+RewriteRule ^(.*)$ http://www.maxdesign.com.au [L,R=301]
 
 #Custom 400 errors
 ErrorDocument 404 /404.html
