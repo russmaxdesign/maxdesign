@@ -403,6 +403,13 @@ banner
   border-bottom: 5px solid #5CA4BF;
 }
 
+.banner-inner-404 {
+  background-color: #6D0E53;
+  padding: 2em;
+  margin: 0;
+  border-bottom: 5px solid #9E9A9A;
+}
+
 .banner-content {
   max-width: 36em;
   border-radius: .3em;
@@ -414,7 +421,8 @@ banner
   margin: 0 0 .3em;
 }
 
-.banner-inner h1 {
+.banner-inner h1,
+.banner-inner-404 h1 {
   color: #fff;
   margin: 0;
 }

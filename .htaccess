@@ -80,7 +80,6 @@ Redirect 301 /news/dumbing-down.cfm /articles/dumbing-down.html
 Redirect 301 /news/dumbing-down.htm /articles/dumbing-down.html
 
 #301 liquid
-Redirect 301 /liquid/ /liquid/index.html
 Redirect 301 /liquid.cfm /liquid/index.html
 Redirect 301 /liquid.htm /liquid/index.html
 Redirect 301 /presentation/liquid/ /liquid/index.html
