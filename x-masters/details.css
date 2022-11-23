@@ -1,0 +1,38 @@
+
+details summary {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.5em .75em .5em 1.7em;
+  border: 0;
+  background-color: #DCDADA;
+  background-image: url(../img/details-arrow-closed.png);
+  background-repeat: no-repeat;
+  background-position: 5px 50%;
+  background-size: 16px 16px;
+  color: #514D4D;
+  text-decoration: none;
+  border-radius: 0.2em;
+  font-size: .8em;
+  line-height: 1;
+  font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif; 
+}
+
+details[open] summary {
+  background-image: url(../img/details-arrow-open.png);
+}
+
+details summary:hover {
+  background-color: #5E7F1F;
+  color: #fff;
+}
+
+details summary:focus {
+  background-color: #2C2D30;
+  color: #fff;
+  outline: none;
+}
+
+details summary:active {
+  background-color: #6D0E53;
+  color: #fff;
+}
