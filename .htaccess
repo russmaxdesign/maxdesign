@@ -22,7 +22,7 @@ Redirect 301 /presentation/feed.xml /feed.xml
 Redirect 301 /category/news/feed/ /feed.xml
 Redirect 301 /category/news/feed /feed.xml
 Redirect 301 /category/news/feed.xml /feed.xml
-edirect 301 /category/articles/feed/ /feed.xml
+Redirect 301 /category/articles/feed/ /feed.xml
 Redirect 301 /category/articles/feed /feed.xml
 Redirect 301 /category/articles/feed.xml /feed.xml
 Redirect 301 /articles/atom/ /feed.xml
@@ -44,12 +44,9 @@ Redirect 301 /news/rss/ /feed.xml
 Redirect 301 /news/rss /feed.xml
 Redirect 301 /news/rss.xml /feed.xml
 
-
 #301 pages
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 Redirect 301 /about.php /about/index.html
-Redirect 301 /presentation/ /presentations/index.html
-Redirect 301 /articles/presentations/index.html /presentations/index.html
 Redirect 301 /articles/articles/index.html /articles/index.html
 Redirect 301 /articles/resources/index.html /resources/index.html
 Redirect 301 /articles/about/index.html /about/index.html
@@ -68,7 +65,6 @@ Redirect 301 /img/apple-touch-icon-144x144-precomposed.png /apple-touch-icon-144
 Redirect 301 /img/apple-touch-icon-precomposed.png /apple-touch-icon-precomposed.png
 
 #301 contact
-Redirect 301 /book /book/index.html
 Redirect 301 /book.cfm /book/index.html
 Redirect 301 /book.htm /book/index.html
 
@@ -437,4 +433,3 @@ Redirect 301 /2004/07/07/ten-for-dan-cederholm/ /articles/interview-dan-cederhol
 Redirect 301 /2004/05/25/ten-for-patrick-griffiths/ /articles/interview-patrick-griffiths.html
 Redirect 301 /2004/04/27/ten-for-keith-robinson/ /articles/interview-keith-robinson.html
 Redirect 301 /2004/03/21/ten-for-eric-meyer/ /articles/interview-eric-meyer.html
-
