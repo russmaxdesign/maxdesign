@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Three quick tips for accessibility and HTML5 - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Three quick tips for accessibility and HTML5</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2013-11-27">27 November 2013</time></p>
+
+<p>This presentation explores three quick tips around HTML5 and accessibility.</p>
+
+<h2>The <code>&lt;section&gt;</code> element</h2>
+
+<p>HTML5 provides us with a range of new semantic landmark elements such as:</p>
+
+<ul>  
+  <li><code>&lt;header&gt;</code></li>
+  <li><code>&lt;nav&gt;</code></li>
+  <li><code>&lt;section&gt;</code></li>
+  <li><code>&lt;article&gt;</code></li>
+  <li><code>&lt;aside&gt;</code></li>
+  <li><code>&lt;main&gt;</code></li>
+  <li><code>&lt;footer&gt;</code></li>
+</ul>
+
+<p>The <code>&lt;section&gt;</code> element is used to identify a page region - or a  a “thematic grouping of content”. It should only be used if the following conditions are met:</p>
+
+<ol>
+  <li>The page region is sufficiently important that users may want to navigate to it.</li>
+  <li>he page region can be identified, typically by including a heading that is a direct child element.</li>
+</ol>
+
+<p>If these conditions cannot be met, authors should consider using a <code>&lt;div&gt;</code> element, as this is a generic container that can used without any special conditions.</p>
+
+<p>The <code>&lt;section&gt;</code>  element can be used multiple times within a single layout and each instance will generate a section or region landmark.</p>
+
+<p>Additional meaning can be applied to the section element using the <code>aria-labelledby</code> attribute:</p>
+
+<pre><code>&lt;section aria-labelledby="section-apples"&gt;
+  &lt;h2 id="section-apples"&gt;All about apples&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+
+<h2>The <code>summary</code> attribute</h2>
+
+<p>Some attributes from HTML4 are no longer allowed in HTML5. One of these is the <code>summary</code> attribute which is applied to the <code>&lt;table&gt;</code> element.</p>
+
+<p>The summary attribute was used to provide assistive technologies with additional information about the table.</p>
+
+<pre><code>&lt;table summary="Summary information here"&gt;
+&lt;/table&gt;</code></pre>
+
+<p>A lot of accessibility experts are not happy with this attribute being removed!</p>
+
+<p>So, how can we provide this additional summary information?</p>
+
+<p>The simplest solution is to provide the additonal information via the caption element - which generates an accessible name for the table</p>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Caption here&lt;/caption&gt;
+&lt;/table&gt;</code></pre>
+
+<p>You could get a bit fancier and place all relevant content inside a <code>&lt;figure&gt;</code> element and the additional content inside a <code>&lt;figcaption&gt;</code> element.</p>
+
+<pre><code>&lt;figure&gt;
+  &lt;figcaption&gt;
+    Summary information
+  &lt;/figcaption&gt;
+  &lt;table&gt;
+  &lt;/table&gt;
+&lt;/figure&gt;</code></pre>
+
+<p>You could also provide additional meaning by using the <code>aria-labelledby</code> attribute.</p>
+
+<pre><code>&lt;figure&gt;
+  &lt;figcaption id="aaa"&gt;
+    Summary information
+  &lt;/figcaption&gt;
+  &lt;table aria-labelledby="aaa"&gt;
+  &lt;/table&gt;
+&lt;/figure&gt;</code></pre>
+
+<h2>The <code>&lt;a&gt;</code> element</h2>
+
+<p>In the past, the <code>&lt;a&gt;</code> element was considered to be an inline element.</p>
+
+<p>Inline elements were never allowed to wrap around block level elements.</p>
+
+<p>With HTML5, the <code>&lt;a&gt;</code> element has been upgraded. It can now wrap around entire blocks of content - as long as there is no interactive content, or content with a <code>tabindex</code> attribute inside.</p>
+
+<pre><code>&lt;a href="#"&gt;
+  &lt;p&gt;A simple link.&lt;/p&gt;
+&lt;/a&gt;</code></pre>
+
+<p>But why would this be allowed, when it breaks the very laws of nature?</p>
+
+<p>There may be times when you want to link multiple elements inside a container to the same location - such as a link on a thumbnail, a heading and even some text.</p>
+
+<p>In the past, this meant multiple links going to the same location - which could be confusing for some assistive technologies.</p>
+
+<pre><code>&lt;div&gt;
+  &lt;a href="#"&gt;
+    &lt;img src="a.png" alt=""&gt;
+  &lt;/a&gt;
+  &lt;h2&gt;
+    &lt;a href="#"&gt;Heading&lt;/a&gt;
+  &lt;/h2&gt;
+  &lt;p&gt;Some text&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<p>By wrapping the <code>&lt;a&gt;</code> element around the entire block, there is only one link required.</p>
+
+<pre><code>&lt;a href="#"&gt;
+  &lt;div&gt;
+    &lt;a href="#"&gt;
+      &lt;img src="a.png" alt=""&gt;
+    &lt;/a&gt;
+    &lt;h2&gt;
+      &lt;a href="#"&gt;Heading&lt;/a&gt;
+    &lt;/h2&gt;
+    &lt;p&gt;Some text&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/a&gt;</code></pre>
+
+<p>While this can reduce confusion for some assistive technologies, it can make things more confusing for others.</p>
+
+<p>For a full list of all issues, read <a href="http://blog.paciellogroup.com/2011/06/html5-accessibility-chops-block-links/" target="_blank">HTML5 Accessibility Chops: Block Links</a></p>
+
+<p>Be aware that some browsers do not display block links correctly.</p>
+
+<p>Other issues can include missing underlines, cursor not changing, everything underlined...</p>
+
+<p>So, if you want to use block links, be aware of the potential issues as well is the potential benefits!</p>
+
+<p>That's it!</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

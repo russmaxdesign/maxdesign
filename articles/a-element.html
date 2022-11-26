@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The shape-shifting "a" element - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>The shape-shifting "a" element</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-11-24">24 November 2022</time></p>
+
+
+<p>Do you remember when HTML elements were classified into some broad categories like "block-level", "inline" and "replaced" elements?</p>
+
+<p>There were always issues with these categories as many elements did not fit neatly into any category.</p>
+
+<p>In HTML5, a new set of content categories was introduced. These categories are used when defining the content models for each element. They include:</p>
+
+<ul>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#metadata-content" target="_blank">Metadata content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#flow-content" target="_blank">Flow content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content" target="_blank">Phrasing content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#sectioning-content" target="_blank">Sectioning content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#heading-content" target="_blank">Heading content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-2" target="_blank">Embedded content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#interactive-content" target="_blank">Interactive content</a></li>
+</ul>
+
+<p>There are also some lessor categories:</p>
+
+<ul>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content" target="_blank">Palpable content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#script-supporting-elements" target="_blank">Script-supported content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#transparent-content-models" target="_blank">Transparent content models</a></li>
+</ul>
+
+<p>What does this have to do with the <code>&lt;a&gt;</code> element? Well, this element falls into four of these HTML content categories:</p>
+
+<ol>
+  <li>Flow content</li>
+  <li>Phrasing content</li>
+  <li>Interactive content (if there is an <code>href</code> attribute present)</li>
+  <li>Palpable content (if there is at least one node in its contents that is palpable content)</li>
+</ol>
+
+<h2>Descendant elements</h2>
+
+<p>But what elements can be placed inside the <code>&lt;a&gt;</code> element - as child or descendant elements?</p>
+
+<p>Some elements, like the <code>&lt;article&gt;</code>, allow flow content as child or descendant elements.</p>
+
+<pre><code>&lt;article&gt;
+  <span class="highlight">&lt;div&gt;Flow content&lt;/div&gt;</span>
+&lt;/article&gt;
+
+&lt;article&gt;
+  <span class="highlight">&lt;p&gt;Flow content&lt;/p&gt;</span>
+&lt;/article&gt;</code></pre>
+
+<p>Other elements, like the <code>&lt;span&gt;</code>, allow only phrasing content as child or descendant elements.</p>
+
+<pre><code>&lt;span&gt;
+  <span class="highlight">&lt;em&gt;Phrasing content&lt;/em&gt;</span>
+&lt;/span&gt;
+
+&lt;span&gt;
+  <span class="highlight">&lt;b&gt;Phrasing content&lt;/b&gt;</span>
+&lt;/span&gt;</code></pre>
+
+
+<p>The <code>&lt;a&gt;</code> element cannot have descendants that are interactive content or elements that have a <code>tabindex</code> attribute specified. </p>
+
+<p>This makes sense, because you should never place a link or a button inside another link.</p>
+
+<pre><code>&lt;a href="#"&gt;
+  <s>&lt;a href=""&gt;Hello world&lt;/a&gt;</s>
+&lt;/a&gt;</code></pre>
+
+<pre><code>&lt;a href="#"&gt;
+  <s>&lt;button&gt;Hello world&lt;/button&gt;</s>
+&lt;/a&gt;</code></pre>
+
+<p>The <code>&lt;a&gt;</code> element is considered "transparent". This means that it's a shape-shifter! The content model of the <code>&lt;a&gt;</code> element is derived from the content model of its parent element.</p>
+
+<p>Let's look at two examples:</p>
+
+<p>In the example below, the <code>&lt;a&gt;</code> element is positioned inside the <code>&lt;article&gt;</code> element - which allows flow content. So, the "transparent" <code>&lt;a&gt;</code> element also allows flow content:</p>
+
+<pre><code>&lt;article&gt;
+  &lt;a href="#"&gt;
+    <span class="highlight">&lt;div&gt;Flow content&lt;/div&gt;</span>
+  &lt;/a&gt;
+&lt;/article&gt;</code></pre>
+
+<p class="font-small">Note: In the simplified example above, the <code>&lt;article&gt;</code> element does not include a heading. However, headings should always be included within the <code>&lt;article&gt;</code> element, to help with labelling / identification.</p>
+
+<p>In the example below, the <code>&lt;a&gt;</code> element is positioned inside the <code>&lt;span&gt;</code> element, which only allows phrasing content. So, the "transparent" <code>&lt;a&gt;</code> element also only allows phrasing content:</p>
+
+<pre><code>&lt;span&gt;
+  &lt;a href="#"&gt;
+    <span class="highlight">&lt;em&gt;Phrasing content&lt;/em&gt;</span>
+  &lt;/a&gt;
+&lt;/span&gt;</code></pre>
+
+<p>That's it for the shape-shifting <code>&lt;a&gt;</code> element!</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
+
+
+

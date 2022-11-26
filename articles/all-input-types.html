@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>All 22 input types - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>All 22 input types</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-11-25">25 November 2022</time></p>
+
+<p>Can you list all of the 22 different input types without having to resort to using Google? Here you go:</p>
+
+<p>1. <code>&lt;input type="button"&gt;</code></p>
+
+<div class="example">
+  <input class="button" type="button" value="Button">
+</div>
+
+<pre><code>&lt;input type="button" value="Button"&gt;</code></pre>
+
+<p>2. <code>&lt;input type="checkbox"&gt;</code></p>
+
+<div class="example">
+  <input id="checkbox" type="checkbox">
+  <label for="checkbox">Subscribe</label>
+</div>
+
+<pre><code>&lt;input id="checkbox" type="checkbox"&gt;
+&lt;label for="checkbox"&gt;Subscribe&lt;/label&gt;</code></pre>
+
+<p>3. <code>&lt;input type="color"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="color">Pick a colour</label>
+  <input id="color" type="color">
+</div>
+
+<pre><code>&lt;label for="color"&gt;Pick a colour&lt;/label&gt;
+&lt;input id="color" type="color"&gt;</code></pre>
+
+<p>4. <code>&lt;input type="date"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="date">Choose a date</label>
+  <input class="input" id="date" type="date">
+</div>
+
+<pre><code>&lt;label for="date"&gt;Choose a date&lt;/label&gt;
+&lt;input id="date" type="date"&gt;</code></pre>
+
+<p>5. <code>&lt;input type="datetime-local"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="datetime">Choose a date and time</label>
+  <input class="input" id="datetime" type="datetime-local">
+</div>
+
+<pre><code>&lt;label for="datetime"&gt;Choose a date and time&lt;/label&gt;
+&lt;input id="datetime" type="datetime-local"&gt;</code></pre>
+
+<p>6. <code>&lt;input type="email"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="email">Email address</label>
+  <input class="input" id="email" type="email">
+</div>
+
+<pre><code>&lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;input id="email" type="email"&gt;</code></pre>
+
+<p>7. <code>&lt;input type="file"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="file">Choose a file</label>
+  <input id="file" type="file">
+</div>
+
+<pre><code>&lt;label for="file"&gt;Choose a file&lt;/label&gt;
+&lt;input id="file" type="file"&gt;</code></pre>
+
+<p>8. <code>&lt;input type="hidden"&gt;</code></p>
+
+<div class="example">
+  <input type="hidden">
+</div>
+
+<pre><code>&lt;input type="hidden"&gt;</code></pre>
+
+<p>9. <code>&lt;input type="image"&gt;</code></p>
+
+<div class="example">
+  <input type="image" alt="Login" src="https://via.placeholder.com/100">
+</div>
+
+<pre><code>&lt;input type="image" alt="Login" src="a.png"&gt;</code></pre>
+
+<p>10. <code>&lt;input type="month"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="month">Choose a month</label>
+  <input class="input" id="month" type="month">
+</div>
+
+<pre><code>&lt;label for="month"&gt;Choose a month&lt;/label&gt;
+&lt;input id="month" type="month"&gt;</code></pre>
+
+<p>11. <code>&lt;input type="number"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="number">Choose a number</label>
+  <input class="input" id="number" type="number">
+</div>
+
+<pre><code>&lt;label for="number"&gt;Choose a number&lt;/label&gt;
+&lt;input id="number" type="number"&gt;</code></pre>
+
+<p>12. <code>&lt;input type="password"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="password">Add your password</label>
+  <input class="input" id="password" type="password">
+</div>
+
+<pre><code>&lt;label for="password"&gt;Password&lt;/label&gt;
+&lt;input id="password" type="password"&gt;</code></pre>
+
+<p>13. <code>&lt;input type="radio"&gt;</code></p>
+
+<div class="example">
+  <input id="radio" type="radio">
+  <label for="radio">Yes</label>
+</div>
+
+<pre><code>&lt;input id="radio" type="radio"&gt;
+&lt;label for="radio"&gt;Yes&lt;/label&gt;</code></pre>
+
+<p>14. <code>&lt;input type="range"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="range">Choose a range</label>
+  <input class="input" id="range" type="range">
+</div>
+
+<pre><code>&lt;label for="range"&gt;Choose a range&lt;/label&gt;
+&lt;input id="range" type="range"&gt;</code></pre>
+
+<p>15. <code>&lt;input type="reset"&gt;</code></p>
+
+<div class="example">
+  <input class="button" type="reset" value="Reset">
+</div>
+
+<pre><code>&lt;input type="reset" value="Reset"&gt;</code></pre>
+
+<p>16. <code>&lt;input type="search"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="search">Search the site</label>
+  <input class="input" id="search" type="search">
+</div>
+
+<pre><code>&lt;label for="search"&gt;Search the site&lt;/label&gt;
+&lt;input id="search" type="search"&gt;</code></pre>
+
+<p>17. <code>&lt;input type="submit"&gt;</code></p>
+
+<div class="example">
+  <input class="button" type="submit" value="Submit">
+</div>
+
+<pre><code>&lt;input type="submit" value="Submit"&gt;</code></pre>
+
+<p>18. <code>&lt;input type="tel"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="tel">Phone number</label>
+  <input class="input" id="tel" type="tel">
+</div>
+
+<pre><code>&lt;label for="tel"&gt;Phone number&lt;/label&gt;
+&lt;input id="tel" type="tel"&gt;</code></pre>
+
+<p>19. <code>&lt;input type="text"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="text">Full name</label>
+  <input class="input" id="text" type="text">
+</div>
+
+<pre><code>&lt;label for="text"&gt;Name&lt;/label&gt;
+&lt;input id="text" type="text"&gt;</code></pre>
+
+<p>20. <code>&lt;input type="time"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="time">Choose a time</label>
+  <input class="input" id="time" type="time">
+</div>
+
+<pre><code>&lt;label for="time"&gt;Choose a time&lt;/label&gt;
+&lt;input id="time" type="time"&gt;</code></pre>
+
+<p>21. <code>&lt;input type="url"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="url">Web address</label>
+  <input class="input" id="url" type="url">
+</div>
+
+<pre><code>&lt;label for="url"&gt;Web address&lt;/label&gt;
+&lt;input id="url" type="url"&gt;</code></pre>
+
+<p>22. <code>&lt;input type="week"&gt;</code></p>
+
+<div class="example">
+  <label class="label" for="week">Choose a week</label>
+  <input class="input" id="week" type="week">
+</div>
+
+<pre><code>&lt;label for="week"&gt;Choose a week&lt;/label&gt;
+&lt;input id="week" type="week"&gt;</code></pre>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+
+  </footer>
+</body>
+</html>
+
+
+
+
