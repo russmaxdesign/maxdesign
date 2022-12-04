@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Methods of applying accessible descriptions to elements - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Methods of applying accessible descriptions to elements</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-12-05">05 December 2022</time></p>
+
+<p>This article explores various methods that can generate accessible descriptions for elements.</p>
+
+<h2>What is an accessible description?</h2>
+
+<p>Accessible descriptions are additional information given to elements in the accessibility tree. Unlike accessible names, which are generally preferred to be concise, descriptions can provide more verbose information.</p>
+
+<p>Accessible descriptions can be computed from one or more sources and made available in the accessibility tree as a single text string.</p>
+
+<h2>Method 1: Using the <code>title</code> attribute</h2>
+
+<p>The contents of the <code>title</code> can generate an accessible decscription for many elements, as long as the <code>title</code> is not used for the accessible name:</p>
+
+<div class="example">
+  <label class="label" for="a1">Name</label>
+  <input class="input" id="a1" type="text" title="Add your full name">
+</div>
+
+<pre><code>&lt;label for="a1"&gt;Name&lt;/label&gt;
+&lt;input id="a1" type="text" title="<span class="highlight">Add your full name</span>"&gt;</code></pre>
+
+<h2>Method 2: Using the <code>aria-desscribedby</code> attribute</h2>
+
+<p>The contents of one or more elements can generate an accessible description for another element - if there are matching <code>aria-desscribedby</code> and <code>id</code> values:</p>
+
+<div class="example">
+  <label class="label" for="a2">Name</label>
+  <span class="help-text" id="b2">Add your full name</span>
+  <input class="input" id="a2" type="text" aria-describedby="b2">
+</div>
+
+<pre><code>&lt;label for="a2"&gt;Name&lt;/label&gt;
+&lt;span id="b2"&gt;<span class="highlight">Add your full name</span>&lt;/span&gt;
+&lt;input id="a2" type="text" aria-describedby="b2"&gt;</code></pre>
+
+<p>If more than one element is referenced, their <code>id</code> values are processed in the order they occur within the <code>aria-describedby</code> value. The accessible description for the input below would be: <em>"Add your full name Error: This field must be filled in"</em>.</p>
+
+<div class="example">
+  <label class="label" for="a3">Name</label>
+  <span class="help-text" id="b3">Add your full name</span>
+  <input class="input" id="a3" type="text" aria-describedby="b3 c3">
+  <span class="error-message" id="c3">Error: This field must be filled in</span>
+</div>
+
+<pre><code>&lt;label for="a3"&gt;Name&lt;/label&gt;
+&lt;span id="b3"&gt;<span class="highlight">Add your full name</span>&lt;/span&gt;
+&lt;input id="a3" type="text" aria-describedby="b3 c3"&gt;
+&lt;span id="c3"&gt;<span class="highlight">Error: This field must be filled in</span>&lt;/span&gt;</code></pre>
+
+<h2>Method 3: Using the <code>aria-description</code> attribute</h2>
+
+<p>This attribute is still in early discussion, and may be released as paet of ARIA 1.3. In theory, the contents of the <code>aria-description</code> would generate an accessible description for an element:</p>
+
+<pre><code>&lt;label for="a3"&gt;Name&lt;/label&gt;
+&lt;input id="a3" type="text" aria-description="<span class="highlight">Add full name</span>"&gt;</code></pre>
+
+<p>This method should be used with care as it is only available to technologies that supprt the accessibility tree. Ideally, any supportive information should be provided on-screen for all users.</p>
+
+<hr>
+<h2>Which accessible description wins?</h2>
+
+<p>What happens if there is more than one possible description for an element? Which one becomes the text string that creates the accessible description in the accessibility tree?</p>
+
+<p>The two key documents that define accessible names and descriptions are:</p>
+
+<ul>
+  <li><a href="https://www.w3.org/TR/accname-1.1/" target="_blank">Accessible Name and Description Computation 1.1</a></li>
+  <li><a href="https://w3c.github.io/html-aam/#accessible-name-and-description-computation" target="_blank">HTML Accessibility API Mappings 1.0</a></li>
+</ul>
+
+<p>In simple terms, accessible descriptions are defined in the following order:</p>
+
+<ol>
+  <li>If present, use <code>aria-describedby</code>.</li>
+  <li>Otherwise, if present, use <code>title</code>.</li>
+  <li>Otherwise, there is no accessible description.</li>
+</ol>
+
+<h2>Some examples of the accessible name order in action</h2>
+
+<ul>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-description-link01.html" target="_blank">&lt;a&gt; where aria-describedby should be accessible description</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-description-link02.html" target="_blank">&lt;a&gt; where title should be accessible description</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-description-link03.html" target="_blank">&lt;a&gt; with no accessible description</a></li>
+</ul>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

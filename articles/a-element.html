@@ -110,7 +110,7 @@
   <s>&lt;button&gt;Hello world&lt;/button&gt;</s>
 &lt;/a&gt;</code></pre>
 
-<p>The <code>&lt;a&gt;</code> element is considered "transparent". This means that it's a shape-shifter! The content model of the <code>&lt;a&gt;</code> element is derived from the content model of its parent element.</p>
+<p>The <code>&lt;a&gt;</code> element is considered "<a href="https://html.spec.whatwg.org/multipage/dom.html#transparent-content-models" target="_blank">transparent</a>". This means that it's a shape-shifter! The content model of the <code>&lt;a&gt;</code> element is derived from the content model of its parent element.</p>
 
 <p>Let's look at two examples:</p>
 
@@ -122,8 +122,6 @@
   &lt;/a&gt;
 &lt;/article&gt;</code></pre>
 
-<p class="font-small">Note: In the simplified example above, the <code>&lt;article&gt;</code> element does not include a heading. However, headings should always be included within the <code>&lt;article&gt;</code> element, to help with labelling / identification.</p>
-
 <p>In the example below, the <code>&lt;a&gt;</code> element is positioned inside the <code>&lt;span&gt;</code> element, which only allows phrasing content. So, the "transparent" <code>&lt;a&gt;</code> element also only allows phrasing content:</p>
 
 <pre><code>&lt;span&gt;
@@ -133,6 +131,8 @@
 &lt;/span&gt;</code></pre>
 
 <p>That's it for the shape-shifting <code>&lt;a&gt;</code> element!</p>
+
+<p class="font-small">Note: In the simplified examples above, the <code>&lt;article&gt;</code> element does not include a heading. However, headings should always be included within the <code>&lt;article&gt;</code> element, to help with labelling / identification.</p>
 
   </main>
   <footer>

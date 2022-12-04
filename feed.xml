@@ -3,7 +3,7 @@
 	<channel>
 		<title>Max Design articles</title>
 		<description>A list of HTML, CSS and accessibility articles</description>
-		<pubDate>Fri, 25 Nov 2022 05:47:00 +0000</pubDate>
+		<pubDate>Mon, 05 Dec 2022 07:33:00 +0000</pubDate>
 		<link>https://maxdesign.com.au/articles/</link>
 		<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml" />
 		<generator>https://fetchrss.com</generator>
@@ -13,6 +13,20 @@
 			<title>Max Design articles</title>
 		</image>
 
+		<item>
+			<title>Methods of applying accessible descriptions to elements</title>
+			<link>https://maxdesign.com.au/articles/accessible-description.html</link>
+			<description>This article explores a range of different methods that can be used to generate an accessible descriptions for elements.</description>
+			<pubDate>Mon, 05 Dec 2022 07:33:00 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-description.html</guid>
+		</item>
+		<item>
+			<title>Methods of applying accessible names to elements</title>
+			<link>https://maxdesign.com.au/articles/accessible-name.html</link>
+			<description>This article explores a range of different methods that can be used to generate an accessible names for elements.</description>
+			<pubDate>Sat, 03 Dec 2022 09:33:00 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-name.html</guid>
+		</item>
 		<item>
 			<title>All 22 input types</title>
 			<link>https://maxdesign.com.au/articles/all-input-types.html</link>

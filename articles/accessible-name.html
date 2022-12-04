@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Methods of applying accessible names to elements - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Methods of applying accessible names to elements</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-12-03">03 December 2022</time></p>
+
+<p>This article explores various methods that can generate accessible names for elements.</p>
+
+<h2>What is an accessible name?</h2>
+
+<p>Accessible names are names given to elements in the accessibility tree. They are very important for assistive technology users as they help to identify elements.</p>
+
+<p>Accessible names can be computed from one or more sources and made available in the accessibility tree as a single text string.</p>
+
+<h2>Method 1: Using the element's content</h2>
+
+<p>The contents of many HTML elements, such as the <code>&lt;h4&gt;</code>, <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements below, can generate an accessible name</p>
+
+<div class="example">
+  <h4 style="margin: 0;">About our team</h4>
+</div>
+<div class="example">
+  <button class="button">Submit</button>
+</div>
+<div class="example">
+  <a href="#">Contact us</a>
+</div>
+
+<pre><code>&lt;h4&gt;<span class="highlight">About our team</span>&lt;/h4&gt;
+&lt;button class="button"&gt;<span class="highlight">Submit</span>&lt;/button&gt;
+&lt;a href="#"&gt;<span class="highlight">Contact us</span>&lt;/a&gt;</code></pre>
+
+<h2>Method 2: Using the <code>alt</code> attribute</h2>
+
+<p>The contents of the <code>alt</code> attribute can generate an accessible name for the <code>&lt;img&gt;</code> element:</p>
+
+<div class="example">
+  <img src="https://via.placeholder.com/100" alt="A dummy image">
+</div>
+
+<pre><code>&lt;img src="a.png" alt="<span class="highlight">A dummy image</span>"&gt;</code></pre>
+
+<h2>Method 3: Using the <code>placeholder</code> attribute</h2>
+
+<p>The contents of the <code>placeholder</code> attribute can generate an accessible name for the <code>&lt;input&gt;</code> element with a type of <code>text</code>, <code>search</code>, <code>url</code>, <code>tel</code>, <code>email</code>, <code>password</code>, or <code>number</code>. This attribute can also generate an accessible name for the <code>&lt;textarea&gt;</code> element.</p>
+
+<form action="#" class="example">
+  <input class="input" type="text" placeholder="Search">
+</form>
+
+<pre><code>&lt;input class="input" type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
+
+<form action="#" class="example">
+  <textarea class="input" rows="5" placeholder="Comment"></textarea>
+</form>
+
+<pre><code>&lt;textarea placeholder="<span class="highlight">Comment</span>"&gt;&lt;/textarea&gt;</code></pre>
+
+<h2>Method 4: Using the <code>title</code> attribute</h2>
+
+<p>The contents of the <code>title</code> can generate an accessible name for many elements:</p>
+
+<div class="example">
+  <button class="button" title="Close">
+    <div style="width: 16px; height: 16px;">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg aria-hidden="true" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 424.2 424.2" style="enable-background:new 0 0 424.2 424.2;" xml:space="preserve">
+        <style type="text/css">
+          .st0{fill:#FFFFFF;}
+        </style>
+        <polygon class="st0" points="424.2,70.7 353.5,0 212.1,141.4 70.7,0 0,70.7 141.4,212.1 0,353.5 70.7,424.2 212.1,282.8 
+        353.5,424.2 424.2,353.5 282.8,212.1 "/>
+      </svg>
+    </div>
+  </button>
+</div>
+
+<pre><code>&lt;button title="<span class="highlight">Close</span>"&gt;
+&lt;/button&gt;</code></pre>
+
+<h2>Method 5: Using the <code>aria-label</code> attribute</h2>
+
+<p>The contents of the <code>aria-label</code> can generate an accessible name for many elements:</p>
+
+<div class="example">
+  <button class="button" aria-label="Close">
+    <div style="width: 16px; height: 16px;">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg aria-hidden="true" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 424.2 424.2" style="enable-background:new 0 0 424.2 424.2;" xml:space="preserve">
+        <style type="text/css">
+          .st0{fill:#FFFFFF;}
+        </style>
+        <polygon class="st0" points="424.2,70.7 353.5,0 212.1,141.4 70.7,0 0,70.7 141.4,212.1 0,353.5 70.7,424.2 212.1,282.8 
+        353.5,424.2 424.2,353.5 282.8,212.1 "/>
+      </svg>
+    </div>
+  </button>
+</div>
+
+<pre><code>&lt;button aria-label="<span class="highlight">Close</span>"&gt;
+&lt;/button&gt;</code></pre>
+
+<h2>Method 6: Using the <code>aria-placeholder</code> attribute</h2>
+
+<p>The contents of the <code>aria-placeholder</code> attribute can generate an accessible name for non-form elements. Unlike the native <code>placeholder</code> attribute, this will not present information on-screen. It will only be available in the accessibility tree:</p>
+
+<form action="#" class="example">
+  <div contenteditable class="input" role="textbox" aria-placeholder="Add a date"></div>
+</form>
+
+<pre><code>&lt;div
+  contenteditable
+  role="textbox"
+  aria-placeholder="<span class="highlight">Add a date</span>"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>Method 7: Using the <code>&lt;legend&gt;</code> element</h2>
+
+<p>The contents of the <code>&lt;legend&gt;</code> element can generate an accessible name for the <code>&lt;fieldset&gt;</code> element:</p>
+
+<div class="example">
+  <fieldset>
+    <legend>Billing information</legend>
+  </fieldset>
+</div>
+
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;<span class="highlight">Billing information</span>&lt;/legend&gt;
+&lt;/fieldset&gt;</code></pre>
+
+<h2>Method 8: Using the <code>&lt;caption&gt;</code> element</h2>
+
+<p>The contents of the <code>&lt;caption&gt;</code> element can generate an accessible name for the <code>&lt;table&gt;</code> element:</p>
+
+<div class="example">
+  <table style="margin: 0;">
+    <caption>Average rainfall in Australia</caption>
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Rainfall in Janury</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sydney</td>
+        <td>22 mm</td>
+      </tr>
+    </tbody>
+  </table>
+ </div>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;<span class="highlight">Average rainfall in Australia</span>&lt;/caption&gt;
+&lt;/table&gt;</code></pre>
+
+<h2>Method 9: Using the <code>&lt;label&gt;</code> element</h2>
+
+<p>The contents of the <code>&lt;label&gt;</code> element can generate an accessible name for the <code>&lt;input&gt;</code> element if they have matching <code>for</code> and <code>id</code> values:</p>
+
+<form action="#" class="example">
+  <label class="label" for="name">Full name</label>
+  <input class="input" type="text" id="name">
+</form>
+
+<pre><code>&lt;label for="name"&gt;<span class="highlight">Full name</span>&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</code></pre>
+
+<p>Or, if the label wraps around the label content and form control:</p>
+
+<pre><code>&lt;label&gt;
+  <span class="highlight">Full name</span>
+  &lt;input type="text"&gt;
+&lt;/label&gt;</code></pre>
+
+<h2>Method 10: Using the <code>aria-labelledby</code> attribute</h2>
+
+<p>The contents of one or more elements can generate an accessible name for another element - if there are matching <code>aria-labelledby</code> and <code>id</code> values:</p>
+
+<div class="example">
+  <nav aria-labelledby="section-heading" style="padding: 0;">
+    <h4 id="section-heading" style="margin: 0;">About us section</h4>
+  </nav>
+</div>
+
+<pre><code>&lt;nav aria-labelledby="section-heading"&gt;
+  &lt;h4 id="section-heading"&gt;<span class="highlight">About us section</span>&lt;/h4&gt;
+&lt;/nav&gt;</code></pre>
+
+<p>If more than one element is referenced, their <code>id</code> values are processed in the order they occur within the <code>aria-labelledby</code> value. The accessible name for the button below would be: <em>"Bird Fish Lizard"</em>.</p>
+
+<div class="example">
+  <button class="button" aria-labelledby="a1 a2 a3">
+    <div style="width: 16px; height: 16px;">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg aria-hidden="true" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 424.2 424.2" style="enable-background:new 0 0 424.2 424.2;" xml:space="preserve">
+        <style type="text/css">
+          .st0{fill:#FFFFFF;}
+        </style>
+        <polygon class="st0" points="424.2,70.7 353.5,0 212.1,141.4 70.7,0 0,70.7 141.4,212.1 0,353.5 70.7,424.2 212.1,282.8 
+        353.5,424.2 424.2,353.5 282.8,212.1 "/>
+      </svg>
+    </div>
+  </button>
+  <p id="a2" style="margin: .3em 0 0;">Fish</p>
+  <p id="a1" style="margin: .3em 0 0;">Bird</p>
+  <p id="a3" style="margin: .3em 0 0;">Lizard</p>
+</div>
+
+<pre><code>&lt;button aria-labelledby="a1 a2 a3"&gt;&lt;/button&gt;
+&lt;p id="a2"&gt;<span class="highlight">Fish</span>&lt;/p&gt;
+&lt;p id="a1"&gt;<span class="highlight">Bird</span>&lt;/p&gt;
+&lt;p id="a3"&gt;<span class="highlight">Lizard</span>&lt;/p&gt;</code></pre>
+
+<hr>
+<h2>Which accessible name wins?</h2>
+
+<p>What happens if multiple names are provided for an element? Which one becomes the text string that defines the accessible name in the accessibility tree?</p>
+
+<p>The two key documents that define accessible names and descriptions are:</p>
+
+<ul>
+  <li><a href="https://www.w3.org/TR/accname-1.1/" target="_blank">Accessible Name and Description Computation 1.1</a></li>
+  <li><a href="https://w3c.github.io/html-aam/#accessible-name-and-description-computation" target="_blank">HTML Accessibility API Mappings 1.0</a></li>
+</ul>
+
+<p>In simple terms, accessible names are defined in the following order:</p>
+
+<ol>
+  <li>If present, use <code>aria-labelledby</code>.</li>
+  <li>Otherwise, if present, use <code>aria-label</code>.</li>
+  <li>Otherwise, if present, use one of the following:
+    <ul>
+      <li>The element's content OR</li>
+      <li>The element's <code>alt</code> OR</li>
+      <li>Content from a related <code>&lt;label&gt;</code>, <code>&lt;legend&gt;</code> or <code>&lt;caption&gt;</code>.</li>
+    </ul>
+  </li>
+  <li>Otherwise, if present, use <code>title</code>.</li>
+  <li>Otherwise, if relevant and present, use <code>aria-placeholder</code>.</li>
+  <li>Otherwise, if relevant and present, use <code>placeholder</code>.</li>
+  <li>Otherwise, there is no accessible name.</li>
+</ol>
+
+<h2>Some examples of the accessible name order in action</h2>
+
+<ul>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link01.html" target="_blank">&lt;a&gt; where aria-labelledby should be accessible name</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link02.html" target="_blank">&lt;a&gt; where aria-label should be accessible name</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link03.html" target="_blank">&lt;a&gt; where content should be accessible name</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link04.html" target="_blank">&lt;a&gt; where title should be accessible name</a></li>
+  <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link05.html" target="_blank">&lt;a&gt; with no accessible name</a></li>
+</ul>
+
+<h2>No accessible name?</h2>
+
+<p>The <a href="https://www.w3.org/TR/using-aria/#fifthrule" target="_blank">fifth rule of using ARIA</a> states:</p>
+
+<blockquote>
+  <p>All interactive elements must have an accessible name.</p>
+</blockquote>
+
+<p>So, in the case of form controls, buttons, links and any non-native interactive elements, we should always provide an accessible name for assistive technologies.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
