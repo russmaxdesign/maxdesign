@@ -41,7 +41,17 @@
 
 <p>This article explores various methods that can generate accessible names for elements.</p>
 
-<h2>What is an accessible name?</h2>
+<p>Table of contents:</p>
+<ul>
+  <li><a href="#what-is-an-accessible-name">What is an accessible name?</a></li>
+  <li><a href="#possible-accessible-name-methods">Possible accessible name methods</a></li>
+  <li><a href="#which-accessible-name-wins">Which accessible name wins?</a></li>
+  <li><a href="#no-accessible-name">No accessible name?</a></li>
+  <li><a href="#good-and-bad-accessible-names">Good and bad accessible names?</a></li>
+</ul>
+
+<hr>
+<h2 id="what-is-an-accessible-name">What is an accessible name?</h2>
 
 <p>Accessible names are names given to elements in the accessibility tree. They are very important for assistive technology users as they help to identify elements.</p>
 
@@ -49,7 +59,10 @@
 
 <p>So, what are the different methods that can be used to generate an accessible name?</p>
 
-<h2>Method 1: Using the element's content</h2>
+<hr>
+<h2 id="possible-accessible-name-methods">Possible accessible name methods</h2>
+
+<h3>Method 1: Using the element's content</h3>
 
 <p>The contents of many HTML elements, such as the <code>&lt;h4&gt;</code>, <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> elements below, can generate an accessible name</p>
 
@@ -67,7 +80,7 @@
 &lt;button class="button"&gt;<span class="highlight">Submit</span>&lt;/button&gt;
 &lt;a href="#"&gt;<span class="highlight">Contact us</span>&lt;/a&gt;</code></pre>
 
-<h2>Method 2: Using the <code>alt</code> attribute</h2>
+<h3>Method 2: Using the <code>alt</code> attribute</h3>
 
 <p>The contents of the <code>alt</code> attribute can generate an accessible name for the <code>&lt;img&gt;</code> element:</p>
 
@@ -77,7 +90,7 @@
 
 <pre><code>&lt;img src="a.png" alt="<span class="highlight">A dummy image</span>"&gt;</code></pre>
 
-<h2>Method 3: Using the <code>placeholder</code> attribute</h2>
+<h3>Method 3: Using the <code>placeholder</code> attribute</h3>
 
 <p>The contents of the <code>placeholder</code> attribute can generate an accessible name for the <code>&lt;input&gt;</code> element with a type of <code>text</code>, <code>search</code>, <code>url</code>, <code>tel</code>, <code>email</code>, <code>password</code>, or <code>number</code>. This attribute can also generate an accessible name for the <code>&lt;textarea&gt;</code> element.</p>
 
@@ -85,7 +98,7 @@
   <input class="input" type="text" placeholder="Search">
 </form>
 
-<pre><code>&lt;input class="input" type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
+<pre><code>&lt;input type="text" placeholder="<span class="highlight">Search</span>"&gt;</code></pre>
 
 <form action="#" class="example">
   <textarea class="input" rows="5" placeholder="Comment"></textarea>
@@ -93,7 +106,7 @@
 
 <pre><code>&lt;textarea placeholder="<span class="highlight">Comment</span>"&gt;&lt;/textarea&gt;</code></pre>
 
-<h2>Method 4: Using the <code>title</code> attribute</h2>
+<h3>Method 4: Using the <code>title</code> attribute</h3>
 
 <p>The contents of the <code>title</code> can generate an accessible name for many elements:</p>
 
@@ -106,7 +119,7 @@
 <pre><code>&lt;button title="<span class="highlight">Close</span>"&gt;
 &lt;/button&gt;</code></pre>
 
-<h2>Method 5: Using the <code>aria-label</code> attribute</h2>
+<h3>Method 5: Using the <code>aria-label</code> attribute</h3>
 
 <p>The contents of the <code>aria-label</code> can generate an accessible name for many elements:</p>
 
@@ -119,7 +132,7 @@
 <pre><code>&lt;button aria-label="<span class="highlight">Close</span>"&gt;
 &lt;/button&gt;</code></pre>
 
-<h2>Method 6: Using the <code>aria-placeholder</code> attribute</h2>
+<h3>Method 6: Using the <code>aria-placeholder</code> attribute</h3>
 
 <p>The contents of the <code>aria-placeholder</code> attribute can generate an accessible name for non-form elements. Unlike the native <code>placeholder</code> attribute, this will not present information on-screen. It will only be available in the accessibility tree:</p>
 
@@ -134,7 +147,7 @@
 &gt;
 &lt;/div&gt;</code></pre>
 
-<h2>Method 7: Using the <code>&lt;legend&gt;</code> element</h2>
+<h3>Method 7: Using the <code>&lt;legend&gt;</code> element</h3>
 
 <p>The contents of the <code>&lt;legend&gt;</code> element can generate an accessible name for the <code>&lt;fieldset&gt;</code> element:</p>
 
@@ -148,7 +161,7 @@
   &lt;legend&gt;<span class="highlight">Billing information</span>&lt;/legend&gt;
 &lt;/fieldset&gt;</code></pre>
 
-<h2>Method 8: Using the <code>&lt;caption&gt;</code> element</h2>
+<h3>Method 8: Using the <code>&lt;caption&gt;</code> element</h3>
 
 <p>The contents of the <code>&lt;caption&gt;</code> element can generate an accessible name for the <code>&lt;table&gt;</code> element:</p>
 
@@ -174,7 +187,7 @@
   &lt;caption&gt;<span class="highlight">Average rainfall in Australia</span>&lt;/caption&gt;
 &lt;/table&gt;</code></pre>
 
-<h2>Method 9: Using the <code>&lt;label&gt;</code> element</h2>
+<h3>Method 9: Using the <code>&lt;label&gt;</code> element</h3>
 
 <p>The contents of the <code>&lt;label&gt;</code> element can generate an accessible name for the <code>&lt;input&gt;</code> element if they have matching <code>for</code> and <code>id</code> values:</p>
 
@@ -193,7 +206,7 @@
   &lt;input type="text"&gt;
 &lt;/label&gt;</code></pre>
 
-<h2>Method 10: Using the <code>aria-labelledby</code> attribute</h2>
+<h3>Method 10: Using the <code>aria-labelledby</code> attribute</h3>
 
 <p>The contents of one or more elements can generate an accessible name for another element - if there are matching <code>aria-labelledby</code> and <code>id</code> values:</p>
 
@@ -224,7 +237,7 @@
 &lt;p id="a3"&gt;<span class="highlight">Lizard</span>&lt;/p&gt;</code></pre>
 
 <hr>
-<h2>Which accessible name wins?</h2>
+<h2 id="which-accessible-name-wins">Which accessible name wins?</h2>
 
 <p>What happens if multiple names are provided for an element? Which one becomes the text string that defines the accessible name in the accessibility tree?</p>
 
@@ -235,7 +248,7 @@
   <li><a href="https://w3c.github.io/html-aam/#accessible-name-and-description-computation" target="_blank">HTML Accessibility API Mappings 1.0</a></li>
 </ul>
 
-<p>In simple terms, accessible names are defined in the following order:</p>
+<h3>Accessible names are defined in the following order:</h3>
 
 <ol>
   <li>If present, use <code>aria-labelledby</code>.</li>
@@ -253,7 +266,7 @@
   <li>Otherwise, there is no accessible name.</li>
 </ol>
 
-<h2>Some examples of the accessible name order in action</h2>
+<h3>Some accessible names action:</h3>
 
 <ul>
   <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link01.html" target="_blank">&lt;a&gt; where aria-labelledby should be accessible name</a></li>
@@ -263,7 +276,8 @@
   <li><a href="https://russmaxdesign.github.io/accessible-forms/accessible-name-link05.html" target="_blank">&lt;a&gt; with no accessible name</a></li>
 </ul>
 
-<h2>No accessible name?</h2>
+<hr>
+<h2 id="no-accessible-name">No accessible name?</h2>
 
 <p>The <a href="https://www.w3.org/TR/using-aria/#fifthrule" target="_blank">fifth rule of using ARIA</a> states:</p>
 
@@ -273,6 +287,54 @@
 
 <p>So, in the case of form controls, buttons, links and any non-native interactive elements, we should always provide an accessible name for assistive technologies.</p>
 
+<hr>
+<h2 id="good-and-bad-accessible-names">Good and bad accessible names</h2>
+
+<p>Always try to use the most semantic method to apply accessible names and avoid ARIA solutions where possible.</p>
+
+<p>For buttons and links, the content should be used for the accessible name where possible. This method provides a matching visible text label and accessible name.</p>
+
+<pre><code>&lt;button&gt;<span class="highlight">Button text</span>&lt;/button&gt;
+&lt;a href="#"&gt;<span class="highlight">Link text</span>&lt;/a&gt;</code></pre>
+
+<p>For informative images that require a text alternative, use the alt attribute.</p>
+
+<pre><code>&lt;img src="a.png" alt="<span class="highlight">Alt attribute text</span>"&gt;</code></pre>
+
+<p>For form controls that should have a visible text label and an accessible name, a programatically associated label is the best method.</p>
+
+<pre><code>&lt;label for="a"&gt;<span class="highlight">Label text</span>&lt;/label&gt;
+&lt;input id="a" type="text"&gt;</code></pre>
+
+<h3>The <code>placeholder</code> attribute</h3>
+
+<p>This attribute must not be used as a replacement for labels.</p>
+
+<ul>  
+  <li>It is not reliably available to all screen readers.</li>
+  <li>It is often low contrast.</li>
+  <li>It disappears when typing.</li>
+</ul>
+
+<pre><code>&lt;input type="text" <s>placeholder="Add your name"</s>&gt;</code></pre>
+
+<h3>The <code>title</code> attribute</h3>
+
+<p>This attribute must not be used as a replacement for labels.</p>
+
+<ul>
+  <li>It does not produce a visible text label.</li>
+  <li>Is <a href="https://www.tpgi.com/using-the-html-title-attribute-updated/" target="_blank">often unavailable</a>  for mobile and tablet users as well as assistive technology users and keyboard only users.</li>
+</ul>
+
+<pre><code>&lt;button <s>title="Close"</s>&gt;
+&lt;/button&gt;</code></pre>
+
+<p>The <code>title</code> attribute should only ever be used as an accessible name for <code>&lt;frame&gt;</code> and <code>&lt;iframe&gt;</code> elements.</p>
+
+<pre><code>&lt;iframe <span class="highlight">title="Our video"</span> src="video.html"&gt;&lt;/iframe&gt;</code></pre>
+
+</section>
   </main>
   <footer>
     <ul>

@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>404 Page not found - Max Design</title>
+  <title>The required attribute in Chrome's accessibility tree - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="/assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="404 page not found">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
   <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
   <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
@@ -23,35 +23,49 @@
   </header>
   <nav aria-label="Site">
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about/index.html">About us</a></li>
-      <li><a href="/resources/index.html">Resources</a></li>
-      <li><a href="/talks/index.html">Presentations</a></li>
-      <li><a href="/articles/index.html">Articles</a></li>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
     </ul>
   </nav>
-  <div class="banner-inner-404">
+  <div class="banner-inner">
     <div class="banner-content">
-      <h1>404 page not found</h1>    
+      <h1>The required attribute in Chrome's accessibility tree</h1>    
     </div>
   </div>  
   <main>
 
-<p>It looks like the page has gone missing. Here are some pages that may help:</p>
 
-<h3>Some general pages</h3>
+A previous article explored all the methods that could be used to generate an accessible name.
 
-<!-- f nfjfnjfgn j -->
+But which are the best methods to use? Are there any bad methods?
 
-<ul class="bullet-icon list-spaced">
-  <li><a href="/about/index.html">About us</a></li>
-  <li><a href="/about/russweakley/index.html">About Russ Weakley</a></li>
-  <li><a href="/training/index.html">Training</a></li>
-  <li><a href="/resources/index.html">Resources</a></li>
-  <li><a href="/talks/index.html">Presentations</a></li>
-  <li><a href="/articles/index.html">Articles</a></li>
-  <li><a href="/contact-us/index.html">Contact us</a></li>
-</ul>
+Let's start with 
+
+The title attribute
+
+The placeholder attribute
+
+The aria-label attribute
+
+So, what are the best solutions
+
+Ideally, we want labels and accessible names that are
+
+- Presented on screen as well as in the accessibility tree, so the information is available to all users.
+- Are persistant - remain on screen at all times while users are interacting with the elememt.
+- Where possible, the visible text label and accessible names match
+
+
+
+Button - button content
+Links - link content
+Inputs, select, textarea - programmatically associated label
+
+
+
 
   </main>
   <footer>
