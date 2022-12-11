@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chat GPT's accessible dropdown - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Chat GPT's accessible dropdown</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-12-11">11 December 2022</time></p>
+
+<p>I recently asked ChatGPT to: <i>"write an accessible dropdown menu"</i>.</p>
+
+<p>The response was:</p>
+
+<pre><code>&lt;div class="dropdown"&gt;
+  &lt;button
+    class="dropdown-button"
+    aria-expanded="false"
+    aria-haspopup="true"
+  &gt;
+    Menu
+  &lt;/button&gt;
+  &lt;ul class="dropdown-list" aria-hidden="true"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Option 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Option 2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Option 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+<p>At first glance, this is a surprisingly good component as it uses some core <a href="https://www.w3.org/TR/wai-aria-1.1/" target="_blank">ARIA</a> attributes correctly.</p>
+
+<p>But is this the right approach?</p>
+
+<p>Ideally, we should always try to use native elements to build components rather than resorting to ARIA. As per the W3C's "<a href="https://www.w3.org/TR/using-aria/#firstrule" target="_blank">Using ARIA</a>":</p>
+
+<blockquote>
+  <p>If you can use a native HTML element or attribute with the semantics and behavior you require already built in, instead of re-purposing an element and adding an ARIA role, state or property to make it accessible, then do so.</p>  
+</blockquote>
+
+<p>A non-native solution means that the component has been built using elements differently than the intended purpose - in this case, a button is used to create a dropdown menu.</p>
+
+<p>Let's look at a native vs non-native example and compare their accessibility.</p>
+
+<h2>1. A native example</h2>
+
+<p>A native dropdown solution would involve using the <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> elements.</p>
+
+<pre><code>&lt;label for="fruit"&gt;Favourite fruit&lt;/label&gt;
+&lt;select id="fruit"&gt;
+  &lt;option&gt;Choose an option&lt;/option&gt;
+  &lt;option&gt;Apple&lt;/option&gt;
+  &lt;option&gt;Apricot&lt;/option&gt;
+  &lt;option&gt;Avocado&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+<h3>1.1: Role</h3>
+
+<p>The <code>&lt;label&gt;</code>, <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> elements each have a specific semantic meaning that is understood by accessibility APIs.</p>
+
+<h3>1.2: Name</h3>
+
+<p>If the <code>&lt;label&gt;</code> and <code>&lt;select&gt;</code> elements are given matching <code>for</code> and <code>id</code> values, the <code>&lt;select&gt;</code> will then have an accessible name.</p>
+
+<pre><code>&lt;label <span class="highlight">for="fruit"</span>&gt;Favourite fruit&lt;/label&gt;
+&lt;select <span class="highlight">id="fruit"</span>&gt;
+  &lt;option&gt;Choose an option&lt;/option&gt;
+  &lt;option&gt;Apple&lt;/option&gt;
+  &lt;option&gt;Apricot&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+<h3>1.3: Properties</h3>
+
+<p>The <code>&lt;select&gt;</code> element is defined with a property of <code>hasPopup: menu</code> in the accessibility tree.</p>
+
+<p>Interactive components that appear on top of other content when triggered to appear are considered &ldquo;popups&rdquo;. The presence of <code>haspopup</code> indicates the element can trigger a popup.</p>
+
+<h3>1.4: Current state</h3>
+
+<p>The <code>&lt;select&gt;</code> element will have a state of <code>expanded: false</code> until the user expands it.</p>
+
+<h3>1.5: Current value</h3>
+
+<p>If an <code>&lt;option&gt;</code> is selected, it will be defined in the accessibility tree as the value - i.e. &ldquo;Apple&rdquo;.</p>
+
+<h3>1.6: Keyboard accessible</h3>
+
+<p>A range of pre-defined keystrokes can be used to interact with the <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> elements.</p>
+
+<h2>2. A non-native example</h2>
+
+<p>An example of a non-native component would be to use the <code>&lt;button&gt;</code>, <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> elements to create a dropdown - like the <a href="https://getbootstrap.com/docs/5.2/components/dropdowns/" target="_blank">Bootstrap button</a>.</p>
+
+<pre><code>&lt;button&gt;Choose your favourite fruit&lt;/button&gt;
+&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Apricot&lt;/li&gt;
+  &lt;li&gt;Avocado&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>Let's look at this component before any accessibility is manually added.</p>
+
+<h3>2.1: Role</h3>
+
+<p>The <code>&lt;button&gt;</code> element will be defined in the accessibility tree as <code>button</code>, which could confuse some assistive technology users.
+
+<p>The <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> elements have roles of <code>list</code> and <code>listitem</code>, but these are not intended for dynamically displayed dropdown information.</p>
+
+<h3>2.2: Name</h3>
+
+<p>This component will have an accessible name of &ldquo;Choose your favourite fruit&rdquo; in the accessibility tree, which is acceptable.</p>
+
+<h3>2.3: Properties</h3>
+
+<p>There are no additional properties assigned to the elements to provide additional context.</p>
+
+<h3>2.4: Current state</h3>
+
+<p>There is no native way to inform users about the dropdown&rsquo;s current state.</p>
+
+<h3>2.5: Current value</h3>
+
+<p>There is no native way to inform users of the currently selected value.</p>
+
+<h3>2.6: Keyboard accessible</h3>
+
+<p>The component will have no native keystrokes defined. So, it is not keyboard accessible.</p>
+
+<h2>Scorecard?</h2>
+
+<table class="font-xxs">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Native solution</th>
+      <th>Non-native solution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <td>Available</td>
+      <td>Available</td>
+    </tr>
+    <tr>
+      <th>Role</th>
+      <td><code>Combobox</code></td>
+      <td><code>Button</code> <span class="red">(Incorrect)</span></td>
+    </tr>
+    <tr>
+      <th>Properties</th>
+      <td><code>hasPopup: menu</code></td>
+      <td><span class="red">Not available</span></td>
+    </tr>
+    <tr>
+      <th>Current state</th>
+      <td><code>Expanded: false/true</code></td>
+      <td><span class="red">Not available</span></td>
+    </tr>
+    <tr>
+      <th>Current value</th>
+      <td>Available</td>
+      <td><span class="red">Not available</span></td>
+    </tr>
+    <tr>
+      <th>Keyboard accessible</th>
+      <td>Available</td>
+      <td><span class="red">Not available</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All of these problems can fixed using a combination of ARIA and JavaScript. But it takes a lot of additional work.</p>
+
+<p>Here are some resources that can help:</p>
+
+<ul>
+  <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/menubutton/" target="_blank">ARIA Authoring Practices Guide (APG)</a></li>
+  <li><a href="https://www.w3.org/WAI/ARIA/apg/example-index/menu-button/menu-button-actions-active-descendant.html"  target="_blank">Actions Menu Button Example Using aria-activedescendant</a></li>
+</ul>
+
+<p>Bottom line: the ChatGPT solution could be made to work, but using a native solution where possible would be far more efficient and effective.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
