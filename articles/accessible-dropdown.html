@@ -101,9 +101,9 @@
 
 <h3>1.3: Properties</h3>
 
-<p>The <code>&lt;select&gt;</code> element is defined with a property of <code>hasPopup: menu</code> in the accessibility tree.</p>
+<p>The <code>&lt;select&gt;</code> element is defined with a native <code>hasPopup</code> property, with a value of <code>menu</code>.</p>
 
-<p>Interactive components that appear on top of other content when triggered to appear are considered &ldquo;popups&rdquo;. The presence of <code>haspopup</code> indicates the element can trigger a popup.</p>
+<p>The <code>haspopup</code> property indicates the element can trigger a popup. The <code>menu</code> value specifies that the popup will be a menu.</p>
 
 <h3>1.4: Current state</h3>
 
@@ -117,9 +117,15 @@
 
 <p>A range of pre-defined keystrokes can be used to interact with the <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> elements.</p>
 
+<ul>
+  <li><kbd>SPACE</kbd> - View all options in a dropdown</li>
+  <li><kbd>&darr;</kbd> and <kbd>&uarr;</kbd> - Navigate through dropdown options</li>
+  <li><kbd>ENTER</kbd> or <kbd>SPACE</kbd> - Select a dropdown option</li>
+</ul>
+
 <h2>2. A non-native example</h2>
 
-<p>An example of a non-native component would be to use the <code>&lt;button&gt;</code>, <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> elements to create a dropdown - like the <a href="https://getbootstrap.com/docs/5.2/components/dropdowns/" target="_blank">Bootstrap button</a>.</p>
+<p>The ChatGPT example is a non-native component as it uses the <code>&lt;button&gt;</code>, <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> elements to create a dropdown - like the <a href="https://getbootstrap.com/docs/5.2/components/dropdowns/" target="_blank">Bootstrap button</a>.</p>
 
 <pre><code>&lt;button&gt;Choose your favourite fruit&lt;/button&gt;
 &lt;ul&gt;
@@ -150,7 +156,7 @@
 
 <h3>2.5: Current value</h3>
 
-<p>There is no native way to inform users of the currently selected value.</p>
+<p>There is no native way to inform users of the currently selected value. If a screen reader user returns to the component later, there is no indication that an option has been selected.</p>
 
 <h3>2.6: Keyboard accessible</h3>
 
@@ -200,7 +206,7 @@
   </tbody>
 </table>
 
-<p>All of these problems can fixed using a combination of ARIA and JavaScript. But it takes a lot of additional work.</p>
+<p>All of these problems can be fixed using a combination of ARIA and JavaScript. But it takes a lot of additional work.</p>
 
 <p>Here are some resources that can help:</p>
 
