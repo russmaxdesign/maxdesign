@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A simple, styled checkbox - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link href="../assets/css/checkbox.css" rel="stylesheet">
+  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>A simple, styled checkbox</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-12-13">13 December 2022</time></p>
+
+<p>A simple method for styling checkboxes without resorting to non-native solutions.</p>
+
+<p>The checkbox group below:</p>
+
+<ul>
+  <li>Uses native <code><a href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" target="_blank">&lt;input&gt;</a></code> elements with a type of <code><a href="https://html.spec.whatwg.org/multipage/input.html#checkbox-state-(type=checkbox)" target="_blank">checkbox</a></code> and programatically associated <code><a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element" target="_blank">&lt;label&gt;</a></code> elements.</li>
+  <li>Has a styled checkbox that is larger an easier to click than the default-sized checkbox.</li>
+  <li>Is achieved by positioning a pseudo-element over the top of the default checkbox, and making sure all functionality still works.</li>
+  <li>Has all measurements defined in <code>em</code> units so all aspects of the layout will scale together.</li>
+  <li>Works with short or long lines of content for the label (even though labels should not be as long as the example below).</li>
+  <li>Has states defined for:
+    <ul>
+      <li><code>:hover</code></li>
+      <li><code>:focus</code></li>
+      <li><code>:checked</code></li>
+      <li><code>:checked</code> + <code>:focus</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Example</h2>
+
+<div class="example">
+  <form action="#">
+    <fieldset class="checkbox-fieldset">
+      <legend>Which are your favourite animals?</legend>
+      <div class="checkbox-container">
+        <input class="checkbox-input" id="frogs" type="checkbox">
+        <label class="checkbox-label" for="frogs">Frogs are cool</label>
+      </div>
+      <div class="checkbox-container">
+        <input class="checkbox-input" id="horses" type="checkbox">
+        <label class="checkbox-label" for="horses">Horses are better</label>
+      </div>
+      <div class="checkbox-container">
+        <input class="checkbox-input" id="wombats" type="checkbox">
+        <label class="checkbox-label" for="wombats">Wombats are the best, even though they are kinda nasty and sometimes they can bite</label>
+      </div>
+      <div class="checkbox-container">
+        <input class="checkbox-input" id="bats" type="checkbox">
+        <label class="checkbox-label" for="bats">Bats are creepy</label>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+
+<pre><code>&lt;div class="checkbox-container"&gt;
+  &lt;input class="checkbox-input" id="frogs" type="checkbox"&gt;
+  &lt;label class="checkbox-label" for="frogs"&gt;Frogs&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+<p><a class="button" href="https://codepen.io/russweakley/pen/eYKPRro" target="_blank">CodePen demo</a></p>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

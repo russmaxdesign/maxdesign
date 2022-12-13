@@ -1,0 +1,92 @@
+.example form {
+  margin: .2em 0 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.checkbox-container {
+  position: relative;
+  margin: .7em 0;
+  line-height: 1.5;
+}
+
+.checkbox-label {
+  display: block;
+  padding-left: 1.8em;
+  color: #555;
+}
+
+.checkbox-input {
+  position: absolute;
+  left: .25em;
+  top: .2em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.checkbox-input:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -.25em;
+  top: -.25em;
+  width: 1em;
+  height: 1em;
+  border: .1em solid #7D7D7D;
+  border-radius: .2em;
+  background-color: white;
+}
+
+.checkbox-input:hover:after {
+  border: .1em solid #007000;
+}
+
+.checkbox-input:hover + label {
+  color: #007000;
+}
+
+.checkbox-input:focus:after {
+  border: .1em solid black;
+  box-shadow: 
+    0 0 0 .1em #eee,
+    0 0 0 .2em #000;
+}
+
+.checkbox-input:focus + label {
+  color: black;
+}
+
+.checkbox-input:checked + label {
+  color: black;
+}
+
+.checkbox-input:checked:after {
+  border: .1em solid blue;
+  background-color: blue;
+  background-image: url("../img/tick-01.svg");
+  background-position: center center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+}
+
+.checkbox-input:checked:focus:after {
+  border: .1em solid black;
+  background-color: black;
+  background-image: url("../img/tick-01.svg");
+  background-position: center center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  box-shadow: 
+    0 0 0 .1em #fff,
+    0 0 0 .2em #000;
+}
+
+.checkbox-input:checked:focus + label {
+  color: black;
+}
+
+

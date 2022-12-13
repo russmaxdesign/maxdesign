@@ -3,7 +3,7 @@
 	<channel>
 		<title>Max Design articles</title>
 		<description>A list of HTML, CSS and accessibility articles</description>
-		<pubDate>Mon, 11 Dec 2022 07:33:00 +0000</pubDate>
+		<pubDate>Tue, 13 Dec 2022 07:33:00 +0000</pubDate>
 		<link>https://maxdesign.com.au/articles/</link>
 		<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml" />
 		<generator>https://fetchrss.com</generator>
@@ -14,10 +14,17 @@
 		</image>
 
 		<item>
+			<title>A simple, styled checkbox</title>
+			<link>https://maxdesign.com.au/articles/simple-checkbox.html</link>
+			<description>A simple method for styling checkboxes without resorting to non-native solutions</description>
+			<pubDate>Tue, 13 Dec 2022 07:33:00 +0000</pubDate>
+			<guid isPermaLink="false">https://maxdesign.com.au/articles/simple-checkbox.html</guid>
+		</item>
+		<item>
 			<title>Chat GPT's accessible dropdown</title>
 			<link>https://maxdesign.com.au/articles/accessible-dropdown.html</link>
 			<description>How good is Chat GPT's accessible dropdown suggestion?</description>
-			<pubDate>Mon, 11 Dec 2022 07:33:00 +0000</pubDate>
+			<pubDate>Sun, 11 Dec 2022 07:33:00 +0000</pubDate>
 			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-dropdown.html</guid>
 		</item>
 		<item>
