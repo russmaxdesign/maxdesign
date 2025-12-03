@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-live timing: a two-layer model - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Did you know that there are two completely separate systems that determine when live regions are spoken">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding aria-live timing: a two-layer model</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2013-06-21">2 December 2025</time></p>
+
+<p>Did you know that there are two completely separate systems that determine when live regions are spoken? They are:</p>
+
+<ul>
+  <li>User-driven queueing (screen reader level)</li>
+  <li>System-driven scheduling (browser / event loop level)</li>
+</ul>
+
+<p><b>Assertive</b> announcements are controlled almost entirely by the screen reader.</p>
+
+<p><b>Polite</b> announcements depend on both systems, which is why their timing can vary so much in practice.</p>
+
+<p>Let&rsquo;s look at these two systems in detail.</p>
+
+<h2>1. User-driven queueing (screen reader layer)</h2>
+
+<p>Screen readers manage their spoken output using an internal speech queue.</p>
+
+<p>An item spoken by the screen reader is called an <i>utterance</i>. This is a single self-contained chunk of speech.</p>
+
+<p>The queue contains:</p>
+
+<ul>
+  <li>Utterances from user navigation (<em>&ldquo;Heading level 2 ...&rdquo;</em>)</li>
+  <li>Speech produced by reading text (<em>&ldquo;The quick brown fox ...&rdquo;</em>)</li>
+  <li>Dynamic announcements (ARIA live region updates)</li>
+  <li>Semantic hints (<em>&ldquo;button&rdquo;</em>, <em>&ldquo;selected&rdquo;</em>, <em>&ldquo;expanded&rdquo;</em>)</li>
+</ul>
+
+<p>This queue is generally processed FIFO (first in, first out) unless specific rules override it.</p>
+
+<h3>How assertive and polite behave inside the queue</h3>
+
+<p><b>Assertive</b> announcements:</p>
+
+<ul>
+  <li>Immediately flush active and pending utterances.</li>
+  <li>Interrupt whatever is being spoken.</li>
+  <li>Insert the assertive utterance at the front.</li>
+  <li>Speak it next.</li>
+</ul>
+
+<p><b>Assertive</b> always wins because &ldquo;interrupt behaviour&rdquo; is part of the queue layer.</p>
+
+<p><b>Polite</b> announcements:</p>
+
+<ul>
+  <li>Are added to the end of the speech queue.</li>
+  <li>Never interrupt the user.</li>
+  <li>Only play when the queue becomes empty.</li>
+  <li>Wait behind navigation, reading, search/cursor operations, etc.</li>
+</ul>
+
+<p>This means user activity always delays <b>polite</b> announcements. But screen readers do not wait for sentences or paragraphs. They only wait until their queue empties.</p>
+
+<p>This explains the first half of why <b>polite</b> announcements vary.</p>
+
+<h2>2. System-Driven Scheduling (Browser / Event Loop Layer)</h2>
+
+<p>Before a screen reader can speak anything, the browser must:</p>
+
+<ul>
+  <li>Detect the DOM mutation.</li>
+  <li>Update the accessibility tree.</li>
+  <li>Decide when to fire an AX event.</li>
+  <li>Deliver that event to the OS accessibility API.</li>
+  <li>Which then delivers it to the screen reader.</li>
+</ul>
+
+<p>All of this is controlled by the event loop, the browser&rsquo;s scheduling system.</p>
+
+<p>The event loop management includes:</p>
+
+<ul>
+  <li>The JS call stack.</li>
+  <li>The microtask queue.</li>
+  <li>Rendering pipeline (layout, paint, compositing).</li>
+  <li>Timers.</li>
+  <li>Input events.</li>
+  <li>Animation frames.</li>
+  <li>AX tree updates.</li>
+</ul>
+
+<p>This is the other half of live region timing.</p>
+
+<p>Let&rsquo;s explore how <b>assertive</b> and <b>polite</b> differ at the scheduling layer.</p>
+
+<h3>Assertive Timing (Browser Layer)</h3>
+
+<p><b>Assertive</b> live region AX events are scheduled as soon as possible:</p>
+
+<ul>
+  <li>JS mutation.</li>
+  <li>Call stack becomes empty.</li>
+  <li>Microtasks drain.</li>
+  <li><b>ASSERTIVE AX EVENT FIRES ←</b></li>
+  <li>Rendering may happen after this.</li>
+  <li>Task queue work happens later.</li>
+</ul>
+
+<p>Why <b>assertive</b> is fast:</p>
+
+<ul>
+  <li>It fires after the current JavaScript job, when the microtask queue empties.</li>
+  <li>It occurs before rendering changes.</li>
+  <li>It is never delayed by a render cycle.</li>
+  <li>It is not postponed by animations, layouts, or timers.</li>
+</ul>
+
+<p>The only thing that can delay <b>assertive</b> is potential microtask starvation. This happens when microtasks keep running forever, so the browser never gets a chance to move on to the next task.</p>
+
+<p>This explains why <b>assertive</b> is reliable and immediate in practice.</p>
+
+<h3>Polite Timing (Browser Layer)</h3>
+
+<p><b>Polite</b> live region AX events are intentionally delayed:</p>
+
+<ul>
+  <li>JS mutation.</li>
+  <li>Call stack becomes empty.</li>
+  <li>Microtasks drain.</li>
+  <li>Wait for the next rendering opportunity after style/layout have settled.</li>
+  <li><b>POLITE AX EVENT FIRES ←</b></li>
+  <li>Task queue work happens later.</li>
+</ul>
+
+<p><b>Polite</b> must wait for a future render tick, and a “stable render state” can be delayed by:</p>
+
+<ul>
+  <li>active layouts</li>
+  <li>reflows</li>
+  <li>animations</li>
+  <li>transitions</li>
+  <li>scrolling</li>
+  <li>microtask storms</li>
+  <li>React/Vue batching</li>
+  <li>timers</li>
+  <li>heavy CPU load</li>
+  <li>compositor operations</li>
+  <li>pending task queue events</li>
+</ul>
+
+<p>These delays affect the scheduling of the announcement, before the screen reader ever receives it.</p>
+
+<h2>Putting Both Systems Together</h2>
+
+<p>This unified pipeline shows exactly where delays occur:</p>
+
+<pre><code>DOM Mutation
+        ↓
+  Browser Scheduling Layer
+  (when to fire AX events)
+        ↓
+  AX Event Fired
+        ↓
+  Screen Reader Speech Queue
+  (what gets spoken & in what order)
+        ↓
+  TTS Utterance Output</code></pre>
+
+<p><b>Assertive</b> announcements:</p>
+
+<ul>
+  <li>Fast scheduling (after microtasks).</li>
+  <li>Immediate queue flush.</li>
+  <li>Spoken right away.</li>
+</ul>
+
+<p><b>Polite</b> announcements:</p>
+
+<ul>
+  <li>Delayed scheduling (after future render).</li>
+  <li>Added to end of queue.</li>
+  <li>Spoken only after all user-driven utterances finish.</li>
+</ul>
+
+<p>This is why <b>polite</b> announcements vary so much more than assertive ones.</p>
+
+<h2>Caveats and nuances</h2>
+
+<ul>
+  <li><b>AX event timing may vary</b>: Browsers may batch, coalesce or optimise accessibility events internally, so timing may not always follow a simple assertive/polite pattern.</li>
+  <li><b>Screen reader behaviour differs</b>: Each assistive technology has its own rules for interrupting, queuing and speaking updates, and these behaviours can vary across versions and operating systems.</li>
+  <li><b>Rendering stability is implementation-dependent</b>: What counts as a “stable render state” differs between browser engines, especially during animations, transitions, layout changes or heavy CPU activity.</li>
+  <li><b>Heavy JavaScript can delay announcements</b>: Long tasks, microtask storms or blocked main-thread execution can postpone both assertive and polite updates.</li>
+  <li><b>Results may vary</b>: Timing differs across Blink, WebKit and Gecko due to differences in layout, rendering and accessibility pipelines.</li>
+  <li><b>Always test across AT and browser combinations</b>: Real-world timing depends on the interaction between JavaScript, browser scheduling, OS accessibility APIs and the screen reader&rsquo;s own queue.</li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

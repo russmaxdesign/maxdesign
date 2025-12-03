@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>End-to-end browser and accessibility event architecture - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This diagram maps that entire path and shows how user input, JavaScript, layout, accessibility events, and assistive technology output move through the browser in sequence">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <style>
+.footnote-target:focus,
+.footnote-target:target,
+.ref-target:focus,
+.ref-target:target {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #ffff00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+h4 { margin-bottom: .5em }
+h4 + p { margin-top: .5em }
+
+details {
+  border: 1px solid #aaa;
+  border-radius: .3em;
+  margin: 1.5em 0 2em;
+  padding: 0;
+}
+
+summary {
+  padding: 1em;
+  border-radius: .3em .3em 0 0;
+  font-size: 1.22222222222em;
+  color: #6D0E53;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.table-of-contents,
+.table-of-contents ul,
+.table-of-contents ul ul  {
+  margin: 0;
+  padding: 0;
+}
+
+.table-of-contents {
+  padding: 1em 0;
+}
+
+.table-of-contents li {
+  margin: 0 0 0 30px;
+  padding: 0;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>End-to-end browser and accessibility event architecture</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-03">3 December 2025</time></p>
+
+<p>Most accessibility specialists understand HTML, ARIA, and assistive technologies at a surface level, but the layers between them are often a mystery.</p>
+
+<p>When announcements behave unexpectedly or different browsers produce different results, the cause usually lies in these hidden systems.</p>
+
+<p>This diagram maps that entire path and shows how user input, JavaScript, layout, accessibility events, and assistive technology output move through the browser in sequence.</p>
+
+<p>Understanding these layers could help you interpret screen reader behaviour, explain browser differences, and troubleshoot issues that cannot be solved at the HTML level alone.</p>
+
+<p><a class="button" href="../assets/img/end-to-end-browser-accessibility-event-architecture.png" target="_blank">View the full size diagram</a></p>
+
+<h2>How to read this diagram</h2>
+
+<p>The diagram shows the architecture of the browser, not a strict top-to-bottom sequence of steps.</p>
+
+<p>Each box represents a layer or component that the browser may use during an interaction, but the browser does not move through these boxes in numerical order.</p>
+
+<p>When something happens — like a click, a focus change, or a live-region update — the browser jumps between these layers as needed:</p>
+
+<ul>
+  <li>the event loop runs many times</li>
+  <li>the JavaScript engine is entered and exited</li>
+  <li>microtasks run inside the same turn</li>
+  <li>rendering happens only when something visually changes</li>
+  <li>the accessibility tree updates after rendering</li>
+  <li>the screen reader responds when AX events arrive</li>
+</ul>
+
+<p>So the diagram is a map of the system, not a timeline.</p>
+
+<p>Let&rsquo;s look at each section of the diagram.</p>
+
+<details open>
+  <summary><span class="heading2">Table of contents</span></summary>
+  <div>    
+    <ul class="table-of-contents">
+      <li><a href="#developer-facing-layer">Developer-facing layer (input)</a>
+        <ul>
+          <li><a href="#key-structures-1">Key structures in this layer</a>
+            <ul>
+              <li><a href="#html-semantics">HTML semantics</a></li>
+              <li><a href="#aria-attributes">ARIA attributes</a></li>
+              <li><a href="#dom-focus-api">DOM Focus API</a></li>
+              <li><a href="#dom-accessibility-computation-interfaces">DOM and accessibility computation interfaces</a></li>
+            </ul>
+          </li>
+          <li><a href="#key-processes-1">Key processes in this layer</a>
+            <ul>
+              <li><a href="#html-parsing">HTML parsing</a></li>
+              <li><a href="#aria-attribute-resolution">ARIA attribute resolution</a></li>
+              <li><a href="#accessible-name-and-description-computation">Accessible name and description computation</a></li>
+              <li><a href="#role-and-state-mapping">Role and state mapping</a></li>
+              <li><a href="#focus-model-normalisation">Focus model normalisation</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+
+      <li><a href="#browser-engine-layer">Browser engine layer (transformation)</a>
+        <ul>
+          <li><a href="#key-structures-2">Key structures in this layer</a>
+            <ul>
+              <li><a href="#dom-tree">DOM tree</a></li>
+              <li><a href="#cssom-tree">CSSOM tree</a></li>
+              <li><a href="#layout-tree">Layout tree</a></li>
+            </ul>
+          </li>
+          <li><a href="#key-processes-2">Key processes in this layer</a>
+            <ul>
+              <li><a href="#parsing-dom-and-cssom-construction">Parsing → DOM and CSSOM construction</a></li>
+              <li><a href="#style-calculation">Style calculation</a></li>
+              <li><a href="#layout">Layout (or “reflow”)</a></li>
+              <li><a href="#hit-testing">Hit-testing</a></li>
+              <li><a href="#painting">Painting</a></li>
+              <li><a href="#compositing">Compositing</a></li>
+              <li><a href="#accessibility-tree-synchronisation">Accessibility tree synchronisation</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#javascript-engine">JavaScript engine</a>
+        <ul>
+          <li><a href="#key-structures-3">Key structures in this layer</a>
+            <ul>
+              <li><a href="#call-stack">Call stack</a></li>
+              <li><a href="#heap">Heap</a></li>    
+            </ul>
+          </li>
+          <li><a href="#key-processes-3">Key processes in this layer</a>
+            <ul>
+              <li><a href="#execution-context-creation">Execution context creation</a></li>
+              <li><a href="#call-stack-construction">Call stack construction</a></li>
+              <li><a href="#event-dispatch-algorithm">Event dispatch algorithm</a></li>
+              <li><a href="#microtask-checkpoint">Microtask checkpoint</a></li>
+              <li><a href="#garbage-collection">Garbage collection</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#browser-apis">Browser APIs (Web APIs)</a>
+        <ul>
+          <li><a href="#key-processes-4">Key processes in this layer</a>
+            <ul>
+              <li><a href="#task-scheduling">Task scheduling</a></li>
+              <li><a href="#microtask-scheduling">Microtask scheduling</a></li>
+              <li><a href="#network-and-file-io-callbacks">Network and file I/O callbacks</a></li>
+              <li><a href="#animation-scheduling">Animation scheduling</a></li>
+              <li><a href="#mutation-observation">Mutation observation</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#microtask-queue">Microtask queue</a>
+        <ul>
+          <li><a href="#key-processes-5">Key processes in this layer</a>
+            <ul>
+              <li><a href="#promise-reaction-processing">Promise reaction processing</a></li>
+              <li><a href="#mutationObserver-delivery"><code>MutationObserver</code> delivery</a></li>
+              <li><a href="#cleanup-operations">Cleanup operations</a></li>
+              <li><a href="#checkpoint-execution">Checkpoint execution</a></li>    
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#task-queue">Task queue</a>
+        <ul>
+          <li><a href="#key-processes-6">Key processes in this layer</a>
+            <ul>
+              <li><a href="#User-interaction-task-creation">User interaction task creation</a></li>
+              <li><a href="#network-task-callbacks">Network/task callbacks</a></li>
+              <li><a href="#task-selection">Task selection</a></li>
+              <li><a href="#yielding-conditions">Yielding conditions</a></li> 
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#event-loop">Event loop</a>
+        <ul>
+          <li><a href="#key-processes-7">Key processes in this layer</a>
+            <ul>
+              <li><a href="#advancing-the-loop">Advancing the loop (“ticks”)</a></li>
+              <li><a href="#task-microtask-rendering-sequencing">Task → microtask → rendering sequencing</a></li>
+              <li><a href="#render-opportunity-checks">Render opportunity checks</a></li>
+              <li><a href="#ax-update-scheduling">AX update scheduling</a></li>          
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#accessibility-pipeline">Accessibility pipeline (runtime event system)</a>
+        <ul>
+          <li><a href="#key-structures-8">Key structures in this layer</a>
+            <ul>
+              <li><a href="#axtree">AXTree</a></li>
+              <li><a href="#axevents">AXEvents</a></li>
+              <li><a href="#os-accessibility-api-interface">OS accessibility API interface</a></li>
+            </ul>
+          </li>
+          <li><a href="#key-processes-8">Key processes in this layer</a>
+            <ul>
+              <li><a href="#axtree-construction">AXTree construction</a></li>
+              <li><a href="#axtree-diffing">AXTree diffing</a></li>
+              <li><a href="#axevent-generation">AXEvent generation</a></li>
+              <li><a href="#live-region-detection">Live region detection</a></li>
+              <li><a href="#relationship-remapping">Relationship remapping</a></li>
+              <li><a href="#os-api-mapping">OS API mapping</a></li>
+              <li><a href="#object-exposure">Object exposure</a></li>
+              <li><a href="#notification-delivery">Notification delivery</a></li>
+              <li><a href="#value-state-propagation">Value/state propagation</a></li>
+              <li><a href="#event-coalescing">Event coalescing</a></li>
+              <li><a href="#at-registration">AT registration</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="#Assistive-technology-layer">Assistive technology layer (interpretation)</a>
+        <ul>
+          <li><a href="#key-structures-9">Key structures in this layer</a>
+            <ul>
+              <li><a href="#at-client">AT client</a></li>
+              <li><a href="#ax-event-interpreter">AX event interpreter</a></li>
+              <li><a href="#speech-queue">Speech queue (utterances)</a></li>
+              <li><a href="#braille-display-output-buffer">Braille display output buffer</a></li>
+              <li><a href="#tts-engine">TTS engine</a></li>
+              <li><a href="#braille-output-engine">Braille output engine</a></li>
+              <li><a href="#user-input-router">User input router</a></li>
+              <li><a href="#user-settings">User settings</a></li>          
+            </ul>
+          </li>
+          <li><a href="#key-processes-9">Key processes in this layer</a>
+            <ul>
+              <li><a href="#event-routing">Event routing</a></li>
+              <li><a href="#speech-queue-management">Speech queue management</a></li>
+              <li><a href="#interruption-rules">Interruption rules</a></li>
+              <li><a href="#braille-buffer-updates">Braille buffer updates</a></li>
+              <li><a href="#user-setting-checks">User setting checks</a></li>
+              <li><a href="#output-rendering">Output rendering</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</details>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="developer-facing-layer">Developer-facing layer (input)</h2>
+
+<p>This layer includes HTML, ARIA <sup class="ref-target" id="ref-aria"><a href="#aria">1</a></sup> and some DOM <sup class="ref-target" id="ref-dom"><a href="#dom">2</a></sup> features. Browsers use this information to determine the role of each element, how they behave, and how they should be exposed to assistive technologies.</p>
+
+<h3 id="key-structures-1">Key structures in this layer</h3>
+
+<h4 id="html-semantics">HTML semantics</h4>
+
+<p>These are the built-in meanings of HTML elements such as <code>&lt;button&gt;</code>, <code>&lt;nav&gt;</code>, and <code>&lt;h1&gt;</code>. Semantics help the browser understand the structure and purpose of each part of a page.</p>
+
+<p>They also guide default behaviours, such as whether elements receive focus, how keyboard interaction works, and how an element should be exposed in the accessibility tree.</p>
+
+<h4 id="aria-attributes">ARIA attributes</h4>
+
+<p>ARIA is a set of custom HTML attributes that add information to the accessibility tree to help assistive technologies.</p>
+
+<h4 id="dom-focus-api">DOM Focus API</h4>
+
+<p>This API <sup class="ref-target" id="ref-api"><a href="#api">3</a></sup> lets developers control how keyboard focus works. This is important for accessibility because assistive technologies rely on focus being managed in meaningful and intuitive ways.</p>
+
+<h4 id="dom-accessibility-computation-interfaces">DOM and accessibility computation interfaces</h4>
+
+<p>These features compute information about each element including their accessible names, descriptions, roles, and states.</p>
+
+<p>They determine what assistive technologies will receive through the accessibility tree. This category also includes newer capabilities, such as <code>ElementInternals</code> <sup class="ref-target" id="ref-elementinternals"><a href="#elementinternals">4</a></sup>, which allows custom elements to expose proper semantics without relying on ARIA.</p>
+
+<h3 id="key-processes-1">Key processes in this layer</h3>
+
+<h4 id="html-parsing">HTML parsing</h4>
+
+<p>The browser reads raw HTML and begins turning it into DOM nodes, applying default semantics and element roles.</p>
+
+<h4 id="aria-attribute-resolution">ARIA attribute resolution</h4>
+
+<p>ARIA attributes are collected and associated with their elements so they are available during later accessibility computations.</p>
+
+<h4 id="accessible-name-and-description-computation">Accessible name and description computation</h4>
+
+<p>The browser applies the Accessible Name and Description Computation algorithm to determine the element’s name from text, attributes or references.</p>
+
+<h4 id="role-and-state-mapping">Role and state mapping</h4>
+
+<p>Native semantics and ARIA overrides are mapped to internal accessibility concepts such as “button,” “checkbox,” “expanded,” or “disabled.”</p>
+
+<h4 id="focus-model-normalisation">Focus model normalisation</h4>
+
+<p>The browser applies focus rules based on element type, tabindex and special interactions (e.g. click-to-focus behaviour for buttons).</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="browser-engine-layer">Browser engine layer (transformation)</h2>
+
+<p>This is where the browser converts HTML and CSS into internal structures it can work with. It builds the DOM, CSSOM, and layout tree.</p>
+
+<p>These trees represent the page&rsquo;s structure, its styling, and its visual layout. Everything else in the browser depends on these structures.</p>
+
+<h3 id="key-structures-2">Key structures in this layer</h3>
+
+<h4 id="dom-tree">DOM tree</h4>
+
+<p>The DOM tree is the browser&rsquo;s internal model of the HTML document. It is a structured representation made of elements and text nodes <sup class="ref-target" id="ref-textnodes"><a href="#textnodes">5</a></sup>.</p>
+
+<p>JavaScript uses this tree to read content, modify attributes, insert or remove elements, and respond to user actions. All interaction and accessibility behaviour begins with the DOM.</p>
+
+<h4 id="cssom-tree">CSSOM tree</h4>
+
+<p>The CSSOM tree is the browser&rsquo;s internal model of all CSS rules, declarations, and computed styles. This tree is used to determine how each element is presented on-screen.</p>
+
+<h4 id="layout-tree">Layout tree</h4>
+
+<p>The layout tree (sometimes called the render or paint tree) combines information from the DOM and CSSOM and determines where each element appears to create the final layout.</p>
+
+<h3 id="key-processes-2">Key processes in this layer</h3>
+
+<h4 id="parsing-dom-and-cssom-construction">Parsing → DOM and CSSOM construction</h4>
+
+<p>HTML becomes DOM nodes; CSS becomes the CSSOM. These structures power layout, rendering and scripting.</p>
+
+<h4 id="style-calculation">Style calculation</h4>
+
+<p>The browser resolves which CSS rules apply to every element, calculating final values such as colours, font sizes and display types.</p>
+
+<h4 id="layout">Layout (or “reflow”)</h4>
+
+<p>The engine computes geometry: sizes, positions, constraints and relationships across the entire page (or just the affected subtree).</p>
+
+<h4 id="hit-testing">Hit-testing</h4>
+
+<p>The browser looks at the rendered layout to determine which element sits under a specific screen coordinate (e.g. finger or mouse).</p>
+
+<h4 id="painting">Painting</h4>
+
+<p>Each visual element is converted into drawing commands: backgrounds, borders, text, images, shadows, etc.</p>
+
+<h4 id="compositing">Compositing</h4>
+
+<p>The browser builds layers, resolves stacking contexts, and produces the final rendered frame shown on screen.</p>
+
+<h4 id="accessibility-tree-synchronisation">Accessibility tree synchronisation</h4>
+
+<p>Changes in the DOM or layout trigger updates in the internal accessibility tree, ensuring names, roles, and states reflect the current UI.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="javascript-engine">JavaScript engine</h2>
+
+<p>This is where JavaScript code runs. It keeps track of which functions are currently executing in the call stack and stores objects and data in the heap. This engine doesn&rsquo;t schedule timers or event handlers.</p>
+
+<h3 id="key-structures-3">Key structures in this layer</h3>
+
+<h4 id="call-stack">Call stack</h4>
+
+<p>The call stack is a structured list that tracks which JavaScript functions are currently running.</p>
+
+<p>When functions are called, they are pushed onto the call stack. When finishes, they are "popped off". The browser can only run one piece of JavaScript at a time because only one function can sit at the top of the call stack. This ordered execution is essential for predictable behaviour.</p>
+
+<p><b>Note</b>: The JavaScript call stack is not a place where events or tasks are stored. It is a temporary execution structure created by the JS engine while code is running. When the engine is idle, the call stack is empty and effectively does not exist.</p>
+
+<h4 id="heap">Heap</h4>
+
+<p>The heap is an area of memory that holds data that JavaScript can access and update as needed.</p>
+
+<h3 id="key-processes-3">Key processes in this layer</h3>
+
+<h4 id="execution-context-creation">Execution context creation</h4>
+
+<p>Whenever code runs (an event handler, a script block, a callback), a fresh execution context is created.</p>
+
+<h4 id="call-stack-construction">Call stack construction</h4>
+
+<p>As functions call other functions, stack frames are pushed; as they return, frames are popped. The stack only exists while JS is running.</p>
+
+<h4 id="event-dispatch-algorithm">Event dispatch algorithm</h4>
+
+<p>When the browser delivers an event, it runs capture → target → bubble phases and invokes the relevant listeners.</p>
+
+<h4 id="microtask-checkpoint">Microtask checkpoint</h4>
+
+<p>After each task, all queued microtasks (e.g. Promises <sup class="ref-target" id="ref-promises"><a href="#promises">6</a></sup>) are run before the browser proceeds.</p>
+
+<h4 id="garbage-collection">Garbage collection</h4>
+
+<p>Unused memory is reclaimed to keep the engine efficient and prevent leaks.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="browser-apis">Browser APIs (Web APIs)</h2>
+
+<p>These are the features the browser exposes to JavaScript, such as timers, networking, DOM manipulation, storage, and geolocation.</p>
+
+<p>They allow JavaScript to interact with the outside world, but the work they perform happens outside the JavaScript engine.</p>
+
+<p>When JavaScript runs, synchronous code executes immediately on the call stack. But asynchronous operations—such as timers, Promises, network requests, and DOM events—are handled by Web APIs, which schedule their callbacks into either the task queue or the microtask queue.</p>
+
+<p>The event loop selects the next task and instructs the JavaScript engine to run it. As the engine runs the task, it creates the call stack and executes the code one step at a time.</p>
+
+<h3 id="key-processes-4">Key processes in this layer</h3>
+
+<h4 id="task-scheduling">Task scheduling</h4>
+
+<p><code>setTimeout</code> <sup class="ref-target" id="ref-settimeout"><a href="#settimeout">7</a></sup>, <code>setInterval</code> <sup class="ref-target" id="ref-setinterval"><a href="#setinterval">8</a></sup>, <code>postMessage</code> <sup class="ref-target" id="ref-postmessage"><a href="#postmessage">9</a></sup> and user events create tasks that will eventually be placed in the Task Queue.</p>
+
+<h4 id="microtask-scheduling">Microtask scheduling</h4>
+
+<p><code>Promise.then</code> <sup class="ref-target" id="ref-promisethen"><a href="#promisethen">10</a></sup>, <code>queueMicrotask</code> <sup class="ref-target" id="ref-queuemicrotask"><a href="#queuemicrotask">11</a></sup>, and <code>MutationObserver</code> <sup class="ref-target" id="ref-mutationobserver"><a href="#mutationobserver">12</a></sup> notifications create microtasks to be run at microtask checkpoints.</p>
+
+<h4 id="network-and-file-io-callbacks">Network and file I/O callbacks</h4>
+
+<p>Fetch/XHR <sup class="ref-target" id="ref-fetchxhr"><a href="#fetchxhr">13</a></sup>, WebSockets <sup class="ref-target" id="ref-websockets"><a href="#websockets">14</a></sup> and File operations schedule tasks when data arrives or operations finish.</p>
+
+<h4 id="animation-scheduling">Animation scheduling</h4>
+
+<p><code>requestAnimationFrame</code> <sup class="ref-target" id="ref-requestanimationframe"><a href="#requestanimationframe">15</a></sup> places callbacks into the rendering pipeline to run before the next frame is drawn.</p>
+
+<h4 id="mutation-observation">Mutation observation</h4>
+
+<p>DOM mutations <sup class="ref-target" id="ref-dommutations"><a href="#dommutations">16</a></sup> trigger MutationObserver records, queued for delivery as microtasks.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="microtask-queue">Microtask queue</h2>
+
+<p>This queue contains small, high-priority jobs that run immediately after the current JavaScript block finishes and before the browser updates the screen.</p>
+
+<p>Promises and some callback types are added here.</p>
+
+<p>The microtask queue helps the browser complete quick follow-up work efficiently. If too many microtasks are added in a row, they can delay rendering and accessibility events, a problem sometimes called microtask starvation.</p>
+
+<h3 id="key-processes-5">Key processes in this layer</h3>
+
+<h4 id="promise-reaction-processing">Promise reaction processing</h4>
+
+<p>When a Promise resolves or rejects, its <code>.then</code>/<code>.catch</code> <sup class="ref-target" id="ref-thencatchhandlers"><a href="#thencatchhandlers">17</a></sup> handlers are queued as microtasks.</p>
+
+<h4 id="mutationObserver-delivery"><code>MutationObserver</code> delivery</h4>
+
+<p>DOM mutation records are delivered as microtasks after the task that caused them finishes.</p>
+
+<h4 id="cleanup-operations">Cleanup operations</h4>
+
+<p>FinalizationRegistry <sup class="ref-target" id="ref-finalizationregistry"><a href="#finalizationregistry">18</a></sup> and other engine-managed clean-up tasks run as microtasks.</p>
+
+<h4 id="checkpoint-execution">Checkpoint execution</h4>
+
+<p>All microtasks must run to completion before the browser can render or pick up another task.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="task-queue">Task queue</h2>
+
+<p>This queue holds larger, scheduled jobs such as user interaction events, timers, network responses, and <code>postMessage</code> callbacks. Tasks run one at a time, in order, and each task waits for its turn.</p>
+
+<p>Most JavaScript responding to clicks, keypresses, or DOM updates is delivered through tasks, which means accessibility-related logic also depends on task timing. This structured sequencing keeps browser behaviour predictable and avoids race conditions.</p>
+
+<p>After each task completes, the browser may update the layout and the accessibility tree.</p>
+
+<h3 id="key-processes-6">Key processes in this layer</h3>
+
+<h4 id="User-interaction-task-creation">User interaction task creation</h4>
+
+<p>Events such as clicks, key presses or touches place interaction tasks into the queue.</p>
+
+<h4 id="network-task-callbacks">Network/task callbacks</h4>
+
+<p>Network responses, timers, and messaging APIs add new tasks to the queue.</p>
+
+<h4 id="task-selection">Task selection</h4>
+
+<p>Each browser picks tasks according to its scheduling rules, interaction priority and fairness guarantees.</p>
+
+<h4 id="yielding-conditions">Yielding conditions</h4>
+
+<p>Tasks only execute when no JavaScript is running and the event loop is ready.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="event-loop">Event loop</h2>
+
+<p>The event loop coordinates nearly everything that happens in the browser.</p>
+
+<p>It decides when to run tasks, when to process microtasks, when to update the screen, and when to handle user input. This keeps the browser running in a controlled and predictable order.</p>
+
+<p>The event loop manages the full range of work on a web page, including user input, JavaScript execution, layout and rendering updates, network responses, timers, Promise resolution, animation frames, internal browser tasks, and accessibility events.</p>
+
+<p>It runs in a repeating cycle: run one task, drain microtasks, update layout and rendering, and deliver accessibility events. This cycle runs many times per second.</p>
+
+<p>By enforcing this step-by-step sequence, the event loop prevents different parts of the system from blocking each other and ensures that user input is processed, scripts run in order, rendering remains smooth, and assistive technologies receive accurate updates.</p>
+
+<p><b>Note</b>: The event loop doesn’t push tasks into the call stack. Instead, it hands the next task to the JavaScript engine, which creates a new call stack frame and runs the code.</p>
+
+<h3 id="key-processes-7">Key processes in this layer</h3>
+
+<h4 id="advancing-the-loop">Advancing the loop (“ticks”)</h4>
+
+<p>On each turn, the loop checks if JS is idle, then selects the next appropriate phase of work.</p>
+
+<h4 id="task-microtask-rendering-sequencing">Task → microtask → rendering sequencing</h4>
+
+<p>The loop ensures the correct ordering: run one task → then all microtasks → then render → then accessibility → repeat.</p>
+
+<h4 id="render-opportunity-checks">Render opportunity checks</h4>
+
+<p>The event loop coordinates when it is safe to re-render visual frames and perform layout and paint work.</p>
+
+<h4 id="ax-update-scheduling">AX update scheduling</h4>
+
+<p>Accessibility updates occur after rendering phases, ensuring AT receives stable, finalised UI state.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="accessibility-pipeline">Accessibility pipeline (runtime event system)</h2>
+
+<p>This part of the browser builds and updates the accessibility tree, generates accessibility events such as focus changes and live region updates, and passes them to the operating system&rsquo;s accessibility API.</p>
+
+<p>It ensures that assistive technologies always have an accurate and up-to-date view of the web page.</p>
+
+<p>Assistive technologies do not constantly query the accessibility tree. Instead, they rely mainly on AXEvents to know when something meaningful has changed.</p>
+
+<h3 id="key-structures-8">Key structures in this layer</h3>
+
+<h4 id="axtree">AXTree</h4>
+
+<p>The AXTree is the browser&rsquo;s dedicated <b>accessibility tree</b>. It is not a direct copy of the DOM. Some DOM nodes are ignored, others are merged or split into multiple accessibility nodes, depending on semantics and platform rules.</p>
+
+<p>The AXTree is a specialised representation of the page that focuses on semantic meaning rather than visual layout. Each node in the tree exposes information such as roles, accessible names, descriptions, states, and relationships.</p>
+
+<p>Assistive technologies depend on this structure to understand what is on the page and how users can interact with it.</p>
+
+<h4 id="axevents">AXEvents</h4>
+
+<p>AXEvents are notifications the browser sends whenever something changes that is relevant to accessibility. Examples include focus moving to a new element, text updates in a live region, changes in an element&rsquo;s value, or updates to states such as expanded or disabled. </p>
+
+<p>These events allow assistive technologies to react in real time and keep users informed of important changes.</p>
+
+<h4 id="os-accessibility-api-interface">OS accessibility API interface</h4>
+
+<p>This is the layer where the browser hands off accessibility information to the operating system&rsquo;s accessibility API, such as UIA on Windows <sup class="ref-target" id="ref-uia"><a href="#uia">19</a></sup>, AX API on macOS and iOS <sup class="ref-target" id="ref-axapi"><a href="#axapi">20</a></sup>, or ATK and AT-SPI on Linux <sup class="ref-target" id="ref-atspi"><a href="#atspi">21</a></sup>. </p>
+
+<p>The operating system exposes this information to assistive technologies, which read and interpret the page based on the data the browser provides.</p>
+
+<h3 id="key-processes-8">Key processes in this layer</h3>
+
+<h4 id="axtree-construction">AXTree construction</h4>
+
+<p>The browser maps DOM elements to accessibility objects with names, roles and states.</p>
+
+<h4 id="axtree-diffing">AXTree diffing</h4>
+
+<p>When something changes, the browser compares the previous AXTree state with the new one.</p>
+
+<h4 id="axevent-generation">AXEvent generation</h4>
+
+<p>Based on the diff, the browser fires events such as “name changed,” “state changed,” “focus changed,” “value changed.”</p>
+
+<h4 id="live-region-detection">Live region detection</h4>
+
+<p>ARIA live regions trigger AX events when their accessible text changes.</p>
+
+<h4 id="relationship-remapping">Relationship remapping</h4>
+
+<p>ARIA attributes such as aria-owns, aria-labelledby and aria-controls can change how objects relate in the AX tree.</p>
+
+<h4 id="os-api-mapping">OS API mapping</h4>
+
+<p>The browser converts internal AX objects into the structures and notifications required by the OS API.</p>
+
+<h4 id="object-exposure">Object exposure</h4>
+
+<p>The browser exposes AX nodes as OS-native accessibility objects (UIA, AX API, AT-SPI).</p>
+
+<h4 id="notification-delivery">Notification delivery</h4>
+
+<p>The OS receives events from the browser and forwards them to assistive technologies.</p>
+
+<h4 id="value-state-propagation">Value/state propagation</h4>
+
+<p>When roles, states or values change, the OS updates its version of the accessibility object.</p>
+
+<h4 id="event-coalescing">Event coalescing</h4>
+
+<p>APIs may merge related events to avoid flooding ATs with redundant notifications.</p>
+
+<h4 id="at-registration">AT registration</h4>
+
+<p>Screen readers subscribe to receive events for active UI elements.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2 id="Assistive-technology-layer">Assistive technology layer (interpretation)</h2>
+
+<p>This layer is where assistive technologies operate. They interpret all of the information and use this to generate speech or braille output. They also send user information back to the browser.</p>
+
+<p>Before assistive technologies can present information or send user commands back to the browser, they run through several internal steps that interpret events, apply preferences, and manage output.</p>
+
+<h3 id="key-structures-9">Key structures in this layer</h3>
+
+<h4 id="at-client">AT client</h4>
+
+<p>The AT client is the assistive technology program, such as NVDA, JAWS, VoiceOver, Orca, or TalkBack.</p>
+
+<h4 id="ax-event-interpreter">AX event interpreter</h4>
+
+<p>The AX event interpreter listens for incoming accessibility events and decides how to respond. It determines whether something should be spoken, updated in braille, added to a queue, or ignored based on context and user settings. This interpreter is central to how AT remains responsive without overwhelming the user.</p>
+
+<h4 id="speech-queue">Speech queue (utterances)</h4>
+
+<p>The speech queue holds spoken messages before they are passed to the text-to-speech engine. It allows the AT to manage competing announcements, decide what should interrupt or replace previous speech, and present information in the correct order.</p>
+
+<h4 id="braille-display-output-buffer">Braille display output buffer</h4>
+
+<p>The braille output buffer holds the formatted text, cursor position, and structural indicators that will appear on a refreshable braille display. It manages updates efficiently so changes are reflected without disrupting the user&rsquo;s reading flow.</p>
+
+<h4 id="tts-engine">TTS engine</h4>
+
+<p>The text-to-speech (TTS) engine converts text into spoken output using the chosen synthesized voice.</p>
+
+<h4 id="braille-output-engine">Braille output engine</h4>
+
+<p>The braille output engine sends text and formatting instructions to the physical braille display. It ensures that contractions, cursor routing, and display updates match the user&rsquo;s braille preferences.</p>
+
+<h4 id="user-input-router">User input router</h4>
+
+<p>The user input router receives keyboard shortcuts, braille input, gestures, and touch commands from the user. It translates these into the correct instructions for the browser, such as moving focus, activating elements, or performing navigation commands.</p>
+
+<h4 id="user-settings">User settings</h4>
+
+<p>User settings shape how the assistive technology behaves. These include speech rate, punctuation level, verbosity, braille grade, typing mode, navigation mode, and many other preferences. These settings influence what is announced, how quickly it is spoken, and how information is presented.</p>
+
+<h3 id="key-processes-9">Key processes in this layer</h3>
+
+<h4 id="event-routing">Event routing</h4>
+
+<p>The screen reader receives OS accessibility events and determines what they signify.</p>
+
+<h4 id="speech-queue-management">Speech queue management</h4>
+
+<p>The screen reader adds announcements to its internal speech queue and decides how to prioritise, interrupt, merge or flush them. Assertive announcements may jump to the front, while polite announcements wait their turn unless settings or context change that behaviour.</p>
+
+<h4 id="interruption-rules">Interruption rules</h4>
+
+<p>Assertive updates may interrupt the queue; polite updates may wait.</p>
+
+<h4 id="braille-buffer-updates">Braille buffer updates</h4>
+
+<p>Changes to state or focus update the braille display’s live buffer.</p>
+
+<h4 id="user-setting-checks">User setting checks</h4>
+
+<p>Verbosity, punctuation, typing echo and other user preferences shape how the event is presented.</p>
+
+<h4 id="output-rendering">Output rendering</h4>
+
+<p>Speech is spoken via TTS; braille is displayed on refreshable hardware</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Conclusion</h2>
+
+<p>Understanding this full pipeline gives accessibility specialists a clearer view of why things work the way they do. </p>
+
+<p>It shows how user actions, code, rendering, and accessibility events move through the system, and how timing or browser differences can influence what assistive technologies announce. </p>
+
+<p>By seeing the complete journey of an event, we can diagnose issues more accurately, predict behaviour more confidently, and create more reliable and accessible user experiences.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Caveats and nuances</h2>
+
+<h4>This model is conceptual, not a literal browser implementation</h4>
+<p>Each browser engine structures its internal pipelines differently. The diagram simplifies these systems to highlight their relationships, not to mirror every engine&rsquo;s exact architecture.</p>
+
+<h4>Browser engines do not behave identically</h4>
+<p>Blink, WebKit and Gecko differ in how they build layout trees, fire accessibility events, schedule tasks and expose information to OS accessibility APIs. Timing and order can vary across engines and versions.</p>
+
+<h4>AXTree creation rules are implementation-dependent</h4>
+<p>Browsers may merge, omit or create additional accessibility nodes based on platform heuristics. The details differ across operating systems and are not fully standardised.</p>
+
+<h4>Accessibility event timing is not guaranteed</h4>
+<p>Browsers may batch, coalesce or defer AXEvents depending on workload, rendering state or optimisation strategies. Real-world timing can differ from the general flow described in the article.</p>
+
+<h4>Screen readers interpret events differently</h4>
+<p>ATs have their own rules for queuing, interrupting and presenting announcements. Their responses depend on version, settings, OS behaviour and internal heuristics.</p>
+
+<h4>JavaScript scheduling can affect accessibility timing</h4>
+<p>Long tasks, microtask pressure and main-thread blocking can delay rendering or AXEvents. Frameworks that heavily use Promises or MutationObserver may influence announcement order.</p>
+
+<h4>OS accessibility APIs apply their own semantics</h4>
+<p>UIA, AX API and AT-SPI each impose platform-specific rules for roles, states, relationships and event types. Screen readers see this OS-level interpretation, not the raw browser data.</p>
+
+<h4>Rendering stages may not follow a fixed order</h4>
+<p>Layout, paint and compositing steps can be deferred, skipped or merged depending on workload, throttling, animations or visibility. This affects when the accessibility tree updates.</p>
+
+<h4>User settings significantly change behaviour</h4>
+<p>Punctuation level, verbosity, typing echo, braille mode and other AT settings influence what users hear and when they hear it.</p>
+
+<h4>Always verify with real AT and browser combinations</h4>
+<p>No diagram can capture all timing variations. Real behaviour depends on the interaction between JavaScript, the event loop, the browser engine, the OS accessibility API and the AT client</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Footnotes</h2>
+<ul>  
+  <li>
+    <span id="aria" tabindex="-1" class="footnote-target">[1]</span>
+    <b>ARIA</b>: Accessible Rich Internet Applications
+    [<a href="#ref-aria" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="dom" tabindex="-1" class="footnote-target">[2]</span>
+    <b>DOM</b>: Document Object Model
+    [<a href="#ref-dom" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="api" tabindex="-1" class="footnote-target">[3]</span>
+    <b>API</b>: Application Programming Interface
+    [<a href="#ref-api" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="elementinternals" tabindex="-1" class="footnote-target">[4]</span>
+    <code>ElementInternals</code>: A browser API that lets custom elements expose proper semantics to the accessibility tree.
+    [<a href="#ref-elementinternals" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="textnodes" tabindex="-1" class="footnote-target">[5]</span>
+    <b>Text nodes</b>: Nodes in the DOM that contain only text, with no element or markup around them.
+    [<a href="#ref-textnodes" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="promises" tabindex="-1" class="footnote-target">[6]</span>
+    <b>Promise</b>: A JavaScript object representing a value that becomes available later.
+    [<a href="#ref-promises" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="settimeout" tabindex="-1" class="footnote-target">[7]</span>
+    <code>setTimeout</code>: A browser API that runs a function once after a specified delay.
+    [<a href="#ref-settimeout" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="setinterval" tabindex="-1" class="footnote-target">[8]</span>
+    <code>setInterval</code>: A browser API that runs a function repeatedly at a set time interval. 
+    [<a href="#ref-setinterval" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="postmessage" tabindex="-1" class="footnote-target">[9]</span>
+    <code>postMessage</code>: A browser API that sends asynchronous messages between windows, frames, or workers.
+    [<a href="#ref-postmessage" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="promisethen" tabindex="-1" class="footnote-target">[10]</span>
+    <code>Promise.then</code>: A method that adds a callback to run when a Promise resolves.
+    [<a href="#ref-promisethen" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="queuemicrotask" tabindex="-1" class="footnote-target">[11]</span>
+    <code>queueMicrotask</code>: A browser API that schedules a small callback to run at the end of the current task, before rendering.
+    [<a href="#ref-queuemicrotask" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="mutationobserver" tabindex="-1" class="footnote-target">[12]</span>
+    <b>MutationObserver</b>: A browser API that watches the DOM for changes and reports them asynchronously.
+    [<a href="#ref-mutationobserver" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="fetchxhr" tabindex="-1" class="footnote-target">[13]</span>
+    <b>Fetch/XHR</b>: APIs that make network requests and deliver responses asynchronously.
+    [<a href="#ref-fetchxhr" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="websockets" tabindex="-1" class="footnote-target">[14]</span>
+    <b>WebSockets</b>: A browser API that keeps an open, real-time connection to a server for sending and receiving messages.
+    [<a href="#ref-websockets" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="requestanimationframe" tabindex="-1" class="footnote-target">[15]</span>
+    <code>requestAnimationFrame</code>: A browser API that runs a callback before the next screen repaint.
+    [<a href="#ref-requestanimationframe" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="dommutations" tabindex="-1" class="footnote-target">[16]</span>
+    <code>DOM mutations</code>: Changes to the DOM — whether triggered by JavaScript, user interaction, or browser behaviour — such as adding, removing, or updating elements or attributes.
+    [<a href="#ref-dommutations" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="thencatchhandlers" tabindex="-1" class="footnote-target">[17]</span>
+    <code><code>.then</code>/<code>.catch</code> handlers</code>: Functions that run when a Promise resolves (<code>.then</code>) or fails (<code>.catch</code>). 
+    [<a href="#ref-thencatchhandlers" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="finalizationregistry" tabindex="-1" class="footnote-target">[18]</span>
+    <code>FinalizationRegistry</code>: A JavaScript API that lets you run cleanup code after objects are garbage-collected. [Back]
+    [<a href="#ref-finalizationregistry" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="uia" tabindex="-1" class="footnote-target">[19]</span>
+    <b>AX API on macOS and iOS</b>: Apple&rsquo;s Accessibility API that allows macOS and iOS assistive technologies, such as VoiceOver, to read and interact with on-screen content.
+    [<a href="#ref-uia" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="axapi" tabindex="-1" class="footnote-target">[20]</span>
+    <b>UIA on Windows</b>: Microsoft&rsquo;s UI Automation framework, which exposes accessibility information to assistive technologies on Windows.
+    [<a href="#ref-axapi" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="atspi" tabindex="-1" class="footnote-target">[21]</span>
+    <b>ATK and AT-SPI on Linux</b>: Linux accessibility frameworks where ATK defines accessibility objects and AT-SPI provides the communication layer used by assistive technologies like Orca.
+    [<a href="#ref-atspi" class="back">Back</a>]
+  </li>
+</ul>
+
+<script>
+// Select ALL footnote links inside <sup>
+document.querySelectorAll('sup a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    // Extract ID by stripping the "#" from the href
+    const id = link.getAttribute('href').slice(1);
+
+    // Find the matching element in the document
+    const target = document.getElementById(id);
+
+    if (target) {
+      // Ensure the target can receive programmatic focus
+      target.setAttribute('tabindex', '-1');
+
+      // Move focus there
+      target.focus();
+    }
+  });
+});
+
+</script>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

@@ -86,7 +86,7 @@ body {
 
 @media screen and (min-width: 600px) {
   body {
-    font-size: 1.25em;
+    font-size: 1.125em; /* 18px */
   }
 }
 
@@ -99,33 +99,35 @@ h1,
 h2,
 h3,
 h4 {
-  color: #787373;
-  font-weight: 400;
+  color: #6D0E53;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 h1 code,
 h2 code,
 h3 code,
 h4 code{
-  color: #787373;
+  color: #6D0E53;
 }
 
 h1 {
   margin: 0 0 .5em;
   font-size: 2em;
+  font-weight: normal;
 }
 
 h2 {
-  margin: 2.14285714285714em 0 .714285714285714em;
-  font-size: 1.4em;
+  margin: 2em 0 1em;
+  font-size: 1.44444444444em; /* 28px - 26px */
 }
 
-h3 {
-  margin: 1.81818181818182em 0 .909090909090909em;
-  font-size: 1.1em;
+h3, .h3 {
+  margin: 2em 0 1em;
+  font-size: 1.22222222222em;
 }
 
-h4 {
+h4, .h4 {
   margin: 1em 0 .5em;
   font-size: 1em;
 }
@@ -136,7 +138,7 @@ general elements
 ----------------------*/
 
 p {
-  margin: 0 0 1.5em;
+  margin: 0 0 1.66666667em;
   line-height: 1.5;
 }
 
@@ -745,4 +747,3 @@ classes
   width: 1px !important;
   white-space: nowrap !important;
 }
-

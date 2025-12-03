@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What really happens when a user clicks an accordion button? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="We follow the path of a button that has been clicked, through the browser architecture">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What really happens when a user clicks an accordion button?</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-04">4 December 2025</time></p>
+
+<p>Before reading this article, make sure you check out the “<a href="https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html">End-to-end browser and accessibility event architecture</a>” article for detailed information about the browser architecture.</p>
+
+<p>We will also use <a href="https://www.maxdesign.com.au/assets/img/end-to-end-browser-accessibility-event-architecture.png">this diagram to help visualise the process</a>.</p>
+
+<p><b>Note</b>: The architecture diagram shows the components of the browser, not in fixed order. During this process, the browser moves between these layers multiple times as needed.</p>
+
+<h2>An accordion button</h2>
+
+<p>Imagine a screen reader user encounters an accordion button. </p>
+
+<p>In the closed state, the markup will be:</p>
+
+<pre><code>&lt;button aria-label="Open accordion" <span class="highlight">aria-expanded="false"</span>&gt;
+&lt;/button&gt;</code></pre>
+
+<p>When triggered, the markup will change to:</p>
+
+<pre><code>&lt;button aria-label="Open accordion" <span class="highlight">aria-expanded="true"</span>&gt;
+&lt;/button&gt;</code></pre>
+
+<p><b>The button has just been clicked!</b></p>
+
+<p>Let’s review the entire process from start to finish.</p>
+
+<h2>Developer-facing layer</h2>
+
+<p>The browser begins with the HTML and ARIA shown above, which define the button’s role, name and state.</p>
+
+<ul>
+  <li>Name: Open accordion</li>
+  <li>Role: button</li>
+  <li>State: collapsed</li>
+</ul>
+
+<p>This information doesn’t “run,” but it forms the foundation for everything that happens next.</p>
+
+<h2>Browser engine layer</h2>
+
+<p>When the user clicks, the operating system sends a low-level input event to the browser.</p>
+
+<p>The browser then uses hit-testing to determine which element was targeted based on the rendered layout.</p>
+
+<p>It prepares a “dispatch click event” task so the action can be handled later.</p>
+
+<h2>Task queue</h2>
+
+<p>The browser places the click task into a waiting line called the Task Queue.</p>
+
+<p>Nothing runs yet — it’s simply queued until the browser is ready.</p>
+
+<h2>Event loop</h2>
+
+<p>The event loop waits until no JavaScript is running and the browser is in a safe state.</p>
+
+<p>Only then does it pull the click task out of the queue and pass it to the JavaScript engine.</p>
+
+<h2>JavaScript engine</h2>
+
+<p>The JavaScript engine dispatches the click event to the button, and the event handler runs, updating the DOM (in this case, toggling <code>aria-expanded</code> to "true").</p>
+
+<p>When the handler finishes, the engine returns control to the browser.</p>
+
+<h2>Microtasks</h2>
+
+<p>After the main script finishes, the browser immediately runs any microtasks the code has created (like Promises).</p>
+
+<p>This ensures all small follow-up work is completed before the browser continues.</p>
+
+<p>(There are probably no microtasks with this simple button.)</p>
+
+<h2>Rendering</h2>
+
+<p>The browser now applies any visual updates, such as style changes or showing the opened panel.</p>
+
+<p>This may involve recalculating styles, updating the layout and repainting what the user sees.</p>
+
+<h2>AXTree update</h2>
+
+<p>The browser updates its internal accessibility tree to reflect the button&rsquo;s new state.</p>
+
+<p>This includes recalculating any affected properties, such as the updated <code>aria-expanded</code> state.</p>
+
+<h2>AXEvents</h2>
+
+<p>Based on the changes, the browser fires accessibility events such as “expanded state changed.”</p>
+
+<p>These events notify assistive technologies that something important has updated.</p>
+
+<h2>OS API</h2>
+
+<p>The browser sends these accessibility events through the operating system’s accessibility API. This could be:</p>
+
+<ul>
+  <li><b>AX API</b> on macOS and iOS</li>
+  <li><b>UIA</b> on Windows</li>
+  <li><b>ATK</b> and <b>AT-SPI</b> on Linux</li>
+</ul>
+
+<p>This is the bridge that allows screen readers to receive information from the browser.</p>
+
+<h2>Screen reader</h2>
+
+<p>The screen reader interprets the event and decides what to announce based on user settings.</p>
+
+<p>It adds the message to its internal speech queue, which determines the order in which messages are spoken or interrupted.</p>
+
+<p>It then speaks or displays the update using speech output or braille.</p>
+
+<p>And the user hears: <b>“Open accordion. Expanded.”</b> - the accessible name followed by the new state.</p>
+
+<p>The process is now complete.</p>
+
+<h2>Caveats and nuances</h2>
+
+<ul>
+  <li>This explanation is a broad generalisation of how modern browsers work.</li>
+  <li>Each browser engine (Blink, WebKit, Gecko) follows the same overall pattern, but the internal details can differ.</li>
+  <li>Screen readers also vary in how they interpret events, queue speech, and announce state changes.</li>
+  <li>Not every step is visible to developers — many optimisations and timing details are handled internally by the browser.</li>
+  <li>Real behaviour can depend on the browser, operating system, assistive technology, and user settings.</li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
