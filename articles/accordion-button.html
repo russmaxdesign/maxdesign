@@ -130,6 +130,10 @@
 
 <p>No JavaScript runs yet — the browser just has a semantic, labelled button, and this sets the foundation for everything that happens next.</p>
 
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 <h3>2. Browser computes the click target and dispatches a click event</h3>
 
 <p>Now that the user has clicked the button, the operating system sends a low-level input event — such as a mouseup, mousedown, or pointer event — to the browser so it knows that a physical interaction occurred.</p>
@@ -138,7 +142,11 @@
 
 <p>It does <b>not</b> run your JavaScript immediately. Instead, it prepares a “dispatch click event” task <sup class="ref-target" id="ref-dispatchclickevent"><a href="#dispatchclickevent">2</a></sup> and places it in the Task Queue. </p>
 
-<p>This defers the actual event dispatch, ensuring it runs safely only when the browser has finished any immediate work and the JavaScript engine is ready to handle it.</p>
+<p>Placing the task in the Task Queue ensures it runs safely only when the browser has finished any immediate work and the JavaScript engine is ready to handle it.</p>
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
 
 <h3>3. The click event enters the task queue</h3>
 
@@ -146,21 +154,33 @@
 
 <p>Nothing runs yet — it’s simply queued until the browser is ready.</p>
 
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 <h3>4. The event loop hands the click task to the JavaScript engine</h3>
 
 <p>The event loop <sup class="ref-target" id="ref-eventloop"><a href="#eventloop">4</a></sup> waits until the browser is idle — no JavaScript is running and the browser is in a safe state.</p>
 
 <p>Only then does it take the “run the click event” task out of the Task Queue and hand it to the JavaScript engine to be executed.</p>
 
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 <h3>5. The event handler runs</h3>
 
-<p>The event loop then hands the “run the click event” task to the JavaScript engine, and the browser’s event dispatch algorithm delivers the click event to the button.</p>
+<p>The browser’s event dispatch algorithm delivers the click event to the button.</p>
 
 <p>The browser then runs any event listeners attached to that button (and any relevant ancestors). Your event handler runs and updates the DOM — in this case, toggling <code>aria-expanded="true"</code>.</p>
 
 <p>This DOM mutation may trigger follow-up browser work such as style recalculation or layout updates.</p>
 
 <p>When the handler finishes, the JavaScript engine returns control to the browser.</p>
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
 
 <h3>6. Browser performs layout and updates the rendering pipeline</h3>
 
@@ -170,6 +190,10 @@
 
 <p><b>Note</b>: Rendering does not always happen immediately — the browser may batch, delay or skip it depending on performance optimisations and whether the update affects the visual output.</p>
 
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 <h3>7. Browser updates the accessibility tree</h3>
 
 <p>After the DOM mutation is complete, the browser updates its internal AXTree (accessibility tree) to reflect the button’s new state.</p>
@@ -178,11 +202,19 @@
 
 <p><b>Note</b>: The accessibility tree is updated only when the DOM is in a stable state, which means timing can vary depending on layout, rendering, and event-loop scheduling.</p>
 
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 <h3>8. Browser fires accessibility events</h3>
 
 <p>Once the AXTree has been updated, the browser compares the old and new accessibility state and generates one or more <b>AXEvents</b> — internal accessibility events such as “expanded state changed”.</p>
 
 <p>These AXEvents are then sent through the operating system’s accessibility API.</p>
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
 
 <h3>9. Events cross the OS accessibility API boundary</h3>
 
@@ -195,6 +227,10 @@
 </ul>
 
 <p>This OS-level accessibility API then delivers these AXEvents to the screen reader.</p>
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
 
 <h3>10. Screen reader receives events and queues utterances</h3>
 
