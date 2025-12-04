@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What happens when an event occurs? — the quick answer - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This explains what happens inside the browser and what happens outside the browser when a user triggers an event">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What happens when an event occurs? — the quick answer</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-05">5 December 2025</time></p>
+
+<p>This is the short version that explains what happens inside the browser and what happens outside the browser when a user triggers an event.</p>
+
+<h2>Steps that occur inside the browser</h2>
+
+<ol>
+  <li>
+    <p><b>A user event occurs</b><br>
+    Click, key press, pointer movement, etc.</p>
+  </li>
+
+  <li>
+    <p><b>The browser’s rendering engine processes the event</b><br>
+    Hit-testing, default behaviours, form-control logic, internal state updates.</p>
+  </li>
+
+  <li>
+    <p><b>The browser performs layout/paint updates if needed</b><br>
+    Only when something visual has changed — text, position, open/closed state, etc.</p>
+  </li>
+
+  <li>
+    <p><b>The browser updates the accessibility tree</b><br>
+    Recomputes accessible name, role, states, relationships, value, and other properties.</p>
+  </li>
+
+  <li>
+    <p><b>The browser generates AXEvents</b><br>
+    Examples: value changed, state changed, focus changed, live region updated.</p>
+  </li>
+
+  <li>
+    <p><b>The browser sends AXEvents to the OS accessibility API</b><br>
+    Using the appropriate platform API:</p>
+    <ul>
+      <li>AX API — macOS, iOS</li>
+      <li>UIA — Windows</li>
+      <li>ATK / AT-SPI — Linux</li>
+    </ul>
+  </li>
+</ol>
+
+<h2>Steps that occur outside the browser</h2>
+
+<ol start="7">
+  <li>
+    <p><b>The OS accessibility API delivers events to assistive technology</b><br>
+    Screen readers subscribe to these OS-level events and receive them as callbacks.</p>
+  </li>
+
+  <li>
+    <p><b>The assistive technology decides what to do</b><br>
+    Announce, queue, merge, interrupt, delay, or ignore the event based on its logic and user settings.</p>
+  </li>
+</ol>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
