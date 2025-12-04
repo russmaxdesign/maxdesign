@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What are DOM mutations - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="DOM mutations are any changes to the browsers DOM tree, and these changes can happen with or without JavaScript">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<style>
+.footnote-target:focus,
+.footnote-target:target,
+.ref-target:focus,
+.ref-target:target {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #ffff00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+</style>
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What are DOM mutations?</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-05">5 December 2025</time></p>
+
+<p>The DOM is a tree-like structure representing all elements in the document. It is a live, reactive browser data structure, not a passive copy of your HTML.</p>
+
+<p>DOM mutations are any changes to this tree. These mutations can happen with or without JavaScript.</p>
+
+<p>DOM mutations include changes to structure (adding or removing nodes) and changes to attributes (like <code>value</code>, <code>open</code>, or <code>aria-expanded</code>).</p>
+
+<p>The browser constantly modifies the DOM to reflect:</p>
+
+<ul>
+  <li>state changes</li>
+  <li>user actions</li>
+  <li>validation results</li>
+  <li>interactive behaviour</li>
+  <li>internal UI logic</li>
+  <li>accessibility behaviours in rare cases</li>
+  <li>parsing corrections</li>
+  <li>autofill</li>
+  <li>spellchecking behaviour</li>
+</ul>
+
+<p>These changes happen because many HTML elements have built-in behaviour, and the browser must update the DOM to keep the element’s internal state, visual UI, and accessibility information in sync.</p>
+
+<p>None of this requires JavaScript.</p>
+
+<p>Here are some quick examples you can try yourself:</p>
+
+<ol>
+  <li>When you type into an <code>&lt;input&gt;</code>, the browser updates the element’s value property, which counts as a DOM mutation even though you didn’t change the HTML.</li>
+  <li>When you select an option in a <code>&lt;select&gt;</code>, the DOM automatically updates which option is selected.</li>
+  <li>When a <code>&lt;details&gt;</code> element opens, the browser sets the open attribute on the <code>&lt;details&gt;</code> element automatically.</li>
+</ol>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>JavaScript and the DOM</h2>
+
+<p>JavaScript can also be used for DOM mutations. When your script runs, it can directly change the structure, text, or attributes of elements — and every one of these changes counts as a DOM mutation.</p>
+
+<p>Typical JavaScript-driven mutations include:</p>
+
+<ul>
+  <li>Adding nodes</li>
+  <li>Removing nodes</li>
+  <li>Updating attributes (including ARIA)</li>
+  <li>Changing text</li>
+  <li>Changing internal state (“internal state” refers to properties the browser tracks for an element, such as whether a <code>&lt;details&gt;</code> element is open or whether a form control is valid.)</li>
+</ul>
+
+<p>These are sometimes called “JavaScript-driven DOM mutations”, but they are not really a special category — just another way the DOM changes.</p>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Why DOM mutations matter for accessibility</h2>
+
+<p>Every DOM mutation requires the browser to update the AXTree (accessibility tree), the internal structure used by screen readers and other assistive technologies.</p>
+
+<p>Whenever the DOM changes:</p>
+
+<ul>
+  <li>The browser updates the AXTree.</li>
+  <li>It compares the old and new tree.</li>
+  <li>It fires AXEvents <sup class="ref-target" id="ref-axevent"><a href="#axevent">1</a></sup> for anything meaningful that changed such as:
+    <ul>
+      <li>Name changes</li>
+      <li>Value changes</li>
+      <li>Expanded/collapsed state</li>
+      <li>Focus changes</li>
+      <li>Role changes</li>
+      <li>Live region updates</li>
+    </ul>
+  </li>
+</ul>
+
+<p>These AXEvents then travel through the operating system’s accessibility API to the screen reader, which interprets them and decides whether, when, and how to announce the change.</p>
+
+<p>Not all AXEvents result in announcements — screen readers may merge, delay, or ignore certain events based on their behaviour and user settings.</p>
+
+<p>If we return to our previous three examples, they all push information into the AXTree:</p>
+
+<ul>
+  <li>The <code>&lt;input&gt;</code> value is exposed as the control’s value</li>
+  <li>The <code>&lt;select&gt;</code> option is exposed as the element’s accessible value</li>
+  <li>The <code>&lt;summary&gt;</code> open/closed state is mapped to accessibility state</li>
+</ul>
+
+<p>The browser does not store a separate copy of your HTML — it continuously recomputes accessibility information from the live DOM.</p>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Why this matters</h2>
+
+<p>DOM mutations directly influence:</p>
+
+<ul>
+  <li>What screen readers announce</li>
+  <li>How quickly announcements occur</li>
+  <li>Which events interrupt others</li>
+  <li>Whether changes are even detectable</li>
+</ul>
+
+<p>These effects come from how mutations trigger AXTree updates and AXEvents.</p>
+
+<p>Even without JavaScript, DOM mutations still drive accessibility updates.</p>
+
+<h2>Wrapping up</h2>
+
+<ul>
+  <li>The DOM is not static.</li>
+  <li>The browser mutates it frequently without JavaScript.</li>
+  <li>JavaScript can also be used to mutate the DOM.</li>
+  <li>All DOM mutations flow into the AXTree.</li>
+  <li>Accessibility updates, announcements, and timing are shaped by these mutations.</li>
+</ul>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Footnotes</h2>
+<ul>  
+  <li>
+    <span id="axevent" tabindex="-1" class="footnote-target">[1]</span>
+    <b>AX event</b>: An accessibility event fired by the browser when something meaningful changes in the AXTree, such as focus, name, value, or state changes.
+    [<a href="#ref-axevent" class="back">Back</a>]
+  </li>
+</ul>
+
+<script>
+// Select ALL footnote links inside <sup>
+document.querySelectorAll('sup a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    // Extract ID by stripping the "#" from the href
+    const id = link.getAttribute('href').slice(1);
+
+    // Find the matching element in the document
+    const target = document.getElementById(id);
+
+    if (target) {
+      // Ensure the target can receive programmatic focus
+      target.setAttribute('tabindex', '-1');
+
+      // Move focus there
+      target.focus();
+    }
+  });
+});
+
+</script>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>

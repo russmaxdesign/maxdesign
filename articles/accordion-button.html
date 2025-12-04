@@ -16,6 +16,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<style>
+.footnote-target:focus,
+.footnote-target:target,
+.ref-target:focus,
+.ref-target:target {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #ffff00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+</style>
 </head>
 <body>
   <header>
@@ -39,31 +60,63 @@
 
 <p class="metadetails">Published: <time datetime="2025-12-04">4 December 2025</time></p>
 
-<p>Before reading this article, make sure you check out the “<a href="https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html">End-to-end browser and accessibility event architecture</a>” article for detailed information about the browser architecture.</p>
+<p>A quick note before we begin:</p>
 
-<p>We will also use <a href="https://www.maxdesign.com.au/assets/img/end-to-end-browser-accessibility-event-architecture.png">this diagram to help visualise the process</a>.</p>
+<p>The  “<a href="https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html">End-to-end browser and accessibility event architecture</a>” article, along with the <a href="../assets/img/end-to-end-browser-accessibility-event-architecture.png" target="_blank">architectural diagram</a>, describe all the <b>systems</b> that exist inside the browser, accessibility pipeline, and assistive technologies. It’s a map of the components.</p>
 
-<p><b>Note</b>: The architecture diagram shows the components of the browser, not in fixed order. During this process, the browser moves between these layers multiple times as needed.</p>
+<p>This article is different — it shows the <b>processes</b> that flow through those systems when a user clicks an accordion button.</p>
+
+<p>These flows are not linear. Events jump between multiple layers (JavaScript, Web APIs, rendering, accessibility trees, OS APIs, and assistive technologies).</p>
+
+<p>That’s simply how the architecture works: it is an intricate, concurrent set of systems that constantly talk to each other.</p>
+
+<p>So don’t expect a neat step-by-step “path” — expect a dance that moves across different layers.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 
 <h2>An accordion button</h2>
 
-<p>Imagine a screen reader user encounters an accordion button. </p>
+<p>Imagine a screen reader user encounters an button used to toggle an accordion open and closed. </p>
 
 <p>In the closed state, the markup will be:</p>
 
 <pre><code>&lt;button aria-label="Open accordion" <span class="highlight">aria-expanded="false"</span>&gt;
 &lt;/button&gt;</code></pre>
 
-<p>When triggered, the markup will change to:</p>
+<p>When the button is triggered, the markup will change to:</p>
 
 <pre><code>&lt;button aria-label="Open accordion" <span class="highlight">aria-expanded="true"</span>&gt;
 &lt;/button&gt;</code></pre>
 
-<p><b>The button has just been clicked!</b></p>
+<p>This is important as the button will then be announced as either &ldquo;collapsed&rdquo; or &ldquo;expanded&rdquo;.</p>
+
+<h3>How the accordion is toggled</h3>
+
+<p>In this example, a small piece of JavaScript is attached to the button. When the user clicks it, an <b>event handler</b> runs.</p>
+
+<p>This is JavaScript code that listens for the click and updates the DOM by toggling <code>aria-expanded</code> between <code>"false"</code> and <code>"true"</code>.</p>
+
+<p>The browser will run this JavaScript later in the process.</p>
 
 <p>Let’s review the entire process from start to finish.</p>
 
-<h2>Developer-facing layer</h2>
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>The process</h2>
+
+<h3>1. User interacts with the button</h3>
 
 <p>The browser begins with the HTML and ARIA shown above, which define the button’s role, name and state.</p>
 
@@ -73,63 +126,67 @@
   <li>State: collapsed</li>
 </ul>
 
-<p>This information doesn’t “run,” but it forms the foundation for everything that happens next.</p>
+<p><b>The button has just been clicked!</b></p>
 
-<h2>Browser engine layer</h2>
+<p>No JavaScript runs yet — the browser just has a semantic, labelled button, and this sets the foundation for everything that happens next.</p>
 
-<p>When the user clicks, the operating system sends a low-level input event to the browser.</p>
+<h3>2. Browser computes the click target and dispatches a click event</h3>
 
-<p>The browser then uses hit-testing to determine which element was targeted based on the rendered layout.</p>
+<p>Now that the user has clicked the button, the operating system sends a low-level input event — such as a mouseup, mousedown, or pointer event — to the browser so it knows that a physical interaction occurred.</p>
 
-<p>It prepares a “dispatch click event” task so the action can be handled later.</p>
+<p>The browser then uses hit-testing <sup class="ref-target" id="ref-hittest"><a href="#hittest">1</a></sup> to determine which element was targeted based on the rendered layout.</p>
 
-<h2>Task queue</h2>
+<p>It does <b>not</b> run your JavaScript immediately. Instead, it prepares a “dispatch click event” task <sup class="ref-target" id="ref-dispatchclickevent"><a href="#dispatchclickevent">2</a></sup> and places it in the Task Queue. </p>
 
-<p>The browser places the click task into a waiting line called the Task Queue.</p>
+<p>This defers the actual event dispatch, ensuring it runs safely only when the browser has finished any immediate work and the JavaScript engine is ready to handle it.</p>
+
+<h3>3. The click event enters the task queue</h3>
+
+<p>The browser creates a task representing “run the click event” and places it into a waiting line called the Task Queue <sup class="ref-target" id="ref-taskqueue"><a href="#taskqueue">3</a></sup>.</p>
 
 <p>Nothing runs yet — it’s simply queued until the browser is ready.</p>
 
-<h2>Event loop</h2>
+<h3>4. The event loop hands the click task to the JavaScript engine</h3>
 
-<p>The event loop waits until no JavaScript is running and the browser is in a safe state.</p>
+<p>The event loop <sup class="ref-target" id="ref-eventloop"><a href="#eventloop">4</a></sup> waits until the browser is idle — no JavaScript is running and the browser is in a safe state.</p>
 
-<p>Only then does it pull the click task out of the queue and pass it to the JavaScript engine.</p>
+<p>Only then does it take the “run the click event” task out of the Task Queue and hand it to the JavaScript engine to be executed.</p>
 
-<h2>JavaScript engine</h2>
+<h3>5. The event handler runs</h3>
 
-<p>The JavaScript engine dispatches the click event to the button, and the event handler runs, updating the DOM (in this case, toggling <code>aria-expanded</code> to "true").</p>
+<p>The event loop then hands the “run the click event” task to the JavaScript engine, and the browser’s event dispatch algorithm delivers the click event to the button.</p>
 
-<p>When the handler finishes, the engine returns control to the browser.</p>
+<p>The browser then runs any event listeners attached to that button (and any relevant ancestors). Your event handler runs and updates the DOM — in this case, toggling <code>aria-expanded="true"</code>.</p>
 
-<h2>Microtasks</h2>
+<p>This DOM mutation may trigger follow-up browser work such as style recalculation or layout updates.</p>
 
-<p>After the main script finishes, the browser immediately runs any microtasks the code has created (like Promises).</p>
+<p>When the handler finishes, the JavaScript engine returns control to the browser.</p>
 
-<p>This ensures all small follow-up work is completed before the browser continues.</p>
-
-<p>(There are probably no microtasks with this simple button.)</p>
-
-<h2>Rendering</h2>
+<h3>6. Browser performs layout and updates the rendering pipeline</h3>
 
 <p>The browser now applies any visual updates, such as style changes or showing the opened panel.</p>
 
 <p>This may involve recalculating styles, updating the layout and repainting what the user sees.</p>
 
-<h2>AXTree update</h2>
+<p><b>Note</b>: Rendering does not always happen immediately — the browser may batch, delay or skip it depending on performance optimisations and whether the update affects the visual output.</p>
 
-<p>The browser updates its internal accessibility tree to reflect the button&rsquo;s new state.</p>
+<h3>7. Browser updates the accessibility tree</h3>
 
-<p>This includes recalculating any affected properties, such as the updated <code>aria-expanded</code> state.</p>
+<p>After the DOM mutation is complete, the browser updates its internal AXTree (accessibility tree) to reflect the button’s new state.</p>
 
-<h2>AXEvents</h2>
+<p>This includes recalculating any affected accessibility properties — such as its name, role, and the updated <code>aria-expanded="true"</code> state.</p>
 
-<p>Based on the changes, the browser fires accessibility events such as “expanded state changed.”</p>
+<p><b>Note</b>: The accessibility tree is updated only when the DOM is in a stable state, which means timing can vary depending on layout, rendering, and event-loop scheduling.</p>
 
-<p>These events notify assistive technologies that something important has updated.</p>
+<h3>8. Browser fires accessibility events</h3>
 
-<h2>OS API</h2>
+<p>Once the AXTree has been updated, the browser compares the old and new accessibility state and generates one or more <b>AXEvents</b> — internal accessibility events such as “expanded state changed”.</p>
 
-<p>The browser sends these accessibility events through the operating system’s accessibility API. This could be:</p>
+<p>These AXEvents are then sent through the operating system’s accessibility API.</p>
+
+<h3>9. Events cross the OS accessibility API boundary</h3>
+
+<p>The browser sends the generated <b>AXEvents</b> to the operating system’s accessibility API — such as:</p>
 
 <ul>
   <li><b>AX API</b> on macOS and iOS</li>
@@ -137,19 +194,27 @@
   <li><b>ATK</b> and <b>AT-SPI</b> on Linux</li>
 </ul>
 
-<p>This is the bridge that allows screen readers to receive information from the browser.</p>
+<p>This OS-level accessibility API then delivers these AXEvents to the screen reader.</p>
 
-<h2>Screen reader</h2>
+<h3>10. Screen reader receives events and queues utterances</h3>
 
-<p>The screen reader interprets the event and decides what to announce based on user settings.</p>
+<p>The screen reader receives the AXEvent and decides what to announce based on user settings.</p>
 
-<p>It adds the message to its internal speech queue, which determines the order in which messages are spoken or interrupted.</p>
+<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">5</a></sup>, which determines the order in which messages are spoken or interrupted.</p>
 
 <p>It then speaks or displays the update using speech output or braille.</p>
 
 <p>And the user hears: <b>“Open accordion. Expanded.”</b> - the accessible name followed by the new state.</p>
 
 <p>The process is now complete.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 
 <h2>Caveats and nuances</h2>
 
@@ -160,6 +225,70 @@
   <li>Not every step is visible to developers — many optimisations and timing details are handled internally by the browser.</li>
   <li>Real behaviour can depend on the browser, operating system, assistive technology, and user settings.</li>
 </ul>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Footnotes</h2>
+<ul>  
+  <li>
+    <span id="hittest" tabindex="-1" class="footnote-target">[1]</span>
+    <b>Hit-testing</b>: The browser’s method for locating which on-screen element sits under the user’s tap, click, or pointer position.
+    [<a href="#ref-hittest" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="dispatchclickevent" tabindex="-1" class="footnote-target">[2]</span>
+    <b>Dispatch click event task</b>: A scheduled piece of work the browser creates after identifying a click target, telling the system: “run this element’s click event when ready.
+    [<a href="#ref-dispatchclickevent" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="taskqueue" tabindex="-1" class="footnote-target">[3]</span>
+    <b>Task Queue</b>: A queue where the browser stores tasks like user events, timers, and network callbacks until the event loop decides it is safe to run them.
+    [<a href="#ref-taskqueue" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="eventloop" tabindex="-1" class="footnote-target">[4]</span>
+    <b>Event loop</b>: The browser’s central controller that repeatedly checks what should happen next — running tasks, draining microtasks, and coordinating rendering and accessibility updates.
+    [<a href="#ref-eventloop" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="internalspeechqueue" tabindex="-1" class="footnote-target">[5]</span>
+    <b>Internal speech queue</b>: A screen reader’s ordered list of messages waiting to be spoken, used to manage timing, interruptions, and priority between announcements.
+    [<a href="#ref-internalspeechqueue" class="back">Back</a>]
+  </li>
+</ul>
+
+<script>
+// Select ALL footnote links inside <sup>
+document.querySelectorAll('sup a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    // Extract ID by stripping the "#" from the href
+    const id = link.getAttribute('href').slice(1);
+
+    // Find the matching element in the document
+    const target = document.getElementById(id);
+
+    if (target) {
+      // Ensure the target can receive programmatic focus
+      target.setAttribute('tabindex', '-1');
+
+      // Move focus there
+      target.focus();
+    }
+  });
+});
+
+</script>
+
 
   </main>
   <footer>

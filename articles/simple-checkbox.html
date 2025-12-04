@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
   <link href="../assets/css/checkbox.css" rel="stylesheet">
-  <meta name="description" content="This div discusses types of abbreviations, how to mark them up and how to style them.">
+  <meta name="description" content=">A simple method for styling checkboxes without resorting to non-native solutions.">
   <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
   <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
@@ -65,7 +65,7 @@
 <div class="example">
   <form action="#">
     <fieldset class="checkbox-fieldset">
-      <legend>Which are your favourite animals?</legend>
+      <legend>F4avourite animals?</legend>
       <div class="checkbox-container">
         <input class="checkbox-input" id="frogs" type="checkbox">
         <label class="checkbox-label" for="frogs">Frogs are cool</label>
@@ -87,13 +87,128 @@
   </form>
 </div>
 
-<pre><code>&lt;div class="checkbox-container"&gt;
-  &lt;input class="checkbox-input" id="frogs" type="checkbox"&gt;
-  &lt;label class="checkbox-label" for="frogs"&gt;Frogs&lt;/label&gt;
+<h3>HTML</h3>
+<pre><code>&lt;div class="example"&gt;
+  &lt;form action="#"&gt;
+    &lt;fieldset class="ch-fieldset"&gt;
+      &lt;legend&gt;Favourite animals?&lt;/legend&gt;
+      &lt;div class="ch-container"&gt;
+        &lt;input class="ch-input" id="frogs" type="checkbox"&gt;
+        &lt;label class="ch-label" for="frogs"&gt;Frogs 
+        are cool&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="ch-container"&gt;
+        &lt;input class="ch-input" id="horses" type="checkbox"&gt;
+        &lt;label class="ch-label" for="horses"&gt;Horses are 
+        better&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="ch-container"&gt;
+        &lt;input class="ch-input" id="wombats" type="checkbox"&gt;
+        &lt;label class="ch-label" for="wombats"&gt;Wombats 
+        are the best, even though they are kinda nasty 
+        and sometimes they can bite&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="ch-container"&gt;
+        &lt;input class="ch-input" id="bats" type="checkbox"&gt;
+        &lt;label class="ch-label" for="bats"&gt;Bats are 
+        creepy&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/fieldset&gt;
+  &lt;/form&gt;
 &lt;/div&gt;</code></pre>
 
-<p><a class="button" href="https://codepen.io/russweakley/pen/eYKPRro" target="_blank">CodePen demo</a></p>
+<h3>CSS</h3>
+<pre><code>.example form {
+  margin: .2em 0 0;
+}
 
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ch-container {
+  position: relative;
+  margin: .7em 0;
+  line-height: 1.5;
+}
+
+.ch-label {
+  display: block;
+  padding-left: 1.8em;
+  color: #555;
+}
+
+.ch-input {
+  position: absolute;
+  left: .25em;
+  top: .2em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.ch-input:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -.25em;
+  top: -.25em;
+  width: 1em;
+  height: 1em;
+  border: .1em solid #7D7D7D;
+  border-radius: .2em;
+  background-color: white;
+}
+
+.ch-input:hover:after {
+  border: .1em solid #007000;
+}
+
+.ch-input:hover + label {
+  color: #007000;
+}
+
+.ch-input:focus:after {
+  border: .1em solid black;
+  box-shadow: 
+    0 0 0 .1em #eee,
+    0 0 0 .2em #000;
+}
+
+.ch-input:focus + label {
+  color: black;
+}
+
+.ch-input:checked + label {
+  color: black;
+}
+
+.ch-input:checked:after {
+  border: .1em solid blue;
+  background-color: blue;
+  background-image: url("../img/tick-01.svg");
+  background-position: center center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+}
+
+.ch-input:checked:focus:after {
+  border: .1em solid black;
+  background-color: black;
+  background-image: url("../img/tick-01.svg");
+  background-position: center center;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  box-shadow: 
+    0 0 0 .1em #fff,
+    0 0 0 .2em #000;
+}
+
+.ch-input:checked:focus + label {
+  color: black;
+}
+</code></pre>
 
   </main>
   <footer>
