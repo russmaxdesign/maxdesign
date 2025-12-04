@@ -16,6 +16,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <style>
+.footnote-target:focus,
+.footnote-target:target,
+.ref-target:focus,
+.ref-target:target {
+  outline: 2px dotted black;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #ffff00;
+    outline-color: black;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}
+
+  </style>
 </head>
 <body>
   <header>
@@ -46,11 +67,19 @@
   <li>System-driven scheduling (browser / event loop level)</li>
 </ul>
 
-<p><b>Assertive</b> announcements are controlled almost entirely by the screen reader.</p>
+<p><b>Assertive</b> announcements <sup class="ref-target" id="ref-assertiveannouncements"><a href="#assertiveannouncements">1</a></sup> are controlled almost entirely by the screen reader.</p>
 
-<p><b>Polite</b> announcements depend on both systems, which is why their timing can vary so much in practice.</p>
+<p><b>Polite</b> announcements <sup class="ref-target" id="ref-politeannouncements"><a href="#politeannouncements">2</a></sup> depend on both systems, which is why their timing can vary so much in practice.</p>
 
 <p>Let&rsquo;s look at these two systems in detail.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 
 <h2>1. User-driven queueing (screen reader layer)</h2>
 
@@ -69,9 +98,7 @@
 
 <p>This queue is generally processed FIFO (first in, first out) unless specific rules override it.</p>
 
-<h3>How assertive and polite behave inside the queue</h3>
-
-<p><b>Assertive</b> announcements:</p>
+<h3>Assertive announcements:</h3>
 
 <ul>
   <li>Immediately flush active and pending utterances.</li>
@@ -82,7 +109,7 @@
 
 <p><b>Assertive</b> always wins because &ldquo;interrupt behaviour&rdquo; is part of the queue layer.</p>
 
-<p><b>Polite</b> announcements:</p>
+<h3>Polite announcements:</h3>
 
 <ul>
   <li>Are added to the end of the speech queue.</li>
@@ -95,14 +122,22 @@
 
 <p>This explains the first half of why <b>polite</b> announcements vary.</p>
 
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
 <h2>2. System-Driven Scheduling (Browser / Event Loop Layer)</h2>
 
 <p>Before a screen reader can speak anything, the browser must:</p>
 
 <ul>
-  <li>Detect the DOM mutation.</li>
+  <li>Detect the DOM mutation <sup class="ref-target" id="ref-dommutation"><a href="#dommutation">3</a></sup>.</li>
   <li>Update the accessibility tree.</li>
-  <li>Decide when to fire an AX event.</li>
+  <li>Decide when to fire an AX event <sup class="ref-target" id="ref-axevent"><a href="#axevent">4</a></sup>.</li>
   <li>Deliver that event to the OS accessibility API.</li>
   <li>Which then delivers it to the screen reader.</li>
 </ul>
@@ -112,8 +147,8 @@
 <p>The event loop management includes:</p>
 
 <ul>
-  <li>The JS call stack.</li>
-  <li>The microtask queue.</li>
+  <li>The call stack <sup class="ref-target" id="ref-callstack"><a href="#callstack">5</a></sup>.</li>
+  <li>The microtask queue <sup class="ref-target" id="ref-microtaskqueue"><a href="#microtaskqueue">6</a></sup>.</li>
   <li>Rendering pipeline (layout, paint, compositing).</li>
   <li>Timers.</li>
   <li>Input events.</li>
@@ -125,14 +160,14 @@
 
 <p>Let&rsquo;s explore how <b>assertive</b> and <b>polite</b> differ at the scheduling layer.</p>
 
-<h3>Assertive Timing (Browser Layer)</h3>
+<h3>Assertive Timing</h3>
 
 <p><b>Assertive</b> live region AX events are scheduled as soon as possible:</p>
 
 <ul>
-  <li>JS mutation.</li>
+  <li>JavaScript-driven DOM mutation <sup class="ref-target" id="ref-javascriptdrivenmutation"><a href="#javascriptdrivenmutation">7</a></sup>.</li>
   <li>Call stack becomes empty.</li>
-  <li>Microtasks drain.</li>
+  <li>Microtasks drain <sup class="ref-target" id="ref-microtasksdrain"><a href="#microtasksdrain">8</a></sup>.</li>
   <li><b>ASSERTIVE AX EVENT FIRES ←</b></li>
   <li>Rendering may happen after this.</li>
   <li>Task queue work happens later.</li>
@@ -151,12 +186,12 @@
 
 <p>This explains why <b>assertive</b> is reliable and immediate in practice.</p>
 
-<h3>Polite Timing (Browser Layer)</h3>
+<h3>Polite Timing</h3>
 
 <p><b>Polite</b> live region AX events are intentionally delayed:</p>
 
 <ul>
-  <li>JS mutation.</li>
+  <li>JavaScript-driven DOM mutation.</li>
   <li>Call stack becomes empty.</li>
   <li>Microtasks drain.</li>
   <li>Wait for the next rendering opportunity after style/layout have settled.</li>
@@ -181,6 +216,14 @@
 </ul>
 
 <p>These delays affect the scheduling of the announcement, before the screen reader ever receives it.</p>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
 
 <h2>Putting Both Systems Together</h2>
 
@@ -216,6 +259,14 @@
 
 <p>This is why <b>polite</b> announcements vary so much more than assertive ones.</p>
 
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
 <h2>Caveats and nuances</h2>
 
 <ul>
@@ -226,6 +277,87 @@
   <li><b>Results may vary</b>: Timing differs across Blink, WebKit and Gecko due to differences in layout, rendering and accessibility pipelines.</li>
   <li><b>Always test across AT and browser combinations</b>: Real-world timing depends on the interaction between JavaScript, browser scheduling, OS accessibility APIs and the screen reader&rsquo;s own queue.</li>
 </ul>
+
+<hr>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Footnotes</h2>
+<ul>  
+  <li>
+    <span id="assertiveannouncements" tabindex="-1" class="footnote-target">[3]</span>
+    <b>Assertive announcements</b>: Announcements made using <code>aria-live="assertive"</code>.
+    [<a href="#ref-assertiveannouncements" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="politeannouncements" tabindex="-1" class="footnote-target">[3]</span>
+    <b>Polite announcements</b>: Announcements made using <code>aria-live="polite"</code>.
+    [<a href="#ref-politeannouncements" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="dommutation" tabindex="-1" class="footnote-target">[3]</span>
+    <b>DOM mutation</b>: Any change to the DOM — whether triggered by JavaScript, user interaction, or browser behaviour — such as adding, removing, or updating elements or attributes.
+    [<a href="#ref-dommutation" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="axevent" tabindex="-1" class="footnote-target">[4]</span>
+    <b>AX event</b>: An accessibility event fired by the browser when something meaningful changes in the accessibility tree, such as focus, name, value, or state changes.
+    [<a href="#ref-axevent" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="callstack" tabindex="-1" class="footnote-target">[5]</span>
+    <b>The call stack</b>: A temporary structure the JavaScript engine builds while running code, showing which functions are currently being executed. It grows as functions call other functions and shrinks as they return.
+    [<a href="#ref-callstack" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="microtaskqueue" tabindex="-1" class="footnote-target">[6]</span>
+    <b>Microtask queue</b>: A queue of small, high-priority callbacks (e.g. Promise handlers, MutationObserver notifications) that must run immediately after the current JavaScript task finishes and before rendering or the next task begins.
+    [<a href="#ref-microtaskqueue" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="javascriptdrivenmutation" tabindex="-1" class="footnote-target">[7]</span>
+    <b>JavaScript-driven DOM mutation</b>: A DOM change caused directly by JavaScript code, such as creating elements, updating attributes, or altering text content.
+    [<a href="#ref-javascriptdrivenmutation" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="microtasksdrain" tabindex="-1" class="footnote-target">[8]</span>
+    <b>Microtasks drain</b>: The point in the event loop when all queued microtasks must be executed to completion before the browser is allowed to render or pick up the next task.
+    [<a href="#ref-microtasksdrain" class="back">Back</a>]
+  </li>
+</ul>
+
+<script>
+// Select ALL footnote links inside <sup>
+document.querySelectorAll('sup a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    // Extract ID by stripping the "#" from the href
+    const id = link.getAttribute('href').slice(1);
+
+    // Find the matching element in the document
+    const target = document.getElementById(id);
+
+    if (target) {
+      // Ensure the target can receive programmatic focus
+      target.setAttribute('tabindex', '-1');
+
+      // Move focus there
+      target.focus();
+    }
+  });
+});
+
+</script>
 
   </main>
   <footer>
