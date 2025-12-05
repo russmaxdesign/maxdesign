@@ -129,6 +129,25 @@
 
 <p>This is why different screen readers may behave differently even when receiving the same AXEvent.</p>
 
+<h2>The process</h2>
+
+<pre><code>DOM Mutation
+     │
+     ▼
+Accessibility Tree Update
+     │
+     ▼
+AXEvent Fired
+     │
+     ▼
+OS Accessibility API
+     │
+     ▼
+Assistive Technology
+     │
+     ▼
+Speech / Braille Output</code></pre>
+
 <h2>Summary</h2>
 
 <p>Understanding AXEvents helps explain:</p>
