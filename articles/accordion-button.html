@@ -82,7 +82,7 @@
 
 <h2>An accordion button</h2>
 
-<p>Imagine a screen reader user encounters an button used to toggle an accordion open and closed. </p>
+<p>Imagine a screen reader user encounters a button used to toggle an accordion open and closed. </p>
 
 <p>In the closed state, the markup will be:</p>
 
@@ -140,9 +140,9 @@
 
 <p>The browser then uses hit-testing <sup class="ref-target" id="ref-hittest"><a href="#hittest">1</a></sup> to determine which element was targeted based on the rendered layout.</p>
 
-<p>It does <b>not</b> run your JavaScript immediately. Instead, it prepares a “dispatch click event” task <sup class="ref-target" id="ref-dispatchclickevent"><a href="#dispatchclickevent">2</a></sup> and places it in the Task Queue. </p>
+<p>Once the target is known, the browser constructs a DOM <code>click</code> event object so it has a standard way to describe what happened. </p>
 
-<p>Placing the task in the Task Queue ensures it runs safely only when the browser has finished any immediate work and the JavaScript engine is ready to handle it.</p>
+<p>This object contains information such as the event type, the target element, mouse coordinates, and whether the event should bubble <sup class="ref-target" id="ref-bubble"><a href="#bubble">2</a></sup>.</p>
 
 <!--  –––––––––––––––––––––––––
 ******  SECTION ******
@@ -150,9 +150,11 @@
 
 <h3>3. The click event enters the task queue</h3>
 
-<p>The browser creates a task representing “run the click event” and places it into a waiting line called the Task Queue <sup class="ref-target" id="ref-taskqueue"><a href="#taskqueue">3</a></sup>.</p>
+<p>The browser does <b>not</b> run your JavaScript immediately. It first needs to handle internal work, such as completing any layout or rendering tasks already in progress.</p>
 
-<p>Nothing runs yet — it’s simply queued until the browser is ready.</p>
+<p>Instead, it prepares a “dispatch click event” task <sup class="ref-target" id="ref-dispatchclickevent"><a href="#dispatchclickevent">3</a></sup> representing “run the click event” and places it into a waiting line called the Task Queue <sup class="ref-target" id="ref-taskqueue"><a href="#taskqueue">4</a></sup>.</p>
+
+<p>This ensures that the task will run only when the browser has finished any immediate work and the JavaScript engine is ready to handle it.</p>
 
 <!--  –––––––––––––––––––––––––
 ******  SECTION ******
@@ -160,7 +162,7 @@
 
 <h3>4. The event loop hands the click task to the JavaScript engine</h3>
 
-<p>The event loop <sup class="ref-target" id="ref-eventloop"><a href="#eventloop">4</a></sup> waits until the browser is idle — no JavaScript is running and the browser is in a safe state.</p>
+<p>The event loop <sup class="ref-target" id="ref-eventloop"><a href="#eventloop">5</a></sup> waits until the browser is idle — no JavaScript is running and the browser is in a safe state.</p>
 
 <p>Only then does it take the “run the click event” task out of the Task Queue and hand it to the JavaScript engine to be executed.</p>
 
@@ -170,7 +172,7 @@
 
 <h3>5. The event handler runs</h3>
 
-<p>The browser’s event dispatch algorithm delivers the click event to the button.</p>
+<p>The browser’s event dispatch algorithm (the built-in rules for deciding which element should receive the event) delivers the click event to the button.</p>
 
 <p>The browser then runs any event listeners attached to that button (and any relevant ancestors). Your event handler runs and updates the DOM — in this case, toggling <code>aria-expanded="true"</code>.</p>
 
@@ -236,7 +238,7 @@
 
 <p>The screen reader receives the AXEvent and decides what to announce based on user settings.</p>
 
-<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">5</a></sup>, which determines the order in which messages are spoken or interrupted.</p>
+<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">6</a></sup>, which determines the order in which messages are spoken or interrupted.</p>
 
 <p>It then speaks or displays the update using speech output or braille.</p>
 
@@ -279,25 +281,31 @@
   </li>
 
   <li>
-    <span id="dispatchclickevent" tabindex="-1" class="footnote-target">[2]</span>
+    <span id="bubble" tabindex="-1" class="footnote-target">[2]</span>
+    <b>Bubble</b>: When a DOM event happens on an element, it doesn’t stop there — it “bubbles up” the page. This means the event is first handled by the element you interacted with, then by its parent, then its parent’s parent, and so on, until it reaches the top of the page.
+    [<a href="#ref-bubble" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="dispatchclickevent" tabindex="-1" class="footnote-target">[3]</span>
     <b>Dispatch click event task</b>: A scheduled piece of work the browser creates after identifying a click target, telling the system: “run this element’s click event when ready.
     [<a href="#ref-dispatchclickevent" class="back">Back</a>]
   </li>
 
   <li>
-    <span id="taskqueue" tabindex="-1" class="footnote-target">[3]</span>
+    <span id="taskqueue" tabindex="-1" class="footnote-target">[4]</span>
     <b>Task Queue</b>: A queue where the browser stores tasks like user events, timers, and network callbacks until the event loop decides it is safe to run them.
     [<a href="#ref-taskqueue" class="back">Back</a>]
   </li>
 
   <li>
-    <span id="eventloop" tabindex="-1" class="footnote-target">[4]</span>
+    <span id="eventloop" tabindex="-1" class="footnote-target">[5]</span>
     <b>Event loop</b>: The browser’s central controller that repeatedly checks what should happen next — running tasks, draining microtasks, and coordinating rendering and accessibility updates.
     [<a href="#ref-eventloop" class="back">Back</a>]
   </li>
 
   <li>
-    <span id="internalspeechqueue" tabindex="-1" class="footnote-target">[5]</span>
+    <span id="internalspeechqueue" tabindex="-1" class="footnote-target">[6]</span>
     <b>Internal speech queue</b>: A screen reader’s ordered list of messages waiting to be spoken, used to manage timing, interruptions, and priority between announcements.
     [<a href="#ref-internalspeechqueue" class="back">Back</a>]
   </li>
