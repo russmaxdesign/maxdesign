@@ -45,7 +45,7 @@
 
 <h2>What is an utterance?</h2>
 
-<p>An utterance is a single self-contained chunk of speech that the screen reader prepares to speak. Utterances can come from:</p>
+<p>An utterance is the unit of speech a screen reader prepares to output — sometimes a sentence, sometimes a phrase, sometimes only a token like a single character.</p>
 
 <ul>
   <li>Focus changes</li>
@@ -59,11 +59,11 @@
 <p>For this analogy, think of utterances as different types of vehicles:</p>
 
 <ul>
-  <li><b>Focus events</b> are like ambulances.</li>
+  <li><b>Focus events</b> almost always go to the high-priority lane.</li>
   <li><b>Name and value changes</b> are like ordinary cars.</li>
   <li><b>Typing events</b> (individual keystrokes) are like motor scooters.</li>
   <li><b>Live region updates</b> are like delivery vans.</li>
-  <li><b>User-initiated commands</b> are like buses that carry priority passengers.</li>
+  <li><b>User-initiated commands</b> (explicit user intent) are like buses that carry priority passengers.</li>
 </ul>
 
 <h2>What is the speech queue?</h2>
@@ -103,6 +103,13 @@
   <li>Focus events always use the high-priority lane.</li>
 </ul>
 
+<h3 class="h4">User commands</h3>
+<ul>
+  <li>The user presses a screen reader command, such as “read next line” or “read current item”.</li>
+  <li>These commands act like buses carrying priority passengers.</li>
+  <li>They jump straight to the front of the high-priority lane and interrupt anything being spoken.</li>
+</ul>
+
 <h3 class="h4">Delay or batch</h3>
 
 <ul>
@@ -123,18 +130,34 @@
   <li>A user types quickly and the screen reader only speaks the final letter or speaks nothing.</li>
   <li>These are motor scooters arriving almost all at once in the low-priority lane.</li>
   <li>There may be too many scooters, arriving too fast.</li>
-  <li>The traffic inspector becomes overwhelmed and waves them all through, only registering the last one.</li>
+  <li>The traffic inspector becomes overwhelmed and waves them all through, only registering the last one. In reality, it’s not actual ‘overload’ — it’s intentional debouncing.</li>
 </ul>
 
 <h2>Screen readers behave differently</h2>
 
+<p><b>Important</b>: The traffic analogy in this article is only a teaching tool.</p>
+
+<p>Real screen readers do not follow the same rules, and they do not handle speech output in exactly the same way.</p>
+
+<p>Each screen reader has:</p>
+
 <ul>
-  <li>Each screen reader has its own speech queue.</li>
-  <li>Each has its own traffic rules.</li>
-  <li>Each has its own inspector.</li>
+  <li>its own speech queue implementation</li>
+  <li>its own priority system</li>
+  <li>its own timing logic</li>
+  <li>its own internal heuristics and strategies</li>
 </ul>
 
-<p>This is why screen readers behave differently when interacting with the same content.</p>
+<p>Because of this, the same utterance may be:</p>
+
+<ul>
+  <li>spoken immediately in one screen reader</li>
+  <li>delayed in another</li>
+  <li>merged into a single announcement</li>
+  <li>ignored entirely</li>
+</ul>
+
+<p>This is expected, normal, and part of how each product is designed.</p>
 
 <h2>Why this queue matters for accessibility</h2>
 

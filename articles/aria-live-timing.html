@@ -63,7 +63,7 @@
 <p>Did you know that there are two completely separate systems that determine when live regions are spoken? They are:</p>
 
 <ul>
-  <li>User-driven queueing (screen reader level)</li>
+  <li>Screen reader speech queue (assistive technology layer)</li>
   <li>System-driven scheduling (browser / event loop level)</li>
 </ul>
 
@@ -81,7 +81,7 @@
 ––––––––––––––––––––––––––  -->
 
 
-<h2>1. User-driven queueing (screen reader layer)</h2>
+<h2>1. Screen reader speech queue (assistive technology layer)</h2>
 
 <p>Screen readers manage their spoken output using an internal speech queue.</p>
 
@@ -142,7 +142,7 @@
   <li>Which then delivers it to the screen reader.</li>
 </ul>
 
-<p>All of this is controlled by the event loop, the browser&rsquo;s scheduling system.</p>
+<p>This pipeline runs on the browser’s internal scheduling systems, which include (but are not limited to) the JavaScript event loop, microtasks, rendering pipeline timing, and asynchronous accessibility tree updates.</p>
 
 <p>The event loop management includes:</p>
 

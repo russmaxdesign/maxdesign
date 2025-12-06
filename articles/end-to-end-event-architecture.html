@@ -118,7 +118,7 @@ summary {
   <li>the JavaScript engine is entered and exited</li>
   <li>microtasks run inside the same turn</li>
   <li>rendering happens only when something visually changes</li>
-  <li>the accessibility tree updates after rendering</li>
+  <li>the accessibility tree updates whenever the browser’s accessibility subsystem detects relevant DOM or layout changes — not strictly after rendering.</li>
   <li>the screen reader responds when AX events arrive</li>
 </ul>
 
@@ -236,20 +236,9 @@ summary {
         </ul>
       </li>
 
-      <li><a href="#event-loop">Event loop</a>
-        <ul>
-          <li><a href="#key-processes-7">Key processes in this layer</a>
-            <ul>
-              <li><a href="#advancing-the-loop">Advancing the loop (“ticks”)</a></li>
-              <li><a href="#task-microtask-rendering-sequencing">Task → microtask → rendering sequencing</a></li>
-              <li><a href="#render-opportunity-checks">Render opportunity checks</a></li>
-              <li><a href="#ax-update-scheduling">AX update scheduling</a></li>          
-            </ul>
-          </li>
-        </ul>
-      </li>
+      <li><a href="#event-loop">Event loop</a></li>
 
-      <li><a href="#accessibility-pipeline">Accessibility pipeline (runtime event system)</a>
+      <li><a href="#accessibility-pipeline">OS Accessibility API interface</a>
         <ul>
           <li><a href="#key-structures-8">Key structures in this layer</a>
             <ul>
@@ -334,7 +323,7 @@ summary {
 
 <h4 id="dom-accessibility-computation-interfaces">DOM and accessibility computation interfaces</h4>
 
-<p>These features compute information about each element including their accessible names, descriptions, roles, and states.</p>
+<p>These interfaces provide inputs for the accessibility pipeline, which ultimately computes the final values exposed to assistive technologies.</p>
 
 <p>They determine what assistive technologies will receive through the accessibility tree. This category also includes newer capabilities, such as <code>ElementInternals</code> <sup class="ref-target" id="ref-elementinternals"><a href="#elementinternals">4</a></sup>, which allows custom elements to expose proper semantics without relying on ARIA.</p>
 
@@ -388,7 +377,7 @@ summary {
 
 <h4 id="layout-tree">Layout tree</h4>
 
-<p>The layout tree (sometimes called the render or paint tree) combines information from the DOM and CSSOM and determines where each element appears to create the final layout.</p>
+<p>The layout tree (sometimes called the frame tree or render tree, depending on engine) combines information from the DOM and CSSOM and determines where each element appears to create the final layout.</p>
 
 <h3 id="key-processes-2">Key processes in this layer</h3>
 
@@ -430,7 +419,7 @@ summary {
 
 <h2 id="javascript-engine">JavaScript engine</h2>
 
-<p>This is where JavaScript code runs. It keeps track of which functions are currently executing in the call stack and stores objects and data in the heap. This engine doesn&rsquo;t schedule timers or event handlers.</p>
+<p>This is where JavaScript code runs. It keeps track of which functions are currently executing in the call stack and stores objects and data in the heap. The JS engine runs only when the event loop hands it a task.</p>
 
 <h3 id="key-structures-3">Key structures in this layer</h3>
 
@@ -502,7 +491,7 @@ summary {
 
 <h4 id="animation-scheduling">Animation scheduling</h4>
 
-<p><code>requestAnimationFrame</code> <sup class="ref-target" id="ref-requestanimationframe"><a href="#requestanimationframe">15</a></sup> places callbacks into the rendering pipeline to run before the next frame is drawn.</p>
+<p><code>requestAnimationFrame</code> <sup class="ref-target" id="ref-requestanimationframe"><a href="#requestanimationframe">15</a></sup> registers callbacks to be delivered at the next vsync-aligned animation frame, after the rendering pipeline signals a frame opportunity.</p>
 
 <h4 id="mutation-observation">Mutation observation</h4>
 
@@ -522,7 +511,7 @@ summary {
 
 <p>Promises and some callback types are added here.</p>
 
-<p>The microtask queue helps the browser complete quick follow-up work efficiently. If too many microtasks are added in a row, they can delay rendering and accessibility events, a problem sometimes called microtask starvation.</p>
+<p>The microtask queue helps the browser complete quick follow-up work efficiently. Heavy microtask churn delays JavaScript yielding, which can delay rAF callback delivery and some accessibility event dispatch.</p>
 
 <h3 id="key-processes-5">Key processes in this layer</h3>
 
@@ -556,7 +545,7 @@ summary {
 
 <p>Most JavaScript responding to clicks, keypresses, or DOM updates is delivered through tasks, which means accessibility-related logic also depends on task timing. This structured sequencing keeps browser behaviour predictable and avoids race conditions.</p>
 
-<p>After each task completes, the browser may update the layout and the accessibility tree.</p>
+<p>After tasks, the browser may schedule layout or accessibility updates, depending on invalidation state — these are not guaranteed to run immediately.</p>
 
 <h3 id="key-processes-6">Key processes in this layer</h3>
 
@@ -586,35 +575,62 @@ summary {
 
 <h2 id="event-loop">Event loop</h2>
 
-<p>The event loop coordinates nearly everything that happens in the browser.</p>
+<p>The JavaScript event loop coordinates JavaScript task scheduling, not the entire browser. It is responsible for:</p>
 
-<p>It decides when to run tasks, when to process microtasks, when to update the screen, and when to handle user input. This keeps the browser running in a controlled and predictable order.</p>
+<ul>
+  <li>executing queued JavaScript tasks (e.g. event handlers, timers, network callbacks)</li>
+  <li>running microtasks (Promises, MutationObservers)</li>
+  <li>delivering requestAnimationFrame callbacks after the rendering pipeline signals a new frame opportunity</li>
+</ul>
 
-<p>The event loop manages the full range of work on a web page, including user input, JavaScript execution, layout and rendering updates, network responses, timers, Promise resolution, animation frames, internal browser tasks, and accessibility events.</p>
+<p>However, the JS event loop is not the browser’s master scheduler. Major subsystems operate independently, often on their own threads or processes:</p>
 
-<p>It runs in a repeating cycle: run one task, drain microtasks, update layout and rendering, and deliver accessibility events. This cycle runs many times per second.</p>
+<ul>
+  <li>layout, paint, and compositing (rendering)</li>
+  <li>the compositor and GPU pipeline</li>
+  <li>networking</li>
+  <li>input handling</li>
+  <li>the accessibility subsystem (AX tree updates + AXEvents)</li>
+</ul>
 
-<p>By enforcing this step-by-step sequence, the event loop prevents different parts of the system from blocking each other and ensures that user input is processed, scripts run in order, rendering remains smooth, and assistive technologies receive accurate updates.</p>
+<p>These systems run whether or not JavaScript is executing, and many can continue even while the main thread is blocked.</p>
 
-<p><b>Note</b>: The event loop doesn’t push tasks into the call stack. Instead, it hands the next task to the JavaScript engine, which creates a new call stack frame and runs the code.</p>
+<h3>What the JS event loop actually controls</h3>
 
-<h3 id="key-processes-7">Key processes in this layer</h3>
+<ul>
+  <li>the ordering of JavaScript tasks</li>
+  <li>the ordering and draining of microtasks</li>
+  <li>when JavaScript yields control back to the browser</li>
+  <li>when rAF callbacks run after the rendering pipeline signals a vsync-aligned render tick</li>
+</ul>
 
-<h4 id="advancing-the-loop">Advancing the loop (“ticks”)</h4>
+<h3>What the JS event loop does not control</h3>
 
-<p>On each turn, the loop checks if JS is idle, then selects the next appropriate phase of work.</p>
+<ul>
+  <li>rendering or compositing</li>
+  <li>accessibility tree updates or AXEvent dispatch</li>
+  <li>networking</li>
+  <li>GPU work</li>
+  <li>input processing</li>
+  <li>any thread other than the main JS thread</li>
+</ul>
 
-<h4 id="task-microtask-rendering-sequencing">Task → microtask → rendering sequencing</h4>
+<h3>Event loop cycle</h3>
 
-<p>The loop ensures the correct ordering: run one task → then all microtasks → then render → then accessibility → repeat.</p>
-
-<h4 id="render-opportunity-checks">Render opportunity checks</h4>
-
-<p>The event loop coordinates when it is safe to re-render visual frames and perform layout and paint work.</p>
-
-<h4 id="ax-update-scheduling">AX update scheduling</h4>
-
-<p>Accessibility updates occur after rendering phases, ensuring AT receives stable, finalised UI state.</p>
+<ul>
+  <li>Run the next JavaScript task.</li>
+  <li>Drain the microtask queue completely.</li>
+  <li>Yield to the browser. At this point, independent subsystems may run:
+    <ul>
+      <li>rendering pipeline (layout → paint → composite), usually driven by vsync</li>
+      <li>accessibility-tree updates and AXEvents</li>
+      <li>input processing</li>
+      <li>network progress</li>
+    </ul>
+  </li>
+  <li>If the rendering pipeline signals a frame opportunity, queue and run rAF callbacks before the next task.</li>
+  <li>Sleep until the next ready task or callback.</li>
+</ul>
 
 <hr>
 
@@ -624,7 +640,7 @@ summary {
 ––––––––––––––––––––––––––  -->
 
 
-<h2 id="accessibility-pipeline">Accessibility pipeline (runtime event system)</h2>
+<h2 id="accessibility-pipeline">OS Accessibility API interface</h2>
 
 <p>This part of the browser builds and updates the accessibility tree, generates accessibility events such as focus changes and live region updates, and passes them to the operating system&rsquo;s accessibility API.</p>
 

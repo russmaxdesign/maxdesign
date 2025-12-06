@@ -52,18 +52,18 @@
   </li>
 
   <li>
-    <p><b>The browser’s rendering engine processes the event</b><br>
-    Hit-testing, default behaviours, form-control logic, internal state updates.</p>
+    <p><b>The browser processes the event</b><br>
+    It determines what was interacted with (hit-testing), applies default element behaviour, and updates internal state.</p>
   </li>
 
   <li>
-    <p><b>The browser performs layout/paint updates if needed</b><br>
+    <p><b>The browser updates layout or repainting if needed</b><br>
     Only when something visual has changed — text, position, open/closed state, etc.</p>
   </li>
 
   <li>
     <p><b>The browser updates the accessibility tree</b><br>
-    Recomputes accessible name, role, states, relationships, value, and other properties.</p>
+    It synchronises accessibility information with DOM and layout changes, computing names, roles, states, relationships, and values.</p>
   </li>
 
   <li>
@@ -86,8 +86,8 @@
 
 <ol start="7">
   <li>
-    <p><b>The OS accessibility API delivers events to assistive technology</b><br>
-    Screen readers subscribe to these OS-level events and receive them as callbacks.</p>
+    <p><b>The OS accessibility API notifies assistive technology</b><br>
+    Screen readers subscribe to these OS-level notifications and receive them as events.</p>
   </li>
 
   <li>
