@@ -176,7 +176,7 @@
 
 <p>The browser then runs any event listeners attached to that button (and any relevant ancestors). Your event handler runs and updates the DOM — in this case, toggling <code>aria-expanded="true"</code>.</p>
 
-<p>This DOM mutation may trigger follow-up browser work such as style recalculation or layout updates.</p>
+<p>This DOM mutation <sup class="ref-target" id="ref-dommutation"><a href="#dommutation">6</a></sup> may trigger follow-up browser work such as style recalculation or layout updates.</p>
 
 <p>When the handler finishes, the JavaScript engine returns control to the browser.</p>
 
@@ -238,7 +238,7 @@
 
 <p>The screen reader receives the AXEvent and decides what to announce based on user settings.</p>
 
-<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">6</a></sup>, which determines the order in which messages are spoken or interrupted.</p>
+<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">7</a></sup>, which determines the order in which messages are spoken or interrupted.</p>
 
 <p>It then speaks or displays the update using speech output or braille.</p>
 
@@ -305,7 +305,13 @@
   </li>
 
   <li>
-    <span id="internalspeechqueue" tabindex="-1" class="footnote-target">[6]</span>
+    <span id="dommutation" tabindex="-1" class="footnote-target">[6]</span>
+    <b>DOM mutation</b>: DOM mutations are any changes to this tree. These mutations can happen with or without JavaScript.
+    [<a href="#ref-dommutation" class="back">Back</a>]
+  </li>
+
+  <li>
+    <span id="internalspeechqueue" tabindex="-1" class="footnote-target">[7]</span>
     <b>Internal speech queue</b>: A screen reader’s ordered list of messages waiting to be spoken, used to manage timing, interruptions, and priority between announcements.
     [<a href="#ref-internalspeechqueue" class="back">Back</a>]
   </li>
