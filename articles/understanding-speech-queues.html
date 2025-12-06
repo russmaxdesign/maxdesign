@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding screen reader speech queues - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This explains what happens inside the browser and what happens outside the browser when a user triggers an event">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding screen reader speech queues</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-06">6 December 2025</time></p>
+
+<p>To understand how screen readers work — and to diagnose issues — you need to understand the screen reader speech queue.</p>
+
+<p>But before we look at that queue, we need to look at the thing that enters it: the utterance.</p>
+
+<h2>What is an utterance?</h2>
+
+<p>An utterance is a single self-contained chunk of speech that the screen reader prepares to speak. Utterances can come from:</p>
+
+<ul>
+  <li>Focus changes</li>
+  <li>AXEvents from the browser</li>
+  <li>Live regions</li>
+  <li>User actions, such as reading commands</li>
+</ul>
+
+<p>An utterance is not spoken immediately. It is added to the speech queue to be processed.</p>
+
+<p>For this analogy, think of utterances as different types of vehicles:</p>
+
+<ul>
+  <li><b>Focus events</b> are like ambulances.</li>
+  <li><b>Name and value changes</b> are like ordinary cars.</li>
+  <li><b>Typing events</b> (individual keystrokes) are like motor scooters.</li>
+  <li><b>Live region updates</b> are like delivery vans.</li>
+  <li><b>User-initiated commands</b> are like buses that carry priority passengers.</li>
+</ul>
+
+<h2>What is the speech queue?</h2>
+
+<p>In this analogy, the speech queue is like a traffic intersection with two lanes:</p>
+
+<ol>
+  <li>A high-priority lane for focus and alerts</li>
+  <li>A low-priority lane for polite live regions and typing</li>
+</ol>
+
+<p>More importantly, the speech queue has a traffic inspector. This inspector checks every vehicle before letting it through.</p>
+
+<p>The inspector may decide to:</p>
+
+<ul>
+  <li>Speak it</li>
+  <li>Delay it</li>
+  <li>Merge it</li>
+  <li>Interrupt something else</li>
+  <li>Ignore it</li>
+</ul>
+
+<h2>Scenarios</h2>
+
+<h3 class="h4">Interrupt</h3>
+
+<ul>
+  <li>An alert interrupts anything currently speaking.</li>
+  <li>Alerts travel through the high-priority lane.</li>
+</ul>
+
+<h3 class="h4">Speak immediately</h3>
+
+<ul>
+  <li>Focus moves to a button and the screen reader says “Button, Search”.</li>
+  <li>Focus events always use the high-priority lane.</li>
+</ul>
+
+<h3 class="h4">Delay or batch</h3>
+
+<ul>
+  <li>A polite live region is spoken later when the screen reader is idle.</li>
+  <li>These are cars in the low-priority lane that wait their turn.</li>
+</ul>
+
+<h3 class="h4">Ignore</h3>
+
+<ul>
+  <li>Repeated small updates such as rapid changes in a low-priority lane may be ignored.</li>
+  <li>These are low-value cars that the inspector pushes aside.</li>
+</ul>
+
+<h3 class="h4">Merge events</h3>
+
+<ul>
+  <li>A user types quickly and the screen reader only speaks the final letter or speaks nothing.</li>
+  <li>These are motor scooters arriving almost all at once in the low-priority lane.</li>
+  <li>There may be too many scooters, arriving too fast.</li>
+  <li>The traffic inspector becomes overwhelmed and waves them all through, only registering the last one.</li>
+</ul>
+
+<h2>Screen readers behave differently</h2>
+
+<ul>
+  <li>Each screen reader has its own speech queue.</li>
+  <li>Each has its own traffic rules.</li>
+  <li>Each has its own inspector.</li>
+</ul>
+
+<p>This is why screen readers behave differently when interacting with the same content.</p>
+
+<h2>Why this queue matters for accessibility</h2>
+
+<p>Once you understand utterances and how they move through the speech queue, you will avoid misinterpreting screen reader behaviour.</p>
+
+<p>You are much less likely to wonder why something is spoken immediately, spoken after a pause, merged with something else, or not spoken at all.</p>
+
+<p>Stay safe in traffic!</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://codepen.io/russweakley" target="_blank">CodePen</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+      <li><a href="https://twitter.com/russmaxdesign" target="_blank">Twitter</a></li>
+      <li><a href="https://www.slideshare.net/maxdesign" target="_blank">Slideshare</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2022</p>
+  </footer>
+</body>
+</html>
+
