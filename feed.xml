@@ -1,78 +1,169 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
-	<channel>
-		<title>Max Design articles</title>
-		<description>A list of HTML, CSS and accessibility articles</description>
-		<pubDate>Tue, 13 Dec 2022 07:33:00 +0000</pubDate>
-		<link>https://maxdesign.com.au/articles/</link>
-		<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml" />
-		<image>
-			<link>https://maxdesign.com.au/articles/</link>
-			<url>https://maxdesign.com.au/apple-touch-icon-precomposed.png</url>
-			<title>Max Design articles</title>
-		</image>
-		<item>
-			<title>A simple, styled checkbox</title>
-			<link>https://maxdesign.com.au/articles/simple-checkbox.html</link>
-			<description>A simple method for styling checkboxes without resorting to non-native solutions</description>
-			<pubDate>Tue, 13 Dec 2022 07:33:00 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/simple-checkbox.html</guid>
-		</item>
-		<item>
-			<title>Chat GPT's accessible dropdown</title>
-			<link>https://maxdesign.com.au/articles/accessible-dropdown.html</link>
-			<description>How good is Chat GPT's accessible dropdown suggestion?</description>
-			<pubDate>Sun, 11 Dec 2022 07:33:00 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-dropdown.html</guid>
-		</item>
-		<item>
-			<title>Methods of applying accessible descriptions to elements</title>
-			<link>https://maxdesign.com.au/articles/accessible-description.html</link>
-			<description>This article explores a range of different methods that can be used to generate an accessible descriptions for elements.</description>
-			<pubDate>Mon, 05 Dec 2022 07:33:00 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-description.html</guid>
-		</item>
-		<item>
-			<title>Methods of applying accessible names to elements</title>
-			<link>https://maxdesign.com.au/articles/accessible-name.html</link>
-			<description>This article explores a range of different methods that can be used to generate an accessible names for elements.</description>
-			<pubDate>Sat, 03 Dec 2022 09:33:00 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/accessible-name.html</guid>
-		</item>
-		<item>
-			<title>All 22 input types</title>
-			<link>https://maxdesign.com.au/articles/all-input-types.html</link>
-			<description>Can you list all of the 22 different input types without having to resort to using Google?</description>
-			<pubDate>Fri, 25 Nov 2022 05:33:00 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/all-input-types.html</guid>
-		</item>
-		<item>
-			<title>The shape-shifting "a" element</title>
-			<link>https://maxdesign.com.au/articles/a-element.html</link>
-			<description>A look at the strange and wonderful A element and which elements are allowed as child or descendant elements</description>
-			<pubDate>Thu, 24 Nov 2022 07:41:59 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/a-element.html</guid>
-		</item>
-		<item>
-			<title>The label element</title>
-			<link>https://maxdesign.com.au/articles/label.html</link>
-			<description>A deep dive into the label  element, including which elements need labelling, explicit vs implicit labelling and more</description>
-			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/label.html</guid>
-		</item>
-		<item>
-			<title>Concatenated accessible names</title>
-			<link>https://maxdesign.com.au/articles/concatenated.html</link>
-			<description>Did you know that the button element's content, and the content of its decendants may be concatenated to create an accessible name</description>
-			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/concatenated.html</guid>
-		</item>
-		<item>
-			<title>The hidden and aria-hidden attributes</title>
-			<link>https://maxdesign.com.au/articles/hidden.html</link>
-			<description>Do you know the difference between the hidden and aria-hidden attributes?</description>
-			<pubDate>Wed, 23 Nov 2022 07:41:59 +0000</pubDate>
-			<guid isPermaLink="false">https://maxdesign.com.au/articles/hidden.html</guid>
-		</item>
-	</channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" 
+     xmlns:dc="http://purl.org/dc/elements/1.1/" 
+     xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+     version="2.0">
+<channel>
+
+<title>Max Design articles</title>
+<description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
+<link>https://www.maxdesign.com.au/articles/</link>
+<lastBuildDate>Sat, 06 Dec 2025 07:33:00 +0000</lastBuildDate>
+<pubDate>Sat, 06 Dec 2025 07:33:00 +0000</pubDate>
+<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml"/>
+
+<image>
+  <url>https://www.maxdesign.com.au/apple-touch-icon-precomposed.png</url>
+  <title>Max Design articles</title>
+  <link>https://www.maxdesign.com.au/articles/</link>
+</image>
+
+<!--  =========================================================  -->
+<!--  1. Understanding screen reader speech queues               -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding screen reader speech queues</title>
+<link>https://www.maxdesign.com.au/articles/understanding-speech-queues.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/understanding-speech-queues.html</guid>
+<pubDate>Sat, 06 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Accessibility</category>
+<category>Assistive technologies</category>
+<description>This article explores the concept of utterances and how the screen reader speech queue works.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explores the concept of <strong>utterances</strong> and explains how the <strong>screen reader speech queue</strong> works.</p>
+<p>It breaks down how messages are queued, replaced, interrupted, and prioritised across different assistive technologies.</p>
+<p><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  2. What is an AXEvent?                                     -->
+<!--  =========================================================  -->
+<item>
+<title>What is an AXEvent?</title>
+<link>https://www.maxdesign.com.au/articles/axevents.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/axevents.html</guid>
+<pubDate>Fri, 05 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Accessibility</category>
+<category>Browser internals</category>
+<description>An AXEvent is a notification generated by the browser and sent to assistive technologies when something meaningful changes.</description>
+<content:encoded>
+<![CDATA[
+<p>An <strong>AXEvent</strong> is a notification generated by the browser and sent to assistive technologies when something meaningful changes.</p>
+<p>This article explains where AXEvents originate, how they move through the accessibility pipeline, and how assistive technologies interpret them.</p>
+<p><a href="https://www.maxdesign.com.au/articles/axevents.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  3. What happens when an event occurs? — the quick answer    -->
+<!--  =========================================================  -->
+<item>
+<title>What happens when an event occurs? — the quick answer</title>
+<link>https://www.maxdesign.com.au/articles/what-happens.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/what-happens.html</guid>
+<pubDate>Fri, 05 Dec 2025 07:31:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Events</category>
+<description>A short explanation of what happens inside and outside the browser when a user triggers an event.</description>
+<content:encoded>
+<![CDATA[
+<p>This is the short version that explains what happens inside the browser and what happens outside the browser when a user triggers an event.</p>
+<p>It outlines the internal processing steps, accessibility tree updates, and assistive technology notifications.</p>
+<p><a href="https://www.maxdesign.com.au/articles/what-happens.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  4. What are DOM mutations?                                 -->
+<!--  =========================================================  -->
+<item>
+<title>What are DOM mutations?</title>
+<link>https://www.maxdesign.com.au/articles/dom-mutations.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/dom-mutations.html</guid>
+<pubDate>Fri, 05 Dec 2025 07:30:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>DOM</category>
+<description>DOM mutations are any changes to the DOM tree. These mutations can happen with or without JavaScript.</description>
+<content:encoded>
+<![CDATA[
+<p><strong>DOM mutations</strong> are any changes to the document’s node tree. These mutations can happen with or without JavaScript and are central to how modern interfaces update.</p>
+<p>The article covers layout impact, accessibility impact, and how browsers detect and respond to these changes.</p>
+<p><a href="https://www.maxdesign.com.au/articles/dom-mutations.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  5. What really happens when a user clicks an accordion?    -->
+<!--  =========================================================  -->
+<item>
+<title>What really happens when a user clicks an accordion button?</title>
+<link>https://www.maxdesign.com.au/articles/accordion-button.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/accordion-button.html</guid>
+<pubDate>Thu, 04 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Events</category>
+<category>Accessibility</category>
+<category>Browser internals</category>
+<description>An exploration of the entire browser process once a button has been clicked.</description>
+<content:encoded>
+<![CDATA[
+<p>This article traces everything that happens once a user clicks an accordion button — from DOM events to layout updates, accessibility tree mutations, and AXEvents.</p>
+<p>It provides a full timeline showing exactly how browsers process and announce interactive changes.</p>
+<p><a href="https://www.maxdesign.com.au/articles/accordion-button.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  6. End-to-end browser and accessibility event architecture  -->
+<!--  =========================================================  -->
+<item>
+<title>End-to-end browser and accessibility event architecture</title>
+<link>https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html</guid>
+<pubDate>Wed, 03 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Accessibility</category>
+<description>A diagram mapping user input, JavaScript, DOM updates, layout, accessibility events, and assistive technology output.</description>
+<content:encoded>
+<![CDATA[
+<p>This diagram maps the entire path from user input to assistive technology output, including DOM updates, layout, JavaScript execution, accessibility tree mutations, and AXEvents.</p>
+<p>It aims to give developers a clear, high-level overview of how everything fits together.</p>
+<p><a href="https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  7. Understanding aria-live timing                          -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-live timing: a two-Layer model</title>
+<link>https://www.maxdesign.com.au/articles/aria-live-timing.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-live-timing.html</guid>
+<pubDate>Tue, 02 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>ARIA</category>
+<category>Accessibility</category>
+<description>A two-layer model explaining how aria-live timing works.</description>
+<content:encoded>
+<![CDATA[
+<p>This article introduces a two-layer timing model that determines when <strong>aria-live</strong> announcements occur.</p>
+<p>It breaks down the browser timing layer and the assistive technology timing layer and shows how they interact.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-live-timing.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+</channel>
 </rss>

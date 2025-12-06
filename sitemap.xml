@@ -1,502 +1,249 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-
-<url>
-  <loc>https://www.maxdesign.com.au/</loc>
-  <lastmod>2022-12-12T07:10:29+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/index.html</loc>
-  <lastmod>2022-12-12T07:10:29+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/about/index.html</loc>
-  <lastmod>2022-12-12T07:08:48+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/resources/index.html</loc>
-  <lastmod>2022-12-12T07:10:50+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/talks/index.html</loc>
-  <lastmod>2022-12-12T07:11:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/index.html</loc>
-  <lastmod>2022-12-12T20:25:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/sitemap.html</loc>
-  <lastmod>2022-12-12T20:24:52+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/contact-us/index.html</loc>
-  <lastmod>2022-12-12T07:09:50+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/about/russweakley/index.html</loc>
-  <lastmod>2022-12-12T07:08:42+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/about/annagregg/index.html</loc>
-  <lastmod>2022-12-12T07:08:38+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/training/index.html</loc>
-  <lastmod>2022-12-12T07:11:29+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/simple-checkbox.html</loc>
-  <lastmod>2022-12-12T20:25:07+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/accessible-dropdown.html</loc>
-  <lastmod>2022-12-12T07:09:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/accessible-description.html</loc>
-  <lastmod>2022-12-12T07:09:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/accessible-name.html</loc>
-  <lastmod>2022-12-12T07:09:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/all-input-types.html</loc>
-  <lastmod>2022-12-12T07:09:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/a-element.html</loc>
-  <lastmod>2022-12-12T07:09:01+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/label.html</loc>
-  <lastmod>2022-12-12T07:09:16+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/concatenated.html</loc>
-  <lastmod>2022-12-12T07:09:05+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/hidden.html</loc>
-  <lastmod>2022-12-12T07:09:07+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/three-html5-tips.html</loc>
-  <lastmod>2022-12-12T07:09:17+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/ideal-line-length-in-ems.html</loc>
-  <lastmod>2022-12-12T07:09:07+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/simple-responsive-table.html</loc>
-  <lastmod>2022-12-12T07:09:17+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/select-required.html</loc>
-  <lastmod>2022-12-12T07:09:17+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/anonymous-boxes.html</loc>
-  <lastmod>2022-12-12T07:09:04+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/iframe-scrollbars-and-html5.html</loc>
-  <lastmod>2022-12-12T07:09:08+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/font-stacks.html</loc>
-  <lastmod>2022-12-12T07:09:07+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/sign-in.html</loc>
-  <lastmod>2022-12-12T07:09:17+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/vertical-align.html</loc>
-  <lastmod>2022-12-12T07:09:18+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/checked-inputs.html</loc>
-  <lastmod>2022-12-12T07:09:05+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/comment-anatomy.html</loc>
-  <lastmod>2022-12-12T07:09:05+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/dumbing-down.html</loc>
-  <lastmod>2022-12-12T07:09:06+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/abbreviations.html</loc>
-  <lastmod>2022-12-12T07:09:03+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/webstock-media.html</loc>
-  <lastmod>2022-12-12T07:09:18+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/about-structural-labels.html</loc>
-  <lastmod>2022-12-12T07:09:02+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/external.html</loc>
-  <lastmod>2022-12-12T07:09:06+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/ozewai-2005.html</loc>
-  <lastmod>2022-12-12T07:09:17+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/accessibility.html</loc>
-  <lastmod>2022-12-12T07:09:02+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/checklist.html</loc>
-  <lastmod>2022-12-12T07:09:05+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/benefits.html</loc>
-  <lastmod>2022-12-12T07:09:04+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/definition.html</loc>
-  <lastmod>2022-12-12T07:09:06+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/index.html</loc>
-  <lastmod>2022-12-12T07:10:38+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/center.html</loc>
-  <lastmod>2022-12-12T07:09:04+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/index.html</loc>
-  <lastmod>2022-12-12T07:10:14+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/em.html</loc>
-  <lastmod>2022-12-12T07:09:06+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/hr.html</loc>
-  <lastmod>2022-12-12T07:09:07+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-lachlan-hunt.html</loc>
-  <lastmod>2022-12-12T07:09:12+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-sarah-blow.html</loc>
-  <lastmod>2022-12-12T07:09:15+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-peter-paul-koch.html</loc>
-  <lastmod>2022-12-12T07:09:14+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-donna-spencer.html</loc>
-  <lastmod>2022-12-12T07:09:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-steve-faulkner.html</loc>
-  <lastmod>2022-12-12T07:09:16+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-david-storey.html</loc>
-  <lastmod>2022-12-12T07:09:09+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-laura-carlson.html</loc>
-  <lastmod>2022-12-12T07:09:13+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-gian-wild.html</loc>
-  <lastmod>2022-12-12T07:09:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-jeremy-keith.html</loc>
-  <lastmod>2022-12-12T07:09:11+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-patrick-lauke.html</loc>
-  <lastmod>2022-12-12T07:09:14+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-russ-weakley.html</loc>
-  <lastmod>2022-12-12T07:09:15+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-derek-featherstone.html</loc>
-  <lastmod>2022-12-12T07:09:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-joe-clark.html</loc>
-  <lastmod>2022-12-12T07:09:11+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-jason-santa-maria.html</loc>
-  <lastmod>2022-12-12T07:09:11+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-tommy-olsson.html</loc>
-  <lastmod>2022-12-12T07:09:16+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-cameron-adams.html</loc>
-  <lastmod>2022-12-12T07:09:09+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-roger-johansson.html</loc>
-  <lastmod>2022-12-12T07:09:15+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-john-allsopp.html</loc>
-  <lastmod>2022-12-12T07:09:12+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-jon-hicks.html</loc>
-  <lastmod>2022-12-12T07:09:12+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-john-gallant.html</loc>
-  <lastmod>2022-12-12T07:09:12+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-richard-rutter.html</loc>
-  <lastmod>2022-12-12T07:09:14+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-molly-holzschlag.html</loc>
-  <lastmod>2022-12-12T07:09:13+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-dan-cederholm.html</loc>
-  <lastmod>2022-12-12T07:09:09+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-simon-willison.html</loc>
-  <lastmod>2022-12-12T07:09:16+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-patrick-griffiths.html</loc>
-  <lastmod>2022-12-12T07:09:14+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-andy-budd.html</loc>
-  <lastmod>2022-12-12T07:09:08+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-nick-finck.html</loc>
-  <lastmod>2022-12-12T07:09:13+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-anne-van-kesteren.html</loc>
-  <lastmod>2022-12-12T07:09:09+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-keith-robinson.html</loc>
-  <lastmod>2022-12-12T07:09:12+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/interview-eric-meyer.html</loc>
-  <lastmod>2022-12-12T07:09:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/best-accessible-names.html</loc>
-  <lastmod>2022-12-12T07:09:04+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/articles/ideal-line-length-in-ems-tests.html</loc>
-  <lastmod>2022-12-12T07:09:08+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/book/index.html</loc>
-  <lastmod>2022-12-12T07:09:44+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/one-fixed.html</loc>
-  <lastmod>2022-11-22T15:09:20+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/one-liquid.html</loc>
-  <lastmod>2022-11-22T15:09:21+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/two-fixed.html</loc>
-  <lastmod>2022-11-22T15:09:23+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/two-liquid.html</loc>
-  <lastmod>2022-11-22T15:09:24+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/two-fixed-spread.html</loc>
-  <lastmod>2022-11-22T15:09:23+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/three-fixed.html</loc>
-  <lastmod>2022-11-22T15:09:21+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/css-layouts/three-liquid.html</loc>
-  <lastmod>2022-11-22T15:09:22+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample1.html</loc>
-  <lastmod>2022-11-23T19:30:52+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample2.html</loc>
-  <lastmod>2022-11-23T19:30:51+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample3.html</loc>
-  <lastmod>2022-11-23T19:30:50+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample4.html</loc>
-  <lastmod>2022-11-23T19:30:51+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample5.html</loc>
-  <lastmod>2022-11-23T19:30:51+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample6.html</loc>
-  <lastmod>2022-11-23T19:30:52+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample7.html</loc>
-  <lastmod>2022-11-23T19:30:52+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample8.html</loc>
-  <lastmod>2022-11-23T19:30:52+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/liquid/liquid-sample9.html</loc>
-  <lastmod>2022-11-23T19:30:51+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/services/index.html</loc>
-  <lastmod>2022-12-12T07:10:57+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/workshops/index.html</loc>
-  <lastmod>2022-12-12T07:11:35+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.maxdesign.com.au/workshops/terms-and-conditions.html</loc>
-  <lastmod>2022-12-12T07:11:36+00:00</lastmod>
-  <priority>0.64</priority>
+<!--  Homepage  -->
+<url>
+<loc>https://www.maxdesign.com.au/</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
+<!--  About pages  -->
+<url>
+<loc>https://www.maxdesign.com.au/about/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/about/russweakley/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/about/annagregg/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Articles index page  -->
+<url>
+<loc>https://www.maxdesign.com.au/articles/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<!--  20 latest articles  -->
+<!--  1. New article added  -->
+<url>
+<loc>https://www.maxdesign.com.au/articles/understanding-speech-queues.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<url>
+<loc>https://www.maxdesign.com.au/articles/axevents.html</loc>
+<lastmod>2025-12-05</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/what-happens.html</loc>
+<lastmod>2025-12-05</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/dom-mutations.html</loc>
+<lastmod>2025-12-05</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/accordion-button.html</loc>
+<lastmod>2025-12-04</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html</loc>
+<lastmod>2025-12-03</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/aria-live-timing.html</loc>
+<lastmod>2025-12-02</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/simple-checkbox.html</loc>
+<lastmod>2022-12-13</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/accessible-dropdown.html</loc>
+<lastmod>2022-12-11</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/accessible-description.html</loc>
+<lastmod>2022-12-05</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/accessible-name.html</loc>
+<lastmod>2022-12-03</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/all-input-types.html</loc>
+<lastmod>2022-11-25</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/a-element.html</loc>
+<lastmod>2022-11-24</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/label.html</loc>
+<lastmod>2022-11-23</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/hidden.html</loc>
+<lastmod>2022-11-14</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/concatenated.html</loc>
+<lastmod>2022-11-09</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/three-html5-tips.html</loc>
+<lastmod>2013-11-27</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/ideal-line-length-in-ems.html</loc>
+<lastmod>2013-05-21</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/simple-responsive-table.html</loc>
+<lastmod>2013-03-22</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/select-required.html</loc>
+<lastmod>2012-11-03</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://www.maxdesign.com.au/articles/anonymous-boxes.html</loc>
+<lastmod>2012-10-01</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+
+<!--  Book page  -->
+<url>
+<loc>https://www.maxdesign.com.au/book/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Contact page  -->
+<url>
+<loc>https://www.maxdesign.com.au/contact-us/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  CSS layouts index  -->
+<url>
+<loc>https://www.maxdesign.com.au/css-layouts/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+
+<!--  Liquid layouts index  -->
+<url>
+<loc>https://www.maxdesign.com.au/liquid/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+
+<!--  Presentations index  -->
+<url>
+<loc>https://www.maxdesign.com.au/talks/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Resources index  -->
+<url>
+<loc>https://www.maxdesign.com.au/resources/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Services index  -->
+<url>
+<loc>https://www.maxdesign.com.au/services/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Training index  -->
+<url>
+<loc>https://www.maxdesign.com.au/training/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Workshops index  -->
+<url>
+<loc>https://www.maxdesign.com.au/workshops/index.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<!--  Sitemap HTML page itself  -->
+<url>
+<loc>https://www.maxdesign.com.au/sitemap.html</loc>
+<lastmod>2025-12-06</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
 
 </urlset>
