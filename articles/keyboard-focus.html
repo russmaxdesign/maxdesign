@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Where do all the rules around keyboard focus live? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Keyboard focus is not guesswork. It is defined across several parts of the HTML and DOM specifications.">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Where do all the rules around keyboard focus live?</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+
+<p>Keyboard focus is essential for a wide range of users, especially:</p>
+
+<ul>  
+  <li>people with no vision who use screen readers</li>
+  <li>people with limited movement who rely on the keyboard or keyboard equivalents</li>
+</ul>
+
+<p>But how do browsers know where to send focus? Are there specific rules they need to follow?</p>
+
+<p>The answer is <b>yes</b>.</p>
+
+<p>Keyboard focus is not guesswork. It is defined across several parts of the HTML and DOM specifications, each describing a different aspect of how focus should behave.</p>
+
+<p>This article highlights <b>six key documents</b> that determine keyboard focus behaviour.</p>
+
+<h2>Who should care about these specifications?</h2>
+
+<p>Understanding where focus rules live is valuable for anyone who builds or maintains interactive user interfaces, including:</p>
+
+<h3 class="h4">1. Front-end developers</h3>
+
+<p>Especially those working with complex, non-native components such as:</p>
+
+<ul>
+  <li>custom dialogs</li>
+  <li>dropdowns</li>
+  <li>menus</li>
+  <li>accordions</li>
+  <li>popovers</li>
+  <li>Shadow DOM components</li>
+</ul>
+
+<h3 class="h4">2. Accessibility professionals</h3>
+
+<p>Knowing the true source of focus behaviour helps you:</p>
+
+<ul>
+  <li>diagnose “focus bugs” more accurately</li>
+  <li>explain native keyboard behaviour to teams</li>
+</ul>
+
+<h3 class="h4">3. Design system and component library teams</h3>
+
+<p>Design systems fail when focus becomes unpredictable. These teams must ensure:</p>
+
+<ul>
+  <li>consistent focus behaviour across all components</li>
+  <li>correct tab order</li>
+  <li>clean focus indicators</li>
+</ul>
+
+<h3 class="h4">4. UX designers and interaction specialists</h3>
+
+<p>Understanding the native rules leads to simpler, more robust designs. Focus rules shape:</p>
+
+<ul>
+  <li>keyboard interaction models</li>
+  <li>accessible navigation patterns</li>
+</ul>
+
+<h3 class="h4">5. QA testers and auditors</h3>
+
+<p>Knowing how focus should behave helps testers:</p>
+
+<ul>
+  <li>identify regressions</li>
+  <li>evaluate AT compatibility</li>
+  <li>recognise keyboard-based bugs</li>
+</ul>
+
+<h2>Why should you care?</h2>
+
+<p>Together, these specifications explain the foundations of keyboard interactions:</p>
+
+<ul>
+  <li>how browsers calculate the tab order</li>
+  <li>how native elements behave with or without <code>tabindex</code></li>
+  <li>how focus moves across Shadow DOM boundaries</li>
+  <li>why some elements cannot receive focus</li>
+  <li>what happens inside the browser when focus changes</li>
+  <li>how popovers, dialogs, and other layered UIs should manage focus</li>
+  <li>where accessibility APIs fit into the process</li>
+</ul>
+
+<p>Let’s look at the specs!</p>
+
+<hr>
+
+<h2>1. HTML Standard — “Sequential focus navigation”</h2>
+
+<p><b>Section</b>: <a href="https://html.spec.whatwg.org/multipage/interaction.html#sequential-focus-navigation" target="_blank">The tabindex attribute</a></p>
+
+<p>This section defines how the browser decides which element receives focus when the user presses Tab or Shift+Tab. It is the closest thing to the “focus navigation algorithm” most developers imagine.</p>
+
+<p>It defines:</p>
+
+<ul>
+  <li>how browsers collect the list of sequentially focusable elements</li>
+  <li>how the tab order is constructed</li>
+  <li>what happens when the user moves forward or backward through that order</li>
+</ul>
+
+<hr>
+
+<h2>2. HTML Standard — “The focusing steps”</h2>
+
+<p><b>Section</b>: <a href="https://html.spec.whatwg.org/multipage/interaction.html#focusing-steps" target="_blank">Focus steps</a></p>
+
+<p>These are the actual steps a browser runs when setting focus.</p>
+
+<p>It defines:</p>
+
+<ul>
+  <li>blurring the previously focused element</li>
+  <li>firing <code>focusin</code> and <code>focus</code> events</li>
+  <li>adjusting text selection when needed</li>
+  <li>scrolling the focused element into view</li>
+  <li>retargeting focus through Shadow DOM</li>
+  <li>exposing the focus change to accessibility APIs</li>
+</ul>
+
+<p>This is the core “what happens during focus” algorithm.</p>
+
+<hr>
+
+<h2>3. HTML Standard — “Can be focused” steps</h2>
+
+<p><b>Section</b>: <a href="https://html.spec.whatwg.org/multipage/interaction.html#can-be-focused" target="_blank">Can be focused</a></p>
+
+<p>This algorithm determines whether an element is allowed to receive focus. It answers the common question: “Why isn’t this element getting focus?”</p>
+
+<p>It checks:</p>
+
+<ul>
+  <li>whether the element is natively focusable</li>
+  <li>whether <code>tabindex</code> changes its focusability</li>
+  <li>whether it is disabled</li>
+  <li>whether it is hidden (<code>display:none</code>, <code>visibility:hidden</code>, <code>inert</code>)</li>
+  <li>whether it is editable or contains a browsing context</li>
+  <li>Shadow DOM rules that affect focusability</li>
+</ul>
+
+<hr>
+
+<h2>4. HTML Standard — “Tabindex order”</h2>
+
+<p><b>Section</b>: <a href="https://html.spec.whatwg.org/multipage/interaction.html#tabindex" target="_blank">The tabindex attribute</a></p>
+
+<p>This section defines how <code>tabindex</code> values influence the tab order.</p>
+
+<p>A key detail is that <code>tabindex</code> values greater than <code>0</code> create a custom tab order, which must be sorted numerically before any <code>tabindex="0"</code> or native focusable elements. This often leads to unexpected or broken focus patterns on large UIs.</p>
+
+<p>It defines:</p>
+
+<ul>
+  <li>how elements with <code>tabindex > 0</code> are sorted</li>
+  <li>how <code>tabindex="0"</code> fits into DOM order</li>
+  <li>how native focusable elements are integrated</li>
+  <li>why relying on <code>tabindex > 0</code> is discouraged</li>
+</ul>
+
+<hr>
+
+<h2>5. HTML Standard — “Popover focusing steps”</h2>
+
+<p><b>Section</b>: <a href="https://html.spec.whatwg.org/multipage/interaction.html#popovers-focus" target="_blank">Popover focus</a></p>
+
+<p>This algorithm handles the focus behaviour associated with popovers and popover-like UI. Although the Popover API is new, its focus rules affect many common interaction patterns.</p>
+
+<p>It affects:</p>
+
+<ul>
+  <li>how focus is trapped inside a popover</li>
+  <li>what happens to focus when the popover closes</li>
+  <li>how focus is restored to the triggering element</li>
+  <li>how nested or overlapping popovers behave</li>
+</ul>
+
+<p>This matters even if you aren’t using the Popover API directly, because many UI libraries mirror this behaviour.</p>
+
+<hr>
+
+<h2>6. Shadow DOM–specific focus rules</h2>
+
+<p><b>Sections</b>: <a href="https://dom.spec.whatwg.org/#shadow-tree" target="_blank">Shadow tree</a> and <a href="https://dom.spec.whatwg.org/#retarget" target="_blank">Retargeting</a></p>
+
+<p>The DOM Standard doesn’t define its own “focus algorithm,” but it defines the rules that shape how focus behaves inside custom elements. These rules explain why focus inside custom elements can feel different to focus in the light DOM.</p>
+
+<p>These documents define:</p>
+
+<ul>
+  <li>how the composed tree is constructed</li>
+  <li>how focus and blur retarget across Shadow DOM boundaries</li>
+  <li>how the shadow host and internal elements appear to event listeners</li>
+  <li>how <code>delegatesFocus</code> changes click-based focus behaviour</li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>These six documents form an overall &ldquo;rulebook&rdquo; that browsers follow when managing keyboard focus.</p>
+
+<p>Understanding these rules is important when diagnosing issues, designing reliable interactions, and building components that work predictably for everyone who relies on the keyboard.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+
