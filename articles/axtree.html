@@ -42,7 +42,7 @@
 <p class="metadetails">Published: <time datetime="2025-12-07">7 December 2025</time></p>
 
 <div class="further-reading">
-  <p style="margin: 0; font-size: .9em;"><b>Note</b>: The following steps represent my understanding of how Chrome constructs its accessibility tree. This is based on patterns visible in Chromium’s open-source codebase — especially in Blink’s accessibility implementation and the AXTree serialization layer. Source references are listed at the end.</p>
+  <p style="margin: 0; font-size: .9em;"><b>Note</b>: The following steps represent my understanding of how Chrome constructs its accessibility tree. This is based on information from Chromium’s open-source codebase. Source references are listed at the end.</p>
 </div>
 
 <p>We’re often told that the browser builds its accessibility tree ‘from the DOM,’ but what does that actually involve?</p>
@@ -85,7 +85,9 @@
 
 <p>Blink assembles a stable representation of the current accessibility tree, caches computed values, and marks any nodes that have changed since the previous snapshot.</p>
 
-<p><b>Note</b>: This “what changed?” information is crucial — it is exactly how Blink determines whether an AXEvent needs to fire. It is the differences between the old and new snapshots that trigger accessibility events.</p>
+<div class="further-reading" style="background-color: rgba(200,0,0,.1);">
+  <p style="margin: 0;"><b>Note</b>: This “what changed?” information is crucial — it is exactly how Blink determines whether an AXEvent needs to fire. It is the differences between the old and new snapshots that trigger accessibility events.</p>
+</div>
 
 <h2>10. Generate AXEvents based on tree changes</h2>
 

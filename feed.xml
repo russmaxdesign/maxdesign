@@ -1,15 +1,18 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" 
-     xmlns:dc="http://purl.org/dc/elements/1.1/" 
-     xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+<rss xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
      version="2.0">
 <channel>
 
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Sat, 06 Dec 2025 07:33:00 +0000</lastBuildDate>
-<pubDate>Sat, 06 Dec 2025 07:33:00 +0000</pubDate>
-<atom:link href="https://www.maxdesign.com.au/feed.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Sun, 07 Dec 2025 07:33:00 +0000</lastBuildDate>
+<pubDate>Sun, 07 Dec 2025 07:33:00 +0000</pubDate>
+
+<atom:link href="https://www.maxdesign.com.au/feed.xml"
+           rel="self"
+           type="application/rss+xml"/>
 
 <image>
   <url>https://www.maxdesign.com.au/apple-touch-icon-precomposed.png</url>
@@ -18,7 +21,28 @@
 </image>
 
 <!--  =========================================================  -->
-<!--  1. Understanding screen reader speech queues               -->
+<!--  1. How Chrome builds the accessibility tree                -->
+<!--  =========================================================  -->
+<item>
+<title>How Chrome builds the accessibility tree - start to finish</title>
+<link>https://www.maxdesign.com.au/articles/axtree.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/axtree.html</guid>
+<pubDate>Sun, 07 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Accessibility</category>
+<category>Browser internals</category>
+<description>We are often told that the browser builds its accessibility tree from the DOM, but what does that actually involve?</description>
+<content:encoded>
+<![CDATA[
+<p>We are often told that the browser builds its <strong>accessibility tree</strong> from the DOM — but what does that actually involve?</p>
+<p>This article walks through Chrome’s full AXTree construction pipeline: node filtering, role computation, name/description resolution, layout attachment, attribute mapping, and final AXTree snapshot generation.</p>
+<p><a href="https://www.maxdesign.com.au/articles/axtree.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+<!--  =========================================================  -->
+<!--  2. Understanding screen reader speech queues               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -39,7 +63,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  2. What is an AXEvent?                                     -->
+<!--  3. What is an AXEvent?                                     -->
 <!--  =========================================================  -->
 <item>
 <title>What is an AXEvent?</title>
@@ -60,7 +84,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  3. What happens when an event occurs? — the quick answer    -->
+<!--  4. What happens when an event occurs? — the quick answer    -->
 <!--  =========================================================  -->
 <item>
 <title>What happens when an event occurs? — the quick answer</title>
@@ -81,7 +105,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  4. What are DOM mutations?                                 -->
+<!--  5. What are DOM mutations?                                 -->
 <!--  =========================================================  -->
 <item>
 <title>What are DOM mutations?</title>
@@ -102,7 +126,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  5. What really happens when a user clicks an accordion?    -->
+<!--  6. What really happens when a user clicks an accordion?    -->
 <!--  =========================================================  -->
 <item>
 <title>What really happens when a user clicks an accordion button?</title>
@@ -124,7 +148,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  6. End-to-end browser and accessibility event architecture  -->
+<!--  7. End-to-end browser and accessibility event architecture  -->
 <!--  =========================================================  -->
 <item>
 <title>End-to-end browser and accessibility event architecture</title>
@@ -145,7 +169,7 @@
 </item>
 
 <!--  =========================================================  -->
-<!--  7. Understanding aria-live timing                          -->
+<!--  8. Understanding aria-live timing                          -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-live timing: a two-Layer model</title>

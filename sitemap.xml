@@ -37,7 +37,16 @@
 </url>
 
 <!--  20 latest articles  -->
-<!--  1. New article added  -->
+
+<!--  1. How Chrome builds the accessibility tree – start to finish  -->
+<url>
+<loc>https://www.maxdesign.com.au/articles/axtree.html</loc>
+<lastmod>2025-12-07</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<!--  2. Understanding screen reader speech queues  -->
 <url>
 <loc>https://www.maxdesign.com.au/articles/understanding-speech-queues.html</loc>
 <lastmod>2025-12-06</lastmod>
