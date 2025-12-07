@@ -59,21 +59,21 @@
 <p>For this analogy, think of utterances as different types of vehicles:</p>
 
 <ul>
-  <li><b>Focus events</b> are like ambulances, almost always go to the high-priority lane.</li>
+  <li><b>Alerts</b> are like fire trucks with their sirens on — they take priority over everything.</li>
+  <li><b>Focus events</b> are like ambulances — urgent and usually get high priority.</li>
+  <li><b>Live region updates</b> are like delivery vans — some urgent, some less urgent.</li>
   <li><b>Name and value changes</b> are like ordinary cars.</li>
   <li><b>Typing events</b> (individual keystrokes) are like motor scooters.</li>
-  <li><b>Live region updates</b> are like delivery vans.</li>
-  <li><b>User-initiated commands</b> (explicit user intent) are like buses that carry priority passengers.</li>
 </ul>
 
 <h2>What is the speech queue?</h2>
 
 <p>In this analogy, the speech queue is like a traffic intersection with two lanes:</p>
 
-<ol>
-  <li>A high-priority lane for focus and alerts</li>
-  <li>A low-priority lane for polite live regions and typing</li>
-</ol>
+<ul>
+  <li><b>High-priority lane</b> for alerts, focus events, and assertive live regions</li>
+  <li><b>Low-priority lane</b> for polite live regions, name/value changes, and typing</li>
+</ul>
 
 <p>More importantly, the speech queue has a traffic inspector. This inspector checks every vehicle before letting it through.</p>
 
@@ -87,50 +87,50 @@
   <li>Ignore it</li>
 </ul>
 
-<h2>Scenarios</h2>
+<p>Now that we know how the lanes and the inspector work, let’s see how each type of vehicle behaves when it enters the intersection.</p>
 
-<h3 class="h4">Interrupt</h3>
-
-<ul>
-  <li>An alert interrupts anything currently speaking.</li>
-  <li>Alerts travel through the high-priority lane.</li>
+<h3 class="h4">Alerts (fire trucks with sirens on)</h3>
+<p style="margin-bottom: 1em"><i>Example: a session timeout warning appears.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the high-priority lane</li>
+  <li>Always go first in the queue</li>
 </ul>
 
-<h3 class="h4">Speak immediately</h3>
-
-<ul>
-  <li>Focus moves to a button and the screen reader says “Button, Search”.</li>
-  <li>Focus events always use the high-priority lane.</li>
+<h3 class="h4">Focus events (ambulances)</h3>
+<p style="margin-bottom: 1em"><i>Example: the user tabs to a new button.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the high-priority lane</li>
+  <li>Go first unless a fire truck arrives</li>
 </ul>
 
-<h3 class="h4">User commands</h3>
-<ul>
-  <li>The user presses a screen reader command, such as “read next line” or “read current item”.</li>
-  <li>These commands act like buses carrying priority passengers.</li>
-  <li>They jump straight to the front of the high-priority lane and interrupt anything being spoken.</li>
+<h3 class="h4">Assertive live region updates (urgent delivery vans)</h3>
+<p style="margin-bottom: 1em"><i>Example: aria-live="assertive" announces a critical change.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the high-priority lane</li>
+  <li>Often spoken immediately</li>
 </ul>
 
-<h3 class="h4">Delay or batch</h3>
-
-<ul>
-  <li>A polite live region is spoken later when the screen reader is idle.</li>
-  <li>These are cars in the low-priority lane that wait their turn.</li>
+<h3 class="h4">Polite live region updates (non-urgent delivery vans)</h3>
+<p style="margin-bottom: 1em"><i>Example: aria-live="polite" announces a status message.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the low-priority lane</li>
+  <li>Wait until the road is clear</li>
 </ul>
 
-<h3 class="h4">Ignore</h3>
-
-<ul>
-  <li>Repeated small updates such as rapid changes in a low-priority lane may be ignored.</li>
-  <li>These are low-value cars that the inspector pushes aside.</li>
+<h3 class="h4">Name and value changes (ordinary cars)</h3>
+<p style="margin-bottom: 1em"><i>Example: a checkbox changes from unchecked to checked.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the low-priority lane</li>
+  <li>Wait their turn</li>
 </ul>
 
-<h3 class="h4">Merge events</h3>
-
-<ul>
-  <li>A user types quickly and the screen reader only speaks the final letter or speaks nothing.</li>
-  <li>These are motor scooters arriving almost all at once in the low-priority lane.</li>
-  <li>There may be too many scooters, arriving too fast.</li>
-  <li>The traffic inspector becomes overwhelmed and waves them all through, only registering the last one. In reality, it’s not actual ‘overload’ — it’s intentional debouncing.</li>
+<h3 class="h4">Typing events (motor scooters)</h3>
+<p style="margin-bottom: 1em"><i>Example: a user types several letters quickly.</i></p>
+<ul style="margin-top: 1em;">
+  <li>Use the low-priority lane</li>
+  <li>Scooters often arrive in a swarm when the user types quickly.</li>
+  <li>The traffic inspector waves the whole swarm through rather than stopping to check each one.</li>
+  <li>Only the last scooter is noticed and spoken (intentional debouncing)</li>
 </ul>
 
 <h2>Screen readers behave differently</h2>
