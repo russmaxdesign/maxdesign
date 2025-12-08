@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Did you know your browser has two accessibility trees? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="We are often told that the browser builds its accessibility tree from the DOM, but what does that actually involve?">
+  <meta name="keywords" content="training, accessibility, maxdesign, max design, web design, web development, css, web-standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Did you know your browser has two accessibility trees?</h1>    
+    </div>
+  </div>  
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+
+<div class="further-reading" style="margin-top: 0;">
+  <p style="margin: 0; font-size: .9em;"><b>Note</b>: The following steps represent my current understanding of how Chrome’s internal accessibility pipeline works. This overview is based on information from the Chromium open-source codebase, public documentation, and discussions from Chromium’s accessibility components. Any errors are my own.</p>
+</div>
+
+<p>Over the past weeks, I’ve written a series of articles that explain how events and the accessibility tree work at a high level. These include:</p>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/axtree.html">How Chrome builds the accessibility tree — start to finish</a></li>
+  <li><a href="https://www.maxdesign.com.au/articles/what-happens.html">What happens when an accessibility event occurs? — the quick answer</a></li>
+</ul>
+
+<p>In those articles, we follow a clean, simple pipeline:</p>
+
+<pre style="margin-bottom: 3em;"><code>DOM mutation
+↓
+AXEvent
+↓
+Accessibility tree
+↓
+OS accessibility API
+↓
+Screen reader</code></pre>
+
+<p>This model is correct. But there is a lot more that happens between the DOM mutation and the moment an event appears in the accessibility tree.</p>
+
+<p>And here’s the strange part: Chrome doesn’t have one accessibility tree, it has two!</p>
+
+<p>These are:</p>
+
+<ol>
+  <li>The hidden internal tree in Blink.</li>
+  <li>The public-facing platform-neutral tree you normally interact with.</li>
+</ol>
+
+<p>This article traces the full lifecycle of an accessibility event. From the moment the DOM changes, through Blink’s internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
+
+<p>This is a highly technical look at how Chrome actually works.</p>
+
+<p><b>Strap in. This is going to be a deep, wild ride.</b></p>
+
+<hr>
+
+<h2>Chrome’s accessibility event lifecycle</h2>
+
+<h3>1. A DOM mutation occurs</h3>
+
+<p>A DOM mutation means something changes in the DOM: text, attributes, structure, visibility, layout, state, or content. These changes may happen with or without JavaScript.</p>
+
+<div class="further-reading" style="margin-top: 0;">
+  <p style="margin: 0;"><b>Note</b>: Steps 2-5 occur inside Blink’s internal accessibility tree.</p>
+</div>
+
+<h2>2. Blink evaluates whether the mutation affects accessibility</h2>
+
+<p>Blink (Chrome’s rendering engine) uses its internal accessibility tree to check whether the mutation affects semantics such as:</p>
+
+<ul>
+  <li>accessible name</li>
+  <li>role</li>
+  <li>state</li>
+  <li>relationships</li>
+  <li>geometry</li>
+  <li>tree structure</li>
+</ul>
+
+<p>If the change has no accessibility impact, the process stops here.</p>
+
+<h3>3. If it does affect accessibility, Blink marks the corresponding AX node as “dirty”</h3>
+
+<p>AX nodes belong to Blink’s internal accessibility tree. They represent semantic objects such as:</p>
+
+<ul>
+  <li>buttons</li>
+  <li>headings</li>
+  <li>links</li>
+  <li>list items</li>
+  <li>text fields</li>
+  <li>static text</li>
+</ul>
+
+<p>AX nodes are not DOM nodes — they are a separate structure derived from the DOM.</p>
+
+<p>A node becomes <b>dirty</b> when its accessible representation must be refreshed, such as when:</p>
+
+<ul>
+  <li>its accessible name changes</li>
+  <li>its role changes</li>
+  <li>its state changes</li>
+  <li>its text content changes</li>
+  <li>its child list changes</li>
+  <li>its geometry changes</li>
+</ul>
+
+<p>Dirty nodes tell Blink which AX nodes must be <b>re-serialized</b>. This means that Blink generates a fresh AXNodeData snapshot for the node with all its current properties.</p>
+
+<h3>4. Blink creates an AXEvent describing what kind of accessibility change occurred</h3>
+
+<p><b>AXEvents</b> are internal Blink signals that never leave the renderer process.</p>
+
+<p>AXEvents label the semantic type of change and Blink sends these event types to the browser process, which uses them to determine which OS accessibility events to fire.</p>
+
+<p>They are not JavaScript events and not OS events.</p>
+
+<h3>5. Blink re-serializes dirty AX nodes into AXNodeData to capture what actually changed</h3>
+
+<p>Each dirty AX node is converted into <b>AXNodeData</b>.</p>
+
+<p>An AXNodeData is platform-neutral snapshot that includes:</p>
+
+<ul>
+  <li>role</li>
+  <li>name</li>
+  <li>description</li>
+  <li>value</li>
+  <li>states</li>
+  <li>relations</li>
+  <li>bounding box</li>
+  <li>text content</li>
+  <li>ARIA attributes</li>
+  <li>child node IDs</li>
+</ul>
+
+<p>AXNodeData is a snapshot of a Blink AX node, converted into a simple data structure so it can be sent from the renderer process to the browser process using Chrome’s internal messaging system (IPC).</p>
+
+<h3>6. Blink sends AXNodeData to the browser process, which delivers them to BrowserAccessibilityManager</h3>
+
+<p>This is the moment when data leaves Blink’s AX tree and enters Chrome’s BrowserAccessibility tree in the browser process.</p>
+
+<p>Blink sends the updated AXNodeData and a list of event types to fire.</p>
+
+<p>Blink’s role ends here.</p>
+
+<div class="further-reading">
+  <p style="margin: 0;"><b>Note</b>: Steps 7–10 occur inside the BrowserAccessibility tree.</p>
+</div>
+
+<h3>7. BrowserAccessibilityManager updates Chrome’s platform-neutral accessibility tree</h3>
+
+<p><b>BrowserAccessibilityManager</b> maintains Chrome’s second accessibility tree - the BrowserAccessibility tree.</p>
+
+<p>Using AXNodeData, it:</p>
+
+<ul>
+  <li>updates BrowserAccessibility nodes</li>
+  <li>adjusts roles, names, states, geometry</li>
+  <li>updates parent/child relationships</li>
+  <li>invalidates caches</li>
+  <li>decides whether the reported event type should result in a platform accessibility event</li>
+</ul>
+
+<p>This is the accessibility tree Chrome exposes to operating systems.</p>
+
+<h3>8. Each BrowserAccessibility node has a platform-specific accessibility wrapper</h3>
+
+<p>Every node in the BrowserAccessibility tree is paired with a persistent platform wrapper, such as:</p>
+
+<ul>
+  <li>macOS: <code>BrowserAccessibilityCocoa</code></li>
+  <li>Windows: <code>BrowserAccessibilityWin</code></li>
+  <li>Linux: <code>BrowserAccessibilityAtk</code></li>
+  <li>Android: <code>BrowserAccessibilityAndroid</code></li>
+</ul>
+
+<p>These wrappers translate Chrome’s platform-neutral accessibility data into the specific OS accessibility API.</p>
+
+<h3>9. The platform wrapper is notified and emits the corresponding platform accessibility event</h3>
+
+<p>The wrapper translates the event into the correct platform-specific accessibility event and fires it through the OS API.</p>
+
+<p>Accessibiltiy events could include:</p>
+
+<ul>
+  <li><code>NSAccessibilityPostNotification</code> (macOS)</li>
+  <li><code>UiaRaiseAutomationEvent</code> (Windows)</li>
+  <li><code>object:state-changed</code> (Linux AT-SPI)</li>
+  <li>Android <code>AccessibilityEvent</code> objects</li>
+</ul>
+
+<p>These are the events assistive technologies actually receive.</p>
+
+<h3>10. Screen readers query the OS accessibility API, which retrieves information from Chrome’s BrowserAccessibility tree</h3>
+
+<p>Screen readers such as VoiceOver, NVDA, JAWS, Narrator, and TalkBack:</p>
+
+<ul>
+  <li>listen for the OS accessibility event</li>
+  <li>query the BrowserAccessibility tree via the OS accessibility API</li>
+  <li>retrieve the updated node information</li>
+  <li>generate speech, braille, or focus movement</li>
+</ul>
+
+<p>This is where the user finally experiences the result of the original DOM mutation.</p>
+
+<p>So the more detailed diagram is now:</p>
+
+<pre><code>DOM mutation
+↓
+Blink AX tree
+↓
+Blink accessibility updates (AXEvents + AXNodeData)
+↓
+BrowserAccessibility tree
+↓
+Platform wrappers
+↓
+OS API
+↓
+Screen readers
+</code></pre>
+
+<p><b>We are done!</b></p>
+
+<hr>
+
+<h2>What’s the difference between the trees?</h2>
+
+<h3>Blink AX Tree (internal engine tree)</h3>
+
+<p>This is Blink’s own accessibility representation of the DOM. It is tightly connected to:</p>
+
+<ul>
+  <li>DOM nodes</li>
+  <li>layout</li>
+  <li>styles</li>
+  <li>ARIA attributes</li>
+  <li>computed semantics</li>
+</ul>
+
+<p>It’s used to detect accessibility-relevant changes and produce AXNodeData.</p>
+
+<p>Key features:</p>
+
+<ul>
+  <li>It lives inside the renderer process</li>
+  <li>It is part of Blink (Chrome’s rendering engine).</li>
+  <li>Because the renderer is sandboxed, it is not exposed outside Blink and cannot be accessed by assistive technologies.</li>
+</ul>
+
+<h3>BrowserAccessibility Tree (platform-neutral browser tree)</h3>
+
+<p>This is Chrome’s OS-facing accessibility tree. It stores:</p>
+
+<ul>
+  <li>roles</li>
+  <li>names</li>
+  <li>states</li>
+  <li>geometry</li>
+  <li>relationships</li>
+  <li>platform IDs and caches</li>
+</ul>
+
+<p>This tree is what Chrome exposes to operating systems such as:</p>
+
+<ul>
+  <li>macOS (AX API)</li>
+  <li>Windows (UIA)</li>
+  <li>Linux (AT-SPI)</li>
+  <li>Android (AccessibilityNodeInfo)</li>
+</ul>
+
+<p>Key features</p>
+
+<ul>
+  <li>It lives inside the browser process. </li>
+  <li>It is managed by BrowserAccessibilityManager</li>
+  <li>Updated via serialized AXNodeData sent from Blink</li>
+  <li>Holds platform-specific wrapper objects (Win, Cocoa, ATK, Android)</li>
+</ul>
+
+<p>This tree has permission to communicate with OS accessibility APIs.</p>
+
+<h2>Which tree is used by assistive technologies?</h2>
+
+<p>Screen readers only interact with the BrowserAccessibility tree.</p>
+
+<p>But everything they read originates in Blink’s AX tree. The data simply travels through AXNodeData to reach the browser tree.</p>
+
+<p>So, both trees are essential. They just play completely different roles.</p>
+
+<ul>
+  <li>Blink AX tree: computation, semantics, detection</li>
+  <li>BrowserAccessibility tree: exposure, platform events, screen reader queries</li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Every time a screen reader announces something, it’s the result of two accessibility trees working together behind the scenes.</p>
+
+<div class="further-reading">
+  <p style="margin: 0;"><b>Note</b>: Chrome’s accessibility architecture is complex and always evolving. If you have corrections or additional insight, <a href="https://www.maxdesign.com.au/contact-us/index.html" target="current">I’d be grateful to hear from you</a>.</p>
+</div>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
