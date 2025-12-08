@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What does “hidden” actually mean in Accessible Name computation? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="What counts as hidden for accessible name and description computation, and what does not?">
+  <meta name="keywords" content="training, accessibility, maxdesign, web design, html, aria, web standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What does “hidden” actually mean in Accessible Name computation?</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+
+<p><b>In other words</b>: when is an element allowed to contribute to an accessible name or description, and when is it excluded — except when intentionally referenced using <code>aria-labelledby</code> or <code>aria-describedby</code>?</p>
+
+<p>There are four categories:</p>
+
+<h2>1. <code>display:none</code>, <code>visibility:hidden</code>, <code>visibility:collapse</code>, <code>content-visibility:hidden</code></h2>
+
+<p>These ARE considered hidden.</p>
+
+<p>These elements are not rendered, do not take up space, and do not appear in the accessibility tree.</p>
+
+<p>(Note: behaviour of <code>visibility:collapse</code> varies for table rows/columns, but for non-table elements it behaves the same as <code>visibility:hidden</code>.)</p>
+
+<p><b>Verdict</b>: They cannot contribute to accessible names or descriptions.</p>
+
+<h2>2. <code>opacity:0</code>, <code>filter:opacity(0%)</code>, or similar SVG transparency techniques</h2>
+
+<p>These are NOT considered hidden.</p>
+
+<p>Even though the element is visually invisible, it is still present in the layout, in the DOM, in the accessibility tree, and as selectable or copyable text.</p>
+
+<p><b>Verdict</b>: They can contribute to accessible names and descriptions.</p>
+
+<h2>3. <code>aria-hidden="true"</code></h2>
+
+<p>This IS considered hidden.</p>
+
+<p>The author has explicitly instructed the browser to exclude the element from accessibility APIs.  
+It is removed from the accessibility tree.</p>
+
+<p><b>Verdict</b>: It cannot contribute to accessible names or descriptions.</p>
+
+<h2>4. Positioned off-screen or visually covered by other content</h2>
+
+<p>These are NOT considered hidden.</p>
+
+<p>If an element is moved far off-screen or visually obscured by another element, it still exists in the DOM and in the accessibility tree.  
+This includes patterns like “visually hidden but accessible” text used for contextual labelling.</p>
+
+<p><b>Verdict</b>: They can contribute to accessible names and descriptions.</p>
+
+<h2>Keep in mind</h2>
+
+<p>Hidden content is normally ignored, but <code>aria-labelledby</code> and <code>aria-describedby</code> can reference hidden elements and use them to create accessible names or descriptions for other elements.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What is an accumulated text bucket? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Learn how browsers build accessible names using the idea of an “accumulated text bucket”, and why some naming rules empty and replace it.">
+  <meta name="keywords" content="training, accessibility, maxdesign, web design, html, aria, web standards">
+  <link rel="apple-touch-icon-precomposed" href="https://maxdesign.com.au/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://maxdesign.com.au/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://maxdesign.com.au/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://maxdesign.com.au/apple-touch-icon-144x144-precomposed.png">
+  <link rel="shortcut icon" href="https://maxdesign.com.au/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What is an accumulated text bucket?</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+
+<p>When browsers calculate an accessible name for an element, they use a concept called accumulated text.</p>
+
+<p>Think of this as an “accumulated text bucket” — a container the browser fills with bits of text from different sources to build the final accessible name.</p>
+
+<p>“Accumulated text bucket” isn’t a real term from the specification, but it’s a helpful way to visualise how the algorithm collects, replaces, and sometimes discards name information as it works.</p>
+
+<p>Sometimes, new naming rules take priority over earlier ones. When that happens, the browser must empty the bucket and start again.</p>
+
+<h2>Step 2.2 of the spec</h2>
+
+<p>The Accessible Name and Description Computation includes the following rule:</p>
+
+<blockquote>
+  <p><b>2.2</b>: If the current node has an <code>aria-labelledby</code> attribute with at least one valid IDREF,
+  and the node is not already part of an ongoing <code>aria-labelledby</code> or <code>aria-describedby</code> traversal,
+  then:</p>
+  <p><b>2.2.1</b> Set the accumulated text to the empty string. (Empty the bucket.)</p>
+</blockquote>
+
+<p>In plain language:</p>
+
+<blockquote>
+  <p>When an element has a valid <code>aria-labelledby</code>, the browser clears anything it has collected so far, because the accessible name must come only from the referenced elements.</p>
+</blockquote>
+
+A simple example:
+
+<pre><code>&lt;button aria-labelledby="aaa"&gt;
+  Hello world
+&lt;/button&gt;
+&lt;p id="aaa" style="display: none;"&gt;Goodbye world&lt;/p&gt;</code></pre>
+
+<p>Even though the button contains visible text (“Hello world”), the <code>aria-labelledby</code> rule takes over.</p>
+
+<p>The browser must:</p>
+
+<ol>  
+  <li>Empty the accumulated text bucket</li>
+  <li>Ignore the button’s own content</li>
+  <li>Use only the text from the referenced element</li>
+  <li>Produce the final name: “Goodbye world”</li>
+</ol>
+
+<p>This example shows how higher-priority naming rules can replace earlier text, and why the “bucket” analogy helps make sense of how browsers build accessible names step by step.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+

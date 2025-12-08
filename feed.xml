@@ -21,7 +21,31 @@
 </image>
 
 <!--  =========================================================  -->
-<!--  1. How Chrome builds the accessibility tree                -->
+<!--  1. Did you know your browser has two accessibility trees?  -->
+<!--  =========================================================  -->
+<item>
+<title>Did you know your browser has two accessibility trees?</title>
+<link>https://www.maxdesign.com.au/articles/two-trees.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/two-trees.html</guid>
+<pubDate>Mon, 08 Dec 2025 07:33:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Accessibility</category>
+<description>This article traces the full lifecycle of an accessibility event. From the moment the DOM changes, through Blink’s internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</description>
+<content:encoded>
+<![CDATA[
+<p>This article traces the full lifecycle of an <strong>accessibility event</strong> — from the moment the DOM changes, through Blink’s internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
+
+<p>It introduces the concept of Chrome’s <strong>two accessibility trees</strong> and explains why only one of them is exposed to assistive technologies.</p>
+
+<p><a href="https://www.maxdesign.com.au/articles/two-trees.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. How Chrome builds the accessibility tree                -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -41,8 +65,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  2. Understanding screen reader speech queues               -->
+<!--  3. Understanding screen reader speech queues               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -62,8 +87,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  3. What is an AXEvent?                                     -->
+<!--  4. What is an AXEvent?                                     -->
 <!--  =========================================================  -->
 <item>
 <title>What is an AXEvent?</title>
@@ -83,8 +109,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  4. What happens when an event occurs? — the quick answer    -->
+<!--  5. What happens when an event occurs? — the quick answer    -->
 <!--  =========================================================  -->
 <item>
 <title>What happens when an event occurs? — the quick answer</title>
@@ -104,8 +131,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  5. What are DOM mutations?                                 -->
+<!--  6. What are DOM mutations?                                 -->
 <!--  =========================================================  -->
 <item>
 <title>What are DOM mutations?</title>
@@ -125,8 +153,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  6. What really happens when a user clicks an accordion?    -->
+<!--  7. What really happens when a user clicks an accordion?    -->
 <!--  =========================================================  -->
 <item>
 <title>What really happens when a user clicks an accordion button?</title>
@@ -147,8 +176,9 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  7. End-to-end browser and accessibility event architecture  -->
+<!--  8. End-to-end browser and accessibility event architecture  -->
 <!--  =========================================================  -->
 <item>
 <title>End-to-end browser and accessibility event architecture</title>
@@ -168,11 +198,12 @@
 </content:encoded>
 </item>
 
+
 <!--  =========================================================  -->
-<!--  8. Understanding aria-live timing                          -->
+<!--  9. Understanding aria-live timing                          -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-live timing: a two-Layer model</title>
+<title>Understanding aria-live timing: a two-layer model</title>
 <link>https://www.maxdesign.com.au/articles/aria-live-timing.html</link>
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-live-timing.html</guid>
 <pubDate>Tue, 02 Dec 2025 07:33:00 +0000</pubDate>
@@ -188,6 +219,7 @@
 ]]>
 </content:encoded>
 </item>
+
 
 </channel>
 </rss>
