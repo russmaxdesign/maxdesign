@@ -15,6 +15,7 @@ header {
   background: #acff02;
   padding: .5em;
   color: #333;
+  font-size: 16px;
 }
 
 nav {
@@ -50,7 +51,7 @@ footer p {
 
 @media screen and (min-width: 600px) {
   header {
-    padding: .5em 2em;
+    padding: 1em 2.27em;
   }
 
   nav {
