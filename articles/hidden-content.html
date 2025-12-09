@@ -41,9 +41,13 @@
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
 
-<p><b>In other words</b>: when is an element allowed to contribute to an accessible name or description, and when is it excluded — except when intentionally referenced using <code>aria-labelledby</code> or <code>aria-describedby</code>?</p>
+<p>The <em><a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></em> specification defines how browsers determine the accessible names and descriptions for elements. It contains a long series of detailed computation steps that explain which parts of the DOM are included in the calculation and which are ignored.</p>
+
+<p>One part of these steps sets out a broad definition of what the specification considers “hidden” for the purposes of name and description computation. This section is essential, but the language can be difficult to unpack.</p>
+
+<p>The aim of this article is to translate that definition into plain English so you can understand which elements are treated as hidden and which can still contribute to an accessible name.</p>
 
 <p>There are four categories:</p>
 
@@ -52,8 +56,6 @@
 <p>These ARE considered hidden.</p>
 
 <p>These elements are not rendered, do not take up space, and do not appear in the accessibility tree.</p>
-
-<p>(Note: behaviour of <code>visibility:collapse</code> varies for table rows/columns, but for non-table elements it behaves the same as <code>visibility:hidden</code>.)</p>
 
 <p><b>Verdict</b>: They cannot contribute to accessible names or descriptions.</p>
 
@@ -85,7 +87,14 @@ This includes patterns like “visually hidden but accessible” text used for c
 
 <h2>Keep in mind</h2>
 
-<p>Hidden content is normally ignored, but <code>aria-labelledby</code> and <code>aria-describedby</code> can reference hidden elements and use them to create accessible names or descriptions for other elements.</p>
+<p>Hidden content is normally ignored in accessible name and description computation. However, <code>aria-labelledby</code> and <code>aria-describedby</code> can reference hidden elements and still use their text to create accessible names or descriptions for other elements.</p>
+
+<p>In the following example, the paragraph is hidden, but it can still provide the accessible name for the <code>&lt;nav&gt;</code> element. The <code>&lt;nav&gt;</code> will have an accessible name of "Hello world".</p>
+
+<pre><code>&lt;nav aria-labelledby="aaa"&gt;
+  ...
+&lt;/nav&gt;
+&lt;p id="aaa" hidden&gt;Hello world&lt;/p&gt;</code></pre>
 
   </main>
   <footer>
