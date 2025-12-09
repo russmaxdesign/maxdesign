@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How does the Shadow DOM appear in the accessibility tree? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Learn how browsers build accessible names using the idea of an accumulated text bucket, and why some naming rules empty and replace it">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    maxdesign.com.au
+  </header>
+
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>How does the Shadow DOM appear in the accessibility tree?</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
+
+<h2>1. What is the Shadow DOM?</h2>
+
+<p>The Shadow DOM is a way for web components to keep some of their internal structure private.</p>
+
+<p>Think of it as a small, self-contained “mini-DOM” living inside an element.</p>
+
+<p>Why does this exist?</p>
+
+<p>Because it gives the component its own private space for markup, styles, and behaviour — separate from the rest of the page.</p>
+
+<p>This means you don’t need to worry about:</p>
+
+<ul>
+  <li>an ID inside the component clashing with an ID somewhere else on the page</li>
+  <li>your styles leaking into the component</li>
+  <li>the component’s styles leaking out into the page</li>
+  <li>JavaScript inside the component interfering with anything outside it — or vice versa</li>
+</ul>
+
+<p>In short: this encapsulation means you can drop a web component into a page and trust that it won’t break anything, and nothing on the page will break it.</p>
+
+<p>Inside <code>&lt;fancy-button&gt;</code>, the shadow tree might contain:</p>
+
+<ul>
+  <li>real  <code>&lt;button&gt;</code> elements</li>
+  <li>icons</li>
+  <li>extra wrapper  <code>&lt;div&gt;</code> elements</li>
+  <li>scripts and event handlers</li>
+  <li>styles that apply only inside the component</li>
+</ul>
+
+<p>All of this is hidden inside the component’s shadow tree.</p>
+
+<p>Well, technically it is hidden from the DOM tree, but not hidden from the browser’s internal representation.</p>
+
+<h2>2. What the Shadow DOM looks like in the DOM</h2>
+
+<p>Even though the Shadow DOM is part of the page, it doesn’t appear as normal DOM children.</p>
+
+<p>In DevTools, you have to expand the shadow root to see what’s inside. Until you do, the component looks like it contains nothing at all.</p>
+
+<p>Before you expand the shadow root, you only see:</p>
+
+<pre><code>&lt;fancy-button&gt;&lt;/fancy-button&gt;</code></pre>
+
+<p>But after it is expanded, it might look like this:</p>
+
+<pre><code>
+&lt;fancy-button&gt;
+  #shadow-root
+    &lt;button&gt;
+      &lt;span&gt;Buy now&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/fancy-button&gt;
+</code></pre>
+
+<h3>Flattening the Shadow DOM</h3>
+
+<p>Browsers face a problem: screen readers need to understand what’s inside the component.</p>
+
+<p>Without flattening, screen readers would not be able to see the real <code>&lt;button&gt;</code>, the text, or the focusable elements inside the shadow root.</p>
+
+<p>But all of that is hidden behind the Shadow DOM boundary.</p>
+
+<p>So how do browsers solve this?</p>
+
+<p>Shadow DOM boundaries are useful for developers, but they don’t make sense to assistive technologies. </p>
+
+<p>A screen reader cannot interact with a <code>&lt;fancy-button&gt;</code> unless the browser exposes the internal elements that users can actually operate.</p>
+
+<p>To make this work, browsers <b>flatten</b> the shadow tree when building the accessibility tree.</p>
+
+<p>Flattening removes the accessibility boundary of the shadow root and exposes the internal nodes as if they were normal children in the accessibility tree, not the DOM tree.</p>
+
+<h2>How different browsers do it</h2>
+
+<p>All major browsers flatten the shadow tree, but they do it at slightly different stages of their accessibility architecture.</p>
+
+<h3>Chrome (Blink)</h3>
+
+<p>Flattening happens inside the <b>Blink accessibility tree</b> in the renderer process.</p>
+
+<p>By the time the BrowserAccessibility tree is created, the shadow DOM is already flattened.</p>
+
+<h3>Firefox (Gecko)</h3>
+
+<p>Flattening happens in Gecko’s accessibility module.</p>
+
+<p>The accessibility tree reflects the <b>composed tree</b> (light DOM + shadow DOM combined), not the raw DOM.</p>
+
+<h3>Safari (WebKit)</h3>
+
+<p>WebKit exposes a flattened structure based on the composed tree, hiding shadow roots and slot wiring from assistive technologies.</p>
+
+<h2>Final takeaway</h2>
+
+<p>Screen readers never see shadow roots.</p>
+
+<p>They only ever see a single, flattened accessibility tree that merges the light DOM and the shadow DOM into one seamless hierarchy.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+
