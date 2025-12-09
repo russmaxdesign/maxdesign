@@ -38,42 +38,52 @@
 
 <p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
 
-<p>The <em><a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></em> specification defines how browsers determine the accessible names and descriptions for elements. It contains a long series of detailed computation steps that explain which parts of the DOM are included in the calculation and which are ignored.</p>
+<p>The <em><a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></em> explains how browsers decide which parts of a page can be used to create accessible names and descriptions.</p> 
 
-<p>One part of these steps sets out a broad definition of what the specification considers “hidden” for the purposes of name and description computation. This section is essential, but the language can be difficult to unpack.</p>
+<p>One important part of this specification defines what it means for something to be considered <b>“hidden”</b> during that calculation.</p>
 
-<p>The aim of this article is to translate that definition into plain English so you can understand which elements are treated as hidden and which can still contribute to an accessible name.</p>
+<p>In other words: <em>&ldquo;Which elements are ignored, and which can still be used to form an accessible name&rdquo;</em></p>
 
-<p>There are four categories:</p>
+<p>The steps below are plain English translations of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</p>
 
-<h2>1. <code>display:none</code>, <code>visibility:hidden</code>, <code>visibility:collapse</code>, <code>content-visibility:hidden</code></h2>
+<p>There are four categories defined in the specification:</p>
 
-<p>These ARE considered hidden.</p>
+<h2>1. Hidden via CSS</h2>
+
+<p>This includes: <code>display:none</code>, <code>visibility:hidden</code>, <code>visibility:collapse</code>, <code>content-visibility:hidden</code>.</p>
+
+<p>These properties <b>ARE</b> considered hidden.</p>
 
 <p>These elements are not rendered, do not take up space, and do not appear in the accessibility tree.</p>
 
 <p><b>Verdict</b>: They cannot contribute to accessible names or descriptions.</p>
 
-<h2>2. <code>opacity:0</code>, <code>filter:opacity(0%)</code>, or similar SVG transparency techniques</h2>
+<h2>2. Hidden via SVG or visual transparency</h2>
 
-<p>These are NOT considered hidden.</p>
+<p>This includes: <code>opacity:0</code>, <code>filter:opacity(0%)</code>, or similar SVG transparency techniques.</p>
+
+<p>These techniques <b>ARE NOT</b> considered hidden.</p>
 
 <p>Even though the element is visually invisible, it is still present in the layout, in the DOM, in the accessibility tree, and as selectable or copyable text.</p>
 
 <p><b>Verdict</b>: They can contribute to accessible names and descriptions.</p>
 
-<h2>3. <code>aria-hidden="true"</code></h2>
+<h2>3. Hidden via ARIA</h2>
 
-<p>This IS considered hidden.</p>
+<p>This includes: <code>aria-hidden="true"</code>.</p>
+
+<p>This attribute <b>IS</b> considered hidden.</p>
 
 <p>The author has explicitly instructed the browser to exclude the element from accessibility APIs.  
 It is removed from the accessibility tree.</p>
 
 <p><b>Verdict</b>: It cannot contribute to accessible names or descriptions.</p>
 
-<h2>4. Positioned off-screen or visually covered by other content</h2>
+<h2>4. Positioned off-screen or visually covered</h2>
 
-<p>These are NOT considered hidden.</p>
+<p>These elements remain in the accessibility tree even if they are not visible.</p>
+
+<p>These elements <b>ARE NOT</b> considered hidden.</p>
 
 <p>If an element is moved far off-screen or visually obscured by another element, it still exists in the DOM and in the accessibility tree.  
 This includes patterns like “visually hidden but accessible” text used for contextual labelling.</p>

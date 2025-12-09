@@ -38,66 +38,78 @@
 
 <p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
 
-<p>When browsers calculate an accessible name for an element, they use a concept called <b>&ldquo;accumulated text&rdquo;</b>.</p>
+<p>The <a href="https://www.w3.org/TR/accname-1.1/" target="_blank">Accessible Name and Description Computation</a> describes how browsers calculate accessible names and descriptions for elements.</p> 
 
-<p>Think of this as an “accumulated text bucket” — a container the browser fills with bits of text from different sources to build the final accessible name.</p>
+<p>Throughout the specification, you’ll see the term <b>&ldquo;accumulated text&rdquo;</b>.</p> 
 
-<figure>
-  <img style="max-width: 100%;" src="../assets/img/bucket.jpg" alt="A bucket in sand on the beach">
-  <figcaption style="font-size: .7em;">Photo by <a href="https://unsplash.com/@courtneyam98?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Courtney Moore</a> on <a href="https://unsplash.com/photos/yellow-plastic-bucket-on-brown-sand-near-body-of-water-during-daytime-absLd1jgXoo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></figcaption>
-</figure>
+<p>But what does &ldquo;accumulated text&rdquo; actually mean?</p>
 
-<p>“Accumulated text bucket” isn’t a real term from the specification. However, it’s a helpful way to visualise how the algorithm collects, replaces, and sometimes discards name information as it calculates the accessible name for elements.</p>
+<p>When the browser tries to compute an accessible name &mdash; for example, by following <code>aria-labelledby</code> references or collecting text from child nodes &mdash; the algorithm needs a temporary place to store the text it gathers.</p> 
+
+<p>Because the browser may need to pull text from several different locations (such as multiple referenced nodes or multiple child elements), it builds this up piece by piece in a temporary storage area called the &ldquo;accumulated text&rdquo;.</p> 
+
+<p>Think of this as an <b>&ldquo;accumulated text bucket&rdquo;</b> &mdash; a container the browser fills with bits of text from different sources before deciding what the final name should be.</p>
+
+<p>“Accumulated text bucket” isn’t an official term from the specification, but it’s a useful way to visualise how the algorithm collects, updates, and sometimes replaces text as it computes an accessible name.</p>
 
 <h2>An &ldquo;accumulated text&rdquo; example</h2>
 
-<p>In the example below, the the button&rsquo;s has an <code>aria-labelledby</code> that references two IDs. This means it&rsquo;s name has &ldquo;accumulated text&rdquo; coming from two sources:</p>
+<p>In the example below, the button’s <code>aria-labelledby</code> attribute references two IDs. This means its accessible name is built from two separate sources:</p>
 
 <pre><code>&lt;button aria-labelledby="aaa bbb"&gt;&lt;/button&gt;
 &lt;p id="aaa"&gt;Buy Lawn Mower&lt;/p&gt;
 &lt;p id="bbb"&gt;On special&lt;/p&gt;</code></pre>
 
-<p>The accumulated text generates the final accessible name: &ldquo;Buy Lawn Mower On special&rdquo;.</p>
+<p>The algorithm collects text from each referenced element, placing each piece into the “accumulated text” bucket. Once both sources are processed, the bucket contains:</p>
+
+<p><b>“Buy Lawn Mower On special”</b></p>
+
+<p>These text strings are concatenated to form the button’s final accessible name.</p>
 
 <h2>Emptying the bucket</h2>
 
-<p>Sometimes, new naming rules take priority over earlier ones. When that happens, the browser must &ldquo;empty the bucket&rdquo; and start again.</p>
+<p>Sometimes new naming rules take priority over earlier ones. When that happens, the browser must &ldquo;empty the bucket&rdquo; and start again.</p>
 
-<p>The Accessible Name and Description Computation includes the following rule:</p>
+<p>The Accessible Name and Description Computation includes the following rule:</p> 
 
 <blockquote>
-  <p><b>2.2</b>: If the current node has an <code>aria-labelledby</code> attribute with at least one valid IDREF,
-  and the node is not already part of an ongoing <code>aria-labelledby</code> or <code>aria-describedby</code> traversal,
-  then:</p>
+  <p><b>2.2</b> If the current node has an <code>aria-labelledby</code> attribute with at least one valid IDREF, and the node is not already part of an ongoing <code>aria-labelledby</code> or <code>aria-describedby</code> traversal, then:</p> 
   <p><b>2.2.1</b> Set the accumulated text to the empty string. (Empty the bucket.)</p>
 </blockquote>
 
 <p>In plain language:</p>
 
 <blockquote>
-  <p>When an element has a valid <code>aria-labelledby</code>, the browser clears anything it has collected so far, because the accessible name must come only from the referenced elements.</p>
+  <p>If an element has a valid <code>aria-labelledby</code>, the browser clears anything it has collected so far because the accessible name must come only from the referenced elements.</p>
 </blockquote>
 
 <p>A simple example:</p>
-
 <pre><code>&lt;button aria-labelledby="aaa"&gt;
   Hello world
 &lt;/button&gt;
-&lt;p id="aaa" style="display: none;"&gt;Goodbye world&lt;/p&gt;</code></pre>
+&lt;p id="aaa" style="display: none;"&gt;Goodbye world&lt;/p&gt;
+</code></pre>
 
-<p>Even though the button contains visible text (“Hello world”), the <code>aria-labelledby</code> rule takes over.</p>
+<p>Even though the button contains visible text (“Hello world”), the <code>aria-labelledby</code> rule overrides it.</p>
 
 <p>The browser must:</p>
 
-<ol>  
+<ol>
   <li>Empty the accumulated text bucket</li>
   <li>Ignore the button’s own content</li>
   <li>Use only the text from the referenced element</li>
-  <li>Produce the final name: “Goodbye world”</li>
+  <li>Produce the final name: “Goodbye world”</li> 
 </ol>
 
-<p>This example shows how higher-priority naming rules can replace earlier text, and why the “bucket” analogy helps make sense of how browsers build accessible names step by step.</p>
+<h2>What is “total accumulated text”?</h2>
 
+<p>The specification also refers to “total accumulated text,” which is the combined text collected from all relevant parts of the element and its referenced nodes.</p>
+
+<p>This “total accumulated text” is then concatenated into a single string to produce the element’s final accessible name.</p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding “accumulated text” and “total accumulated text” helps make sense of how browsers build accessible names. By picturing these steps as a bucket being filled, emptied, and finally combined into a single string, it becomes much easier to understand how the specification works in practice.</p>
 
   </main>
   <footer>

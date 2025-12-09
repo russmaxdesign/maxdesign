@@ -12,8 +12,9 @@ containers
 ----------------------*/
 
 header {
-  background: #DCDADA;
-  padding: .5em 1em;
+  background: #acff02;
+  padding: .5em;
+  color: #333;
 }
 
 nav {
@@ -49,7 +50,7 @@ footer p {
 
 @media screen and (min-width: 600px) {
   header {
-    padding: 1em 2em;
+    padding: .5em 2em;
   }
 
   nav {
@@ -99,7 +100,8 @@ h1,
 h2,
 h3,
 h4 {
-  color: #6D0E53;
+  /* color: #6D0E53; */
+  color: #1F1F1F;
   font-weight: bold;
   line-height: 1.2;
 }
@@ -108,7 +110,7 @@ h1 code,
 h2 code,
 h3 code,
 h4 code{
-  color: #6D0E53;
+  color: #1F1F1F;
 }
 
 h1 {
@@ -397,7 +399,6 @@ legend {
   background: #6D0E53;
   color: #fff;
 }
-
 
 /* ---------------------
 banner
