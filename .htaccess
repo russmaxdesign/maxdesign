@@ -1,434 +1,70 @@
-#Rewrite to www
+# -------------------------------------------------------
+# Canonical www redirect
+# -------------------------------------------------------
 Options +FollowSymLinks
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^maxdesign.com.au [NC]
-RewriteRule ^(.*)$ http://www.maxdesign.com.au [L,R=301]
 
-#Custom 400 errors
+RewriteCond %{HTTP_HOST} ^maxdesign\.com\.au [NC]
+RewriteRule ^(.*)$ https://www.maxdesign.com.au/$1 [L,R=301]
+
+# -------------------------------------------------------
+# Custom 404
+# -------------------------------------------------------
 ErrorDocument 404 /404.html
 
-#301 feed
-Redirect 301 /feed/ /feed.xml
-Redirect 301 /feed /feed.xml
-Redirect 301 /news/feed/ /feed.xml
-Redirect 301 /news/feed /feed.xml
-Redirect 301 /news/feed.xml /feed.xml
-Redirect 301 /articles/feed/ /feed.xml
-Redirect 301 /articles/feed /feed.xml
-Redirect 301 /articles/feed.xml /feed.xml
-Redirect 301 /presentation/feed/ /feed.xml
-Redirect 301 /presentation/feed /feed.xml
-Redirect 301 /presentation/feed.xml /feed.xml
-Redirect 301 /category/news/feed/ /feed.xml
-Redirect 301 /category/news/feed /feed.xml
-Redirect 301 /category/news/feed.xml /feed.xml
-Redirect 301 /category/articles/feed/ /feed.xml
-Redirect 301 /category/articles/feed /feed.xml
-Redirect 301 /category/articles/feed.xml /feed.xml
-Redirect 301 /articles/atom/ /feed.xml
-Redirect 301 /articles/atom /feed.xml
-Redirect 301 /articles/atom.xml /feed.xml
-Redirect 301 /feed/atom/ /feed.xml
-Redirect 301 /feed/atom /feed.xml
-Redirect 301 /feed/atom.xml /feed.xml
-Redirect 301 /news/atom/ /feed.xml
-Redirect 301 /news/atom /feed.xml
-Redirect 301 /news/atom.xml /feed.xml
-Redirect 301 /articles/rss/ /feed.xml
-Redirect 301 /articles/rss /feed.xml
-Redirect 301 /articles/rss.xml /feed.xml
-Redirect 301 /feed/rss/ /feed.xml
-Redirect 301 /feed/rss /feed.xml
-Redirect 301 /feed/rss.xml /feed.xml
-Redirect 301 /news/rss/ /feed.xml
-Redirect 301 /news/rss /feed.xml
-Redirect 301 /news/rss.xml /feed.xml
+# -------------------------------------------------------
+# FEEDS (all variants → feed.xml)
+# -------------------------------------------------------
+RedirectMatch 301 ^/(.+/)?(feed|rss|atom)(\.xml)?/?$ /feed.xml
 
-#301 pages
-Redirect 301 /about_russ.cfm /about/russweakley/index.html
-Redirect 301 /about.php /about/index.html
-Redirect 301 /articles/articles/index.html /articles/index.html
-Redirect 301 /articles/resources/index.html /resources/index.html
-Redirect 301 /articles/about/index.html /about/index.html
-Redirect 301 /articles/webstock-media/ /articles/webstock-media.html
-Redirect 301 /img/maxdesign.png /assets/img/maxdesign.png
+# -------------------------------------------------------
+# RETIRED LAYOUT DEMOS
+# Entire folders → /articles/index.html
+# IMPORTANT: must appear BEFORE rewrite rules below
+# -------------------------------------------------------
+RedirectMatch 301 ^/css-layouts(/.*)?$ /articles/index.html
+RedirectMatch 301 ^/liquid(/.*)?$ /articles/index.html
 
-#301 contact
-Redirect 301 /contact/ /contact-us/index.html
+# -------------------------------------------------------
+# EXTENSION NORMALISATION (.cfm, .htm → .html)
+# -------------------------------------------------------
+RewriteRule ^(.+)\.(cfm|htm)$ /$1.html [L,R=301]
+
+# -------------------------------------------------------
+# TRAILING SLASH NORMALISATION FOR HTML CONTENT
+# /foo/ → /foo.html  (if file exists)
+# -------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.html$
+RewriteRule ^(.+)/$ /$1.html [L,R=301]
+
+# -------------------------------------------------------
+# OLD WORDPRESS BLOG URLS
+# /YYYY/MM/DD/slug/ → /articles/slug.html
+# -------------------------------------------------------
+RewriteRule ^([0-9]{4})/[0-9]{2}/[0-9]{2}/(.+)/?$ /articles/$2.html [L,R=301]
+
+# -------------------------------------------------------
+# COLLAPSE presentation / news / articles prefix variations
+# /presentation/foo → /articles/foo.html
+# /news/foo → /articles/foo.html
+# /articles/foo → /articles/foo.html (ensures correct filename)
+# -------------------------------------------------------
+RewriteRule ^(presentation|news|articles)/([^/]+)/?$ /articles/$2.html [L,R=301]
+
+# -------------------------------------------------------
+# CONTACT + BOOK PAGES
+# -------------------------------------------------------
+Redirect 301 /contact /contact-us/index.html
 Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /contact.htm /contact-us/index.html
 
-#301 favicons
-Redirect 301 /img/apple-touch-icon-72x72-precomposed.png /apple-touch-icon-72x72-precomposed.png
-Redirect 301 /img/apple-touch-icon-114x114-precomposed.png /apple-touch-icon-114x114-precomposed.png
-Redirect 301 /img/apple-touch-icon-144x144-precomposed.png /apple-touch-icon-144x144-precomposed.png
-Redirect 301 /img/apple-touch-icon-precomposed.png /apple-touch-icon-precomposed.png
-
-#301 contact
+Redirect 301 /book /book/index.html
 Redirect 301 /book.cfm /book/index.html
 Redirect 301 /book.htm /book/index.html
 
-#301 dumbing down
-Redirect 301 /presentation/dumbing-down/ /articles/dumbing-down.html
-Redirect 301 /presentation/dumbing-down.cfm /articles/dumbing-down.html
-Redirect 301 /presentation/dumbing-down.htm /articles/dumbing-down.html
-Redirect 301 /articles/dumbing-down/ /articles/dumbing-down.html
-Redirect 301 /articles/dumbing-down.cfm /articles/dumbing-down.html
-Redirect 301 /articles/dumbing-down.htm /articles/dumbing-down.html
-Redirect 301 /news/dumbing-down/ /articles/dumbing-down.html
-Redirect 301 /news/dumbing-down.cfm /articles/dumbing-down.html
-Redirect 301 /news/dumbing-down.htm /articles/dumbing-down.html
-
-#301 liquid
-Redirect 301 /liquid.cfm /liquid/index.html
-Redirect 301 /liquid.htm /liquid/index.html
-Redirect 301 /presentation/liquid/ /liquid/index.html
-Redirect 301 /presentation/liquid.cfm /liquid/index.html
-Redirect 301 /presentation/liquid.htm /liquid/index.html
-Redirect 301 /articles/liquid/ /liquid/index.html
-Redirect 301 /articles/liquid.cfm /liquid/index.html
-Redirect 301 /articles/liquid.htm /liquid/index.html
-Redirect 301 /news/liquid/ /liquid/index.html
-Redirect 301 /news/liquid.cfm /liquid/index.html
-Redirect 301 /news/liquid.htm /liquid/index.html
-Redirect 301 /liquid/liquid-sample1/ /liquid/liquid-sample1.html
-Redirect 301 /liquid/liquid-sample2/ /liquid/liquid-sample2.html
-Redirect 301 /liquid/liquid-sample3/ /liquid/liquid-sample3.html
-Redirect 301 /liquid/liquid-sample4/ /liquid/liquid-sample4.html
-Redirect 301 /liquid/liquid-sample5/ /liquid/liquid-sample5.html
-Redirect 301 /liquid/liquid-sample6/ /liquid/liquid-sample6.html
-Redirect 301 /liquid/liquid-sample7/ /liquid/liquid-sample7.html
-Redirect 301 /liquid/liquid-sample8/ /liquid/liquid-sample8.html
-Redirect 301 /liquid/liquid-sample9/ /liquid/liquid-sample9.html
-Redirect 301 /presentation/liquid/liquid-sample1/ /liquid/liquid-sample1.html
-Redirect 301 /presentation/liquid/liquid-sample2/ /liquid/liquid-sample2.html
-Redirect 301 /presentation/liquid/liquid-sample3/ /liquid/liquid-sample3.html
-Redirect 301 /presentation/liquid/liquid-sample4/ /liquid/liquid-sample4.html
-Redirect 301 /presentation/liquid/liquid-sample5/ /liquid/liquid-sample5.html
-Redirect 301 /presentation/liquid/liquid-sample6/ /liquid/liquid-sample6.html
-Redirect 301 /presentation/liquid/liquid-sample7/ /liquid/liquid-sample7.html
-Redirect 301 /presentation/liquid/liquid-sample8/ /liquid/liquid-sample8.html
-Redirect 301 /presentation/liquid/liquid-sample9/ /liquid/liquid-sample9.html
-Redirect 301 /articles/liquid/liquid-sample1/ /liquid/liquid-sample1.html
-Redirect 301 /articles/liquid/liquid-sample2/ /liquid/liquid-sample2.html
-Redirect 301 /articles/liquid/liquid-sample3/ /liquid/liquid-sample3.html
-Redirect 301 /articles/liquid/liquid-sample4/ /liquid/liquid-sample4.html
-Redirect 301 /articles/liquid/liquid-sample5/ /liquid/liquid-sample5.html
-Redirect 301 /articles/liquid/liquid-sample6/ /liquid/liquid-sample6.html
-Redirect 301 /articles/liquid/liquid-sample7/ /liquid/liquid-sample7.html
-Redirect 301 /articles/liquid/liquid-sample8/ /liquid/liquid-sample8.html
-Redirect 301 /articles/liquid/liquid-sample9/ /liquid/liquid-sample9.html
-Redirect 301 /news/liquid/liquid-sample1/ /liquid/liquid-sample1.html
-Redirect 301 /news/liquid/liquid-sample2/ /liquid/liquid-sample2.html
-Redirect 301 /news/liquid/liquid-sample3/ /liquid/liquid-sample3.html
-Redirect 301 /news/liquid/liquid-sample4/ /liquid/liquid-sample4.html
-Redirect 301 /news/liquid/liquid-sample5/ /liquid/liquid-sample5.html
-Redirect 301 /news/liquid/liquid-sample6/ /liquid/liquid-sample6.html
-Redirect 301 /news/liquid/liquid-sample7/ /liquid/liquid-sample7.html
-Redirect 301 /news/liquid/liquid-sample8/ /liquid/liquid-sample8.html
-Redirect 301 /news/liquid/liquid-sample9/ /liquid/liquid-sample9.html
-
-#301 anonymous boxes
-Redirect 301 /presentation/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /presentation/anonymous-boxes.cfm /articles/anonymous-boxes.html
-Redirect 301 /presentation/anonymous-boxes.htm /articles/anonymous-boxes.html
-Redirect 301 /articles/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /articles/anonymous-boxes.cfm /articles/anonymous-boxes.html
-Redirect 301 /articles/anonymous-boxes.htm /articles/anonymous-boxes.html
-Redirect 301 /news/anonymous-boxes/ /articles/anonymous-boxes.html
-Redirect 301 /news/anonymous-boxes.cfm /articles/anonymous-boxes.html
-Redirect 301 /news/anonymous-boxes.htm /articles/anonymous-boxes.html
-
-#301 checklist
-Redirect 301 /presentation/checklist/ /articles/checklist.html
-Redirect 301 /presentation/checklist.cfm /articles/checklist.html
-Redirect 301 /presentation/checklist.htm /articles/checklist.html
-Redirect 301 /articles/checklist/ /articles/checklist.html
-Redirect 301 /articles/checklist.cfm /articles/checklist.html
-Redirect 301 /articles/checklist.htm /articles/checklist.html
-Redirect 301 /news/checklist/ /articles/checklist.html
-Redirect 301 /news/checklist.cfm /articles/checklist.html
-Redirect 301 /news/checklist.htm /articles/checklist.html
-Redirect 301 /2004/08/05/webstandards-checklist/ /articles/checklist.html
-Redirect 301 /2007/01/15/webstandards-checklist-more/ /articles/checklist.html
-
-#301 abbreviations
-Redirect 301 /presentation/abbreviations/ /articles/abbreviations.html
-Redirect 301 /presentation/abbreviations.cfm /articles/abbreviations.html
-Redirect 301 /presentation/abbreviations.htm /articles/abbreviations.html
-Redirect 301 /articles/abbreviations/ /articles/abbreviations.html
-Redirect 301 /articles/abbreviations.cfm /articles/abbreviations.html
-Redirect 301 /articles/abbreviations.htm /articles/abbreviations.html
-Redirect 301 /news/abbreviations/ /articles/abbreviations.html
-Redirect 301 /news/abbreviations.cfm /articles/abbreviations.html
-Redirect 301 /news/abbreviations.htm /articles/abbreviations.html
-Redirect 301 /2006/07/25/styling-abbreviations-2/ /articles/abbreviations.html
-
-#301 definition
-Redirect 301 /presentation/definition/ /articles/definition.html
-Redirect 301 /presentation/definition.cfm /articles/definition.html
-Redirect 301 /presentation/definition.htm /articles/definition.html
-Redirect 301 /presentation/definition/index.htm /articles/definition.html
-Redirect 301 /articles/definition/ /articles/definition.html
-Redirect 301 /articles/definition.cfm /articles/definition.html
-Redirect 301 /articles/definition.htm /articles/definition.html
-Redirect 301 /news/definition/ /articles/definition.html
-Redirect 301 /news/definition.cfm /articles/definition.html
-Redirect 301 /news/definition.htm /articles/definition.html
-Redirect 301 /2004/01/27/definition-lists/ /articles/definition.html
-
-#301 ideal line length
-Redirect 301 /presentation/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /presentation/ideal-line-length-in-ems.cfm /articles/ideal-line-length-in-ems.html
-Redirect 301 /presentation/ideal-line-length-in-ems.htm /articles/ideal-line-length-in-ems.html
-Redirect 301 /articles/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /articles/ideal-line-length-in-ems.cfm /articles/ideal-line-length-in-ems.html
-Redirect 301 /articles/ideal-line-length-in-ems.htm /articles/ideal-line-length-in-ems.html
-Redirect 301 /news/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /news/ideal-line-length-in-ems.cfm /articles/ideal-line-length-in-ems.html
-Redirect 301 /news/ideal-line-length-in-ems.htm /articles/ideal-line-length-in-ems.html
-Redirect 301 /2013/05/25/ideal-line-length-in-ems/ /articles/ideal-line-length-in-ems.html
-Redirect 301 /2003/05/03/ideal-line-length/ /articles/ideal-line-length-in-ems.html
-
-#301 about-structural-labels
-Redirect 301 /presentation/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /presentation/about-structural-labels.cfm /articles/about-structural-labels.html
-Redirect 301 /presentation/about-structural-labels.htm /articles/about-structural-labels.html
-Redirect 301 /articles/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /articles/about-structural-labels.cfm /articles/about-structural-labels.html
-Redirect 301 /articles/about-structural-labels.htm /articles/about-structural-labels.html
-Redirect 301 /news/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /news/about-structural-labels.cfm /articles/about-structural-labels.html
-Redirect 301 /news/about-structural-labels.htm /articles/about-structural-labels.html
-Redirect 301 /2006/01/17/about-structural-labels/ /articles/about-structural-labels.html
-Redirect 301 /articles/articles/about-structural-labels/ /articles/about-structural-labels.html
-
-#301 center
-Redirect 301 /presentation/center/ /articles/center.html
-Redirect 301 /presentation/center.cfm /articles/center.html
-Redirect 301 /presentation/center.htm /articles/center.html
-Redirect 301 /presentation/center/01.htm /articles/center.html
-Redirect 301 /articles/center/ /articles/center.html
-Redirect 301 /articles/center.cfm /articles/center.html
-Redirect 301 /articles/center.htm /articles/center.html
-Redirect 301 /articles/center/01.htm /articles/center.html
-Redirect 301 /news/center/ /articles/center.html
-Redirect 301 /news/center.cfm /articles/center.html
-Redirect 301 /news/center.htm /articles/center.html
-Redirect 301 /news/center/01.htm /articles/center.html
-
-#301 checked inputs
-Redirect 301 /presentation/checked-inputs/ /articles/checked-inputs.html
-Redirect 301 /presentation/checked-inputs.cfm /articles/checked-inputs.html
-Redirect 301 /presentation/checked-inputs.htm /articles/checked-inputs.html
-Redirect 301 /articles/checked-inputs/ /articles/checked-inputs.html
-Redirect 301 /articles/checked-inputs.cfm /articles/checked-inputs.html
-Redirect 301 /articles/checked-inputs.htm /articles/checked-inputs.html
-Redirect 301 /news/checked-inputs/ /articles/checked-inputs.html
-Redirect 301 /news/checked-inputs.cfm /articles/checked-inputs.html
-Redirect 301 /news/checked-inputs.htm /articles/checked-inputs.html
-
-#301 comment anatomy
-Redirect 301 /presentation/comment-anatomy/ /articles/comment-anatomy.html
-Redirect 301 /presentation/comment-anatomy.cfm /articles/comment-anatomy.html
-Redirect 301 /presentation/comment-anatomy.htm /articles/comment-anatomy.html
-Redirect 301 /articles/comment-anatomy/ /articles/comment-anatomy.html
-Redirect 301 /articles/comment-anatomy.cfm /articles/comment-anatomy.html
-Redirect 301 /articles/comment-anatomy.htm /articles/comment-anatomy.html
-Redirect 301 /news/comment-anatomy/ /articles/comment-anatomy.html
-Redirect 301 /news/comment-anatomy.cfm /articles/comment-anatomy.html
-Redirect 301 /news/comment-anatomy.htm /articles/comment-anatomy.html
-Redirect 301 /2008/02/09/comment-anatomy/ /articles/comment-anatomy.html
-
-#301 benefits
-Redirect 301 /presentation/benefits/ /articles/benefits.html
-Redirect 301 /presentation/benefits.cfm /articles/benefits.html
-Redirect 301 /presentation/benefits.htm /articles/benefits.html
-Redirect 301 /articles/benefits/ /articles/benefits.html
-Redirect 301 /articles/benefits.cfm /articles/benefits.html
-Redirect 301 /articles/benefits.htm /articles/benefits.html
-Redirect 301 /news/benefits/ /articles/benefits.html
-Redirect 301 /news/benefits.cfm /articles/benefits.html
-Redirect 301 /news/benefits.htm /articles/benefits.html
-Redirect 301 /2003/02/23/benefits-of-webstandards/ /articles/benefits.html
-
-#301 select required
-Redirect 301 /presentation/select-required/ /articles/select-required.html
-Redirect 301 /presentation/select-required.cfm /articles/select-required.html
-Redirect 301 /presentation/select-required.htm /articles/select-required.html
-Redirect 301 /articles/select-required/ /articles/select-required.html
-Redirect 301 /articles/select-required.cfm /articles/select-required.html
-Redirect 301 /articles/select-required.htm /articles/select-required.html
-Redirect 301 /news/select-required/ /articles/select-required.html
-Redirect 301 /news/select-required.cfm /articles/select-required.html
-Redirect 301 /news/select-required.htm /articles/select-required.html
-Redirect 301 /2012/11/03/select-required/ /articles/select-required.html
-
-#301 sign in
-Redirect 301 /presentation/sign-in/ /articles/sign-in.html
-Redirect 301 /presentation/sign-in.cfm /articles/sign-in.html
-Redirect 301 /presentation/sign-in.htm /articles/sign-in.html
-Redirect 301 /articles/sign-in/ /articles/sign-in.html
-Redirect 301 /articles/sign-in.cfm /articles/sign-in.html
-Redirect 301 /articles/sign-in.htm /articles/sign-in.html
-Redirect 301 /news/sign-in/ /articles/sign-in.html
-Redirect 301 /news/sign-in.cfm /articles/sign-in.html
-Redirect 301 /news/sign-in.htm /articles/sign-in.html
-Redirect 301 /2008/12/12/sign-in/ /articles/sign-in.html
-
-#301 responsive table
-Redirect 301 /presentation/simple-responsive-table/ /articles/simple-responsive-table.html
-Redirect 301 /presentation/simple-responsive-table.cfm /articles/simple-responsive-table.html
-Redirect 301 /presentation/simple-responsive-table.htm /articles/simple-responsive-table.html
-Redirect 301 /articles/simple-responsive-table/ /articles/simple-responsive-table.html
-Redirect 301 /articles/simple-responsive-table.cfm /articles/simple-responsive-table.html
-Redirect 301 /articles/simple-responsive-table.htm /articles/simple-responsive-table.html
-Redirect 301 /news/simple-responsive-table/ /articles/simple-responsive-table.html
-Redirect 301 /news/simple-responsive-table.cfm /articles/simple-responsive-table.html
-Redirect 301 /news/simple-responsive-table.htm /articles/simple-responsive-table.html
-Redirect 301 /2013/03/22/simple-responsive-table/ /articles/simple-responsive-table.html
-
-#301 em
-Redirect 301 /presentation/em/ /articles/em.html
-Redirect 301 /presentation/em.cfm /articles/em.html
-Redirect 301 /presentation/em.htm /articles/em.html
-Redirect 301 /articles/em/ /articles/em.html
-Redirect 301 /articles/em.cfm /articles/em.html
-Redirect 301 /articles/em.htm /articles/em.html
-Redirect 301 /news/em/ /articles/em.html
-Redirect 301 /news/em.cfm /articles/em.html
-Redirect 301 /news/em.htm /articles/em.html
-
-#301 external
-Redirect 301 /presentation/external/ /articles/external.html
-Redirect 301 /presentation/external.cfm /articles/external.html
-Redirect 301 /presentation/external.htm /articles/external.html
-Redirect 301 /articles/external/ /articles/external.html
-Redirect 301 /articles/external.cfm /articles/external.html
-Redirect 301 /articles/external.htm /articles/external.html
-Redirect 301 /news/external/ /articles/external.html
-Redirect 301 /news/external.cfm /articles/external.html
-Redirect 301 /news/external.htm /articles/external.html
-
-# hr
-Redirect 301 /presentation/hr/ /articles/hr.html
-Redirect 301 /presentation/hr.cfm /articles/hr.html
-Redirect 301 /presentation/hr.htm /articles/hr.html
-Redirect 301 /articles/hr/ /articles/hr.html
-Redirect 301 /articles/hr.cfm /articles/hr.html
-Redirect 301 /articles/hr/ /articles/hr.html
-Redirect 301 /news/hr.cfm /articles/hr.html
-Redirect 301 /news/hr.htm /articles/hr.html
-Redirect 301 /news/hr.htm /articles/hr.html
-
-#301 iframe scrollbars and html5
-Redirect 301 /presentation/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /presentation/iframe-scrollbars-and-html5.cfm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /presentation/iframe-scrollbars-and-html5.htm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /articles/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /articles/iframe-scrollbars-and-html5.cfm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /articles/iframe-scrollbars-and-html5.htm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /news/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /news/iframe-scrollbars-and-html5.cfm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /news/iframe-scrollbars-and-html5.htm /articles/iframe-scrollbars-and-html5.html
-Redirect 301 /2011/03/10/iframe-scrollbars-and-html5/ /articles/iframe-scrollbars-and-html5.html
-
-#301 font stacks
-Redirect 301 /presentation/font-stacks/ /articles/font-stacks.html
-Redirect 301 /presentation/font-stacks.cfm /articles/font-stacks.html
-Redirect 301 /presentation/font-stacks.htm /articles/font-stacks.html
-Redirect 301 /articles/font-stacks/ /articles/font-stacks.html
-Redirect 301 /articles/font-stacks.cfm /articles/font-stacks.html
-Redirect 301 /articles/font-stacks.htm /articles/font-stacks.html
-Redirect 301 /news/font-stacks/ /articles/font-stacks.html
-Redirect 301 /news/font-stacks.cfm /articles/font-stacks.html
-Redirect 301 /news/font-stacks.htm /articles/font-stacks.html
-
-#301 vertical align
-Redirect 301 /presentation/vertical-align/ /articles/vertical-align.html
-Redirect 301 /presentation/vertical-align.cfm /articles/vertical-align.html
-Redirect 301 /presentation/vertical-align.htm /articles/vertical-align.html
-Redirect 301 /articles/vertical-align/ /articles/vertical-align.html
-Redirect 301 /articles/vertical-align.cfm /articles/vertical-align.html
-Redirect 301 /articles/vertical-align.htm /articles/vertical-align.html
-Redirect 301 /news/vertical-align/ /articles/vertical-align.html
-Redirect 301 /news/vertical-align.cfm /articles/vertical-align.html
-Redirect 301 /news/vertical-align.htm /articles/vertical-align.html
-
-#301 accessibility
-Redirect 301 /presentation/accessibility/ /articles/accessibility.html
-Redirect 301 /presentation/accessibility.cfm /articles/accessibility.html
-Redirect 301 /presentation/accessibility.htm /articles/accessibility.html
-Redirect 301 /articles/accessibility/ /articles/accessibility.html
-Redirect 301 /articles/accessibility.cfm /articles/accessibility.html
-Redirect 301 /articles/accessibility.htm /articles/accessibility.html
-Redirect 301 /news/accessibility/ /articles/accessibility.html
-Redirect 301 /news/accessibility.cfm /articles/accessibility.html
-Redirect 301 /news/accessibility.htm /articles/accessibility.html
-
-#301 css layouts
-Redirect 301 /css-layouts/ /css-layouts/index.html
-Redirect 301 /css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /presentation/page_layouts/ /css-layouts/index.html
-Redirect 301 /presentation/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /presentation/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /presentation/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /presentation/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /presentation/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /presentation/css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /articles/css-layouts/ /css-layouts/index.html
-Redirect 301 /articles/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /articles/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /articles/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /articles/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /articles/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /articles/css-layouts/three-fixed/ /css-layouts/three-liquid.html
-Redirect 301 /news/css-layouts/ /css-layouts/index.html
-Redirect 301 /news/css-layouts/one-fixed/ /css-layouts/one-fixed.html
-Redirect 301 /news/css-layouts/one-liquid/ /css-layouts/one-liquid.html
-Redirect 301 /news/css-layouts/two-fixed/ /css-layouts/two-fixed.html
-Redirect 301 /news/css-layouts/two-liquid/ /css-layouts/two-liquid.html
-Redirect 301 /news/css-layouts/two-fixed-spread/ /css-layouts/two-fixed-spread.html
-Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-fixed.html
-Redirect 301 /news/css-layouts/three-fixed/ /css-layouts/three-liquid.html
-
-#301 interviews
-Redirect 301 /2007/04/14/ten-for-lachlan-hunt/ /articles/interview-lachlan-hunt.html
-Redirect 301 /2007/03/21/ten-for-sarah-blow/ /articles/interview-sarah-blow.html
-Redirect 301 /2004/06/22/ten-for-molly-holzschlag/ /articles/interview-molly-holzschlag.html
-Redirect 301 /2005/10/11/ten-for-patrick-lauke/ /articles/interview-patrick-lauke.html
-Redirect 301 /2005/10/20/ten-for-jeremy-keith/ /articles/interview-jeremy-keith.html
-Redirect 301 /2006/07/05/ten-questions-for-gian-sampson-wild/ /articles/interview-gian-wild.html
-Redirect 301 /2006/07/15/laura-carlson/ /articles/interview-laura-carlson.html
-Redirect 301 /2006/07/21/david-storey/ /articles/interview-david-storey.html
-Redirect 301 /2006/07/28/steve-faulkner/ /articles/interview-steve-faulkner.html
-Redirect 301 /2006/08/02/donna-maurer/ /articles/interview-donna-spencer.html
-Redirect 301 /2006/10/12/ten-questions-for-peter-paul-koch/ /articles/interview-peter-paul-koch.html
-Redirect 301 /2004/05/18/ten-for-andy-budd/ /articles/interview-andy-budd.html
-Redirect 301 /2004/05/11/ten-for-nick-finck/ /articles/interview-nick-finck.html
-Redirect 301 /2005/05/23/ten-for-derek-featherstone/ /articles/interview-derek-featherstone.html
-Redirect 301 /2004/06/01/ten-for-simon-willison/ /articles/interview-simon-willison.html
-Redirect 301 /2004/09/19/ten-for-jon-hicks/ /articles/interview-jon-hicks.html
-Redirect 301 /2004/11/08/ten-for-john-allsopp/ /articles/interview-john-allsopp.html
-Redirect 301 /2004/05/04/ten-for-anne-van-kesteren/ /articles/interview-anne-van-kesteren.html
-Redirect 301 /news/ten-for-anne-van-kesteren/ /articles/interview-anne-van-kesteren.html
-Redirect 301 /2005/06/04/ten-for-russ-weakley/ /articles/interview-russ-weakley.html
-Redirect 301 /2005/05/12/ten-for-joe-clark/ /articles/interview-joe-clark.html
-Redirect 301 /2005/05/06/ten-for-jason-santa-maria/ /articles/interview-jason-santa-maria.html
-Redirect 301 /news/ten-for-jason-santa-maria/ /articles/interview-jason-santa-maria.html
-Redirect 301 /2005/04/25/ten-for-tommy-olsson/ /articles/interview-tommy-olsson.html
-Redirect 301 /2004/11/22/ten-for-cameron-adams/ /articles/interview-cameron-adams.html
-Redirect 301 /2004/11/16/ten-for-roger-johansson/ /articles/interview-roger-johansson.html
-Redirect 301 /2004/09/13/ten-for-john-gallant/ /articles/interview-john-gallant.html
-Redirect 301 /2004/07/07/ten-for-dan-cederholm/ /articles/interview-dan-cederholm.html
-Redirect 301 /2004/05/25/ten-for-patrick-griffiths/ /articles/interview-patrick-griffiths.html
-Redirect 301 /2004/04/27/ten-for-keith-robinson/ /articles/interview-keith-robinson.html
-Redirect 301 /2004/03/21/ten-for-eric-meyer/ /articles/interview-eric-meyer.html
+# -------------------------------------------------------
+# ABOUT PAGES
+# -------------------------------------------------------
+Redirect 301 /about_russ.cfm /about/russweakley/index.html
+Redirect 301 /about.php /about/index.html
