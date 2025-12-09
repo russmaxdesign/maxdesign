@@ -196,22 +196,6 @@
 <priority>0.5</priority>
 </url>
 
-<!--  CSS layouts index  -->
-<url>
-<loc>https://www.maxdesign.com.au/css-layouts/index.html</loc>
-<lastmod>2025-12-06</lastmod>
-<changefreq>yearly</changefreq>
-<priority>0.4</priority>
-</url>
-
-<!--  Liquid layouts index  -->
-<url>
-<loc>https://www.maxdesign.com.au/liquid/index.html</loc>
-<lastmod>2025-12-06</lastmod>
-<changefreq>yearly</changefreq>
-<priority>0.4</priority>
-</url>
-
 <!--  Presentations index  -->
 <url>
 <loc>https://www.maxdesign.com.au/talks/index.html</loc>
