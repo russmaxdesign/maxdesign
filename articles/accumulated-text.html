@@ -30,23 +30,38 @@
 
   <div class="banner-inner">
     <div class="banner-content">
-      <h1>What is an accumulated text bucket?</h1>
+      <h1>What is an &ldquo;accumulated text bucket&rdquo;?</h1>
     </div>
   </div>
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-08">8 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
 
 <p>When browsers calculate an accessible name for an element, they use a concept called <b>&ldquo;accumulated text&rdquo;</b>.</p>
 
 <p>Think of this as an “accumulated text bucket” — a container the browser fills with bits of text from different sources to build the final accessible name.</p>
 
+<figure>
+  <img style="max-width: 100%;" src="../assets/img/bucket.jpg" alt="A bucket in sand on the beach">
+  <figcaption style="font-size: .7em;">Photo by <a href="https://unsplash.com/@courtneyam98?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Courtney Moore</a> on <a href="https://unsplash.com/photos/yellow-plastic-bucket-on-brown-sand-near-body-of-water-during-daytime-absLd1jgXoo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></figcaption>
+</figure>
+
 <p>“Accumulated text bucket” isn’t a real term from the specification. However, it’s a helpful way to visualise how the algorithm collects, replaces, and sometimes discards name information as it calculates the accessible name for elements.</p>
 
-<p>Sometimes, new naming rules take priority over earlier ones. When that happens, the browser must &ldquo;empty the bucket&rdquo; and start again.</p>
+<h2>An &ldquo;accumulated text&rdquo; example</h2>
 
-<h2>Step 2.2 of the spec</h2>
+<p>In the example below, the the button&rsquo;s has an <code>aria-labelledby</code> that references two IDs. This means it&rsquo;s name has &ldquo;accumulated text&rdquo; coming from two sources:</p>
+
+<pre><code>&lt;button aria-labelledby="aaa bbb"&gt;&lt;/button&gt;
+&lt;p id="aaa"&gt;Buy Lawn Mower&lt;/p&gt;
+&lt;p id="bbb"&gt;On special&lt;/p&gt;</code></pre>
+
+<p>The accumulated text generates the final accessible name: &ldquo;Buy Lawn Mower On special&rdquo;.</p>
+
+<h2>Emptying the bucket</h2>
+
+<p>Sometimes, new naming rules take priority over earlier ones. When that happens, the browser must &ldquo;empty the bucket&rdquo; and start again.</p>
 
 <p>The Accessible Name and Description Computation includes the following rule:</p>
 
@@ -63,7 +78,7 @@
   <p>When an element has a valid <code>aria-labelledby</code>, the browser clears anything it has collected so far, because the accessible name must come only from the referenced elements.</p>
 </blockquote>
 
-A simple example:
+<p>A simple example:</p>
 
 <pre><code>&lt;button aria-labelledby="aaa"&gt;
   Hello world
@@ -82,6 +97,7 @@ A simple example:
 </ol>
 
 <p>This example shows how higher-priority naming rules can replace earlier text, and why the “bucket” analogy helps make sense of how browsers build accessible names step by step.</p>
+
 
   </main>
   <footer>

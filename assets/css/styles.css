@@ -196,6 +196,15 @@ kbd {
   margin: 0 .1em 0 0;
 }
 
+figure {
+  margin: 2em 0;
+}
+
+figcaption {
+  display: block;
+  margin: .5em 0 0;
+}
+
 /* ---------------------
 links
 ----------------------*/
