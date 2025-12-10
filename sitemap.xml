@@ -39,6 +39,13 @@
 <!--  20 latest articles  -->
 
 <url>
+<loc>https://www.maxdesign.com.au/articles/accumulated-text.html</loc>
+<lastmod>2025-12-10</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
 <loc>https://www.maxdesign.com.au/articles/two-trees.html</loc>
 <lastmod>2025-12-08</lastmod>
 <changefreq>monthly</changefreq>
