@@ -1,5 +1,5 @@
-Sitemap: http://www.maxdesign.com.au/sitemap.xml
-
 User-agent: *
 Allow: /
 
+Sitemap: https://www.maxdesign.com.au/sitemap.xml
+Sitemap: https://www.maxdesign.com.au/feed.xml

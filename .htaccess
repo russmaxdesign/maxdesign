@@ -59,3 +59,15 @@ Redirect 301 /book.htm /book/index.html
 # -------------------------------------------------------
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
 Redirect 301 /about.php /about/index.html
+
+# -------------------------------------------------------
+# SOME OLD ARTICLES
+# -------------------------------------------------------
+Redirect 301 /presentation/checklist.html /articles/index.html
+Redirect 301 /presentation/process/example23.html /articles/index.html
+Redirect 301 /presentation/definition/index.html /articles/index.html
+Redirect 301 /articles/page_layouts.html /articles/index.html
+Redirect 301 /articles/liquid.html /articles/index.html
+Redirect 301 /articles/wentworth.html /articles/index.html
+Redirect 301 /articles/process.html /articles/index.html
+

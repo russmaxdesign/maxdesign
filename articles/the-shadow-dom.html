@@ -36,9 +36,9 @@
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-10">10 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-12">12 December 2025</time></p>
 
-<h2>1. What is the Shadow DOM?</h2>
+<h2>What is the Shadow DOM?</h2>
 
 <p>The Shadow DOM is a way for web components to keep some of their internal structure private.</p>
 
@@ -73,7 +73,7 @@
 
 <p>Well, technically it is hidden from the DOM tree, but not hidden from the browser’s internal representation.</p>
 
-<h2>2. What the Shadow DOM looks like in the DOM</h2>
+<h2>What the Shadow DOM looks like in the DOM</h2>
 
 <p>Even though the Shadow DOM is part of the page, it doesn’t appear as normal DOM children.</p>
 
@@ -85,14 +85,12 @@
 
 <p>But after it is expanded, it might look like this:</p>
 
-<pre><code>
-&lt;fancy-button&gt;
+<pre><code>&lt;fancy-button&gt;
   #shadow-root
     &lt;button&gt;
       &lt;span&gt;Buy now&lt;/span&gt;
     &lt;/button&gt;
-&lt;/fancy-button&gt;
-</code></pre>
+&lt;/fancy-button&gt;</code></pre>
 
 <h3>Flattening the Shadow DOM</h3>
 
@@ -118,15 +116,11 @@
 
 <h3>Chrome (Blink)</h3>
 
-<p>Flattening happens inside the <b>Blink accessibility tree</b> in the renderer process.</p>
-
-<p>By the time the BrowserAccessibility tree is created, the shadow DOM is already flattened.</p>
+<p>Flattening happens inside the <b>Blink accessibility tree</b> in the renderer process. By the time the BrowserAccessibility tree is created, the shadow DOM is already flattened.</p>
 
 <h3>Firefox (Gecko)</h3>
 
-<p>Flattening happens in Gecko’s accessibility module.</p>
-
-<p>The accessibility tree reflects the <b>composed tree</b> (light DOM + shadow DOM combined), not the raw DOM.</p>
+<p>Flattening happens in Gecko’s accessibility module. The accessibility tree reflects the <b>composed tree</b> (light DOM + shadow DOM combined), not the raw DOM.</p>
 
 <h3>Safari (WebKit)</h3>
 
@@ -134,9 +128,7 @@
 
 <h2>Final takeaway</h2>
 
-<p>Screen readers never see shadow roots.</p>
-
-<p>They only ever see a single, flattened accessibility tree that merges the light DOM and the shadow DOM into one seamless hierarchy.</p>
+<p>Screen readers never see shadow roots. They only ever see a single, flattened accessibility tree that merges the light DOM and the shadow DOM into one seamless hierarchy.</p>
 
   </main>
   <footer>
