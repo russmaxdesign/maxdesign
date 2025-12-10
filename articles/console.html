@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Using the browser console for accessibility testing - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="What counts as hidden for accessible name and description computation, and what does not?">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Using the browser console for accessibility testing</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-14">14 December 2025</time></p>
+
+<p>Many accessibility testers don’t realise how powerful the browser console can be. With some simple JavaScript, you can highlight headings, display accessible names, check image alternatives, outline landmarks, and inspect many other accessibility features on any page.</p>
+
+<p>This guide introduces the console, explains how to open it, and shows simple scripts you can use right away.</p>
+
+<h2>1. What is the console?</h2>
+
+<p>The console is a tool built into every modern browser. It lets you:</p>
+
+<ul>
+	<li>run small pieces of JavaScript</li>
+	<li>inspect information about the page</li>
+	<li>quickly test ideas without changing the source code</li>
+</ul>
+
+<p>Think of it as a scratchpad for checking how a page behaves. You’re not modifying the real website. You’re simply asking the browser questions and getting answers back.</p>
+
+<h2>2. How to open the console</h2>
+
+<h3 class="h4">Mac</h3>
+
+<ul>
+	<li><b>Chrome</b>: <kbd>Option</kbd> + <kbd>Command</kbd> + <kbd>J</kbd></li>
+	<li><b>Firefox</b>: <kbd>Option</kbd> + <kbd>Command</kbd> + <kbd>K</kbd></li>
+	<li><b>Safari</b>: First enable the Develop menu (Preferences → Advanced → “Show Develop menu”). Then press <kbd>Option</kbd> + <kbd>Command</kbd> + <kbd>C</kbd>.</li>
+</ul>
+
+<h3 class="h4">Windows</h3>
+
+<ul>
+	<li><b>Chrome / Edge</b>: <kbf>Ctrl</kbf> + <kbd>Shift</kbd> + <kbd>J</kbd></li>
+	<li><b>Firefox</b>: <kbf>Ctrl</kbf> + <kbd>Shift</kbd> + <kbd>K</kbd></li>
+</ul>
+
+<h2>How to use these scripts</h2>
+
+<p>Each example script in this article follows the same simple process. You don’t need to install anything, and you can’t break the website — these scripts only display information visually or in the console.</p>
+
+<ol>
+	<li>Open the browser console</li>
+	<li>Paste the script</li>
+	<li>Press <kbd>ENTER</kbd></li>
+	<li>View the results</li>
+	<li>Refresh the page to clear the overlays and return to normal.</li>
+</ol>
+
+<h2>Example scripts</h2>
+
+<p>The scripts below highlight headings, buttons, images, links, lists, tables, landmarks, form fields, and more. Each script creates an overlay on the page to help you visually inspect accessibility features.</p>
+
+<h3 class="h4">1. Display all headings:</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Scroll-Safe Overlay Container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Colour map per heading level
+// ----------------------
+const colours = {
+  H1: "red",
+  H2: "green",
+  H3: "blue",
+  H4: "purple",
+  H5: "deepPink",
+  H6: "black"
+};
+
+// ----------------------
+// Main Logic
+// ----------------------
+document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
+  
+  const tag = h.tagName.toUpperCase();
+  const colour = colours[tag] || "#147580"; // fallback just in case
+
+  // Border
+  h.style.outline = `3px solid ${colour}`;
+
+  // Position
+  const rect = h.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = tag;
+  badge.style.position = "absolute";
+  badge.style.left = `${left - 20}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = colour;
+  badge.style.color = "white";
+  badge.style.padding = "5px 8px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">2. Display all buttons:</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Helper: Compute accessible name
+// ----------------------
+function getAccessibleName(el) {
+  // aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const ids = labelledby.trim().split(/\s+/);
+    const texts = ids.map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    }).filter(Boolean);
+    if (texts.length) return texts.join(" ");
+  }
+
+  // value for input buttons
+  if (el.tagName === "INPUT") {
+    const value = el.getAttribute("value");
+    if (value && value.trim()) return value.trim();
+  }
+
+  // visible text
+  const txt = el.textContent.trim();
+  if (txt) return txt;
+
+  return "(no name)";
+}
+
+// ----------------------
+// Button selector
+// ----------------------
+const buttonSelector = `
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"]
+`;
+
+const buttons = Array.from(document.querySelectorAll(buttonSelector));
+
+// ----------------------
+// Process each button
+// ----------------------
+buttons.forEach(btn => {
+  const name = getAccessibleName(btn);
+
+  // Add outline
+  btn.style.outline = "3px solid #ca6510";
+
+  // Compute location
+  const rect = btn.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `Button: ${name}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 28}px`;
+  badge.style.background = "#ca6510";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.borderRadius = "5px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">3. Display image alternatives</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Scroll-Safe Overlay Container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+
+// ----------------------
+// Main Logic
+// ----------------------
+document.querySelectorAll("img").forEach(img => {
+
+  // Determine alt text
+  const alt = img.getAttribute("alt");
+  const altText = (alt && alt.trim()) ? alt.trim() : "(missing alt)";
+
+  // Add visible outline
+  img.style.outline = "2px solid #b23a48";
+
+  // Get absolute coordinates
+  const rect = img.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Create floating badge
+  const badge = document.createElement("div");
+  badge.textContent = altText;
+  badge.style.position = "absolute";
+  badge.style.left = `${left -20}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#b23a48";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+
+  // Add to overlay layer
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">4. Display all links:</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Accessible Name Helper
+// ----------------------
+function getLinkName(el) {
+
+  // 1. aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const parts = labelledby.split(/\s+/).map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    });
+    const name = parts.join(" ").trim();
+    if (name) return name;
+  }
+
+  // 2. aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // 3. Text content
+  const text = el.textContent.trim();
+  if (text) return text;
+
+  // 4. Images inside links (alt text)
+  const img = el.querySelector("img");
+  if (img) {
+    const alt = img.getAttribute("alt");
+    if (alt && alt.trim()) return alt.trim();
+  }
+
+  return "(no accessible name)";
+}
+
+
+// ----------------------
+// Scroll-Safe Overlay Container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+
+// ----------------------
+// Main Logic
+// ----------------------
+document.querySelectorAll("a").forEach(a => {
+
+  const accName = getLinkName(a);
+
+  // Add border to the link
+  a.style.outline = "2px solid #6a1b9a";
+
+  // Get page coordinates
+  const rect = a.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Create floating label
+  const badge = document.createElement("div");
+  badge.textContent = accName;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 28}px`;
+  badge.style.background = "#6a1b9a";
+  badge.style.color = "white";
+  badge.style.padding = "4px 6px";
+  badge.style.borderRadius = "4px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">5. Display all lists and list items:</h3>
+
+<pre contenteditable="true"><code>// -------------------------------------------
+// Scroll-safe overlay container
+// -------------------------------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+
+// -------------------------------------------
+// Badge helper
+// -------------------------------------------
+function drawBadge(el, label, color) {
+  // Outline element
+  el.style.outline = `3px solid ${color}`;
+
+  // Position calculation with scroll offsets
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY - 28; // float above element
+
+  // Create floating badge
+  const badge = document.createElement("div");
+  badge.textContent = label;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top}px`;
+  badge.style.background = color;
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+}
+
+
+// -------------------------------------------
+// 1. Highlight UL / OL / DL
+// -------------------------------------------
+document.querySelectorAll("ul").forEach(el => {
+  drawBadge(el, "UL", "#006d77");
+});
+
+document.querySelectorAll("ol").forEach(el => {
+  drawBadge(el, "OL", "#005f8f");
+});
+
+document.querySelectorAll("dl").forEach(el => {
+  drawBadge(el, "DL", "#4a148c");
+});
+
+
+// -------------------------------------------
+// 2. Highlight LI / DT / DD
+// -------------------------------------------
+document.querySelectorAll("li").forEach(el => {
+  drawBadge(el, "LI", "#8a5a44");
+});
+
+document.querySelectorAll("dt").forEach(el => {
+  drawBadge(el, "DT", "#7f3d9c");
+});
+
+document.querySelectorAll("dd").forEach(el => {
+  drawBadge(el, "DD", "#b83b5e");
+});</code></pre>
+
+<h3 class="h4">6. Display table captions and table headers</h3>
+
+<pre contenteditable="true"><code>/* -----------------------------------------
+   Shared overlay container (scroll-safe)
+------------------------------------------ */
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+/* -----------------------------------------
+   1. Highlight all TABLES
+------------------------------------------ */
+document.querySelectorAll("table").forEach(table => {
+  // Add visible outline
+  table.style.outline = "3px solid #d35400";
+
+  // Get caption text (if present)
+  const captionEl = table.querySelector("caption");
+  const caption = captionEl && captionEl.textContent.trim()
+    ? captionEl.textContent.trim()
+    : "(no caption)";
+
+  // Compute position
+  const rect = table.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating label for the table
+  const badge = document.createElement("div");
+  badge.textContent = `Table: ${caption}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#d35400";
+  badge.style.color = "white";
+  badge.style.padding = "4px 6px";
+  badge.style.borderRadius = "4px";
+  badge.style.fontSize = "14px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+
+  overlay.appendChild(badge);
+});
+
+/* -----------------------------------------
+   2. Highlight all TH cells
+------------------------------------------ */
+document.querySelectorAll("th").forEach(th => {
+  // Add outline
+  th.style.outline = "2px dashed #8e44ad";
+
+  // Compute position
+  const rect = th.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating label
+  const thBadge = document.createElement("div");
+  thBadge.textContent = "TH";
+  thBadge.style.position = "absolute";
+  thBadge.style.left = `${left}px`;
+  thBadge.style.top = `${top - 20}px`;
+  thBadge.style.background = "#8e44ad";
+  thBadge.style.color = "white";
+  thBadge.style.padding = "2px 4px";
+  thBadge.style.borderRadius = "3px";
+  thBadge.style.fontSize = "16px";
+  thBadge.style.whiteSpace = "nowrap";
+  thBadge.style.pointerEvents = "none";
+
+  overlay.appendChild(thBadge);
+});</code></pre>
+
+<h3 class="h4">7. Display landmark roles and their names</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Landmark roles to target
+// ----------------------
+const landmarkRoles = [
+  "banner",
+  "navigation",
+  "main",
+  "contentinfo",
+  "complementary",
+  "search",
+  "region",
+];
+
+/* Native HTML elements that map to landmarks:
+   header, nav, main, footer, aside, section (if named), article (if named)
+*/
+const selectors = [
+  "header",
+  "nav",
+  "main",
+  "footer",
+  "aside",
+  "section",
+  "article",
+  "[role]"
+].join(",");
+
+// ----------------------
+// Helper: compute landmark role
+// ----------------------
+function getLandmarkRole(el) {
+  // Explicit role always wins
+  const role = el.getAttribute("role");
+  if (landmarkRoles.includes(role)) return role;
+
+  // Native mappings
+  const tag = el.tagName.toLowerCase();
+  if (tag === "header") return "banner";
+  if (tag === "nav") return "navigation";
+  if (tag === "main") return "main";
+  if (tag === "footer") return "contentinfo";
+  if (tag === "aside") return "complementary";
+
+  // Section/article require names — else not a landmark
+  if ((tag === "section" || tag === "article") &&
+      (el.hasAttribute("aria-label") || el.hasAttribute("aria-labelledby"))) {
+    return "region";
+  }
+
+  return null;
+}
+
+// ----------------------
+// Helper: compute accessible name
+// ----------------------
+function getAccessibleName(el) {
+  // 1. aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // 2. aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const ids = labelledby.split(" ");
+    const texts = ids.map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    }).filter(Boolean);
+    if (texts.length) return texts.join(" ");
+  }
+
+  // 3. fallback: "(no name)"
+  return "(no name)";
+}
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll(selectors).forEach(el => {
+  const role = getLandmarkRole(el);
+  if (!role) return; // Skip non-landmarks
+
+  // Add visible outline
+  el.style.outline = "3px solid #0a6ebd";
+
+  // Compute coordinates
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Compute accessible name
+  const accName = getAccessibleName(el);
+
+  // Create display label
+  const badge = document.createElement("div");
+  badge.textContent = accName !== "(no name)" ? `${role}: ${accName}` : role;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#0a6ebd";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">8. Display form labels</h3>
+
+<pre contenteditable="true"><code>function getAccName(el) {
+
+  // 1. aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const parts = labelledby.split(/\s+/).map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    });
+    const name = parts.join(" ").trim();
+    if (name) return name;
+  }
+
+  // 2. aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // 3. label[for]
+  if (el.id) {
+    const explicit = document.querySelector(`label[for="${el.id}"]`);
+    if (explicit) {
+      const name = explicit.textContent.trim();
+      if (name) return name;
+    }
+  }
+
+  // 4. nested label
+  const nestedLabel = el.closest("label");
+  if (nestedLabel) {
+    const name = nestedLabel.textContent.trim();
+    if (name) return name;
+  }
+
+  // 5. element text content
+  const text = el.textContent.trim();
+  if (text) return text;
+
+  // 6. placeholder fallback
+  const placeholder = el.getAttribute("placeholder");
+  if (placeholder && placeholder.trim()) return placeholder.trim();
+
+  return "(no accessible name)";
+}
+
+
+// -------------------------------------------
+// SCROLL-SAFE OVERLAY (absolute, not fixed)
+// -------------------------------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+
+// -------------------------------------------
+// Elements to inspect
+// -------------------------------------------
+const controls = document.querySelectorAll(
+  'input, select, textarea, [role="textbox"], [role="combobox"], [role="spinbutton"]'
+);
+
+
+// -------------------------------------------
+// Main rendering logic
+// -------------------------------------------
+controls.forEach(ctrl => {
+
+  const accName = getAccName(ctrl);
+
+  // Outline the control
+  ctrl.style.outline = "2px solid #0a558c";
+
+  // Compute absolute coordinates
+  const rect = ctrl.getBoundingClientRect();
+  const left = rect.left + window.scrollX - 20;
+  const top = rect.top + window.scrollY - 30;
+
+  // Create floating badge
+  const badge = document.createElement("div");
+  badge.textContent = accName;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top}px`;
+  badge.style.background = "#0a558c";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">9. Display form field descriptions</h3>
+
+<pre><code>/* -----------------------------------------
+   Shared overlay container (scroll-safe)
+------------------------------------------ */
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+/* -----------------------------------------
+   Find all elements with aria-describedby
+------------------------------------------ */
+document.querySelectorAll("[aria-describedby]").forEach(el => {
+
+  const idList = el.getAttribute("aria-describedby")
+                   .trim()
+                   .split(/\s+/);
+
+  // Compute description text from referenced elements
+  const description = idList
+    .map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : `(missing element #${id})`;
+    })
+    .filter(Boolean)
+    .join(" ");
+
+  // Add visible outline
+  el.style.outline = "3px solid #0d6efd";
+
+  // Compute absolute element position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Create floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `Description: ${description}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left -10}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#0d6efd";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">10. Display fieldsets and captions</h3>
+
+<pre contenteditable="true"><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+
+// ----------------------
+// Helpers
+// ----------------------
+
+// Accessible name helper (shared with radio-group)
+function getAccessibleName(el) {
+  // 1. aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // 2. aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const ids = labelledby.split(" ");
+    const texts = ids.map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    }).filter(Boolean);
+    if (texts.length) return texts.join(" ");
+  }
+
+  return "(no name)";
+}
+
+
+// ----------------------
+// 1. FIELDSETS
+// ----------------------
+document.querySelectorAll("fieldset").forEach(fs => {
+  
+  // Compute accessible name from LEGEND
+  const legend = fs.querySelector("legend");
+  const name = legend && legend.textContent.trim()
+    ? legend.textContent.trim()
+    : "(no name)";
+
+  // Outline fieldset
+  fs.style.outline = "3px solid #1e8449";
+
+  // Position of fieldset
+  const rect = fs.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `Fieldset: ${name}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#1e8449";
+  badge.style.color = "white";
+  badge.style.padding = "4px 6px";
+  badge.style.borderRadius = "4px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});
+
+
+// ----------------------
+// 2. ARIA RADIO-GROUPS
+// ----------------------
+document.querySelectorAll('[role="radiogroup"]').forEach(rg => {
+
+  const accName = getAccessibleName(rg);
+
+  // Outline group
+  rg.style.outline = "3px solid #7d3c98";
+
+  // Position of the element
+  const rect = rg.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `Radio-group: ${accName}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#7d3c98";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+
+<h3 class="h4">11. Display focusable elements</h3>
+
+<p>This simple script logs each element as it receives keyboard focus. Press <kbd>TAB</kbd> through the page, and you’ll see every focusable element listed in the console:</p>
+
+<pre contenteditable="true"><code>document.addEventListener('focusin', () => {
+  console.log('Focused element:', document.activeElement);
+});</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>These simple scripts are designed to help you understand how accessibility features appear in the browser.</p>
+
+<p>They’re not a replacement for manual testing or assistive technologies, but they can make patterns, errors, and relationships much easier to see while developing or reviewing a page.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+

@@ -34,7 +34,7 @@
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-12">12 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-11">11 December 2025</time></p>
 
 <h2>What is the Shadow DOM?</h2>
 
@@ -108,6 +108,8 @@
 
 <p>Flattening removes the accessibility boundary of the shadow root and exposes the internal nodes as if they were normal children in the accessibility tree, not the DOM tree.</p>
 
+<p>During flattening, the browser resolves slotting (which light DOM nodes appear in which <slot>), and exposes the final composed structure to assistive technologies.</p>
+
 <h2>How different browsers do it</h2>
 
 <p>All major browsers flatten the shadow tree, but they do it at slightly different stages of their accessibility architecture.</p>
@@ -124,9 +126,26 @@
 
 <p>WebKit exposes a flattened structure based on the composed tree, hiding shadow roots and slot wiring from assistive technologies.</p>
 
+<h2>Is screen reader performance affected by the Shadow DOM?</h2>
+
+<p>In general, no. The Shadow DOM does not introduce inherent performance problems for assistive technologies. Screen readers never interact with shadow roots directly. They only receive the final, flattened accessibility tree that combines everything into one structure.</p>
+
+<p>If a page feels slow or laggy with a screen reader, it’s rarely because of the Shadow DOM. It usually comes from broader factors such as:</p>
+
+<ul>
+  <li>how many accessibility nodes the page contains</li>
+  <li>how much text or interactive content needs to be spoken</li>
+  <li>how often the UI changes or updates</li>
+  <li>the specific combination of browser and assistive technology being used</li>
+</ul>
+
+<p>Component-heavy sites can sometimes feel slower, but not because they use web components or shadow roots. 
+They simply tend to contain more elements and trigger more back-and-forth communication between the browser 
+and the assistive technology.</p>
+
 <h2>Final takeaway</h2>
 
-<p>Screen readers never see shadow roots. They only ever see a single, flattened accessibility tree that merges the light DOM and the shadow DOM into one seamless hierarchy.</p>
+<p>Screen readers only ever see a single, flattened accessibility tree that merges the light DOM and the shadow DOM into one seamless hierarchy. Shadow roots, slot wiring, and internal component structure are all handled by the browser long before assistive technologies are involved.</p>
 
   </main>
   <footer>

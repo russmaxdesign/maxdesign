@@ -7,8 +7,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Mon, 10 Dec 2025 10:02:00 +0000</lastBuildDate>
-<pubDate>Mon, 10 Dec 2025 10:02:00 +0000</pubDate>
+<lastBuildDate>Thu, 11 Dec 2025 08:30:00 +0000</lastBuildDate>
+<pubDate>Thu, 11 Dec 2025 08:30:00 +0000</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -21,7 +21,30 @@
 </image>
 
 <!--  =========================================================  -->
-<!--  1. What is an accumulated text bucket?  -->
+<!--  1. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  =========================================================  -->
+<item>
+<title>How does the Shadow DOM appear in the accessibility tree?</title>
+<link>https://www.maxdesign.com.au/articles/the-shadow-dom.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/the-shadow-dom.html</guid>
+<pubDate>Mon, 11 Dec 2025 10:02:00 +0000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Accessibility</category>
+<description>A screen reader cannot interact with the shadow DOM unless the browser exposes the internal elements that users can actually operate. To make this work, browsers flatten the shadow tree when building the accessibility tree.</description>
+<content:encoded>
+<![CDATA[
+<p>Browsers face a problem: screen readers need to understand what’s inside web components. Without flattening, screen readers would not be able to see the real anything inside the shadow root.</p>
+<p>But all of that is hidden behind the Shadow DOM boundary.</p>
+<p>So how do browsers solve this? To make this work, browsers flatten the shadow tree when building the accessibility tree.</p>
+<p><a href="https://www.maxdesign.com.au/articles/the-shadow-dom.html">Read the full article →</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -45,7 +68,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Did you know your browser has two accessibility trees?  -->
+<!--  3. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -67,7 +90,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. How Chrome builds the accessibility tree                -->
+<!--  4. How Chrome builds the accessibility tree                -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -89,7 +112,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Understanding screen reader speech queues               -->
+<!--  5. Understanding screen reader speech queues               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -111,7 +134,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. What is an AXEvent?                                     -->
+<!--  6. What is an AXEvent?                                     -->
 <!--  =========================================================  -->
 <item>
 <title>What is an AXEvent?</title>
@@ -133,7 +156,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. What happens when an event occurs? — the quick answer    -->
+<!--  7. What happens when an event occurs? — the quick answer    -->
 <!--  =========================================================  -->
 <item>
 <title>What happens when an event occurs? — the quick answer</title>
@@ -155,7 +178,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. What are DOM mutations?                                 -->
+<!--  8. What are DOM mutations?                                 -->
 <!--  =========================================================  -->
 <item>
 <title>What are DOM mutations?</title>
@@ -177,7 +200,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. What really happens when a user clicks an accordion?    -->
+<!--  9. What really happens when a user clicks an accordion?    -->
 <!--  =========================================================  -->
 <item>
 <title>What really happens when a user clicks an accordion button?</title>
@@ -200,7 +223,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. End-to-end browser and accessibility event architecture  -->
+<!--  10. End-to-end browser and accessibility event architecture  -->
 <!--  =========================================================  -->
 <item>
 <title>End-to-end browser and accessibility event architecture</title>
@@ -222,7 +245,7 @@
 
 
 <!--  =========================================================  -->
-<!--  10. Understanding aria-live timing                          -->
+<!--  11. Understanding aria-live timing                          -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-live timing: a two-layer model</title>
