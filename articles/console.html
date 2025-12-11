@@ -15,13 +15,18 @@
   <style>
 video {
   max-width: 640px;
-  width: 100%;      /* responsive up to 640px */
+  width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
+.video-headings {
+  margin: 4em 0 1em;
+}
+
   </style>
+}
 </head>
 <body>
   <header>
@@ -44,7 +49,7 @@ video {
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-14">14 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-12">12 December 2025</time></p>
 
 <p>Many accessibility testers don’t realise how powerful the browser console can be. With some simple JavaScript, you can highlight headings, display accessible names, check image alternatives, outline landmarks, and inspect many other accessibility features on any page.</p>
 
@@ -91,11 +96,27 @@ video {
 	<li>Refresh the page to clear the overlays and return to normal.</li>
 </ol>
 
+<h2>Why not convert these into bookmarklets?</h2>
+
+<p>You can convert any of these snippets into bookmarklets, but for teaching and quick testing, pasting JavaScript into the console is often faster and more flexible. Bookmarklets need to be encoded, saved, and managed in your browser. In contrast, running scripts in the console lets you:</p>
+
+<ul>  
+  <li>adjust or experiment with the code before running it</li>
+  <li>see errors or warnings immediately</li>
+  <li>change the snippet based on the current page structure</li>
+  <li>avoid cluttering your browser with one-off bookmarklets</li>
+  <li>keep the focus on understanding what the script is doing, not just clicking a shortcut</li>
+</ul>
+
+<p>Using the console also mirrors how real accessibility debugging works — quick checks, small iterations, and rapid feedback.</p>
+
 <h2>Example scripts</h2>
 
-<p>The scripts below highlight headings, buttons, images, links, lists, tables, landmarks, form fields, and more. Each script creates an overlay on the page to help you visually inspect accessibility features.</p>
+<p>The scripts below highlight headings, buttons, images, links, lists, tables, landmarks, form fields, and more. Most create visual overlays on the page to help you inspect accessibility features, while the final example logs information to the console as you move focus through the page.</p>
 
-<h3 class="h4">1. Display all headings:</h3>
+<p>These are intentionally simple, single-purpose examples for quick testing and teaching. Feel free to adapt or optimise them as needed.</p>
+
+<h3 class="h4 video-headings">1. Display all headings:</h3>
 
 <video controls src="../assets/mp4/01-headings.mp4"></video>
 
@@ -157,7 +178,9 @@ document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">2. Display all buttons::</h3>
+<h3 class="h4 video-headings">2. Display all buttons:</h3>
+
+<video controls src="../assets/mp4/02-buttons.mp4"></video>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -248,7 +271,9 @@ buttons.forEach(btn => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">3. Display image alternatives:</h3>
+<h3 class="h4 video-headings">3. Display image alternatives:</h3>
+
+<video controls src="../assets/mp4/03-images.mp4"></video>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-Safe Overlay Container
@@ -298,7 +323,9 @@ document.querySelectorAll("img").forEach(img => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">4. Display all links:</h3>
+<h3 class="h4 video-headings">4. Display all links:</h3>
+
+<video controls src="../assets/mp4/04-links.mp4"></video>
 
 <pre contenteditable="true"><code>// ----------------------
 // Accessible Name Helper
@@ -380,7 +407,9 @@ document.querySelectorAll("a").forEach(a => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">5. Display all lists and list items:</h3>
+<h3 class="h4 video-headings">5. Display all lists and list items:</h3>
+
+<video controls src="../assets/mp4/05-lists.mp4"></video>
 
 <pre contenteditable="true"><code>// -------------------------------------------
 // Scroll-safe overlay container
@@ -457,7 +486,9 @@ document.querySelectorAll("dd").forEach(el => {
   drawBadge(el, "DD", "#b83b5e");
 });</code></pre>
 
-<h3 class="h4">6. Display table captions and table headers:</h3>
+<h3 class="h4 video-headings">6. Display table captions and table headers:</h3>
+
+<video controls src="../assets/mp4/06-tables.mp4"></video>
 
 <pre contenteditable="true"><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
@@ -535,7 +566,9 @@ document.querySelectorAll("th").forEach(th => {
   overlay.appendChild(thBadge);
 });</code></pre>
 
-<h3 class="h4">7. Display landmark roles and their names:</h3>
+<h3 class="h4 video-headings">7. Display landmark roles and their names:</h3>
+
+<video controls src="../assets/mp4/07-landmarks.mp4"></video>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -660,7 +693,9 @@ document.querySelectorAll(selectors).forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">8. Display form labels:</h3>
+<h3 class="h4 video-headings">8. Display form labels:</h3>
+
+<video controls src="../assets/mp4/08-labels.mp4"></video>
 
 <pre contenteditable="true"><code>function getAccName(el) {
 
@@ -760,7 +795,9 @@ controls.forEach(ctrl => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">9. Display form field descriptions:</h3>
+<h3 class="h4 video-headings">9. Display form field descriptions:</h3>
+
+<video controls src="../assets/mp4/09-descriptions.mp4"></video>
 
 <pre><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
@@ -817,7 +854,9 @@ document.querySelectorAll("[aria-describedby]").forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">10. Display fieldsets and captions:</h3>
+<h3 class="h4 video-headings">10. Display fieldsets and captions:</h3>
+
+<video controls src="../assets/mp4/10-fieldset.mp4"></video>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -928,9 +967,11 @@ document.querySelectorAll('[role="radiogroup"]').forEach(rg => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">11. Display focusable elements:</h3>
+<h3 class="h4 video-headings">11. Display focusable elements:</h3>
 
 <p>This simple script logs each element as it receives keyboard focus. Press <kbd>TAB</kbd> through the page, and you’ll see every focusable element listed in the console:</p>
+
+<video controls src="../assets/mp4/11-focus.mp4"></video>
 
 <pre contenteditable="true"><code>document.addEventListener('focusin', () => {
   console.log('Focused element:', document.activeElement);
