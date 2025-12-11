@@ -148,7 +148,14 @@ details pre {
 
 <p>The following examples are more advanced, but all use the same basic idea: outline elements and place badges using simple DOM queries. You don’t need to understand or memorise every line — just paste them in and explore the results. Feel free to adapt or optimise them as needed.</p>
 
-<p>To test these scripts on the same page shown in the videos, try the <a href="https://intopia.github.io/exercise/" target="_blank">“All about wombats”</a> page.</p>
+<p>To test these scripts on the same pages shown in the videos, try these:</p>
+
+<ul>
+  <li><a href="https://intopia.github.io/exercise/" target="_blank">“All about wombats”</a></li>
+  <li><a href="https://intopia.github.io/exercise/reviewing-landmarks.html" target="_blank">Reviewing the different landmarks</a></li>
+  <li><a href="https://intopia.github.io/exercise/reviewing-aria-owns.html" target="_blank">Reviewing aria-owns</a></li>
+  <li><a href="https://intopia.github.io/exercise/reviewing-aria-controls.html" target="_blank">Reviewing aria-controls</a></li>
+</ul>
 
 <h3 class="h4 video-headings">1. Display all headings:</h3>
 
@@ -677,7 +684,7 @@ overlay.style.zIndex = "999999";
 document.body.appendChild(overlay);
 
 // ----------------------
-// Landmark roles to target
+// Landmark roles + colours
 // ----------------------
 const landmarkRoles = [
   "banner",
@@ -688,6 +695,16 @@ const landmarkRoles = [
   "search",
   "region",
 ];
+
+const roleColors = {
+  banner: "#0a6ebd",
+  navigation: "#b85c00",
+  main: "#006400",
+  contentinfo: "#7a0099",
+  complementary: "#990000",
+  search: "#357a38",
+  region: "#666600"
+};
 
 /* Native HTML elements that map to landmarks:
    header, nav, main, footer, aside, section (if named), article (if named)
@@ -707,11 +724,9 @@ const selectors = [
 // Helper: compute landmark role
 // ----------------------
 function getLandmarkRole(el) {
-  // Explicit role always wins
   const role = el.getAttribute("role");
   if (landmarkRoles.includes(role)) return role;
 
-  // Native mappings
   const tag = el.tagName.toLowerCase();
   if (tag === "header") return "banner";
   if (tag === "nav") return "navigation";
@@ -719,7 +734,6 @@ function getLandmarkRole(el) {
   if (tag === "footer") return "contentinfo";
   if (tag === "aside") return "complementary";
 
-  // Section/article require names — else not a landmark
   if ((tag === "section" || tag === "article") &&
       (el.hasAttribute("aria-label") || el.hasAttribute("aria-labelledby"))) {
     return "region";
@@ -732,11 +746,9 @@ function getLandmarkRole(el) {
 // Helper: compute accessible name
 // ----------------------
 function getAccessibleName(el) {
-  // 1. aria-label
   const ariaLabel = el.getAttribute("aria-label");
   if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
 
-  // 2. aria-labelledby
   const labelledby = el.getAttribute("aria-labelledby");
   if (labelledby) {
     const ids = labelledby.split(" ");
@@ -747,7 +759,6 @@ function getAccessibleName(el) {
     if (texts.length) return texts.join(" ");
   }
 
-  // 3. fallback: "(no name)"
   return "(no name)";
 }
 
@@ -756,26 +767,24 @@ function getAccessibleName(el) {
 // ----------------------
 document.querySelectorAll(selectors).forEach(el => {
   const role = getLandmarkRole(el);
-  if (!role) return; // Skip non-landmarks
+  if (!role) return;
 
-  // Add visible outline
-  el.style.outline = "3px solid #0a6ebd";
+  // Apply outline using role colour
+  const color = roleColors[role] || "#0a6ebd";
+  el.style.outline = `3px solid ${color}`;
 
-  // Compute coordinates
   const rect = el.getBoundingClientRect();
   const left = rect.left + window.scrollX;
   const top = rect.top + window.scrollY;
 
-  // Compute accessible name
   const accName = getAccessibleName(el);
 
-  // Create display label
   const badge = document.createElement("div");
   badge.textContent = accName !== "(no name)" ? `${role}: ${accName}` : role;
   badge.style.position = "absolute";
   badge.style.left = `${left}px`;
   badge.style.top = `${top - 30}px`;
-  badge.style.background = "#0a6ebd";
+  badge.style.background = color;
   badge.style.color = "white";
   badge.style.padding = "5px";
   badge.style.borderRadius = "5px";
@@ -1105,6 +1114,198 @@ document.querySelectorAll('[role="radiogroup"]').forEach(rg => {
 
 <pre><code>document.addEventListener('focusin', () => {
   console.log('Focused element:', document.activeElement);
+});</code></pre>
+
+  </div>
+</details>
+
+<h3 class="h4 video-headings">12. Display aria-owns:</h3>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/12-aria-owns.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// Colour for aria-owns highlights
+const ownsColor = "#c2185b"; // pink-ish
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[aria-owns]").forEach(owner => {
+  const ownsValue = owner.getAttribute("aria-owns");
+  if (!ownsValue || !ownsValue.trim()) {
+    return;
+  }
+
+  const ids = ownsValue.trim().split(/\s+/);
+
+  // Outline the owner
+  owner.style.outline = `3px solid ${ownsColor}`;
+
+  // Position for the owner's badge
+  const ownerRect = owner.getBoundingClientRect();
+  const ownerLeft = ownerRect.left + window.scrollX;
+  const ownerTop = ownerRect.top + window.scrollY;
+
+  // Badge for the owner element
+  const ownerBadge = document.createElement("div");
+  ownerBadge.textContent = `aria-owns: ${ownsValue}`;
+  ownerBadge.style.position = "absolute";
+  ownerBadge.style.left = `${ownerLeft}px`;
+  ownerBadge.style.top = `${ownerTop - 30}px`;
+  ownerBadge.style.background = ownsColor;
+  ownerBadge.style.color = "white";
+  ownerBadge.style.padding = "5px";
+  ownerBadge.style.borderRadius = "5px";
+  ownerBadge.style.fontSize = "16px";
+  ownerBadge.style.whiteSpace = "nowrap";
+  ownerBadge.style.pointerEvents = "none";
+  ownerBadge.style.zIndex = "999999";
+  overlay.appendChild(ownerBadge);
+
+  // Highlight each owned element
+  ids.forEach(id => {
+    const owned = document.getElementById(id);
+    if (!owned) {
+      // Optional: log missing references to the console
+      console.warn(`aria-owns references missing element with id="${id}"`, owner);
+      return;
+    }
+
+    // Outline the owned element (dashed to distinguish from owner)
+    owned.style.outline = `3px dashed ${ownsColor}`;
+
+    const rect = owned.getBoundingClientRect();
+    const left = rect.left + window.scrollX;
+    const top = rect.top + window.scrollY;
+
+    const ownedBadge = document.createElement("div");
+    ownedBadge.textContent = `owned: #${id}`;
+    ownedBadge.style.position = "absolute";
+    ownedBadge.style.left = `${left}px`;
+    ownedBadge.style.top = `${top - 24}px`;
+    ownedBadge.style.background = ownsColor;
+    ownedBadge.style.color = "white";
+    ownedBadge.style.padding = "3px 5px";
+    ownedBadge.style.borderRadius = "5px";
+    ownedBadge.style.fontSize = "14px";
+    ownedBadge.style.whiteSpace = "nowrap";
+    ownedBadge.style.pointerEvents = "none";
+    ownedBadge.style.zIndex = "999999";
+    overlay.appendChild(ownedBadge);
+  });
+});</code></pre>
+
+  </div>
+</details>
+
+<h3 class="h4 video-headings">13. Display aria-controls:</h3>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/13-aria-controls.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// Colour for aria-controls highlights
+const controlsColor = "#00796b"; // teal
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[aria-controls]").forEach(controller => {
+  const controlsValue = controller.getAttribute("aria-controls");
+  if (!controlsValue || !controlsValue.trim()) {
+    return;
+  }
+
+  const ids = controlsValue.trim().split(/\s+/);
+
+  // Outline the controller element
+  controller.style.outline = `3px solid ${controlsColor}`;
+
+  // Coordinates for controller badge
+  const rect = controller.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Badge for the controller
+  const controllerBadge = document.createElement("div");
+  controllerBadge.textContent = `aria-controls: ${controlsValue}`;
+  controllerBadge.style.position = "absolute";
+  controllerBadge.style.left = `${left}px`;
+  controllerBadge.style.top = `${top - 30}px`;
+  controllerBadge.style.background = controlsColor;
+  controllerBadge.style.color = "white";
+  controllerBadge.style.padding = "5px";
+  controllerBadge.style.borderRadius = "5px";
+  controllerBadge.style.fontSize = "16px";
+  controllerBadge.style.whiteSpace = "nowrap";
+  controllerBadge.style.pointerEvents = "none";
+  controllerBadge.style.zIndex = "999999";
+  overlay.appendChild(controllerBadge);
+
+  // Highlight each controlled element
+  ids.forEach(id => {
+    const controlled = document.getElementById(id);
+
+    if (!controlled) {
+      console.warn(`aria-controls references missing element with id="${id}"`, controller);
+      return;
+    }
+
+    // Outline controlled element (dashed to distinguish)
+    controlled.style.outline = `3px dashed ${controlsColor}`;
+
+    const cRect = controlled.getBoundingClientRect();
+    const cLeft = cRect.left + window.scrollX;
+    const cTop = cRect.top + window.scrollY;
+
+    const controlledBadge = document.createElement("div");
+    controlledBadge.textContent = `controls: #${id}`;
+    controlledBadge.style.position = "absolute";
+    controlledBadge.style.left = `${cLeft}px`;
+    controlledBadge.style.top = `${cTop - 24}px`;
+    controlledBadge.style.background = controlsColor;
+    controlledBadge.style.color = "white";
+    controlledBadge.style.padding = "3px 5px";
+    controlledBadge.style.borderRadius = "5px";
+    controlledBadge.style.fontSize = "14px";
+    controlledBadge.style.whiteSpace = "nowrap";
+    controlledBadge.style.pointerEvents = "none";
+    controlledBadge.style.zIndex = "999999";
+    overlay.appendChild(controlledBadge);
+  });
 });</code></pre>
 
   </div>
