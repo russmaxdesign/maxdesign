@@ -25,6 +25,9 @@ RedirectMatch 301 ^/(.+/)?(feed|rss|atom)(\.xml)?/?$ /feed.xml
 RedirectMatch 301 ^/css-layouts(/.*)?$ /articles/index.html
 RedirectMatch 301 ^/liquid(/.*)?$ /articles/index.html
 
+# Retired Listamatic demos
+RedirectMatch 301 ^/presentation/listamatic(/.*)?$ /articles/index.html
+
 # -------------------------------------------------------
 # EXTENSION NORMALISATION (.cfm, .htm → .html)
 # -------------------------------------------------------
@@ -49,6 +52,11 @@ RewriteRule ^(presentation|news|articles)/([^/]+)/?$ /articles/$2.html [L,R=301]
 Redirect 301 /contact /contact-us/index.html
 Redirect 301 /contact.cfm /contact-us/index.html
 Redirect 301 /contact.htm /contact-us/index.html
+Redirect 301 /contact.html /contact-us/index.html
+
+# Normalise /contact-us and /contact-us/ to the canonical index.html
+RedirectMatch 301 ^/contact-us/?$ /contact-us/index.html
+RedirectMatch 301 ^/contact-us/index\.html/$ /contact-us/index.html
 
 Redirect 301 /book /book/index.html
 Redirect 301 /book.cfm /book/index.html
@@ -57,7 +65,12 @@ Redirect 301 /book.htm /book/index.html
 # -------------------------------------------------------
 # ABOUT PAGES
 # -------------------------------------------------------
+Redirect 301 /about /about/index.html
+Redirect 301 /about.html /about/index.html
+Redirect 301 /about.cfm /about/index.html
+
 Redirect 301 /about_russ.cfm /about/russweakley/index.html
+Redirect 301 /about_russ.html /about/russweakley/index.html
 Redirect 301 /about.php /about/index.html
 
 # -------------------------------------------------------
@@ -71,3 +84,5 @@ Redirect 301 /articles/liquid.html /articles/index.html
 Redirect 301 /articles/wentworth.html /articles/index.html
 Redirect 301 /articles/process.html /articles/index.html
 
+# Retired CSS layouts index article
+Redirect 301 /articles/css-layouts.html /articles/index.html
