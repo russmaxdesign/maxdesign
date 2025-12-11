@@ -5,7 +5,7 @@
   <title>Using the browser console for accessibility testing - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="What counts as hidden for accessible name and description computation, and what does not?">
+  <meta name="description" content="Learn how to use the browser console to highlight headings, links, buttons, images, landmarks, and other accessibility features with simple JavaScript snippets.">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,8 +25,44 @@ video {
   margin: 4em 0 1em;
 }
 
-  </style>
+details {
+  border: 1px solid #aaa;
+  border-radius: .3em;
+  margin: 1em 0;
+  padding: 0;
 }
+
+details:hover {
+  border: 1px solid #3A3636;
+  box-shadow: 0 0 5px #999;
+}
+
+summary {
+  padding: 1em;
+  border-radius: .3em .3em 0 0;
+}
+
+summary:focus {
+  outline: 0;
+  color: #fff;
+  background: #3A3636;
+}
+
+details pre {
+  margin: .5em 0 0;
+}
+
+.copy-container {
+  padding: .5em 0 0;
+  background: #3A3636;
+}
+
+.copy-btn {
+  display: inline-block;
+  margin: 0 0 0 1em;
+}
+
+  </style>
 </head>
 <body>
   <header>
@@ -51,21 +87,21 @@ video {
 
 <p class="metadetails">Published: <time datetime="2025-12-12">12 December 2025</time></p>
 
-<p>Many accessibility testers don’t realise how powerful the browser console can be. With some simple JavaScript, you can highlight headings, display accessible names, check image alternatives, outline landmarks, and inspect many other accessibility features on any page.</p>
+<p>Did you know that with some simple JavaScript, you can highlight headings, display accessible names, check image alternatives, outline landmarks, and inspect many other accessibility features on any page?</p>
 
-<p>This guide introduces the console, explains how to open it, and shows simple scripts you can use right away.</p>
+<p>Let’s explore how to open the console and use a few simple scripts to inspect accessibility features on any page.</p>
 
 <h2>1. What is the console?</h2>
 
 <p>The console is a tool built into every modern browser. It lets you:</p>
 
 <ul>
-	<li>run small pieces of JavaScript</li>
-	<li>inspect information about the page</li>
-	<li>quickly test ideas without changing the source code</li>
+  <li>run small pieces of JavaScript</li>
+  <li>inspect information about the page</li>
+  <li>quickly test ideas without changing the source code</li>
 </ul>
 
-<p>Think of it as a scratchpad for checking how a page behaves. You’re not modifying the real website. You’re simply asking the browser questions and getting answers back.</p>
+<p>Think of it as a place to try things out and see how the page behaves. You’re not modifying the real website — just running temporary code in your own browser to inspect or experiment with what’s on the page.</p>
 
 <h2>2. How to open the console</h2>
 
@@ -80,11 +116,11 @@ video {
 <h3 class="h4">Windows</h3>
 
 <ul>
-	<li><b>Chrome / Edge</b>: <kbf>Ctrl</kbf> + <kbd>Shift</kbd> + <kbd>J</kbd></li>
-	<li><b>Firefox</b>: <kbf>Ctrl</kbf> + <kbd>Shift</kbd> + <kbd>K</kbd></li>
+	<li><b>Chrome / Edge</b>: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd></li>
+	<li><b>Firefox</b>: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd></li>
 </ul>
 
-<h2>How to use these scripts</h2>
+<h2>3. How to use these scripts</h2>
 
 <p>Each example script in this article follows the same simple process. You don’t need to install anything, and you can’t break the website — these scripts only display information visually or in the console.</p>
 
@@ -96,31 +132,35 @@ video {
 	<li>Refresh the page to clear the overlays and return to normal.</li>
 </ol>
 
-<h2>Why not convert these into bookmarklets?</h2>
+<h2>4. Some quick examples</h2>
 
-<p>You can convert any of these snippets into bookmarklets, but for teaching and quick testing, pasting JavaScript into the console is often faster and more flexible. Bookmarklets need to be encoded, saved, and managed in your browser. In contrast, running scripts in the console lets you:</p>
+<p>Here’s a simple script you can try first. It shows every link on the page as a NodeList in the console, which is useful for quick checks.</p>
 
-<ul>  
-  <li>adjust or experiment with the code before running it</li>
-  <li>see errors or warnings immediately</li>
-  <li>change the snippet based on the current page structure</li>
-  <li>avoid cluttering your browser with one-off bookmarklets</li>
-  <li>keep the focus on understanding what the script is doing, not just clicking a shortcut</li>
-</ul>
+<pre><code>document.querySelectorAll("a");</code></pre>
 
-<p>Using the console also mirrors how real accessibility debugging works — quick checks, small iterations, and rapid feedback.</p>
+<p>Or you could highlight all links on the page:</p>
 
-<h2>Example scripts</h2>
+<pre><code>document.querySelectorAll("a").forEach(a => a.style.outline = "2px solid red");</code></pre>
 
-<p>The scripts below highlight headings, buttons, images, links, lists, tables, landmarks, form fields, and more. Most create visual overlays on the page to help you inspect accessibility features, while the final example logs information to the console as you move focus through the page.</p>
+<p>Some people turn snippets like these into bookmarklets (small saved JavaScript actions). That can be useful, but for teaching and quick testing, the console is often easier. I explain why at the end of the article.</p>
 
-<p>These are intentionally simple, single-purpose examples for quick testing and teaching. Feel free to adapt or optimise them as needed.</p>
+<h2>5. Some read-to-use examples</h2>
+
+<p>The following examples are more advanced, but all use the same basic idea: outline elements and place badges using simple DOM queries. You don’t need to understand or memorise every line — just paste them in and explore the results. Feel free to adapt or optimise them as needed.</p>
+
+<p>To test these scripts on the same page shown in the videos, try the <a href="https://intopia.github.io/exercise/" target="_blank">“All about wombats”</a> page.</p>
 
 <h3 class="h4 video-headings">1. Display all headings:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/01-headings.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Scroll-Safe Overlay Container
 // ----------------------
 const overlay = document.createElement("div");
@@ -178,11 +218,20 @@ document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">2. Display all buttons:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/02-buttons.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Scroll-safe overlay container
 // ----------------------
 const overlay = document.createElement("div");
@@ -271,11 +320,20 @@ buttons.forEach(btn => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">3. Display image alternatives:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/03-images.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Scroll-Safe Overlay Container
 // ----------------------
 const overlay = document.createElement("div");
@@ -323,11 +381,20 @@ document.querySelectorAll("img").forEach(img => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">4. Display all links:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/04-links.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Accessible Name Helper
 // ----------------------
 function getLinkName(el) {
@@ -407,11 +474,20 @@ document.querySelectorAll("a").forEach(a => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">5. Display all lists and list items:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/05-lists.mp4"></video>
 
-<pre contenteditable="true"><code>// -------------------------------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// -------------------------------------------
 // Scroll-safe overlay container
 // -------------------------------------------
 const overlay = document.createElement("div");
@@ -486,11 +562,20 @@ document.querySelectorAll("dd").forEach(el => {
   drawBadge(el, "DD", "#b83b5e");
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">6. Display table captions and table headers:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/06-tables.mp4"></video>
 
-<pre contenteditable="true"><code>/* -----------------------------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
 ------------------------------------------ */
 const overlay = document.createElement("div");
@@ -566,11 +651,20 @@ document.querySelectorAll("th").forEach(th => {
   overlay.appendChild(thBadge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">7. Display landmark roles and their names:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/07-landmarks.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Scroll-safe overlay container
 // ----------------------
 const overlay = document.createElement("div");
@@ -693,11 +787,20 @@ document.querySelectorAll(selectors).forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">8. Display form labels:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/08-labels.mp4"></video>
 
-<pre contenteditable="true"><code>function getAccName(el) {
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>function getAccName(el) {
 
   // 1. aria-labelledby
   const labelledby = el.getAttribute("aria-labelledby");
@@ -795,9 +898,18 @@ controls.forEach(ctrl => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">9. Display form field descriptions:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/09-descriptions.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
 
 <pre><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
@@ -854,11 +966,20 @@ document.querySelectorAll("[aria-describedby]").forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">10. Display fieldsets and captions:</h3>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/10-fieldset.mp4"></video>
 
-<pre contenteditable="true"><code>// ----------------------
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
 // Scroll-safe overlay container
 // ----------------------
 const overlay = document.createElement("div");
@@ -967,21 +1088,62 @@ document.querySelectorAll('[role="radiogroup"]').forEach(rg => {
   overlay.appendChild(badge);
 });</code></pre>
 
+  </div>
+</details>
+
 <h3 class="h4 video-headings">11. Display focusable elements:</h3>
 
 <p>This simple script logs each element as it receives keyboard focus. Press <kbd>TAB</kbd> through the page, and you’ll see every focusable element listed in the console:</p>
 
 <video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/11-focus.mp4"></video>
 
-<pre contenteditable="true"><code>document.addEventListener('focusin', () => {
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>document.addEventListener('focusin', () => {
   console.log('Focused element:', document.activeElement);
 });</code></pre>
 
-<h2>Conclusion</h2>
+  </div>
+</details>
+
+<h2>6. Why not convert these into bookmarklets?</h2>
+
+<p>You can convert any of these snippets into bookmarklets, but for teaching and quick testing, pasting JavaScript into the console is often faster and more flexible. Bookmarklets need to be encoded, saved, and managed manually in your browser. In contrast, running scripts in the console lets you:</p>
+
+<ul>  
+  <li>adjust or experiment with the code before running it</li>
+  <li>see errors or warnings immediately</li>
+  <li>change the snippet based on the current page structure</li>
+  <li>avoid cluttering your browser with one-off bookmarklets</li>
+  <li>keep the focus on understanding what the script is doing, not just clicking a shortcut</li>
+</ul>
+
+<p>Using the console also mirrors how real accessibility debugging works — quick checks, small iterations, and rapid feedback.</p>
+
+<h2>7. Conclusion</h2>
 
 <p>These simple scripts are designed to help you understand how accessibility features appear in the browser.</p>
 
-<p>They’re not a replacement for manual testing or assistive technologies, but they can make patterns, errors, and relationships much easier to see while developing or reviewing a page.</p>
+<p>They’re not a replacement for manual testing or assistive technologies, but they can make patterns, errors, and relationships much easier to see while testing a page.</p>
+
+<script>
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('copy-btn')) {
+    const pre = e.target.nextElementSibling;
+    const code = pre.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      e.target.textContent = "Copied!";
+      setTimeout(() => e.target.textContent = "Copy script", 1500);
+    });
+  }
+});
+</script>
+
 
   </main>
   <footer>
