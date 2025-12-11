@@ -12,6 +12,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
   <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+video {
+  max-width: 640px;
+  width: 100%;      /* responsive up to 640px */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+  </style>
 </head>
 <body>
   <header>
@@ -87,6 +97,8 @@
 
 <h3 class="h4">1. Display all headings:</h3>
 
+<video controls src="../assets/mp4/01-headings.mp4"></video>
+
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-Safe Overlay Container
 // ----------------------
@@ -145,7 +157,7 @@ document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">2. Display all buttons:</h3>
+<h3 class="h4">2. Display all buttons::</h3>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -236,7 +248,7 @@ buttons.forEach(btn => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">3. Display image alternatives</h3>
+<h3 class="h4">3. Display image alternatives:</h3>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-Safe Overlay Container
@@ -445,7 +457,7 @@ document.querySelectorAll("dd").forEach(el => {
   drawBadge(el, "DD", "#b83b5e");
 });</code></pre>
 
-<h3 class="h4">6. Display table captions and table headers</h3>
+<h3 class="h4">6. Display table captions and table headers:</h3>
 
 <pre contenteditable="true"><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
@@ -523,7 +535,7 @@ document.querySelectorAll("th").forEach(th => {
   overlay.appendChild(thBadge);
 });</code></pre>
 
-<h3 class="h4">7. Display landmark roles and their names</h3>
+<h3 class="h4">7. Display landmark roles and their names:</h3>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -648,7 +660,7 @@ document.querySelectorAll(selectors).forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">8. Display form labels</h3>
+<h3 class="h4">8. Display form labels:</h3>
 
 <pre contenteditable="true"><code>function getAccName(el) {
 
@@ -748,7 +760,7 @@ controls.forEach(ctrl => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">9. Display form field descriptions</h3>
+<h3 class="h4">9. Display form field descriptions:</h3>
 
 <pre><code>/* -----------------------------------------
    Shared overlay container (scroll-safe)
@@ -805,7 +817,7 @@ document.querySelectorAll("[aria-describedby]").forEach(el => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">10. Display fieldsets and captions</h3>
+<h3 class="h4">10. Display fieldsets and captions:</h3>
 
 <pre contenteditable="true"><code>// ----------------------
 // Scroll-safe overlay container
@@ -916,7 +928,7 @@ document.querySelectorAll('[role="radiogroup"]').forEach(rg => {
   overlay.appendChild(badge);
 });</code></pre>
 
-<h3 class="h4">11. Display focusable elements</h3>
+<h3 class="h4">11. Display focusable elements:</h3>
 
 <p>This simple script logs each element as it receives keyboard focus. Press <kbd>TAB</kbd> through the page, and you’ll see every focusable element listed in the console:</p>
 
