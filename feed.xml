@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -7,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Thu, 12 Dec 2025 08:30:00 +0000</lastBuildDate>
-<pubDate>Thu, 12 Dec 2025 08:30:00 +0000</pubDate>
+<lastBuildDate>Fri, 12 Dec 2025 23:15:30 +1100</lastBuildDate>
+<pubDate>Fri, 12 Dec 2025 23:15:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -21,13 +22,36 @@
 </image>
 
 <!--  =========================================================  -->
-<!--  1. Using the browser console for accessibility testing -->
+<!--  1. What does hidden actually mean in Accessible Name computation? -->
+<!--  =========================================================  -->
+<item>
+<title>What does hidden actually mean in Accessible Name computation?</title>
+<link>https://www.maxdesign.com.au/articles/hidden-content.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/hidden-content.html</guid>
+<pubDate>Fri, 12 Dec 2025 23:15:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Accessibility</category>
+<description>A plain English translation of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</description>
+<content:encoded>
+<![CDATA[
+<p>One important part of the Accessible Name and Description Computation specification defines what it means for something to be considered hidden during that calculation.</p>
+<p>In other words: Which elements are ignored, and which can still be used to form an accessible name</p>
+<p>The steps below are plain English translations of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</p>
+<p><a href="https://www.maxdesign.com.au/articles/hidden-content.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
 <link>https://www.maxdesign.com.au/articles/console.html</link>
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/console.html</guid>
-<pubDate>Mon, 12 Dec 2025 10:02:00 +0000</pubDate>
+<pubDate>Fri, 12 Dec 2025 10:02:00 +0000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>Browser internals</category>
 <category>Accessibility</category>
@@ -35,61 +59,61 @@
 <content:encoded>
 <![CDATA[
 <p>With a few lines of JavaScript, you can highlight headings, outline landmarks, check image alternatives, inspect accessible names, and much more — on any page. This guide includes 11 copy-and-paste snippets you can run right away.</p>
-<p><a href="https://www.maxdesign.com.au/articles/console.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/console.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  2. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  3. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
 <link>https://www.maxdesign.com.au/articles/the-shadow-dom.html</link>
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/the-shadow-dom.html</guid>
-<pubDate>Mon, 11 Dec 2025 10:02:00 +0000</pubDate>
+<pubDate>Thu, 11 Dec 2025 10:02:00 +0000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>Browser internals</category>
 <category>Accessibility</category>
 <description>A screen reader cannot interact with the shadow DOM unless the browser exposes the internal elements that users can actually operate. To make this work, browsers flatten the shadow tree when building the accessibility tree.</description>
 <content:encoded>
 <![CDATA[
-<p>Browsers face a problem: screen readers need to understand what’s inside web components. Without flattening, screen readers would not be able to see the real anything inside the shadow root.</p>
+<p>Browsers face a problem: screen readers need to understand what's inside web components. Without flattening, screen readers would not be able to see the real anything inside the shadow root.</p>
 <p>But all of that is hidden behind the Shadow DOM boundary.</p>
 <p>So how do browsers solve this? To make this work, browsers flatten the shadow tree when building the accessibility tree.</p>
-<p><a href="https://www.maxdesign.com.au/articles/the-shadow-dom.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/the-shadow-dom.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  3. What is an accumulated text bucket?  -->
+<!--  4. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
 <link>https://www.maxdesign.com.au/articles/accumulated-text.html</link>
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/accumulated-text.html</guid>
-<pubDate>Mon, 10 Dec 2025 10:02:00 +0000</pubDate>
+<pubDate>Wed, 10 Dec 2025 10:02:00 +0000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>Browser internals</category>
 <category>Accessibility</category>
 <description>Learn how browsers build accessible names using the idea of an accumulated text bucket, and why some naming rules empty and replace it.</description>
 <content:encoded>
 <![CDATA[
-<p>Throughout Accessible Name and Description Computation specification, you’ll see the term accumulated text.</p>
+<p>Throughout Accessible Name and Description Computation specification, you'll see the term accumulated text.</p>
 <p>But what does accumulated text actually mean?</p>
 <p>When the browser tries to compute an accessible name — for example, by following aria-labelledby references or collecting text from child nodes — the algorithm needs a temporary place to store the text it gathers.</p>
 <p>Think of this as an accumulated text bucket — a container the browser fills with bits of text from different sources before deciding what the final name should be.</p>
-<p><a href="https://www.maxdesign.com.au/articles/accumulated-text.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/accumulated-text.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  4. Did you know your browser has two accessibility trees?  -->
+<!--  5. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -99,19 +123,19 @@
 <dc:creator>Russ Weakley</dc:creator>
 <category>Browser internals</category>
 <category>Accessibility</category>
-<description>This article traces the full lifecycle of an accessibility event. From the moment the DOM changes, through Blink’s internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</description>
+<description>This article traces the full lifecycle of an accessibility event. From the moment the DOM changes, through Blink's internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</description>
 <content:encoded>
 <![CDATA[
-<p>This article traces the full lifecycle of an <strong>accessibility event</strong> — from the moment the DOM changes, through Blink’s internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
-<p>It introduces the concept of Chrome’s <strong>two accessibility trees</strong> and explains why only one of them is exposed to assistive technologies.</p>
-<p><a href="https://www.maxdesign.com.au/articles/two-trees.html">Read the full article →</a></p>
+<p>This article traces the full lifecycle of an <strong>accessibility event</strong> - from the moment the DOM changes, through Blink's internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
+<p>It introduces the concept of Chrome's <strong>two accessibility trees</strong> and explains why only one of them is exposed to assistive technologies.</p>
+<p><a href="https://www.maxdesign.com.au/articles/two-trees.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  5. How Chrome builds the accessibility tree                -->
+<!--  6. How Chrome builds the accessibility tree                -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -124,16 +148,16 @@
 <description>We are often told that the browser builds its accessibility tree from the DOM, but what does that actually involve?</description>
 <content:encoded>
 <![CDATA[
-<p>We are often told that the browser builds its <strong>accessibility tree</strong> from the DOM — but what does that actually involve?</p>
-<p>This article walks through Chrome’s full AXTree construction pipeline: node filtering, role computation, name/description resolution, layout attachment, attribute mapping, and final AXTree snapshot generation.</p>
-<p><a href="https://www.maxdesign.com.au/articles/axtree.html">Read the full article →</a></p>
+<p>We are often told that the browser builds its <strong>accessibility tree</strong> from the DOM - but what does that actually involve?</p>
+<p>This article walks through Chrome's full AXTree construction pipeline: node filtering, role computation, name/description resolution, layout attachment, attribute mapping, and final AXTree snapshot generation.</p>
+<p><a href="https://www.maxdesign.com.au/articles/axtree.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  6. Understanding screen reader speech queues               -->
+<!--  7. Understanding screen reader speech queues               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -148,14 +172,14 @@
 <![CDATA[
 <p>This article explores the concept of <strong>utterances</strong> and explains how the <strong>screen reader speech queue</strong> works.</p>
 <p>It breaks down how messages are queued, replaced, interrupted, and prioritised across different assistive technologies.</p>
-<p><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  7. What is an AXEvent?                                     -->
+<!--  8. What is an AXEvent?                                     -->
 <!--  =========================================================  -->
 <item>
 <title>What is an AXEvent?</title>
@@ -170,17 +194,17 @@
 <![CDATA[
 <p>An <strong>AXEvent</strong> is a notification generated by the browser and sent to assistive technologies when something meaningful changes.</p>
 <p>This article explains where AXEvents originate, how they move through the accessibility pipeline, and how assistive technologies interpret them.</p>
-<p><a href="https://www.maxdesign.com.au/articles/axevents.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/axevents.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  8. What happens when an event occurs? — the quick answer    -->
+<!--  9. What happens when an event occurs? - the quick answer    -->
 <!--  =========================================================  -->
 <item>
-<title>What happens when an event occurs? — the quick answer</title>
+<title>What happens when an event occurs? - the quick answer</title>
 <link>https://www.maxdesign.com.au/articles/what-happens.html</link>
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/what-happens.html</guid>
 <pubDate>Fri, 05 Dec 2025 07:31:00 +0000</pubDate>
@@ -192,14 +216,14 @@
 <![CDATA[
 <p>This is the short version that explains what happens inside the browser and what happens outside the browser when a user triggers an event.</p>
 <p>It outlines the internal processing steps, accessibility tree updates, and assistive technology notifications.</p>
-<p><a href="https://www.maxdesign.com.au/articles/what-happens.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/what-happens.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  9. What are DOM mutations?                                 -->
+<!--  10. What are DOM mutations?                                 -->
 <!--  =========================================================  -->
 <item>
 <title>What are DOM mutations?</title>
@@ -212,76 +236,9 @@
 <description>DOM mutations are any changes to the DOM tree. These mutations can happen with or without JavaScript.</description>
 <content:encoded>
 <![CDATA[
-<p><strong>DOM mutations</strong> are any changes to the document’s node tree. These mutations can happen with or without JavaScript and are central to how modern interfaces update.</p>
+<p><strong>DOM mutations</strong> are any changes to the document's node tree. These mutations can happen with or without JavaScript and are central to how modern interfaces update.</p>
 <p>The article covers layout impact, accessibility impact, and how browsers detect and respond to these changes.</p>
-<p><a href="https://www.maxdesign.com.au/articles/dom-mutations.html">Read the full article →</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. What really happens when a user clicks an accordion?    -->
-<!--  =========================================================  -->
-<item>
-<title>What really happens when a user clicks an accordion button?</title>
-<link>https://www.maxdesign.com.au/articles/accordion-button.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/accordion-button.html</guid>
-<pubDate>Thu, 04 Dec 2025 07:33:00 +0000</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Events</category>
-<category>Accessibility</category>
-<category>Browser internals</category>
-<description>An exploration of the entire browser process once a button has been clicked.</description>
-<content:encoded>
-<![CDATA[
-<p>This article traces everything that happens once a user clicks an accordion button — from DOM events to layout updates, accessibility tree mutations, and AXEvents.</p>
-<p>It provides a full timeline showing exactly how browsers process and announce interactive changes.</p>
-<p><a href="https://www.maxdesign.com.au/articles/accordion-button.html">Read the full article →</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  11. End-to-end browser and accessibility event architecture  -->
-<!--  =========================================================  -->
-<item>
-<title>End-to-end browser and accessibility event architecture</title>
-<link>https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html</guid>
-<pubDate>Wed, 03 Dec 2025 07:33:00 +0000</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
-<category>Accessibility</category>
-<description>A diagram mapping user input, JavaScript, DOM updates, layout, accessibility events, and assistive technology output.</description>
-<content:encoded>
-<![CDATA[
-<p>This diagram maps the entire path from user input to assistive technology output, including DOM updates, layout, JavaScript execution, accessibility tree mutations, and AXEvents.</p>
-<p>It aims to give developers a clear, high-level overview of how everything fits together.</p>
-<p><a href="https://www.maxdesign.com.au/articles/end-to-end-event-architecture.html">Read the full article →</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  12. Understanding aria-live timing                          -->
-<!--  =========================================================  -->
-<item>
-<title>Understanding aria-live timing: a two-layer model</title>
-<link>https://www.maxdesign.com.au/articles/aria-live-timing.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-live-timing.html</guid>
-<pubDate>Tue, 02 Dec 2025 07:33:00 +0000</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>ARIA</category>
-<category>Accessibility</category>
-<description>A two-layer model explaining how aria-live timing works.</description>
-<content:encoded>
-<![CDATA[
-<p>This article introduces a two-layer timing model that determines when <strong>aria-live</strong> announcements occur.</p>
-<p>It breaks down the browser timing layer and the assistive technology timing layer and shows how they interact.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-live-timing.html">Read the full article →</a></p>
+<p><a href="https://www.maxdesign.com.au/articles/dom-mutations.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
