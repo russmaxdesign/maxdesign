@@ -42,7 +42,7 @@
 
 <p>Think of it as a small, self-contained “mini-DOM” living inside an element.</p>
 
-<p>Why does this exist?</p>
+<h2>Why does this exist?</h2>
 
 <p>Because it gives the component its own private space for markup, styles, and behaviour — separate from the rest of the page.</p>
 
@@ -92,23 +92,28 @@
 
 <h3>Flattening the Shadow DOM</h3>
 
-<p>Browsers face a problem: screen readers need to understand what’s inside the component.</p>
+<p>Screen readers do not see the shadow root itself.</p>
 
-<p>Without flattening, screen readers would not be able to see the real <code>&lt;button&gt;</code>, the text, or the focusable elements inside the shadow root.</p>
+<p>Without flattening, the <code>&lt;button&gt;</code> would be inaccessible because it lives behind a shadow boundary.</p>
 
-<p>But all of that is hidden behind the Shadow DOM boundary.</p>
+<p>Browsers solve this by <b>flattening</b> the shadow tree when building the accessibility tree.</p>
 
-<p>So how do browsers solve this?</p>
+<p>Flattening removes the accessibility boundary of the shadow root and exposes the internal nodes as if they were normal children in the accessibility tree (not the DOM tree).</p>
 
-<p>Shadow DOM boundaries are useful for developers, but they don’t make sense to assistive technologies. </p>
+<p>During flattening, the browser resolves slotting (which light DOM nodes appear in which <code>&lt;slot&gt;</code>), and exposes the final composed structure to assistive technologies.</p>
 
-<p>A screen reader cannot interact with a <code>&lt;fancy-button&gt;</code> unless the browser exposes the internal elements that users can actually operate.</p>
+<p>So, the accessibility tree could look something like:</p>
 
-<p>To make this work, browsers <b>flatten</b> the shadow tree when building the accessibility tree.</p>
+<pre><code>Root
+└─ fancy-button (generic container / group)
+   └─ button  Name: "Buy now"</code></pre>
 
-<p>Flattening removes the accessibility boundary of the shadow root and exposes the internal nodes as if they were normal children in the accessibility tree, not the DOM tree.</p>
+<p>Note two things:</p>
 
-<p>During flattening, the browser resolves slotting (which light DOM nodes appear in which <slot>), and exposes the final composed structure to assistive technologies.</p>
+<ol>
+  <li>The shadow root is not represented at all in the accessibility tree.</li>
+  <li>The non-native <code>fancy-button</code> element is exposed with a generic role, because it has no inherent semantic meaning.</li>
+</ol>
 
 <h2>How different browsers do it</h2>
 
