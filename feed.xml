@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Fri, 12 Dec 2025 23:15:30 +1100</lastBuildDate>
-<pubDate>Fri, 12 Dec 2025 23:15:30 +1100</pubDate>
+<lastBuildDate>Tue, 16 Dec 2025 19:37:30 +1100</lastBuildDate>
+<pubDate>Tue, 16 Dec 2025 19:37:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -22,7 +22,29 @@
 </image>
 
 <!--  =========================================================  -->
-<!--  1. What does hidden actually mean in Accessible Name computation? -->
+<!--  1. Does Chrome get the header element wrong? -->
+<!--  =========================================================  -->
+<item>
+<title>Does Chrome get the header element wrong?</title>
+<link>https://www.maxdesign.com.au/articles/header.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/header.html</guid>
+<pubDate>Tue, 16 Dec 2025 19:37:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Browser internals</category>
+<category>Accessibility</category>
+<description>If a header sits inside another landmark, it should be defined as generic, but Chrome defines it as sectionHeading - is this wrong?</description>
+<content:encoded>
+<![CDATA[
+<p>When a &lt;header&gt; element appears inside another landmark, the ARIA in HTML specification says its implicit role becomes generic. However, if you inspect the accessibility tree in Chrome, you’ll often see the element exposed as sectionHeader instead. At first glance, this can look like a contradiction — or even a browser bug.</p>
+<p>This article explains why Chrome’s behaviour is correct. It breaks down the difference between implicit ARIA roles, browser-assigned accessibility roles, and platform-level roles exposed via operating system accessibility APIs, using the &lt;header&gt; element as a concrete example of how these layers interact.</p>
+<p><a href="https://www.maxdesign.com.au/articles/header.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -45,7 +67,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Using the browser console for accessibility testing -->
+<!--  3. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -66,7 +88,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  4. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -89,7 +111,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. What is an accumulated text bucket?  -->
+<!--  5. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -113,7 +135,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Did you know your browser has two accessibility trees?  -->
+<!--  6. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -135,7 +157,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. How Chrome builds the accessibility tree                -->
+<!--  7. How Chrome builds the accessibility tree                -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -157,7 +179,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Understanding screen reader speech queues               -->
+<!--  8. Understanding screen reader speech queues               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -179,7 +201,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. What is an AXEvent?                                     -->
+<!--  9. What is an AXEvent?                                     -->
 <!--  =========================================================  -->
 <item>
 <title>What is an AXEvent?</title>
@@ -201,7 +223,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. What happens when an event occurs? - the quick answer    -->
+<!--  10. What happens when an event occurs? - the quick answer    -->
 <!--  =========================================================  -->
 <item>
 <title>What happens when an event occurs? - the quick answer</title>
@@ -220,29 +242,6 @@
 ]]>
 </content:encoded>
 </item>
-
-
-<!--  =========================================================  -->
-<!--  10. What are DOM mutations?                                 -->
-<!--  =========================================================  -->
-<item>
-<title>What are DOM mutations?</title>
-<link>https://www.maxdesign.com.au/articles/dom-mutations.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/dom-mutations.html</guid>
-<pubDate>Fri, 05 Dec 2025 07:30:00 +0000</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>DOM</category>
-<description>DOM mutations are any changes to the DOM tree. These mutations can happen with or without JavaScript.</description>
-<content:encoded>
-<![CDATA[
-<p><strong>DOM mutations</strong> are any changes to the document's node tree. These mutations can happen with or without JavaScript and are central to how modern interfaces update.</p>
-<p>The article covers layout impact, accessibility impact, and how browsers detect and respond to these changes.</p>
-<p><a href="https://www.maxdesign.com.au/articles/dom-mutations.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
 
 </channel>
 </rss>

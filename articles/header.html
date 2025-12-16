@@ -43,11 +43,11 @@
   <p>If not a descendant of an article, aside, main, nav or section element, or an element with role=article, complementary, main, navigation or region then role=banner. Otherwise, role=generic.</p>
 </blockquote>
 
-<p>This rule defines <strong>ARIA semantics</strong>. It doesn&rsquo;t specify how browsers must represent elements internally. And doesn&rsquo;t determine how they expose elements to operating system accessibility APIs.</p>
+<p>This rule defines <strong>ARIA semantics</strong>. It doesn&rsquo;t specify how browsers must represent elements internally. And it doesn&rsquo;t determine how they expose elements to operating system accessibility APIs.</p>
 
 <h2>Example 1: header outside other landmarks</h2>
 
-<p>In the following example, the <code>&lt;header&gt;</code> element is not inside another sectioning or landmark element. Its implicit ARIA role is therefore <code>banner</code>:</p>
+<p>In the following example, the <code>&lt;header&gt;</code> element is not inside another sectioning or landmark element. Therefore, it has an implicit ARIA role of <code>banner</code>:</p>
 
 <pre><code>&lt;div&gt;
   &lt;header&gt;&lt;/header&gt;

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How aria-labelledby really works - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>How <code>aria-labelledby</code> really works</h1> 
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-17">17 December 2025</time></p>
+
+<p>The <code>aria-labelledby</code> attribute lets you use existing text on the page to name another element for assistive technologies.</p>
+
+<p>Under the hood, it works by referencing one or more elements whose text is used to compute the element’s accessible name.</p>
+
+
+<p>In the following example, the <code>&lt;nav&gt;</code> element has an accessible name of “About us”, taken from the text content of the referenced heading:</p>
+
+<pre><code>&lt;nav <span class="highlight">aria-labelledby="aaa"</span>&gt;
+  &lt;h4 <span class="highlight">id="aaa"</span>&gt;About us&lt;/h4&gt;
+&lt;/nav&gt;</code></pre>
+
+<!-- Section -->
+
+<h2>When to use <code>aria-labelledby</code></h2>
+
+<p>The <code>aria-labelledby</code> attribute can be used to provide or override the accessible name of an element.</p>
+
+<p>It is commonly used:</p>
+
+<ul>
+  <li>when an element does not have a native way to generate an accessible name</li>
+  <li>when visible text elsewhere in the document should be used as the name</li>
+  <li>when you need to override an element’s existing accessible name</li>
+</ul>
+
+<p>When visible content already exists in the page, <code>aria-labelledby</code> should generally be used in preference to <code>aria-label</code>, as it reuses text that is available to all users.</p>
+
+<!-- Section -->
+
+<h2>Order of precedence?</h2>
+
+<p>The <code>aria-labelledby</code> attribute is the most powerful <b>author-provided</b> method of assigning an accessible name to an element.</p>
+
+<p>In simplified order:</p>
+
+<ol>
+  <li>If present, use <code>aria-labelledby</code>.</li>
+  <li>Otherwise, if present, use <code>aria-label</code>.</li>
+  <li>Otherwise, use the element’s native HTML naming mechanism, where applicable, including:
+    <ul>
+      <li>Visible text content</li>
+      <li>A <code>&lt;label&gt;</code> associated with a form control</li>
+      <li>The <code>alt</code> attribute on images</li>
+      <li>A <code>&lt;legend&gt;</code> for a <code>&lt;fieldset&gt;</code></li>
+      <li>A <code>&lt;caption&gt;</code> for a table</li>
+      <li>A <code>&lt;figcaption&gt;</code> for a <code>&lt;figure&gt;</code></li>      
+    </ul>
+  </li>
+</ol>
+
+<p>Importantly, just because these two ARIA attributes take precedence in name computation, this does not mean they should be used.</p>
+
+<p>Where possible, always use the element’s native HTML naming mechanism, as this is typically more robust, more predictable, and better supported across browsers and assistive technologies.</p>
+
+<!-- Section -->
+
+<h2>Anywhere in the DOM?</h2>
+
+<p>The referenced element must exist in the same document and have a valid, unique <code>id</code>.</p>
+
+<p>In the following example, the button has an accessible name of “Buy Lawn Mower”, taken from a paragraph elsewhere in the document:</p>
+
+<pre><code>&lt;p <span class="highlight">id="bbb"</span>&gt;Buy Lawn Mower&lt;/p&gt;
+&lt;button <span class="highlight">aria-labelledby="bbb"</span>&gt;Buy&lt;/button&gt;</code></pre>
+
+<p>The referenced element must exist in the same document and have a valid, unique id.</p>
+
+<!-- Section -->
+
+<h2>More than one source?</h2>
+
+<p>More than one element can be referenced using space-separated values in the <code>aria-labelledby</code> attribute.</p>
+
+<p>In the following example, the button has an accessible name of “Buy Lawn Mower On special”, created by concatenating the text from elements ccc and ddd, in the order they are listed in the aria-labelledby attribute.</p>
+
+<p>The order in which those elements appear in the DOM is irrelevant.</p>
+
+<pre><code>&lt;p <span class="highlight">id="ccc"</span>&gt;Buy Lawn Mower&lt;/p&gt;
+&lt;button <span class="highlight">aria-labelledby="ccc ddd"</span>&gt;Buy&lt;/button&gt;
+&lt;p <span class="highlight">id="ddd"</span>&gt;On special&lt;/p&gt;</code></pre>
+
+<!-- Section -->
+
+<h2>Reference the element itself?</h2>
+
+<p>An element may include its own id as part of the <code>aria-labelledby</code> reference.</p>
+
+<p>In the following example, the button’s accessible name is “Buy Lawn Mower On special”, created from:</p>
+
+<ul>
+  <li>its own text content</li>
+  <li>the referenced elements <code>yyy</code> and <code>zzz</code></li>
+</ul>
+
+<pre><code>&lt;p <span class="highlight">id="yyy"</span>&gt;Lawn Mower&lt;/p&gt;
+&lt;button <span class="highlight">id="xxx" aria-labelledby="xxx yyy zzz"</span>&gt;Buy&lt;/button&gt;
+&lt;p <span class="highlight">id="zzz"</span>&gt;On special&lt;/p&gt;</code></pre>
+
+<p>The accessible name computation algorithm prevents infinite loops and ensures the element’s own content is only included once.</p>
+
+<!-- Section -->
+
+<h2>Punctuation</h2>
+
+<p>In the previous examples, the computed accessible name is formed by concatenating text from multiple sources.</p>
+
+<p>This concatenation process does not insert punctuation or pauses. The referenced text strings are merged into a single text string exactly as provided.</p>
+
+<p>As a result, screen readers may not pause naturally between concatenated segments, which can affect how the name is announced.</p>
+
+<!-- Section -->
+
+<h2>Hidden elements?</h2>
+
+<p>Elements that are not rendered are not included in accessible name computation.</p>
+
+<p>Text from elements that are hidden using any of the following should not contribute to an accessible name:</p>
+
+<ul>
+  <li><code>display: none</code></li>
+  <li><code>visibility: hidden</code></li>
+  <li>the <code>hidden</code> attribute</li>
+  <li><code>aria-hidden="true"</code></li>
+</ul>
+
+<p>While hidden elements are generally excluded from accessible name computation, Chrome will still use text referenced via <code>aria-labelledby</code> even when the referenced element is hidden with <code>display: none</code>.</p>
+
+<p>This behaviour should not be relied upon, as it is browser-dependent.</p>
+
+<p>For example, the following paragraph should not be relied upon to produce an accessible name:</p>
+
+<pre><code>&lt;p id="ccc" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
+&lt;button aria-labelledby="ccc"&gt;Buy&lt;/button&gt;</code></pre>
+
+<p>To provide text that is visually hidden but still available to assistive technologies, use an off-screen or visually-hidden CSS technique instead.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;p id="ccc" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;
+&lt;button aria-labelledby="ccc"&gt;Buy&lt;/button&gt;</code></pre>
+
+<!-- Section -->
+
+<h2>Empty strings?</h2>
+
+<p>If all referenced elements resolve to empty text strings, the resulting accessible name will be empty.</p>
+
+<p>In the following example, the button has an empty accessible name:</p>
+
+<pre><code>&lt;button aria-labelledby="xyz"&gt;Hello world&lt;/button&gt;
+<span class="highlight">&lt;p id="xyz"&gt;&lt;/p&gt;</span></code></pre>
+
+<p>If no other naming mechanism applies, the element may be exposed to assistive technologies without a usable accessible name.</p>
+
+<!-- Section -->
+
+<h2>Broken references fail silently</h2>
+
+<p>If a referenced <code>id</code>:</p>
+
+<ul>
+  <li>does not exist</li>
+  <li>is duplicated</li>
+  <li>is added or removed dynamically</li>
+</ul>
+
+<p>then:</p>
+
+<ul>
+  <li>the accessible name may be empty or incomplete</li>
+  <li>no error or warning is exposed to the author</li>
+</ul>
+
+<p>Broken <code>aria-labelledby</code> references fail silently, making these issues easy to miss during development.</p>
+
+<p>When debugging, inspect the element in the <b>accessibility tree</b> to confirm that its accessible name is being computed as expected, rather than relying solely on markup inspection.</p>
+
+<!-- Section -->
+
+<h2>Shadow DOM boundaries</h2>
+
+<p>The <code>aria-labelledby</code> attribute cannot cross shadow DOM boundaries.</p>
+
+<p>The following examples are illustrative. The <code>#shadow-root</code> line represents the shadow DOM boundary and is not literal HTML.</p>
+
+<p>An element in the light DOM cannot reference an element inside a shadow root using <code>aria-labelledby</code>. Any such reference is treated as if the <code>id</code> does not exist.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-labelledby="xyz"</span>&gt;Click me&lt;/button&gt;
+
+&lt;greeting-widget&gt;
+  #shadow-root
+    &lt;p <span class="highlight">id="xyz"</span>&gt;Hello world&lt;/p&gt;
+&lt;/greeting-widget&gt;</code></pre>
+
+<p>Similarly, elements inside a shadow root cannot reference elements outside that shadow root.</p>
+
+<pre><code>&lt;p <span class="highlight">id="xyz"</span>&gt;Hello world&lt;/p&gt;
+
+&lt;greeting-widget&gt;
+  #shadow-root
+    &lt;button <span class="highlight">aria-labelledby="xyz"</span>&gt;Click me&lt;/button&gt;
+&lt;/greeting-widget&gt;</code></pre>
+
+<p>In both cases, the result is a silent failure, and the referenced text will not contribute to the accessible name.</p>
+
+<!-- Section -->
+
+<h2>Which roles and elements?</h2>
+
+<p>The <code>aria-labelledby</code> attribute is a global ARIA attribute, meaning it is allowed on all HTML elements.</p>
+
+<p>However, its effect depends on the element’s implicit or explicit ARIA role.</p>
+
+<p>Most roles support author-provided accessible names, but some roles are not intended to be named by authors, including:</p>
+
+<ul>
+  <li><code>code</code></li>
+  <li><code>definition</code></li>
+  <li><code>deletion</code></li>
+  <li><code>emphasis</code></li>
+  <li><code>insertion</code></li>
+  <li><code>mark</code></li>
+  <li><code>paragraph</code></li>
+  <li><code>presentation</code></li>
+  <li><code>none</code></li>
+  <li><code>strong</code></li>
+  <li><code>subscript</code></li>
+  <li><code>superscript</code></li>
+  <li><code>suggestion</code></li>
+  <li><code>term</code></li>
+</ul>
+
+<p>While <code>aria-labelledby</code> is valid markup on any element, applying it to elements or roles that do not support accessible naming will have no practical effect.</p>
+
+<!-- Section -->
+
+<h2>Conclusion</h2>
+
+<p>The <code>aria-labelledby</code> attribute is a powerful tool for generating accessible names from existing content.</p>
+
+<p>However, it should be used with care, and not as a first resort. Where possible, rely on native HTML naming mechanisms.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+
+
+
