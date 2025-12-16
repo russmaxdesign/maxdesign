@@ -166,15 +166,15 @@
 
 <p>For example, the following paragraph should not be relied upon to produce an accessible name:</p>
 
-<pre><code>&lt;p id="ccc" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="ccc"&gt;Buy&lt;/button&gt;</code></pre>
+<pre><code>&lt;p id="eee" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
+&lt;button aria-labelledby="eee"&gt;Buy&lt;/button&gt;</code></pre>
 
 <p>To provide text that is visually hidden but still available to assistive technologies, use an off-screen or visually-hidden CSS technique instead.</p>
 
 <p>For example:</p>
 
-<pre><code>&lt;p id="ccc" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="ccc"&gt;Buy&lt;/button&gt;</code></pre>
+<pre><code>&lt;p id="fff" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;
+&lt;button aria-labelledby="fff"&gt;Buy&lt;/button&gt;</code></pre>
 
 <!-- Section -->
 
@@ -184,10 +184,17 @@
 
 <p>In the following example, the button has an empty accessible name:</p>
 
-<pre><code>&lt;button aria-labelledby="xyz"&gt;Hello world&lt;/button&gt;
-<span class="highlight">&lt;p id="xyz"&gt;&lt;/p&gt;</span></code></pre>
+<pre><code>&lt;button aria-labelledby="ggg"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
+<span class="highlight">&lt;p id="ggg"&gt;&lt;/p&gt;</span></code></pre>
 
-<p>If no other naming mechanism applies, the element may be exposed to assistive technologies without a usable accessible name.</p>
+<p>In practice, some browsers (including Chrome) may fall back to the element’s own text content if the <code>aria-labelledby</code> reference resolves to an empty string. So, the name would be &ldquo;Hello world&rdquo;.</p>
+
+<p>This fallback should not be relied upon. If the element has no internal text content, the accessible name will be empty.</p>
+
+<p>In the following example, there is no fallback naming mechanism, resulting in a control with no accessible name.</p>
+
+<pre><code>&lt;button aria-labelledby="hhh"&gt;&lt;/button&gt;
+<span class="highlight">&lt;p id="hhh"&gt;&lt;/p&gt;</span></code></pre>
 
 <!-- Section -->
 
@@ -222,20 +229,20 @@
 
 <p>An element in the light DOM cannot reference an element inside a shadow root using <code>aria-labelledby</code>. Any such reference is treated as if the <code>id</code> does not exist.</p>
 
-<pre><code>&lt;button <span class="highlight">aria-labelledby="xyz"</span>&gt;Click me&lt;/button&gt;
+<pre><code>&lt;button <span class="highlight">aria-labelledby="iii"</span>&gt;Click me&lt;/button&gt;
 
 &lt;greeting-widget&gt;
   #shadow-root
-    &lt;p <span class="highlight">id="xyz"</span>&gt;Hello world&lt;/p&gt;
+    &lt;p <span class="highlight">id="iii"</span>&gt;Hello world&lt;/p&gt;
 &lt;/greeting-widget&gt;</code></pre>
 
 <p>Similarly, elements inside a shadow root cannot reference elements outside that shadow root.</p>
 
-<pre><code>&lt;p <span class="highlight">id="xyz"</span>&gt;Hello world&lt;/p&gt;
+<pre><code>&lt;p <span class="highlight">id="jjj"</span>&gt;Hello world&lt;/p&gt;
 
 &lt;greeting-widget&gt;
   #shadow-root
-    &lt;button <span class="highlight">aria-labelledby="xyz"</span>&gt;Click me&lt;/button&gt;
+    &lt;button <span class="highlight">aria-labelledby="jjj"</span>&gt;Click me&lt;/button&gt;
 &lt;/greeting-widget&gt;</code></pre>
 
 <p>In both cases, the result is a silent failure, and the referenced text will not contribute to the accessible name.</p>
@@ -290,6 +297,3 @@
   </footer>
 </body>
 </html>
-
-
-
