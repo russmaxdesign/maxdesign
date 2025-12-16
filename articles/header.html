@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Does Chrome get the header element wrong? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="If a header sits inside another landmark, it should be defined as generic, but Chrome defines it as sectionHeading - is this wrong?">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Does Chrome get the <code>&lt;header&gt;</code> element wrong?</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-16">16 December 2025</time></p>
+
+<p>The <a href="https://w3c.github.io/html-aria/" target="_blank" rel="noopener">ARIA in HTML</a> specification defines the <em>implicit ARIA semantics</em> for HTML elements.</p>
+
+<p>In this specification, the <code>&lt;header&gt;</code> element has an implicit ARIA role of <code>banner</code> only when it is <em>not</em> a descendant of certain sectioning or landmark elements.</p>
+
+<blockquote>
+  <p>If not a descendant of an article, aside, main, nav or section element, or an element with role=article, complementary, main, navigation or region then role=banner. Otherwise, role=generic.</p>
+</blockquote>
+
+<p>This rule defines <strong>ARIA semantics</strong>. It doesn&rsquo;t specify how browsers must represent elements internally. And doesn&rsquo;t determine how they expose elements to operating system accessibility APIs.</p>
+
+<h2>Example 1: header outside other landmarks</h2>
+
+<p>In the following example, the <code>&lt;header&gt;</code> element is not inside another sectioning or landmark element. Its implicit ARIA role is therefore <code>banner</code>:</p>
+
+<pre><code>&lt;div&gt;
+  &lt;header&gt;&lt;/header&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>Example 2: header inside another landmark</h2>
+
+<p>In this example, the <code>&lt;header&gt;</code> element is a descendant of <code>&lt;main&gt;</code>, which is a landmark. In this context, the implicit ARIA role of the <code>&lt;header&gt;</code> element is <code>generic</code>, meaning that no implicit ARIA landmark role applies.</p>
+
+<pre><code>&lt;main&gt;
+  &lt;header&gt;&lt;/header&gt;
+&lt;/main&gt;</code></pre>
+
+<h2>What Chrome exposes in the accessibility tree</h2>
+
+<p>If you inspect the second example using Chrome DevTools and view the accessibility tree, you&rsquo;ll see that the <code>&lt;header&gt;</code> element is not shown with a role of <code>generic</code>. Instead, Chrome exposes it as <code>sectionHeader</code>.</p>
+
+<p>This may seem to contradict the “ARIA in HTML” specification, but it doesn’t!</p>
+
+<h2>What “generic” actually means in the specification</h2>
+
+<p>In the “ARIA in HTML” spec, the term <code>generic</code> does not mean that the element has no semantics or that it should be removed from the accessibility tree.</p>
+
+<p>It means only one thing: <strong>no implicit ARIA role applies</strong>.</p>
+
+<p>The specification intentionally stops at defining ARIA semantics. It does not require browsers to expose a literal <code>generic</code> role to assistive technologies.</p>
+
+<h2>Under the hood in Blink</h2>
+
+<p>Chrome does not expose ARIA roles directly to assistive technologies. Instead, Blink builds an internal accessibility tree made up of accessibility objects (AXObjects). Each AXObject is assigned an internal role based on multiple inputs, including:</p>
+
+<ul>
+  <li>the native HTML element type</li>
+  <li>the element’s context in the DOM</li>
+  <li>implicit ARIA semantics defined by specifications</li>
+  <li>explicit ARIA roles, if present</li>
+</ul>
+
+<p>When a <code>&lt;header&gt;</code> element does not qualify for the <code>banner</code> landmark role, Blink suppresses landmark semantics.</p>
+
+<p>However, the element still represents a structural heading container within a section.</p>
+
+<p>In this situation, Blink assigns a non-landmark structural accessibility role. On macOS, this role maps to <code>AXSectionHeader</code>, which Chrome surfaces in DevTools as <code>sectionHeader</code>.</p>
+
+<p>This mapping reflects a structural role at the platform layer, not an ARIA role.</p>
+
+<h2>ARIA roles vs platform accessibility roles</h2>
+
+<p>This distinction is important:</p>
+
+<ul>
+  <li>The “ARIA in HTML” spec defines <em>implicit ARIA roles</em>.</li>
+  <li>Browsers internally assign accessibility roles that may be more granular.</li>
+  <li>Operating system accessibility APIs often have richer role vocabularies than ARIA.</li>
+</ul>
+
+<p>When Chrome exposes <code>sectionHeader</code>, it is:</p>
+
+<ul>
+  <li>Fully compliant with the rule that no <code>banner</code> landmark applies.</li>
+  <li>Fully compliant with the implicit ARIA role being <code>generic</code>.</li>
+  <li>Expressing additional structural meaning at the platform level.</li>
+  <li>Not exposing a different ARIA role.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>Chrome is not misinterpreting the “ARIA in HTML” specification.</p>
+
+<p>What you see as <code>sectionHeader</code> in the accessibility tree is a platform-level structural role chosen by the browser when landmark semantics do not apply.</p>
+
+<p>This is a small example of how browsers have to reconcile HTML semantics, ARIA rules, and operating system accessibility APIs when constructing an accessibility tree.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
