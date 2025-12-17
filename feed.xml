@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Wed, 17 Dec 2025 08:30:30 +1100</lastBuildDate>
-<pubDate>Wed, 17 Dec 2025 08:30:30 +1100</pubDate>
+<lastBuildDate>Thu, 18 Dec 2025 06:30:30 +1100</lastBuildDate>
+<pubDate>Thu, 18 Dec 2025 06:30:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -21,8 +21,30 @@
   <link>https://www.maxdesign.com.au/articles/</link>
 </image>
 
+
 <!--  =========================================================  -->
-<!--  1. How aria-labelledby really works -->
+<!--  1. More about screen reader speech queues                  -->
+<!--  =========================================================  -->
+<item>
+<title>More about screen reader speech queues</title>
+<link>https://www.maxdesign.com.au/articles/more-about-speech-queues.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/more-about-speech-queues.html</guid>
+<pubDate>Thu, 18 Dec 2025 06:30:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>This article explores a single example to show why they don’t always behave the way you might expect. In fact, we are going to look at one specific vehicle type - motor scooters.</description>
+<content:encoded>
+<![CDATA[
+<p>More about screen reader speech queues is a follow-up to Understanding screen reader speech queues, focusing on a single, deceptively simple interaction: typing. Using the “traffic and vehicles” analogy, the article explores why typing events don’t always result in predictable speech output — and why the “last character” isn’t always announced the way people expect.</p>
+<p><a href="https://www.maxdesign.com.au/articles/more-about-speech-queues.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. How aria-labelledby really works -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -30,7 +52,7 @@
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-labelledby.html</guid>
 <pubDate>Wed, 17 Dec 2025 08:30:30 +1100</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
+<category>ARIA</category>
 <category>Accessibility</category>
 <description>How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.</description>
 <content:encoded>
@@ -46,7 +68,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Does Chrome get the header element wrong? -->
+<!--  3. Does Chrome get the header element wrong? -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -68,7 +90,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. What does hidden actually mean in Accessible Name computation? -->
+<!--  4. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -91,7 +113,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Using the browser console for accessibility testing -->
+<!--  5. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -99,7 +121,7 @@
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/console.html</guid>
 <pubDate>Fri, 12 Dec 2025 10:02:00 +1100</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
+<category>Browser console</category>
 <category>Accessibility</category>
 <description>With a few lines of JavaScript, you can highlight headings, outline landmarks, check image alternatives, inspect accessible names, and much more — on any page.</description>
 <content:encoded>
@@ -112,7 +134,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  6. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -120,7 +142,7 @@
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/the-shadow-dom.html</guid>
 <pubDate>Thu, 11 Dec 2025 10:02:00 +1100</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
+<category>Shadow DOM</category>
 <category>Accessibility</category>
 <description>A screen reader cannot interact with the shadow DOM unless the browser exposes the internal elements that users can actually operate. To make this work, browsers flatten the shadow tree when building the accessibility tree.</description>
 <content:encoded>
@@ -135,7 +157,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. What is an accumulated text bucket?  -->
+<!--  7. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -159,7 +181,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Did you know your browser has two accessibility trees?  -->
+<!--  8. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -181,7 +203,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. How Chrome builds the accessibility tree                -->
+<!--  9. How Chrome builds the accessibility tree                -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -203,7 +225,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Understanding screen reader speech queues               -->
+<!--  10. Understanding screen reader speech queues              -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding screen reader speech queues</title>
@@ -211,36 +233,14 @@
 <guid isPermaLink="true">https://www.maxdesign.com.au/articles/understanding-speech-queues.html</guid>
 <pubDate>Sat, 06 Dec 2025 07:33:00 +1100</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>Accessibility</category>
 <category>Assistive technologies</category>
+<category>Accessibility</category>
 <description>This article explores the concept of utterances and how the screen reader speech queue works.</description>
 <content:encoded>
 <![CDATA[
 <p>This article explores the concept of <strong>utterances</strong> and explains how the <strong>screen reader speech queue</strong> works.</p>
 <p>It breaks down how messages are queued, replaced, interrupted, and prioritised across different assistive technologies.</p>
 <p><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. What is an AXEvent?                                     -->
-<!--  =========================================================  -->
-<item>
-<title>What is an AXEvent?</title>
-<link>https://www.maxdesign.com.au/articles/axevents.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/axevents.html</guid>
-<pubDate>Fri, 05 Dec 2025 07:33:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Accessibility</category>
-<category>Browser internals</category>
-<description>An AXEvent is a notification generated by the browser and sent to assistive technologies when something meaningful changes.</description>
-<content:encoded>
-<![CDATA[
-<p>An <strong>AXEvent</strong> is a notification generated by the browser and sent to assistive technologies when something meaningful changes.</p>
-<p>This article explains where AXEvents originate, how they move through the accessibility pipeline, and how assistive technologies interpret them.</p>
-<p><a href="https://www.maxdesign.com.au/articles/axevents.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
