@@ -100,15 +100,17 @@
 <pre><code>&lt;p <span class="highlight">id="bbb"</span>&gt;Buy Lawn Mower&lt;/p&gt;
 &lt;button <span class="highlight">aria-labelledby="bbb"</span>&gt;Buy&lt;/button&gt;</code></pre>
 
-<p>The referenced element must exist in the same document and have a valid, unique id.</p>
-
 <!-- Section -->
 
 <h2>More than one source?</h2>
 
 <p>More than one element can be referenced using space-separated values in the <code>aria-labelledby</code> attribute.</p>
 
-<p>In the following example, the button has an accessible name of “Buy Lawn Mower On special”, created by concatenating the text from elements ccc and ddd, in the order they are listed in the aria-labelledby attribute.</p>
+<p>In the following example, the button has an accessible name of “Buy Lawn Mower On special”.</p>
+
+<p>This name was created by concatenating the text from elements <code>ccc</code> (“Buy Lawn Mower”) and <code>ddd</code> (“On special”).</p>
+
+<p>The accessible name is compiled based on the order they are listed in the <code>aria-labelledby</code> attribute.</p>
 
 <p>The order in which those elements appear in the DOM is irrelevant.</p>
 
@@ -120,13 +122,13 @@
 
 <h2>Reference the element itself?</h2>
 
-<p>An element may include its own id as part of the <code>aria-labelledby</code> reference.</p>
+<p>An element may include its own <code>id</code> as part of the <code>aria-labelledby</code> reference.</p>
 
 <p>In the following example, the button’s accessible name is “Buy Lawn Mower On special”, created from:</p>
 
 <ul>
-  <li>its own text content</li>
-  <li>the referenced elements <code>yyy</code> and <code>zzz</code></li>
+  <li>its own text content - <code>xxx</code> (“Buy”).</li>
+  <li>the referenced elements <code>yyy</code> (“Lawn Mower”) and <code>zzz</code> (“On special”).</li>
 </ul>
 
 <pre><code>&lt;p <span class="highlight">id="yyy"</span>&gt;Lawn Mower&lt;/p&gt;
@@ -137,9 +139,9 @@
 
 <!-- Section -->
 
-<h2>Punctuation</h2>
+<h2>Punctuation and announcement</h2>
 
-<p>In the previous examples, the computed accessible name is formed by concatenating text from multiple sources.</p>
+<p>In the last two examples, the computed accessible name is formed by concatenating text from multiple sources.</p>
 
 <p>This concatenation process does not insert punctuation or pauses. The referenced text strings are merged into a single text string exactly as provided.</p>
 
@@ -182,7 +184,7 @@
 
 <p>If all referenced elements resolve to empty text strings, the resulting accessible name will be empty.</p>
 
-<p>In the following example, the button has an empty accessible name:</p>
+<p>In the following example, the button is attempting to reference another element with no content:</p>
 
 <pre><code>&lt;button aria-labelledby="ggg"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
 <span class="highlight">&lt;p id="ggg"&gt;&lt;/p&gt;</span></code></pre>

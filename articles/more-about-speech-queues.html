@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>More about screen reader speech queues - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article explores a single example to show why they don’t always behave the way you might expect. In fact, we are going to look at one specific vehicle type - motor scooters.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+    .code-example {
+      background: #efefef;
+      border-radius: .3em;
+      padding: .3em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>More about screen reader speech queues</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-18">18 December 2025</time></p>
+
+<p>This article is a follow-up on <a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html" target="_blank">Understanding screen reader speech queues</a>.</p>
+
+<p>The first article explains how speech queues work.</p>
+
+<p>This article explores a single example to show why they don’t always behave the way you might expect.</p>
+
+<p>In fact, we are going to look at one specific vehicle type:</p>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Typing events (motor scooters)</h2>
+
+<p>Example: a user types several letters quickly.</p>
+
+<p>We outlined some basic behaviours:</p>
+
+<ul>
+  <li>Use the low-priority lane</li>
+  <li>Scooters often arrive in a swarm when the user types quickly.</li>
+  <li>The traffic inspector waves the whole swarm through rather than stopping to check each one.</li>
+  <li>Only the last scooter is noticed and spoken (intentional debouncing)</li>
+</ul>
+
+<p>This description assumes there is a meaningful “last scooter”.</p>
+
+<p>But an important question: Is the last scooter announced as a letter, a word?</p>
+
+<p>The simple answer: <b>it depends</b>!</p>
+
+<p>Let&rsquo;s look at four scenarios:</p>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Scenario 1: Single word typing in a quiet street</h2>
+
+<p>(Last scooter is spoken)</p>
+
+<ul>
+  <li>The user types: <code class="code-example">h e l l o</code></li>
+  <li>Each keystroke generates a small accessibility update</li>
+  <li>Scooters pile up rapidly in the low-priority lane</li>
+  <li>No other traffic interrupts</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+  <li>The inspector sees a swarm</li>
+  <li>Decides it’s not worth stopping traffic</li>
+  <li>Lets them all pass</li>
+  <li>Notices only the final scooter</li>
+</ul>
+
+<p>Outcome:</p>
+
+<p>The screen reader might announce “hello”, or just “o”, depending on:</p>
+
+<ul>
+  <li>Whether the browser collapses intermediate text changes</li>
+  <li>How the assistive technology is configured to echo typing</li>
+</ul>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Scenario 2: Typing, but another vehicle cuts in</h2>
+
+<p><em>(Last scooter never reaches the checkpoint)</em></p>
+
+<ul>
+  <li>User types <code class="code-example">h e l l o</code></li>
+  <li>Immediately presses <kbd>TAB</kbd></li>
+  <li>Or focus moves</li>
+  <li>Or a live region updates</li>
+</ul>
+
+<p>In scooter terms:</p>
+
+<ul>
+  <li>Scooters are still approaching</li>
+  <li>A bus (focus change) enters a high-priority lane</li>
+  <li>The inspector must deal with the bus immediately</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+  <li>The inspector never checks the scooters</li>
+  <li>The scooters may be discarded entirely</li>
+  <li>Or silently merged into a later announcement</li>
+</ul>
+
+<p>Outcome:</p>
+
+<ul>
+  <li>Nothing about the typed letters is spoken at all.</li>
+</ul>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Scenario 3: Scooters merge into a delivery truck</h2>
+
+<p><em>(Letters are never spoken individually)</em></p>
+
+<p>Some typing doesn’t stay as scooters.</p>
+
+<p>Example:</p>
+
+<ul>
+  <li>Typing updates a text node</li>
+  <li>Browser decides to batch the DOM mutation</li>
+  <li>Accessibility layer emits a single text-changed event</li>
+</ul>
+
+<p>In scooter terms:</p>
+
+<ul>
+  <li>Scooters ride onto a service road</li>
+  <li>They merge into a small delivery truck</li>
+  <li>The inspector never sees individual scooters</li>
+</ul>
+
+<p>Outcome:</p>
+
+<p>The AT may announce a word, a phrase, or nothing, depending on:</p>
+
+<ul>
+  <li>Control type (input, textarea, contenteditable)</li>
+  <li>AT verbosity settings</li>
+  <li>Whether character echo is enabled</li>
+</ul>
+
+<p>So the question “is the last letter spoken?” no longer applies.</p>
+
+<p>There are no scooters left to inspect.</p>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Scenario 4: The inspector decides scooters don’t matter</h2>
+
+<p><em>(No speech by design)</em></p>
+
+<p>Some inspectors are stricter than others.</p>
+
+<p>Examples:</p>
+
+<ul>
+  <li>Secure fields</li>
+  <li>Password inputs</li>
+  <li>Rapid backspacing</li>
+  <li>Repeated characters</li>
+  <li>Typing inside controls that suppress echo</li>
+</ul>
+
+<p>In scooter terms:</p>
+
+<ul>
+  <li>Scooters are legally allowed</li>
+  <li>But the inspector has instructions:
+    <ul>
+      <li>“Ignore scooters in this zone”</li>
+      <li>“Do not announce scooter traffic here”</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Outcome:</p>
+
+<ul>
+  <li>Typing produces no speech, even though events occurred.</li>
+</ul>
+
+<p>Nothing went “wrong”. The inspector followed policy.</p>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>A common misconception</h2>
+
+<p>There is a common critical misconception:</p>
+
+<p><em>“If something changed, the screen reader will eventually say it.”</em></p>
+
+<p>In reality:</p>
+
+<ul>
+  <li>Events compete</li>
+  <li>Priorities override</li>
+  <li>Some traffic is intentionally ignored</li>
+  <li>Some traffic never becomes speech-worthy</li>
+</ul>
+
+<p>Speech is not delayed truth. It is selected output.</p>
+
+<!-- Section  -->
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Screen reader speech is not a guaranteed log of everything that happened.</p>
+
+<p>It is a filtered, prioritised summary of what survived competition.</p>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+
+
