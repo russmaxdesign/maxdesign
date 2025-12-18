@@ -151,27 +151,30 @@
 
 <h2>Hidden elements?</h2>
 
-<p>Elements that are not rendered are not included in accessible name computation.</p>
+<p>Hidden elements are generally excluded from implicit accessible name computation.</p>
 
-<p>Text from elements that are hidden using any of the following should not contribute to an accessible name:</p>
+<p>However, <code>aria-labelledby</code> is an <b>explicit reference</b>.</p>
+
+<p>In practice, <code>aria-labelledby</code> resolves label text by dereferencing <b>DOM nodes</b>, not accessibility nodes.</p>
+
+<p>As a result, browsers can extract text from referenced elements regardless of visibility or <code>aria-hidden</code>, even when those elements are not rendered or exposed in the accessibility tree.</p>
+
+<p>In Chrome, Firefox, and Safari (macOS VoiceOver), this means the referenced element’s text can still be used as the accessible name even when the referenced element is hidden with:</p>
 
 <ul>
   <li><code>display: none</code></li>
-  <li><code>visibility: hidden</code></li>
   <li>the <code>hidden</code> attribute</li>
   <li><code>aria-hidden="true"</code></li>
 </ul>
 
-<p>While hidden elements are generally excluded from accessible name computation, Chrome will still use text referenced via <code>aria-labelledby</code> even when the referenced element is hidden with <code>display: none</code>.</p>
-
-<p>This behaviour should not be relied upon, as it is browser-dependent.</p>
-
-<p>For example, the following paragraph should not be relied upon to produce an accessible name:</p>
+<p>For example, the following produces an accessible name of “Buy now” in major browsers:</p>
 
 <pre><code>&lt;p id="eee" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
 &lt;button aria-labelledby="eee"&gt;Buy&lt;/button&gt;</code></pre>
 
-<p>To provide text that is visually hidden but still available to assistive technologies, use an off-screen or visually-hidden CSS technique instead.</p>
+<p>Even though this behaviour is widely supported, it should be used with care. If the label comes from content that is not perceivable to sighted users, it can create a mismatch between what users see and what assistive technologies announce.</p>
+
+<p>If your goal is to provide text that is visually hidden but still intended to be used for accessibility, use a visually hidden or off-screen CSS technique instead.</p>
 
 <p>For example:</p>
 
