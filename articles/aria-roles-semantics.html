@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Did you know some ARIA roles remove child semantics? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Some ARIA roles replace native HTML structure and remove child semantics. Learn how this works, why it happens, and when child roles must be explicitly defined.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+    .example { margin-top: .5em; }
+    .example p { margin: 0 0 .3em; }
+    pre code { font-size: .8em; }
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Did you know some ARIA roles remove child semantics?</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-21">21 December 2025</time></p>
+
+<h2>A single sentence with a lot of impact</h2>
+
+<p>Some ARIA roles can completely remove their children’s semantics.</p>
+
+<p>This behaviour is defined in the Core Accessibility API Mappings 1.2 specification:</p>
+
+<blockquote>
+	<p style="margin: 0 0 .5em;">If the host language element is overridden by a WAI-ARIA role whose semantics or structure is not equivalent to the native host language semantics or to a subclass of those semantics, then treat any child elements having roles specified as Allowed Accessibility Child Roles as having presentation or none.</p>
+	<p style="margin: 0;"><a href="https://www.w3.org/TR/core-aam-1.2/#mapping_conflicts" target="_blank">Source</a></p>
+</blockquote>
+
+<p>Here’s a plain language breakdown of that sentence:</p>
+
+<ul>  
+  <li>When you apply certain ARIA roles, the browser stops using the element’s native structure.</li>
+  <li>From that point on, only child elements that explicitly match the ARIA role’s expected structure remain accessible.</li>
+  <li>Any other child elements are treated as presentation only.</li>
+</ul>
+
+<p>In these cases, ARIA doesn’t build on existing semantics. It replaces the entire semantic model of the element, including how the browser interprets its children.</p>
+
+<p>Once this happens, the browser no longer makes any assumptions about native HTML relationships. Every meaningful part of the widget <b>must be stated explicitly using ARIA roles</b>.</p>
+
+<h2>Is this documented anywhere else?</h2>
+
+<p>This rule appears in other specifications, but usually indirectly. It’s never stated as clearly as it is in Core AAM.</p>
+
+<h3 class="h4"><a class="external" href="https://www.w3.org/TR/wai-aria-1.3/#mustContain" target="_blank">Allowed Accessibility Child Roles</a></h3>
+
+<p>Explains which child roles are allowed, but not what happens if they’re missing.</p>
+
+<h3 class="h4"><a class="external" href="https://www.w3.org/TR/wai-aria-1.3/#scope" target="_blank">Required Accessibility Parent Role</a></h3>
+
+<p>Defines structural expectations, but not the consequence of breaking them.</p>
+
+<h3 class="h4"><a class="external" href="https://www.w3.org/TR/wai-aria-1.2/#mustContain" target="_blank">Implicit vs explicit roles</a></h3>
+
+<p>Explains role override behaviour, but not the loss of child semantics.</p>
+
+<h2>An example: <code>menu</code> and <code>menuitem</code></h2>
+
+<p>Let’s look at an example that may seem logical, but doesn’t follow the ARIA rules we’ve been discussing.</p>
+
+<pre><code>&lt;ul <span class="highlight">role="menu"</span>&gt;
+  &lt;li&gt;Save&lt;/li&gt;
+  &lt;li&gt;Open&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>At a glance, this looks reasonable.</p>
+
+<ul>
+  <li>A list has been repurposed as a <code>menu</code>.</li>
+  <li>The list items look like <code>menu</code> options.</li>
+</ul>
+
+<p>However, this is not how ARIA works.</p>
+
+<p>By applying <code>role="menu"</code>, you’re opting into the ARIA menu widget model whether you intend to or not.</p>
+
+<ul>
+  <li>Native list semantics are discarded.</li>
+  <li><code>&lt;li&gt;</code> elements no longer have any implicit meaning.</li>
+  <li>No menu items exist in the accessibility tree.</li>
+</ul>
+
+<p>From an accessibility perspective, this is now a menu with no items.</p>
+
+<p>To make this work, the child semantics must be redefined explicitly:</p>
+
+<pre><code>&lt;ul <span class="highlight">role="menu"</span>&gt;
+  &lt;li <span class="highlight">role="menuitem"</span>&gt;Save&lt;/li&gt;
+  &lt;li <span class="highlight">role="menuitem"</span>&gt;Open&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>This is required to rebuild the menu’s structure in the accessibility tree.</p>
+
+<h2>Other common examples where child semantics are wiped</h2>
+
+<p>The <code>menu</code> example is not unique. The same kind of structural replacement happens with many widget roles.</p>
+
+<p>Here are some other examples:</p>
+
+<ul>
+  <li><code>menu</code> → <code>menuitem</code>, <code>menuitemcheckbox</code>, <code>menuitemradio</code></li>
+  <li><code>tablist</code> → <code>tab</code></li>
+  <li><code>listbox</code> → <code>option</code></li>
+  <li><code>tree</code> → <code>treeitem</code></li>
+  <li><code>grid</code> → <code>row</code> → <code>gridcell</code></li>
+  <li><code>menubar</code> → <code>menuitem</code></li>
+</ul>
+
+<p>In all of these cases, native HTML semantics may be ignored once the ARIA widget role is applied.</p>
+
+<h2>When this rule does not apply</h2>
+
+<p>So far, this article has shown how some ARIA roles replace an element’s entire semantic structure and wipe out native child semantics.</p>
+
+<p>However, there is an important exception. The specification includes a qualifying phrase that is easy to miss:</p>
+
+<blockquote>
+  <p>“…whose semantics or structure is not equivalent to the native host language semantics…”</p>
+</blockquote>
+
+<p>Those few words carry a lot of weight. They define when ARIA replaces semantics and when it merely reinforces them.</p>
+
+<h3>Two rules to understand</h3>
+
+<p>Once you unpack this, the behaviour becomes much more predictable.</p>
+
+<ul>
+  <li><b>Rule 1</b>: Some ARIA roles replace the entire semantic model of an element, including how its children are interpreted.</li>
+  <li><b>Rule 2</b>: That replacement only happens when the ARIA role’s semantics are not equivalent to the native HTML model.</li>
+</ul>
+
+<p>When the ARIA role introduces a different widget model, native structure is discarded. It must be rebuilt explicitly using ARIA roles.</p>
+
+<p>When the child elements already have native semantics that match the ARIA role’s expected model, those semantics are preserved.</p>
+
+<p>Here’s an example where semantics are preserved:</p>
+
+<pre><code>&lt;div role="radiogroup" aria-labelledby="group-heading"&gt;
+  &lt;h3 id="group-heading"&gt;Do you like boats?&lt;/h3&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="boats-y" name="boats"&gt;
+    &lt;label for="boats-y"&gt;Yes&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" id="boats-n" name="boats"&gt;
+    &lt;label for="boats-n"&gt;No&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>In this case:</p>
+
+<ul>
+  <li>Native radio inputs already expose <code>role="radio"</code>.</li>
+  <li>The grouping behaviour already exists in HTML.</li>
+  <li>The ARIA radiogroup role matches the native semantic model.</li>
+</ul>
+
+<p>Because the semantics are equivalent, the browser does not discard the child roles. The radio buttons remain intact and correctly exposed to assistive technologies.</p>
+
+<p>In these cases, ARIA is reinforcing an existing model rather than replacing it.</p>
+
+<h3>Why this distinction matters</h3>
+
+<p>Without this context, ARIA can feel inconsistent.</p>
+
+<p>Sometimes applying a role appears to wipe child semantics. Other times it does not.</p>
+
+<p>This difference isn’t arbitrary. It depends on whether the ARIA role introduces a new widget model or aligns with an existing native one.</p>
+
+<p>Once you recognise this distinction, a lot of previously confusing ARIA behaviour starts to make sense.</p>
+
+<h2>Conclusion</h2>
+
+<p>Understanding which ARIA roles replace structure, and which merely reinforce it, is important. Especially when building non-native widgets.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>

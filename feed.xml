@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Sat, 20 Dec 2025 01:30:30 +1100</lastBuildDate>
-<pubDate>Sat, 20 Dec 2025 01:30:30 +1100</pubDate>
+<lastBuildDate>Sun, 21 Dec 2025 02:30:30 +1100</lastBuildDate>
+<pubDate>Sun, 21 Dec 2025 02:30:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,28 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Tests for aria-labelledby and aria-describedby          -->
+<!--  1. Did you know some ARIA roles remove child semantics?    -->
+<!--  =========================================================  -->
+<item>
+<title>Did you know some ARIA roles remove child semantics?</title>
+<link>https://www.maxdesign.com.au/articles/aria-roles-semantics.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-roles-semantics.html</guid>
+<pubDate>Sun, 21 Dec 2025 02:30:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>Some ARIA roles replace native HTML structure and remove child semantics. Learn how this works, why it happens, and when child roles must be explicitly defined.</description>
+<content:encoded>
+<![CDATA[
+<p>Some ARIA roles introduce an entirely new semantic model, replacing native HTML structure and removing child semantics. This article explores where that behaviour is defined, how it affects common widgets like menus and tabs, and when child roles must be explicitly redefined. Understanding this distinction helps explain why ARIA sometimes behaves in unexpected ways.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-roles-semantics.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -44,9 +65,8 @@
 </item>
 
 
-
 <!--  =========================================================  -->
-<!--  2. More about screen reader speech queues                  -->
+<!--  3. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -67,7 +87,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. How aria-labelledby really works -->
+<!--  4. How aria-labelledby really works -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -91,7 +111,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Does Chrome get the header element wrong? -->
+<!--  5. Does Chrome get the header element wrong? -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -113,7 +133,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. What does hidden actually mean in Accessible Name computation? -->
+<!--  6. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -136,7 +156,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Using the browser console for accessibility testing -->
+<!--  7. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -157,7 +177,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  8. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -180,7 +200,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. What is an accumulated text bucket?  -->
+<!--  9. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -204,7 +224,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Did you know your browser has two accessibility trees?  -->
+<!--  10. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -220,28 +240,6 @@
 <p>This article traces the full lifecycle of an <strong>accessibility event</strong> - from the moment the DOM changes, through Blink's internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
 <p>It introduces the concept of Chrome's <strong>two accessibility trees</strong> and explains why only one of them is exposed to assistive technologies.</p>
 <p><a href="https://www.maxdesign.com.au/articles/two-trees.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. How Chrome builds the accessibility tree               -->
-<!--  =========================================================  -->
-<item>
-<title>How Chrome builds the accessibility tree - start to finish</title>
-<link>https://www.maxdesign.com.au/articles/axtree.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/axtree.html</guid>
-<pubDate>Sun, 07 Dec 2025 07:33:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Accessibility</category>
-<category>Browser internals</category>
-<description>We are often told that the browser builds its accessibility tree from the DOM, but what does that actually involve?</description>
-<content:encoded>
-<![CDATA[
-<p>We are often told that the browser builds its <strong>accessibility tree</strong> from the DOM - but what does that actually involve?</p>
-<p>This article walks through Chrome's full AXTree construction pipeline: node filtering, role computation, name/description resolution, layout attachment, attribute mapping, and final AXTree snapshot generation.</p>
-<p><a href="https://www.maxdesign.com.au/articles/axtree.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
