@@ -1,0 +1,180 @@
+<h1>Did you know the true power of some ARIA roles?</h1>
+
+<h2>A single sentence hidden in an obscure spec</h2>
+
+<p>A lot of people do not realise that some ARIA roles can erase existing semantics entirely.</p>
+
+<p>This behaviour is stated clearly in only one place, buried inside the Core Accessibility API Mappings 1.2 specification:</p>
+
+<blockquote>
+	<p>If the host language element is overridden by a WAI-ARIA role whose semantics or structure is not equivalent to the native host language semantics or to a subclass of those semantics, then treat any child elements having roles specified as Allowed Accessibility Child Roles as having presentation or none.</p>
+	<p style="font-size: .7em"><a href="https://www.w3.org/TR/core-aam-1.2/#mapping_conflicts" target="_blank">Source</a></p>
+</blockquote>
+
+[]
+
+------------------
+
+## 2. The same statement in plain language
+
+Here is the same rule from the specification, rewritten in plain language:
+
+When you apply certain ARIA roles, the browser stops using the element’s native structure.
+From that point on, only child elements that explicitly match the ARIA role’s expected structure remain accessible.
+Any other child elements are treated as presentation only.
+
+This is not additive behaviour.
+
+In these cases, ARIA does not “enhance” existing semantics. It replaces the entire semantic model of the element, including how its children are interpreted.
+
+Once this happens, the browser no longer assumes anything about native HTML relationships. Every meaningful part of the widget must be stated explicitly using ARIA roles.
+
+------------------
+
+## 3. Is this stated anywhere else?
+
+This rule is mentioned in other specifications, although it is inferred rather than stated as clearly as it is in Core AAM.
+
+Allowed Accessibility Child Roles
+Explains which child roles are permitted, but not what happens when they are missing.
+[ link ]
+
+Required Accessibility Parent Role
+Defines structural expectations, but not the consequence of breaking them.
+[ link ]
+
+Implicit vs explicit roles
+Explains role override behaviour, but not the loss of child semantics.
+[ link ]
+
+------------------
+
+## 4. An example: menu and menuitem
+
+Let’s look at a common example that appears logical but fails quietly.
+
+<ul role="menu">
+  <li>Save</li>
+  <li>Open</li>
+</ul>
+
+At a glance, this looks reasonable.
+
+- A list has been repurposed as a menu.
+- Each list item looks like a menu option.
+
+However, this is not how ARIA works.
+
+By applying role="menu", you are opting into the ARIA menu widget model. At that point:
+
+- Native list semantics are discarded.
+- <li> elements no longer have any implicit meaning.
+- No menu items exist in the accessibility tree.
+
+From an accessibility perspective, this is now a menu with no items.
+
+To make this work, the child semantics must be rebuilt explicitly:
+
+<ul role="menu">
+  <li role="menuitem">Save</li>
+  <li role="menuitem">Open</li>
+</ul>
+
+This is not redundant ARIA. It is structurally required.
+
+Once the menu role is applied, only elements that match the menu’s allowed child roles are recognised as meaningful. Everything else is treated as presentation only.
+
+------------------
+
+## 5. Other common examples where child semantics are wiped
+
+The menu example is not unique. The same structural replacement happens with many widget roles.
+
+Here are some other examples:
+
+- menu → menuitem, menuitemcheckbox, menuitemradio
+- tablist → tab
+- listbox → option
+- tree → treeitem
+- grid → row → gridcell
+- menubar → menuitem
+
+In all of these cases, native HTML semantics are ignored once the ARIA widget role is applied.
+
+------------------
+
+## 6. When this rule does not apply
+
+So far, this article has shown how some ARIA roles replace the entire semantic structure of an element and wipe native child semantics.
+
+However, there is an important exception.
+
+The specification includes a qualifying phrase that is easy to miss:
+
+| “…whose semantics or structure is not equivalent to the native host language semantics…”
+
+Those few words carry a lot of weight.
+
+They define when ARIA replaces semantics and when it merely reinforces them.
+
+### Two rules to understand
+
+Once this is unpacked, the behaviour becomes more predictable.
+
+Rule 1
+Some ARIA roles replace the entire semantic model of an element, including how its children are interpreted.
+
+Rule 2
+That replacement only happens when the ARIA role’s semantics are not equivalent to the native HTML model.
+
+When the ARIA role introduces a different widget model, native structure is discarded and must be rebuilt explicitly using ARIA roles.
+
+When the ARIA role matches an existing native model, the browser keeps the native semantics.
+
+An example where semantics are preserved
+
+Consider the following markup:
+
+<div role="radiogroup" aria-labelledby="group-heading">
+  <h3 id="group-heading">Do you like boats?</h3>
+
+  <div>
+    <input type="radio" id="boats-y" name="boats">
+    <label for="boats-y">Yes</label>
+  </div>
+
+  <div>
+    <input type="radio" id="boats-n" name="boats">
+    <label for="boats-n">No</label>
+  </div>
+</div>
+
+In this case:
+
+- Native radio inputs already expose role="radio".
+- The grouping behaviour already exists in HTML.
+- The ARIA radiogroup role matches the native semantic model.
+
+Because the semantics are equivalent, the browser does not discard the child roles. The radio buttons remain intact and correctly exposed to assistive technologies.
+
+Here, ARIA is reinforcing an existing model rather than replacing it.
+
+### Why this distinction matters
+
+Without this context, ARIA can feel inconsistent.
+
+Sometimes applying a role appears to wipe child semantics. Other times it does not.
+
+The difference is not arbitrary.
+
+It depends on whether the ARIA role introduces a new widget model or aligns with an existing native one.
+
+Once you recognise this distinction, a lot of previously confusing ARIA behaviour starts to make sense.
+
+------------------
+
+7. Conclusion
+
+ARIA is not just a set of attributes. Some roles opt you into an entirely new semantic system. When that happens, native structure stops mattering unless you rebuild it explicitly.
+
+Understanding which ARIA roles replace structure, and which merely reinforce it, explains a huge amount of “mysterious” accessibility breakage.

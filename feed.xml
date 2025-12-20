@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Thu, 18 Dec 2025 06:30:30 +1100</lastBuildDate>
-<pubDate>Thu, 18 Dec 2025 06:30:30 +1100</pubDate>
+<lastBuildDate>Sat, 20 Dec 2025 01:30:30 +1100</lastBuildDate>
+<pubDate>Sat, 20 Dec 2025 01:30:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,30 @@
 
 
 <!--  =========================================================  -->
-<!--  1. More about screen reader speech queues                  -->
+<!--  1. Tests for aria-labelledby and aria-describedby          -->
+<!--  =========================================================  -->
+<item>
+<title>Tests for aria-labelledby and aria-describedby</title>
+<link>https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html</guid>
+<pubDate>Sat, 20 Dec 2025 01:30:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</description>
+<content:encoded>
+<![CDATA[
+<p>aria-labelledby and aria-describedby do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
+<p>These 13 tests review how aria-labelledby and aria-describedby actuall treat hidden content.</p>
+<p><a href="https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+
+<!--  =========================================================  -->
+<!--  2. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -44,7 +67,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. How aria-labelledby really works -->
+<!--  3. How aria-labelledby really works -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -68,7 +91,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Does Chrome get the header element wrong? -->
+<!--  4. Does Chrome get the header element wrong? -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -90,7 +113,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. What does hidden actually mean in Accessible Name computation? -->
+<!--  5. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -113,7 +136,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Using the browser console for accessibility testing -->
+<!--  6. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -134,7 +157,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  7. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -157,7 +180,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. What is an accumulated text bucket?  -->
+<!--  8. What is an accumulated text bucket?  -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -181,7 +204,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Did you know your browser has two accessibility trees?  -->
+<!--  9. Did you know your browser has two accessibility trees?  -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know your browser has two accessibility trees?</title>
@@ -203,7 +226,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. How Chrome builds the accessibility tree                -->
+<!--  10. How Chrome builds the accessibility tree               -->
 <!--  =========================================================  -->
 <item>
 <title>How Chrome builds the accessibility tree - start to finish</title>
@@ -219,28 +242,6 @@
 <p>We are often told that the browser builds its <strong>accessibility tree</strong> from the DOM - but what does that actually involve?</p>
 <p>This article walks through Chrome's full AXTree construction pipeline: node filtering, role computation, name/description resolution, layout attachment, attribute mapping, and final AXTree snapshot generation.</p>
 <p><a href="https://www.maxdesign.com.au/articles/axtree.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Understanding screen reader speech queues              -->
-<!--  =========================================================  -->
-<item>
-<title>Understanding screen reader speech queues</title>
-<link>https://www.maxdesign.com.au/articles/understanding-speech-queues.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/understanding-speech-queues.html</guid>
-<pubDate>Sat, 06 Dec 2025 07:33:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>This article explores the concept of utterances and how the screen reader speech queue works.</description>
-<content:encoded>
-<![CDATA[
-<p>This article explores the concept of <strong>utterances</strong> and explains how the <strong>screen reader speech queue</strong> works.</p>
-<p>It breaks down how messages are queued, replaced, interrupted, and prioritised across different assistive technologies.</p>
-<p><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
