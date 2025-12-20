@@ -121,6 +121,18 @@
 
 <p>This is a small example of how browsers have to reconcile HTML semantics, ARIA rules, and operating system accessibility APIs when constructing an accessibility tree.</p>
 
+<h2>Footnote</h2>
+
+<p>At the time of writing, the <a href="https://www.w3.org/TR/html-aam-1.0/" target="_blank">HTML Accessibility API Mappings</a> (HTML-AAM) specification defines <code>&lt;header&gt;</code> elements that are scoped to sectioning content or other landmarks as having no implicit ARIA landmark role, and maps them to the ARIA role generic.</p>
+
+<p>The HTML-AAM also includes an editorial note indicating that this mapping may change in a future revision, and references ongoing work in ARIA to introduce more specific roles for sectional headers and footers.</p>
+
+<p>In December 2024, <a href="https://github.com/w3c/aria/pull/1931" target="_blank">ARIA added the <code>sectionheader</code> and sectionfooter roles</a>. This work does not retroactively change the current HTML-AAM mapping for <code>&lt;header&gt;</code>, but it signals a possible future direction for how nested headers and footers may be represented at the ARIA role level.</p>
+
+<p>Importantly, browser developer tools may display internal or platform-specific roles such as <code>sectionHeader</code>. These reflect the browser’s internal accessibility object model or platform accessibility APIs, and do not necessarily indicate the computed ARIA role defined by the HTML-AAM.</p>
+
+<p>Additional reading: <a href="https://www.stefanjudis.com/today-i-learned/header-and-footer-elements-lose-their-roles-in-sectioning-content/" target="_blank">Header & footer elements change their roles when they're inside of sectioning content</a></p>
+
   </main>
   <footer>
     <ul>

@@ -35,10 +35,32 @@
 
 <p class="metadetails">Published: <time datetime="2025-12-17">17 December 2025</time></p>
 
+<h2>This article covers:</h2>
+
+<ul>
+  <li><a href="#article-a">What is <code>aria-labelledby</code>?</a></li>
+  <li><a href="#article-b">When to use <code>aria-labelledby</code></a></li>
+  <li><a href="#article-c">How does <code>aria-labelledby</code> work?</a></li>
+  <li><a href="#article-d">What is the order of precedence?</a></li>
+  <li><a href="#article-e">Can the name come from anywhere in the DOM?</a></li>
+  <li><a href="#article-f">Can it use more than one source?</a></li>
+  <li><a href="#article-g">Can it reference the element itself?</a></li>
+  <li><a href="#article-h">What happens with empty strings?</a></li>
+  <li><a href="#article-i">What happens with broken references?</a></li>
+  <li><a href="#article-j">Can it cross shadow DOM boundaries?</a></li>
+  <li><a href="#article-k">Can it reference hidden elements?</a></li>
+  <li><a href="#article-l">Which roles and elements can it be applied to?</a></li>
+  <li><a href="#article-m">Punctuation and announcement</a></li>
+  <li><a href="#article-n">Conclusion</a></li>
+</ul>
+
+<hr>
+
+<h2 id="article-a">What is <code>aria-labelledby</code>?</h2>
+
 <p>The <code>aria-labelledby</code> attribute lets you use existing text on the page to name another element for assistive technologies.</p>
 
 <p>Under the hood, it works by referencing one or more elements whose text is used to compute the element’s accessible name.</p>
-
 
 <p>In the following example, the <code>&lt;nav&gt;</code> element has an accessible name of “About us”, taken from the text content of the referenced heading:</p>
 
@@ -48,7 +70,7 @@
 
 <!-- Section -->
 
-<h2>When to use <code>aria-labelledby</code></h2>
+<h2 id="article-b">When to use <code>aria-labelledby</code></h2>
 
 <p>The <code>aria-labelledby</code> attribute can be used to provide or override the accessible name of an element.</p>
 
@@ -64,7 +86,22 @@
 
 <!-- Section -->
 
-<h2>Order of precedence?</h2>
+<h2 id="article-c">How does <code>aria-labelledby</code> work?</h2>
+
+<p><code>aria-labelledby</code> creates an explicit, ID-based relationship.</p>
+
+<p>When present, the browser:</p>
+
+<ul>
+  <li>reads the value of aria-labelledby</li>
+  <li>resolves each <code>ID</code> to a DOM node</li>
+  <li>extracts the text content from those nodes</li>
+  <li>uses the combined text as the element’s accessible name</li>
+</ul>
+
+<!-- Section -->
+
+<h2 id="article-d">What is the order of precedence?</h2>
 
 <p>The <code>aria-labelledby</code> attribute is the most powerful <b>author-provided</b> method of assigning an accessible name to an element.</p>
 
@@ -91,18 +128,19 @@
 
 <!-- Section -->
 
-<h2>Anywhere in the DOM?</h2>
+<h2 id="article-e">Can the name come from anywhere in the DOM?</h2>
 
 <p>The referenced element must exist in the same document and have a valid, unique <code>id</code>.</p>
 
 <p>In the following example, the button has an accessible name of “Buy Lawn Mower”, taken from a paragraph elsewhere in the document:</p>
 
-<pre><code>&lt;p <span class="highlight">id="bbb"</span>&gt;Buy Lawn Mower&lt;/p&gt;
-&lt;button <span class="highlight">aria-labelledby="bbb"</span>&gt;Buy&lt;/button&gt;</code></pre>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="bbb"</span>&gt;Buy&lt;/button&gt;
+...
+&lt;p <span class="highlight">id="bbb"</span>&gt;Buy Lawn Mower&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
-<h2>More than one source?</h2>
+<h2 id="article-f">Can it use more than one source?</h2>
 
 <p>More than one element can be referenced using space-separated values in the <code>aria-labelledby</code> attribute.</p>
 
@@ -114,110 +152,59 @@
 
 <p>The order in which those elements appear in the DOM is irrelevant.</p>
 
-<pre><code>&lt;p <span class="highlight">id="ccc"</span>&gt;Buy Lawn Mower&lt;/p&gt;
-&lt;button <span class="highlight">aria-labelledby="ccc ddd"</span>&gt;Buy&lt;/button&gt;
+<pre><code>&lt;button <span class="highlight">aria-labelledby="ccc ddd"</span>&gt;Buy&lt;/button&gt;
+&lt;p <span class="highlight">id="ccc"</span>&gt;Buy Lawn Mower&lt;/p&gt;
 &lt;p <span class="highlight">id="ddd"</span>&gt;On special&lt;/p&gt;</code></pre>
 
 <!-- Section -->
 
-<h2>Reference the element itself?</h2>
+<h2 id="article-g">Can it reference the element itself?</h2>
 
 <p>An element may include its own <code>id</code> as part of the <code>aria-labelledby</code> reference.</p>
 
 <p>In the following example, the button’s accessible name is “Buy Lawn Mower On special”, created from:</p>
 
 <ul>
-  <li>its own text content - <code>xxx</code> (“Buy”).</li>
-  <li>the referenced elements <code>yyy</code> (“Lawn Mower”) and <code>zzz</code> (“On special”).</li>
+  <li>its own text content - <code>eee</code> (“Buy”).</li>
+  <li>the referenced elements <code>fff</code> (“Lawn Mower”) and <code>ggg</code> (“On special”).</li>
 </ul>
 
-<pre><code>&lt;p <span class="highlight">id="yyy"</span>&gt;Lawn Mower&lt;/p&gt;
-&lt;button <span class="highlight">id="xxx" aria-labelledby="xxx yyy zzz"</span>&gt;Buy&lt;/button&gt;
-&lt;p <span class="highlight">id="zzz"</span>&gt;On special&lt;/p&gt;</code></pre>
+<pre><code>&lt;button <span class="highlight">id="eee"</span> <span class="highlight">aria-labelledby="eee fff ggg"</span>&gt;Buy&lt;/button&gt;
+&lt;p <span class="highlight">id="fff"</span>&gt;Lawn Mower&lt;/p&gt;
+&lt;p <span class="highlight">id="ggg"</span>&gt;On special&lt;/p&gt;</code></pre>
 
 <p>The accessible name computation algorithm prevents infinite loops and ensures the element’s own content is only included once.</p>
 
 <!-- Section -->
 
-<h2>Punctuation and announcement</h2>
-
-<p>In the last two examples, the computed accessible name is formed by concatenating text from multiple sources.</p>
-
-<p>This concatenation process does not insert punctuation or pauses. The referenced text strings are merged into a single text string exactly as provided.</p>
-
-<p>As a result, screen readers may not pause naturally between concatenated segments, which can affect how the name is announced.</p>
-
-<!-- Section -->
-
-<h2>Hidden elements?</h2>
-
-<p>Hidden elements are generally excluded from implicit accessible name computation.</p>
-
-<p>However, <code>aria-labelledby</code> is an <b>explicit reference</b>.</p>
-
-<p>In practice, <code>aria-labelledby</code> resolves label text by dereferencing <b>DOM nodes</b>, not accessibility nodes.</p>
-
-<p>As a result, browsers can extract text from referenced elements regardless of visibility or <code>aria-hidden</code>, even when those elements are not rendered or exposed in the accessibility tree.</p>
-
-<p>In Chrome, Firefox, and Safari (macOS VoiceOver), this means the referenced element’s text can still be used as the accessible name even when the referenced element is hidden with:</p>
-
-<ul>
-  <li><code>display: none</code></li>
-  <li>the <code>hidden</code> attribute</li>
-  <li><code>aria-hidden="true"</code></li>
-</ul>
-
-<p>For example, the following produces an accessible name of “Buy now” in major browsers:</p>
-
-<pre><code>&lt;p id="eee" <span class="highlight">style="display: none"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="eee"&gt;Buy&lt;/button&gt;</code></pre>
-
-<p>Even though this behaviour is widely supported, it should be used with care. If the label comes from content that is not perceivable to sighted users, it can create a mismatch between what users see and what assistive technologies announce.</p>
-
-<p>If your goal is to provide text that is visually hidden but still intended to be used for accessibility, use a visually hidden or off-screen CSS technique instead.</p>
-
-<p>For example:</p>
-
-<pre><code>&lt;p id="fff" <span class="highlight">class="off-screen"</span>&gt;Buy now&lt;/p&gt;
-&lt;button aria-labelledby="fff"&gt;Buy&lt;/button&gt;</code></pre>
-
-<!-- Section -->
-
-<h2>Empty strings?</h2>
+<h2 id="article-h">What happens with empty strings?</h2>
 
 <p>If all referenced elements resolve to empty text strings, the resulting accessible name will be empty.</p>
 
 <p>In the following example, the button is attempting to reference another element with no content:</p>
 
-<pre><code>&lt;button aria-labelledby="ggg"&gt;<span class="highlight">Hello world</span>&lt;/button&gt;
-<span class="highlight">&lt;p id="ggg"&gt;&lt;/p&gt;</span></code></pre>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="hhh"</span>&gt;Buy&lt;/button&gt;
+<span class="highlight">&lt;p id="hhh"&gt;&lt;/p&gt;</span></code></pre>
 
-<p>In practice, some browsers (including Chrome) may fall back to the element’s own text content if the <code>aria-labelledby</code> reference resolves to an empty string. So, the name would be &ldquo;Hello world&rdquo;.</p>
+<p>In practice, some browsers (including Chrome) may fall back to the element’s own text content if the <code>aria-labelledby</code> reference resolves to an empty string. So, the name would be &ldquo;Buy&rdquo;.</p>
 
 <p>This fallback should not be relied upon. If the element has no internal text content, the accessible name will be empty.</p>
 
 <p>In the following example, there is no fallback naming mechanism, resulting in a control with no accessible name.</p>
 
-<pre><code>&lt;button aria-labelledby="hhh"&gt;&lt;/button&gt;
-<span class="highlight">&lt;p id="hhh"&gt;&lt;/p&gt;</span></code></pre>
+<pre><code>&lt;button <span class="highlight">aria-labelledby="iii"</span>&gt;&lt;/button&gt;
+<span class="highlight">&lt;p id="iii"&gt;&lt;/p&gt;</span></code></pre>
 
 <!-- Section -->
 
-<h2>Broken references fail silently</h2>
+<h2 id="article-i">What happens with broken references?</h2>
 
-<p>If a referenced <code>id</code>:</p>
+<p>The accessible name may be empty or incomplete if a referenced <code>id</code>:</p>
 
 <ul>
   <li>does not exist</li>
   <li>is duplicated</li>
   <li>is added or removed dynamically</li>
-</ul>
-
-<p>then:</p>
-
-<ul>
-  <li>the accessible name may be empty or incomplete</li>
-  <li>no error or warning is exposed to the author</li>
 </ul>
 
 <p>Broken <code>aria-labelledby</code> references fail silently, making these issues easy to miss during development.</p>
@@ -226,7 +213,7 @@
 
 <!-- Section -->
 
-<h2>Shadow DOM boundaries</h2>
+<h2 id="article-j">Can it cross shadow DOM boundaries?</h2>
 
 <p>The <code>aria-labelledby</code> attribute cannot cross shadow DOM boundaries.</p>
 
@@ -234,31 +221,81 @@
 
 <p>An element in the light DOM cannot reference an element inside a shadow root using <code>aria-labelledby</code>. Any such reference is treated as if the <code>id</code> does not exist.</p>
 
-<pre><code>&lt;button <span class="highlight">aria-labelledby="iii"</span>&gt;Click me&lt;/button&gt;
+<pre><code>&lt;button <span class="highlight">aria-labelledby="jjj"</span>&gt;Buy&lt;/button&gt;
 
 &lt;greeting-widget&gt;
   #shadow-root
-    &lt;p <span class="highlight">id="iii"</span>&gt;Hello world&lt;/p&gt;
+    &lt;p <span class="highlight">id="jjj"</span>&gt;Buy lawn mowers&lt;/p&gt;
 &lt;/greeting-widget&gt;</code></pre>
 
 <p>Similarly, elements inside a shadow root cannot reference elements outside that shadow root.</p>
 
-<pre><code>&lt;p <span class="highlight">id="jjj"</span>&gt;Hello world&lt;/p&gt;
+<pre><code>&lt;p <span class="highlight">id="kkk"</span>&gt;Buy lawn mowers&lt;/p&gt;
 
 &lt;greeting-widget&gt;
   #shadow-root
-    &lt;button <span class="highlight">aria-labelledby="jjj"</span>&gt;Click me&lt;/button&gt;
+    &lt;button <span class="highlight">aria-labelledby="kkk"</span>&gt;Buy&lt;/button&gt;
 &lt;/greeting-widget&gt;</code></pre>
 
 <p>In both cases, the result is a silent failure, and the referenced text will not contribute to the accessible name.</p>
 
 <!-- Section -->
 
-<h2>Which roles and elements?</h2>
+<h2 id="article-k">Can it reference hidden elements?</h2>
 
-<p>The <code>aria-labelledby</code> attribute is a global ARIA attribute, meaning it is allowed on all HTML elements.</p>
+<p><code>aria-labelledby</code> can reference hidden content.</p>
 
-<p>However, its effect depends on the element’s implicit or explicit ARIA role.</p>
+<p>In the following example, the text string is hidden using <code>aria-hidden="true"</code> but the button will still have an accessible name of &ldquo;ARIA-hidden&rdquo;:</p>
+
+<pre><code>&lt;p id="lll" <span class="highlight">aria-hidden="true"</span>&gt;ARIA-hidden&lt;/p&gt;
+&lt;button aria-labelledby="lll"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>In the following example, the text string is hidden using the <code>hidden</code> attribute but the button will still have an accessible name of &ldquo;Hidden attribute&rdquo;:</p>
+
+<pre><code>&lt;p id="mmm" <span class="highlight">hidden</span>&gt;Hidden attribute&lt;/p&gt;
+&lt;button aria-labelledby="mmm"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>In the following example, the text string is hidden using <code>style="display:none"</code> but the button will still have an accessible name of &ldquo;Display-none&rdquo;:</p>
+
+<pre><code>&lt;p id="nnn" <span class="highlight">style="display:none"</span>&gt;Display-none&lt;/p&gt;
+&lt;button aria-labelledby="nnn"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>In the following example, the text string is hidden using <code>style="visibility:hidden"</code> but the button will still have an accessible name of &ldquo;Visibility-hidden&rdquo;:</p>
+
+<pre><code>&lt;p id="ooo" <span class="highlight">style="visibility:hidden"</span>&gt;Visibility-hidden&lt;/p&gt;
+&lt;button aria-labelledby="ooo"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>In the following example, the text string is hidden using a CSS class but the button will still have an accessible name of &ldquo;Visually-hidden&rdquo;:</p>
+
+<pre><code>&lt;p id="ppp" <span class="highlight">class="visually-hidden"</span>&gt;Visually-hidden&lt;/p&gt;
+&lt;button aria-labelledby="ppp"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>In the following example, the text string is hidden using <code>style="opacity:0"</code> but the button will still have an accessible name of &ldquo;Visually-hidden&rdquo;:</p>
+
+<pre><code>&lt;p id="qqq" <span class="highlight">style="opacity:0"</span>&gt;Opacity-invisible&lt;/p&gt;
+&lt;button aria-labelledby="qqq"&gt;
+  Buy
+&lt;/button&gt;</code></pre>
+
+<p>More information on <a href="https://www.maxdesign.com.au/articles/hidden-content.html">hidden content</a> and how it relates to <code>aria-labelledby</code> and <code>aria-describedby</code>.</p>
+
+<!-- Section -->
+
+<h2 id="article-l">Which roles and elements can it be applied to?</h2>
+
+<p>The <code>aria-labelledby</code> attribute is a global ARIA attribute which means it is allowed on all HTML elements.</p>
+
+<p>However, its effect depends on the element’s implicit or explicit ARIA <code>role</code>.</p>
 
 <p>Most roles support author-provided accessible names, but some roles are not intended to be named by authors, including:</p>
 
@@ -283,7 +320,17 @@
 
 <!-- Section -->
 
-<h2>Conclusion</h2>
+<h2 id="article-m">Punctuation and announcement</h2>
+
+<p>In some of the examples above, the computed accessible name is formed by concatenating text from multiple sources.</p>
+
+<p>This concatenation process does not insert punctuation or pauses. The referenced text strings are merged into a single text string exactly as provided.</p>
+
+<p>As a result, screen readers may not pause naturally between concatenated segments, which can affect how the name is announced.</p>
+
+<!-- Section -->
+
+<h2 id="article-n">Conclusion</h2>
 
 <p>The <code>aria-labelledby</code> attribute is a powerful tool for generating accessible names from existing content.</p>
 

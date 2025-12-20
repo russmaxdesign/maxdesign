@@ -31,73 +31,168 @@
       <h1>What does “hidden” actually mean in Accessible Name computation?</h1>
     </div>
   </div>
-
   <main>
 
 <p class="metadetails">Published: <time datetime="2025-12-14">14 December 2025</time></p>
 
-<p>The <em><a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></em> explains how browsers decide which parts of a page can be used to create accessible names and descriptions.</p> 
+<p>The <em><a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2</a></em> specification explains how browsers decide which parts of a page can be used to create accessible names and descriptions.</p>
 
-<p>One important part of this specification defines what it means for something to be considered <b>“hidden”</b> during that calculation.</p>
+<p>One important part of this specification defines what it means for something to be considered “hidden” during that calculation.</p>
 
-<p>In other words: <em>&ldquo;Which elements are ignored, and which can still be used to form an accessible name&rdquo;</em></p>
+<p>In other words, this section answers the question: which elements are ignored, and which can still be used, when the browser is deriving an accessible name <b>for itself</b>,  automatically.</p>
 
-<p>The steps below are plain English translations of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</p>
+<p>The steps below are plain-English translations of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</p>
 
-<p>There are four categories defined in the specification:</p>
+<h2>Two ways accessible names are created</h2>
+
+<p>Before looking at what “hidden” means, it helps to understand how accessible names are usually created.</p>
+
+<p>In practice, there are two ways a browser can determine an accessible name or description.</p>
+
+<h3>1. Implicit name computation (the default)</h3>
+
+<p>For almost every element on a page, the browser works out the accessible name automatically.</p>
+
+<p>It does this by:</p>
+
+<ul>
+  <li>Looking at the element’s native semantics</li>
+  <li>Walking the element’s subtree</li>
+  <li>Collecting visible and accessible text</li>
+  <li>Applying a defined set of rules from the specification</li>
+</ul>
+
+<p>This is called <b>implicit name computation</b>, and it is how accessible names are created for the vast majority of elements.</p>
+
+<p>Unless an author explicitly says otherwise, this is the path the browser uses.</p>
+
+<h3>2. Explicit name computation (the exception)</h3>
+
+<p>In some cases, the author can override this automatic process.</p>
+
+<p>Attributes like <code>aria-labelledby</code> and <code>aria-describedby</code> allow the author to explicitly point to other elements and say:</p>
+
+<p><em>“Use the text from these elements as the name or description.”</em></p>
+
+<p>This is called <b>explicit name computation</b>.</p>
+
+<p>It is far less common than implicit computation, but when it is used, it changes how name calculation works in important ways.</p>
+
+<h3>Why this distinction matters here</h3>
+
+<p>The rules that define what is considered “hidden” apply to implicit name computation.</p>
+
+<p>They describe which elements are ignored when the browser is automatically discovering text.</p>
+
+<p>These rules apply to almost everything, except cases where the author has explicitly defined relationships using <code>aria-labelledby</code> or <code>aria-describedby</code>.</p>
+
+<p>With that in mind, we can now look at the four categories the specification uses to define “hidden”.</p>
+
+<hr>
 
 <h2>1. Hidden via CSS</h2>
 
-<p>This includes: <code>display:none</code>, <code>visibility:hidden</code>, <code>visibility:collapse</code>, <code>content-visibility:hidden</code>.</p>
+<p>This includes:</p>
 
-<p>These properties <b>ARE</b> considered hidden.</p>
+<ul>
+  <li><code>display: none</code></li>
+  <li><code>visibility: hidden</code></li>
+  <li><code>visibility: collapse</code></li>
+  <li><code>content-visibility: hidden</code></li>
+</ul>
 
-<p>These elements are not rendered, do not take up space, and do not appear in the accessibility tree.</p>
+<p>These properties are considered hidden.</p>
 
-<p><b>Verdict</b>: They cannot contribute to accessible names or descriptions.</p>
+<p>Elements styled this way are not rendered, do not take up space, and do not appear in the accessibility tree.</p>
+
+<h3 class="h4">Verdict:</h3>
+
+<p>They cannot contribute to accessible names or descriptions when names are computed implicitly.</p>
 
 <h2>2. Hidden via SVG or visual transparency</h2>
 
-<p>This includes: <code>opacity:0</code>, <code>filter:opacity(0%)</code>, or similar SVG transparency techniques.</p>
+<p>This includes:</p>
 
-<p>These techniques <b>ARE NOT</b> considered hidden.</p>
+<ul>
+  <li><code>opacity: 0</code></li>
+  <li><code>filter: opacity(0%)</code></li>
+  <li>Similar SVG transparency techniques</li>
+</ul>
 
-<p>Even though the element is visually invisible, it is still present in the layout, in the DOM, in the accessibility tree, and as selectable or copyable text.</p>
+<p>These techniques are not considered hidden.</p>
 
-<p><b>Verdict</b>: They can contribute to accessible names and descriptions.</p>
+<p>Even though the element is visually invisible, it is still present in the layout, in the DOM, and in the accessibility tree, unless it is explicitly removed by other means. Text may still be selectable or copyable.</p>
+
+<h3 class="h4">Verdict:</h3>
+
+<p>They can contribute to accessible names and descriptions.</p>
 
 <h2>3. Hidden via ARIA</h2>
 
-<p>This includes: <code>aria-hidden="true"</code>.</p>
+<p>This includes:</p>
 
-<p>This attribute <b>IS</b> considered hidden.</p>
+<ul>
+  <li><code>aria-hidden="true"</code></li>
+</ul>
 
-<p>The author has explicitly instructed the browser to exclude the element from accessibility APIs.  
-It is removed from the accessibility tree.</p>
+<p>This attribute is considered hidden.</p>
 
-<p><b>Verdict</b>: It cannot contribute to accessible names or descriptions.</p>
+<p>The author has explicitly instructed the browser to exclude the element from accessibility APIs. As a result, the element is removed from the accessibility tree.</p>
+
+<h3 class="h4">Verdict:</h3>
+
+<p>It cannot contribute to accessible names or descriptions through implicit name computation.</p>
 
 <h2>4. Positioned off-screen or visually covered</h2>
 
-<p>These elements remain in the accessibility tree even if they are not visible.</p>
+<p>These elements remain in the accessibility tree even if they are not visible on screen.</p>
 
-<p>These elements <b>ARE NOT</b> considered hidden.</p>
+<p>If an element is moved far off-screen or visually obscured by another element, it still exists in the DOM and in the accessibility tree. This includes common patterns like “visually hidden but accessible” text used for contextual labelling or instructions.</p>
 
-<p>If an element is moved far off-screen or visually obscured by another element, it still exists in the DOM and in the accessibility tree.  
-This includes patterns like “visually hidden but accessible” text used for contextual labelling.</p>
+<p>These elements are not considered hidden by the specification.</p>
 
-<p><b>Verdict</b>: They can contribute to accessible names and descriptions.</p>
+<h3 class="h4">Verdict:</h3>
 
-<h2>Keep in mind</h2>
+<p>They can contribute to accessible names and descriptions.</p>
 
-<p>Hidden content is normally ignored in accessible name and description computation. However, <code>aria-labelledby</code> and <code>aria-describedby</code> can reference hidden elements and still use their text to create accessible names or descriptions for other elements.</p>
+<hr>
 
-<p>In the following example, the paragraph is hidden, but it can still provide the accessible name for the <code>&lt;nav&gt;</code> element. The <code>&lt;nav&gt;</code> will have an accessible name of "Hello world".</p>
+<h2>Why <code>aria-labelledby</code> and <code>aria-describedby</code> are different</h2>
 
-<pre><code>&lt;nav aria-labelledby="aaa"&gt;
-  ...
-&lt;/nav&gt;
-&lt;p id="aaa" hidden&gt;Hello world&lt;/p&gt;</code></pre>
+<p><code>aria-labelledby</code> and <code>aria-describedby</code> work in a different way.</p>
+
+<p>They do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
+
+<p>When these attributes are present, the browser:</p>
+
+<ul>
+  <li>Resolves the ID references</li>
+  <li>Finds the referenced elements</li>
+  <li>Extracts their text content</li>
+</ul>
+
+<p>This process happens even if the referenced elements are hidden, not rendered, or otherwise excluded from the accessibility tree.</p>
+
+<p>Because of this, the “hidden” rules described earlier do not apply in the same way. Those rules are about skipping hidden content during automatic traversal. <code>aria-labelledby</code> and <code>aria-describedby</code> intentionally bypass traversal altogether.</p>
+
+<h3>How this makes sense in practice</h3>
+
+<p>The confusion usually comes from treating accessible name computation as a single process. In reality, there are two distinct paths.</p>
+
+<h4>Implicit computation</h4>
+
+<p>The browser derives a name from an element’s own content. Hidden content is skipped.</p>
+
+<h4>Explicit computation</h4>
+
+<p>The author provides exact references using aria-labelledby or aria-describedby. Referenced content is used, even if it is hidden.</p>
+
+<p>The specification’s “hidden” note is correct for the first case, but it does not apply cleanly to the second unless this distinction is understood.</p>
+
+<p>This is why text from elements that are hidden, marked with <code>aria-hidden="true"</code>, or styled with <code>display: none</code> can still contribute to an accessible name or description when referenced explicitly. </p>
+
+<p>This is not a bug or an exception. It is how explicit relationships are designed to work, and why they override the visibility rules used during automatic name discovery by design.</p>
+
 
   </main>
   <footer>
