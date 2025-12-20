@@ -585,7 +585,6 @@ external
   background-image: url(../img/external-active.png);
 }
 
-
 .bullet-icon {
   margin-left: 0;
   padding-left: 0;
@@ -617,6 +616,7 @@ metadetails
   display: inline-block;
   margin: 0 0 0 .5em;
 }
+
 
 /* ---------------------
 article
@@ -745,6 +745,16 @@ classes
   background: rgba(255,255,0,.3);
 }
 
+.fail {
+  color: #fff;
+  background: red;
+}
+
+.pass {
+  color: #fff;
+  background: green;
+}
+
 .further-reading {
   margin: 3em 0 2em;
   padding: 1.5em;
@@ -758,7 +768,8 @@ classes
 }
 
 .sr-only,
-.hidden {
+.hidden,
+.visually-hidden {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
   -webkit-clip-path: inset(50%) !important;
