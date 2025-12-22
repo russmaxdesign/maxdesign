@@ -5,7 +5,7 @@
   <title>The label element - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="The label element including which elements need labelling explicit vs implicit labelling and more">
+  <meta name="description" content="The label element including which elements need labelling, explicit vs implicit labelling, and more">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,9 @@
   <li><code>&lt;textarea&gt;</code></li>
 </ul>
 
-<h2>Which form elements don’t need a <code>&lt;label&gt;</code>?</h2>
+<p>Note: While the <code>&lt;label&gt;</code> is the preferred mechanism for naming form controls, accessible names can also be provided via other mechanisms such as aria-label or aria-labelledby when appropriate.</p>
+
+<h2>Which form elements do not typically use a <code>&lt;label&gt;</code>?</h2>
 
 <p>Many form-based elements don't require a <code>&lt;label&gt;</code>. In some of these cases, adding a <code>&lt;label&gt;</code> would either be invalid or confusing for assistive technologies.</p>
 
@@ -104,7 +106,7 @@
   &lt;/optgroup&gt;
 &lt;/select&gt;</code></pre>
 
-<p>The <code>&lt;datalist&gt;</code> must not have an associated <code>&lt;label&gt;</code>, as it should always be associated with a labeled <code>&lt;input&gt;</code>.</p>
+<p>The <code>&lt;datalist&gt;</code> is not a labelable element in HTML.</p>
 
 <pre><code><span class="highlight">&lt;label for="aaa"&gt;Choose a flavor:&lt;/label&gt;</span>
 &lt;input id="aaa" list="bbb"&gt;
@@ -113,54 +115,49 @@
   &lt;option value="Mint"&gt;
 &lt;/datalist&gt;</code></pre>
 
-<h2>Explicit or implicit?</h2>
+<h2>Explicit or implicit (wrapped)?</h2>
 
 <p>If a <code>&lt;label&gt;</code> is associated with any of these form controls, it should be <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
 
 <pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;Name&lt;/label&gt;
 &lt;input <span class="highlight">id="aaa"</span> type="text"&gt;</code></pre>
 
-<p>Or, the form control can be <i>implicitly associated</i> if it is placed inside its <code>&lt;label&gt;</code>:</p>
+<p>The form control can be <i>implicitly associated</i> if it is wrapped inside its <code>&lt;label&gt;</code>:</p>
 
 <pre><code>&lt;label&gt;
   Name
   <span class="highlight">&lt;input type="text"&gt;</span>
 &lt;/label&gt;</code></pre>
 
-<p>You can place form controls inside the label and also make them <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
+<p><b>Note</b>: Implicitly associated labels are not reliably supported by voice control software.</p>
+
+<p>To solve this, you can place form controls inside the label and also make them <i>explicitly associated</i> via matching <code>for</code> and <code>id</code> values:</p>
 
 <pre><code>&lt;label <span class="highlight">for="aaa"</span>&gt;
   Name
   &lt;input <span class="highlight">id="aaa"</span> type="text"&gt;
 &lt;/label&gt;</code></pre>
 
-<h2>Label order</h2>
+<h2>Label order (best practice)</h2>
 
-<p>For <code>&lt;input&gt;</code> elements with a type of <code>radio</code> or <code>checkbox</code>, the <code>&lt;label&gt;</code> element must be positioned after the form control.</p>
+<p>HTML does not require a specific ordering of <code>&lt;label&gt;</code> elements relative to their associated form controls.
+A label may appear before or after the control, and both patterns are valid.</p>
 
-<pre><code>&lt;input type="radio" id="yes"&gt;
-<span class="highlight">&lt;label for="yes"&gt;Yes&lt;/label&gt;</span></code></pre>
+<p>However, user testing has shown that label order can significantly affect comprehension and usability for some people.</p>
 
-<p>For all other form controls, the <code>&lt;label&gt;</code> element must be positioned before the form control.</p>
+<p>In particular, placing the visible label text <strong>before</strong> the form control can reduce confusion for:</p>
 
-<pre><code><span class="highlight">&lt;label for="name"&gt;Full name&lt;/label&gt;</span>
-&lt;input type="text" id="name"&gt;</code></pre>
+<ul>
+  <li>people with cognitive disabilities</li>
+  <li>people using screen magnification</li>
+  <li>people with reduced peripheral vision</li>
+</ul>
 
-<p>When form controls are positioned inside the <code>&lt;label&gt;</code>, the order of its content rather than the <code>&lt;label&gt;</code> itself becomes critical.</p>
+<p> When the control appears before its label, users may encounter an interactive element before they understand its purpose, especially when only a portion of the screen is visible at high zoom levels.</p>
 
-<p>For <code>&lt;label&gt;</code> elements with a type of <code>radio</code> or <code>checkbox</code>, the <code>&lt;label&gt;</code> content must be positioned after the form control.</p>
+<p>Based on this evidence, many teams choose patterns that prioritise understanding before interaction.</p>
 
-<pre><code>&lt;label for="yes"&gt;
-  &lt;input type="radio" id="yes"&gt;
-  <span class="highlight">Yes</span>
-&lt;/label&gt;</code></pre>
-
-<p>For all other form controls, the <code>&lt;label&gt;</code> content must be positioned before the form control.</p>
-
-<pre><code>&lt;label for="name"&gt;
-  <span class="highlight">Full name</span>
-  &lt;input type="text" id="name"&gt;
-&lt;/label&gt;</code></pre>
+<p>In the case of radio buttons and checkboxes, the opposite is true. The visible labels are best placed <b>after</b> radio and checkbox form controls.</p>
 
 <h2>Which elements are allowed as descendants of the <code>&lt;label&gt;</code> element?</h2>
 

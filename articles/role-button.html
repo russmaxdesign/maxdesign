@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Why role="button" on a button does nothing - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Why adding role=button to a native button has no effect, how the specification defines this behaviour, and what it teaches us about when ARIA should and shouldn’t be used.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+    .example { margin-top: .5em; }
+    .example p { margin: 0 0 .3em; }
+    pre code { font-size: .8em; }
+    blockquote { padding: 0 0 0 1em; }
+    blockquote p { margin: 0 0 .5em; }
+    blockquote p:last-child { margin: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Why <code>role="button"</code> on a <code>&lt;button&gt;</code> does nothing</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-22">22 December 2025</time></p>
+
+<p>You’ve probably seen markup like this many times:</p>
+
+<pre><code>&lt;button <span class="highlight">role="button"</span>&gt;
+  Save
+&lt;/button&gt;</code></pre>
+
+<p>And at first glance, it doesn’t seem to do anything useful.</p>
+
+<p>That instinct is right. A native <code>&lt;button&gt;</code> already has a button role, so adding <code>role="button"</code> changes nothing.</p>
+
+<p>Where is this behaviour actually defined?</p>
+
+<p>This is defined in the <a href="https://www.w3.org/TR/core-aam-1.2/#mapping_conflicts" target="_blank">Core Accessibility API Mappings 1.2 specification</a>.</p>
+
+<blockquote>
+  <p>When a host language declares a WAI-ARIA attribute to be in direct semantic conflict with a native attribute for a given element, user agents MUST ignore the WAI-ARIA attribute and instead use the host language attribute with the same implicit semantic.</p>
+</blockquote>
+
+<p>Here’s a plain language breakdown of that sentence:</p>
+
+<blockquote>
+  <p>If HTML already provides a semantic meaning, ARIA does not override it. The browser keeps the native semantics and ignores the ARIA.</p>
+</blockquote>
+
+<p>This rule exists to prevent assistive technologies from receiving conflicting or duplicate information.</p>
+
+<h2>Why does this rule exist?</h2>
+
+<p>The specification requires browsers to ignore <code>role="button"</code> on a native <code>&lt;button&gt;</code>.</p>
+
+<p>This rule exists because a native <code>&lt;button&gt;</code> already provides everything needed:</p>
+
+<ul>
+  <li>an implicit ARIA role of <code>button</code></li>
+  <li>built-in keyboard behaviour</li>
+  <li>built-in states such as disabled</li>
+  <li>a well-defined mapping to accessibility APIs</li>
+</ul>
+
+<p>Adding <code>role="button"</code> does not add clarity or extra information. It simply restates what is already there.</p>
+
+<h2>The broader lesson</h2>
+
+<p>This example highlights a common point of confusion about how ARIA works.</p>
+
+<p>ARIA isn’t meant to be added everywhere to improve accessibility.</p>
+
+<p>It should only be used to:</p>
+
+<ul>
+  <li>Fill gaps where native HTML semantics are missing.</li>
+  <li>Provide accessible names or descriptions when HTML alone is not enough.</li>
+  <li>Support interaction patterns that HTML doesn’t provide on its own.</li>
+  <li>Intentionally replace native semantics when building fully custom widgets.</li>
+</ul>
+
+<h2>Five rules of ARIA</h2>
+
+<p>The <a href="https://www.w3.org/TR/using-aria/#notes2" target="_blank">five rules of ARIA</a> help explain when ARIA is useful, and when native HTML should be left alone.</p>
+
+<h3 class="h4">First Rule of ARIA Use</h3>
+
+<blockquote>
+  <p>If you can use a native HTML element [HTML51] or attribute with the semantics and behavior you require already built in, instead of re-purposing an element and adding an ARIA role, state or property to make it accessible, then do so.</p>
+</blockquote>
+
+<p>In our example, the <code>&lt;button&gt;</code> has everything built in:</p>
+
+<ul>
+  <li>correct roles</li>
+  <li>correct states</li>
+  <li>correct keyboard interaction</li>
+  <li>correct accessibility API mappings</li>
+</ul>
+
+<h3 class="h4">Second Rule of ARIA Use</h3>
+
+<blockquote>
+  <p>Do not change native semantics, unless you really have to.</p>
+</blockquote>
+
+<p>Adding <code>role="button"</code> to a <code>&lt;button&gt;</code> attempts to restate or override something that is already correct.</p>
+
+<h3 class="h4">Third Rule of ARIA Use</h3>
+
+<blockquote>
+  <p>All interactive ARIA controls must be usable with the keyboard.</p>
+</blockquote>
+
+<p>A native <code>&lt;button&gt;</code> already supports:</p>
+
+<ul>
+  <li><kbd>ENTER</kbd> and <kbd>SPACE</kbd> keystrokes</li>
+  <li>focus</li>
+  <li>disabled state</li>
+</ul>
+
+<p>ARIA does none of that.</p>
+
+<h3 class="h4">Fourth Rule of ARIA Use</h3>
+
+<blockquote>
+  <p>Do not use <code>role="presentation"</code> or <code>aria-hidden="true"</code> on a focusable element.</p>
+</blockquote>
+
+<p>Though important, this rule is not relevant to our example.</p>
+
+<h3 class="h4">Fifth Rule of ARIA Use</h3>
+
+<blockquote>
+  <p>All interactive elements must have an accessible name.</p>
+</blockquote>
+
+<p>Adding a role to a <code>&lt;button&gt;</code> does not solve this problem. Instead, we need to make sure the <code>&lt;button&gt;</code> has a meaningful visible text label and accessible name.</p>
+
+<h2>Takeaway</h2>
+
+<p>The best accessibility practice is to use native HTML elements wherever possible.</p>
+
+<p>ARIA should only be used when native semantics are missing, insufficient, or need to be intentionally replaced.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>

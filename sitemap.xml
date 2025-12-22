@@ -39,6 +39,12 @@
 <!--  20 latest articles  -->
 
 <url>
+<loc>https://www.maxdesign.com.au/articles/role-button.html</loc>
+<lastmod>2025-12-22</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+<url>
 <loc>https://www.maxdesign.com.au/articles/aria-roles-semantics.html</loc>
 <lastmod>2025-12-21</lastmod>
 <changefreq>weekly</changefreq>

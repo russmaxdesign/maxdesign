@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Sun, 21 Dec 2025 02:30:30 +1100</lastBuildDate>
-<pubDate>Sun, 21 Dec 2025 02:30:30 +1100</pubDate>
+<lastBuildDate>Mon, 22 Dec 2025 05:30:30 +1100</lastBuildDate>
+<pubDate>Mon, 22 Dec 2025 05:30:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,29 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Did you know some ARIA roles remove child semantics?    -->
+<!--  1. Why role="button" on a <button> does nothing            -->
+<!--  =========================================================  -->
+<item>
+<title>Why role="button" on a button does nothing</title>
+<link>https://www.maxdesign.com.au/articles/role-button.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/role-button.html</guid>
+<pubDate>Mon, 22 Dec 2025 05:30:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>Why adding role=button to a native button has no effect, how the specification defines this behaviour, and what it teaches us about when ARIA should and shouldn’t be used.</description>
+<content:encoded>
+<![CDATA[
+<p>You may have seen role="button" in real-world markup and wondered why it’s there. This article looks at why adding an ARIA role to a native button has no effect, and how the Core Accessibility API Mappings specification defines what browsers must do when native HTML and ARIA describe the same semantics.</p>
+<p>Using this small example, the article explores a broader lesson about ARIA: it doesn’t enhance native elements, and it isn’t something to add “just in case”. Instead, ARIA is meant for situations where native semantics are missing, insufficient, or need to be replaced intentionally.</p>
+<p><a href="https://www.maxdesign.com.au/articles/role-button.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -44,7 +66,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Tests for aria-labelledby and aria-describedby          -->
+<!--  3. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -66,7 +88,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. More about screen reader speech queues                  -->
+<!--  4. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -87,7 +109,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. How aria-labelledby really works -->
+<!--  5. How aria-labelledby really works -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -111,7 +133,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Does Chrome get the header element wrong? -->
+<!--  6. Does Chrome get the header element wrong? -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -133,7 +155,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. What does hidden actually mean in Accessible Name computation? -->
+<!--  7. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -156,7 +178,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Using the browser console for accessibility testing -->
+<!--  8. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -177,7 +199,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  9. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -200,7 +222,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. What is an accumulated text bucket?  -->
+<!--  10. What is an accumulated text bucket?                    -->
 <!--  =========================================================  -->
 <item>
 <title>What is an accumulated text bucket?</title>
@@ -218,28 +240,6 @@
 <p>When the browser tries to compute an accessible name — for example, by following aria-labelledby references or collecting text from child nodes — the algorithm needs a temporary place to store the text it gathers.</p>
 <p>Think of this as an accumulated text bucket — a container the browser fills with bits of text from different sources before deciding what the final name should be.</p>
 <p><a href="https://www.maxdesign.com.au/articles/accumulated-text.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Did you know your browser has two accessibility trees?  -->
-<!--  =========================================================  -->
-<item>
-<title>Did you know your browser has two accessibility trees?</title>
-<link>https://www.maxdesign.com.au/articles/two-trees.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/two-trees.html</guid>
-<pubDate>Mon, 08 Dec 2025 07:33:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
-<category>Accessibility</category>
-<description>This article traces the full lifecycle of an accessibility event. From the moment the DOM changes, through Blink's internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</description>
-<content:encoded>
-<![CDATA[
-<p>This article traces the full lifecycle of an <strong>accessibility event</strong> - from the moment the DOM changes, through Blink's internal systems, through its internal accessibility tree, and finally back out into the BrowserAccessibility tree that screen readers query.</p>
-<p>It introduces the concept of Chrome's <strong>two accessibility trees</strong> and explains why only one of them is exposed to assistive technologies.</p>
-<p><a href="https://www.maxdesign.com.au/articles/two-trees.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
