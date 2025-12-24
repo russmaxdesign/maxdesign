@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Eight quick things to remember when using aria-owns - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Eight quick things to rememer when using aria-owns including what it is, when to use it and when not to use it.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Eight quick things to remember when using <code>aria-owns</code></h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-29">29 December 2025</time></p>
+
+<p>Here are eight quick things to remember when using the <code>aria-owns</code> attribute.</p>
+
+<p>This article looks at <code>aria-owns</code> from both a specification perspective and a practical, real-world perspective.</p>
+
+<h2>1. What <code>aria-owns</code> does</h2>
+
+<p><code>aria-owns</code> lets you make elements behave as if they are parent and child for assistive technologies, even when they are not nested in the DOM.</p>
+
+<p>More precisely, it allows you to indicate that one element owns one or more other elements, which assistive technologies are expected to treat as children of the owning element.</p>
+
+<p>In the following example, two elements are not children of the first list. By using <code>aria-owns</code>, assistive technologies are expected to treat these two elements as children of the first list.</p>
+
+<pre><code>&lt;ul <span class="highlight">aria-owns="aaa bbb"</span>&gt;
+  &lt;li&gt;Fruit&lt;/li&gt;
+  &lt;li&gt;Vegetables&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li <span class="highlight">id="aaa"</span>&gt;Apples&lt;/li&gt;
+  &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<pre><code>Accessibility tree result:
+
+- Fruit
+- Vegetables
+- <span class="highlight">Apple</span>
+- <span class="highlight">Banana</span>
+</code></pre>
+
+<h2>2. When <code>aria-owns</code> can be useful</h2>
+
+<p>Use <code>aria-owns</code> when:</p>
+
+<ul>
+  <li>Visual or technical constraints prevent correct DOM nesting.</li>
+  <li>You need assistive technologies to perceive a logical parent–child structure that cannot be represented in markup alone.</li>
+</ul>
+
+<p>It is a <b>last-resort structural fix</b>, not a layout tool.</p>
+
+<h2>3. When <code>aria-owns</code> should not be used</h2>
+
+<p>As a best practice, do not use <code>aria-owns</code> when:</p>
+
+<ul>
+  <li>The correct structure already exists in the DOM.</li>
+  <li>You can fix the hierarchy by changing markup.</li>
+  <li>You are trying to reorder content visually or for keyboard navigation.</li>
+</ul>
+
+<p>If the DOM can be fixed, <b>fix the DOM</b>.</p>
+
+<h2>4. DOM order vs Tab order vs Accessibility tree order</h2>
+
+<p>These are independent systems:</p>
+
+<ul>
+  <li><b>DOM order</b>: Source order in the document.</li>
+  <li><b>Tab order</b>: Keyboard focus order (driven by DOM order, focusability, and tabindex).</li>
+  <li><b>Accessibility tree order</b>: What is exposed to assistive technologies.</li>
+</ul>
+
+<p><strong>In simple terms</strong>, <code>aria-owns</code> affects how the accessibility tree is exposed to assistive technologies. It does not change DOM order or tab order.</p>
+
+<h2>5. DOM children vs <code>aria-owns</code> children</h2>
+
+<p>In the accessibility tree:</p>
+
+<ul>
+  <li>Owned elements are treated as children of the owner <b>in addition</b> to their DOM relationships. </li>
+  <li>In practice, this usually means that <code>aria-owns</code> children are appended after all DOM children have been processed.</li>
+</ul>
+
+<p>Using our example from earlier, you can see that the two <code>aria-owns</code> elements appear last in order in the accessibility tree:</p>
+
+<pre><code>Accessibility tree result:
+
+- Fruit (DOM child)
+- Vegetables (DOM child)
+- Apple (aria-owns child)
+- Banana (aria-owns child)
+</code></pre>
+
+<h2>6. IDREF order matters</h2>
+
+<p>In practice, browsers expose owned elements to assistive technologies in the order the IDs appear in the <code>aria-owns</code> attribute, rather than in document order.</p>
+
+<p>In the example below, <code>bbb</code> will appear in the accessibility tree order before <code>aaa</code> as this the order inside the <code>aria-owns</code> attribute:</p>
+
+<pre><code>&lt;ul <span class="highlight">aria-owns="bbb aaa"</span>&gt;
+  &lt;li&gt;Fruit&lt;/li&gt;
+  &lt;li&gt;Vegetables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li <span class="highlight">id="aaa"</span>&gt;Apples&lt;/li&gt;
+  &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<pre><code>Accessibility tree result:
+
+- Fruit
+- Vegetables
+- <span class="highlight">Banana</span>
+- <span class="highlight">Apple</span>
+</code></pre>
+
+<h2>7. Defining all children when order is critical</h2>
+
+<p>If the exact order of children matters, extra care is needed.</p>
+
+<p>Because <code>aria-owns</code> adds to existing DOM relationships rather than replacing them, DOM children may still appear before owned children.</p>
+
+<p>To reliably control the order, you should list <em>all</em> children using <code>aria-owns</code>, including those that are already DOM children.</p>
+
+<p>In the example below, DOM children have also been referenced by the <code>aria-owns</code> attribute to allow control of the order:</p>
+
+<pre><code>&lt;ul <span class="highlight">aria-owns="aaa bbb ccc ddd"</span>&gt;
+  &lt;li <span class="highlight">id="ccc"</span>&gt;Fruit&lt;/li&gt;
+  &lt;li <span class="highlight">id="ddd"</span>&gt;Vegetables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet...&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li <span class="highlight">id="aaa"</span>&gt;Apples&lt;/li&gt;
+  &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<pre><code>Accessibility tree result:
+
+- Apple
+- Banana
+- <span class="highlight">Fruit</span>
+- <span class="highlight">Vegetables</span>
+</code></pre>
+
+<h2>8. Multiple references to the same ID</h2>
+
+<p>An element should not be referenced by more than one <code>aria-owns</code>. If this happens:</p>
+
+<ul>
+  <li>User agents may ignore one or more ownership references.</li>
+  <li>The resulting exposure to assistive technologies can become unpredictable.</li>
+  <li>Some relationships may silently disappear.</li>
+  <li>There is no guaranteed “winner”.</li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p><code>aria-owns</code> affects how content is exposed to assistive technologies.</p>
+
+<p>It appends owned nodes after DOM children, follows IDREF order, and becomes unstable when misused. We should always aim to fix the DOM first and use it sparingly.</p>
+
+<p class="further-reading"><b>Note</b>: This article is based on the WAI-ARIA specification. Assistive technology behaviour may vary by platform and screen reader. Always test with real tools and users.</p>
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
