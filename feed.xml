@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Mon, 22 Dec 2025 05:30:30 +1100</lastBuildDate>
-<pubDate>Mon, 22 Dec 2025 05:30:30 +1100</pubDate>
+<lastBuildDate>Sat, 27 Dec 2025 07:25:30 +1100</lastBuildDate>
+<pubDate>Sat, 27 Dec 2025 07:25:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,38 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Why role="button" on a <button> does nothing            -->
+<!--  1. Eight quick things to remember when using aria-owns     -->
+<!--  =========================================================  -->
+<item>
+<title>Why role="button" on a button does nothing</title>
+<link>https://www.maxdesign.com.au/articles/aria-owns.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-owns.html</guid>
+<pubDate>Sat, 27 Dec 2025 07:25:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>Eight quick things to rememer when using aria-owns including what it is, when to use it and when not to use it.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explores: </p>
+<ul>
+  <li>What <code>aria-owns</code> does</li>
+  <li>When <code>aria-owns</code> can be useful</li>
+  <li>When <code>aria-owns</code> should not be used</li>
+  <li>DOM order vs Tab order vs Accessibility tree order</li>
+  <li>DOM children vs <code>aria-owns</code> children</li>
+  <li>IDREF order matters</li>
+  <li>Defining all children when order is critical</li>
+  <li>Multiple references to the same ID</li>
+</ul>
+<p><a href="https://www.maxdesign.com.au/articles/aria-owns.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Why role="button" on a <button> does nothing            -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -45,7 +76,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Did you know some ARIA roles remove child semantics?    -->
+<!--  3. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -66,7 +97,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Tests for aria-labelledby and aria-describedby          -->
+<!--  4. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -88,7 +119,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. More about screen reader speech queues                  -->
+<!--  5. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -109,7 +140,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. How aria-labelledby really works -->
+<!--  6. How aria-labelledby really works -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -133,7 +164,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Does Chrome get the header element wrong? -->
+<!--  7. Does Chrome get the header element wrong? -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -155,7 +186,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. What does hidden actually mean in Accessible Name computation? -->
+<!--  8. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -178,7 +209,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Using the browser console for accessibility testing -->
+<!--  9. Using the browser console for accessibility testing -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing</title>
@@ -199,7 +230,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. How does the Shadow DOM appear in the accessibility tree? -->
+<!--  10. How does the Shadow DOM appear in the accessibility tree? -->
 <!--  =========================================================  -->
 <item>
 <title>How does the Shadow DOM appear in the accessibility tree?</title>
@@ -216,30 +247,6 @@
 <p>But all of that is hidden behind the Shadow DOM boundary.</p>
 <p>So how do browsers solve this? To make this work, browsers flatten the shadow tree when building the accessibility tree.</p>
 <p><a href="https://www.maxdesign.com.au/articles/the-shadow-dom.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. What is an accumulated text bucket?                    -->
-<!--  =========================================================  -->
-<item>
-<title>What is an accumulated text bucket?</title>
-<link>https://www.maxdesign.com.au/articles/accumulated-text.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/accumulated-text.html</guid>
-<pubDate>Wed, 10 Dec 2025 10:02:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Browser internals</category>
-<category>Accessibility</category>
-<description>Learn how browsers build accessible names using the idea of an accumulated text bucket, and why some naming rules empty and replace it.</description>
-<content:encoded>
-<![CDATA[
-<p>Throughout Accessible Name and Description Computation specification, you'll see the term accumulated text.</p>
-<p>But what does accumulated text actually mean?</p>
-<p>When the browser tries to compute an accessible name — for example, by following aria-labelledby references or collecting text from child nodes — the algorithm needs a temporary place to store the text it gathers.</p>
-<p>Think of this as an accumulated text bucket — a container the browser fills with bits of text from different sources before deciding what the final name should be.</p>
-<p><a href="https://www.maxdesign.com.au/articles/accumulated-text.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
