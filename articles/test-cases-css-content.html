@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tests for CSS generated content alternative text - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Tests to determine how CSS generated content alternative text is exposed to assistive technologies.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+<style>
+/* ===== Test Classes ===== */
+
+/* 1. Without alt text, old school */
+.test-old::after {
+  content: "Visible generated content";
+  color: red;
+}
+
+/* 2. Empty visible content, alt text only */
+.test-alt-only::after {
+  content: "" / "Hello world";
+  color: red;
+}
+
+/* 3. Visible content only, empty alternative text */
+.test-visible-only::after {
+  content: "Visible generated content" / "";
+  color: red;
+}
+
+/* 4. Visible + alternative text */
+.test-both::after {
+  content: "Visible generated content" / "Hello world";
+  color: red;
+}
+
+/* ===== Styling for visibility ===== */
+
+.example:focus {
+  outline: 2px solid #000;
+}
+
+.example p {
+  margin: .3em 0;
+}
+
+.example b {
+  display: block;
+}
+</style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Tests for CSS generated content alternative text</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-27">27 December 2025</time></p>
+
+<blockquote>
+  <p>Content intended for visual media sometimes needs alternative text for speech output or other non-visual mediums. The content property accepts alternative text to be specified after a slash (/) after the last <code>&lt;content-list&gt;</code>. If such alternative text is provided, it must be used for speech output instead.</p>
+  <p><a href="https://www.w3.org/TR/css-content-3/#alt" target="_blank">Source</a></p>
+</blockquote>
+
+<p>This alternative text is presented as a new node in the accessibility tree, for browsers that support it.</p>
+
+<h2>Test criteria:</h2>
+
+<ol>
+  <li>Is the <b>generated content</b> announced for assistive technologies when the element receives focus?</li>
+  <li>Is the generated content <b>alternative text</b> announced for assistive technologies when the element receives focus?</li>
+</ol>
+
+<p>For these tests, “announced” means that the exact string (for example, “Visible generated content” or “Hello world”) is spoken when the block receives keyboard focus (such as via the <kbd>TAB</kbd> key). Partial or generic announcements like “and one other item” are treated as failures.</p>
+
+<h3>Notes</h3>
+<ul>
+  <li>Each block is <code>tabindex="0"</code> for easy focus testing.</li>
+  <li>Generated text is from <code>::after</code> pseudo-elements.</li>
+  <li>The part after <code>/</code> is the alternative text for assistive technologies.</li>
+</ul>
+
+<hr>
+
+<h2>Test cases</h2>
+
+<h3>Example 1:</h3>
+
+<div class="example test-old" tabindex="0">
+  This is example 1
+</div>
+
+<pre><code>.test-old::after {
+  content: "Visible generated content";
+}</code></pre>
+
+<p>Pass should be:</p>
+
+<ol type="a">
+  <li>"Visible generated content" should be announced.</li>
+  <li>Alternative text should not be announced (not present).</li>
+</ol>
+
+<h3>Example 2:</h3>
+
+<div class="example test-alt-only" tabindex="0">
+  This is example 2
+</div>
+
+<pre><code>.test-alt-only::after {
+  content: "" / "Hello world";
+}</code></pre>
+
+<p>Pass should be:</p>
+
+<ol type="a">
+  <li>Generated content should not be announced (left blank).</li>
+  <li>"Hello world" alternative text should be announced.</li>
+</ol>
+
+<h3>Example 3:</h3>
+
+<div class="example test-visible-only" tabindex="0">
+  This is example 3
+</div>
+
+<pre><code>.test-visible-only::after {
+  content: "Visible generated content" / "";
+}</code></pre>
+
+<p>Pass should be:</p>
+
+<ol type="a">
+  <li>"Visible generated content" should be announced.</li>
+  <li>Alternative text should not be announced (left blank).</li>
+</ol>
+
+<h3>Example 4:</h3>
+
+<div class="example test-both" tabindex="0">
+  This is example 4
+</div>
+
+<pre><code>.test-both::after {
+  content: "Visible generated content" / "Hello world";
+}</code></pre>
+
+<p>Pass should be:</p>
+
+<ol type="a">
+  <li>"Visible generated content" should be announced.</li>
+  <li>"Hello world" alternative text should be announced.</li>
+</ol>
+
+<hr>
+
+<h2>Results</h2>
+
+<table>
+  <caption>macOS results</caption>
+  <thead>
+    <tr>
+      <th style="width: 33%">Browser / SR</th>
+      <th>1a</th>
+      <th>1b</th>
+      <th>2a</th>
+      <th>2b</th>
+      <th>3a</th>
+      <th>3b</th>
+      <th>4a</th>
+      <th>4b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chrome + VoiceOver</td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+    </tr>
+    <tr>
+      <td>Firefox + VoiceOver</td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+    </tr>
+    <tr>
+      <td>Safari + VoiceOver</td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <caption>Windows results</caption>
+  <thead>
+    <tr>
+      <th style="width: 33%">Browser / SR</th>
+      <th>1a</th>
+      <th>1b</th>
+      <th>2a</th>
+      <th>2b</th>
+      <th>3a</th>
+      <th>3b</th>
+      <th>4a</th>
+      <th>4b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chrome + NVDA</td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+    </tr>
+    <tr>
+      <td>Firefox + NVDA</td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+    </tr>
+    <tr>
+      <td>Chrome + JAWS</td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+    </tr>
+    <tr>
+      <td>Firefox + JAWS</td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Summary of findings</h2>
+
+<p>In the engines tested, CSS-generated alt text appears to be computed too late in the rendering pipeline to consistently participate in accessible name computation. As a result, announcements often depend on AT heuristics rather than reliable browser behaviour.</p>
+
+<p>With that in mind, these tests show that the CSS <code>content</code> alternative text syntax is not reliable enough to be used as a primary accessibility mechanism.</p>
+
+<ul>
+  <li><strong>Support is highly inconsistent.</strong> No browser and screen reader combination passed all tests. Even the best stacks had a mix of passes and fails across the four examples.</li>
+  <li><strong>Being in the accessibility tree does not guarantee speech.</strong> In several cases (for example, macOS Firefox and Safari with VoiceOver), generated content and alternative text appear as nodes in the accessibility tree, but VoiceOver announces only a generic message such as “and one other item” instead of the actual text.</li>
+  <li><strong>Alt-only content is the least-bad pattern, but still fragile.</strong> Example&nbsp;2 (no visible text, alt text only) worked in some browser and screen reader combinations, but still failed in others, so it cannot be relied on for critical information.</li>
+  <li><strong>Visible + alt together is the most fragile.</strong> Example&nbsp;4 (both visible text and alternative text) almost never produced both expected announcements. Often only one string, or neither, was spoken.</li>
+  <li><strong>Some stacks fail completely.</strong> macOS Safari with VoiceOver failed all tests: neither generated content nor alternative text was announced for any example.</li>
+  <li><strong>Recommendation.</strong> At this time, the CSS generated content alternative text syntax should be treated as experimental only. For important information, continue to use semantic HTML and ARIA, rather than relying on CSS-generated content for accessibility.</li>
+</ul>
+
+<hr>
+
+<h2>Disclaimer</h2>
+
+<p>Any test results involving operating systems, browsers, and assistive technologies must be interpreted with care. There are many moving parts at play — OS versions, browser engines, assistive technology configuration, and even individual AT verbosity settings — which makes exact replication extremely difficult. My results reflect the versions and conditions listed, with screen readers kept as close to default “manufacturer settings” as possible to ensure that another tester could reasonably reproduce the behaviour observed here.</p>
+
+<p>Even with these variables, the consistency of the failures observed across multiple stacks provides meaningful evidence that this feature should continue to be treated as experimental until interoperability improves.</p>
+
+  </main>
+
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>

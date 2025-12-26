@@ -45,7 +45,7 @@
 
 <p>More precisely, it allows you to indicate that one element owns one or more other elements, which assistive technologies are expected to treat as children of the owning element.</p>
 
-<p>In the following example, two elements are not children of the first list. By using <code>aria-owns</code>, assistive technologies are expected to treat these two elements as children of the first list.</p>
+<p>In the following example, two elements are not children of the first list. By using <code>aria-owns</code>, assistive technologies should treat these two elements as children of the first list.</p>
 
 <pre><code>&lt;ul <span class="highlight">aria-owns="aaa bbb"</span>&gt;
   &lt;li&gt;Fruit&lt;/li&gt;
@@ -59,7 +59,7 @@
   &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
-<pre><code>Accessibility tree result:
+<pre><code>Potential accessibility tree result:
 
 - Fruit
 - Vegetables
@@ -100,7 +100,7 @@
   <li><b>Accessibility tree order</b>: What is exposed to assistive technologies.</li>
 </ul>
 
-<p><strong>In simple terms</strong>, <code>aria-owns</code> affects how the accessibility tree is exposed to assistive technologies. It does not change DOM order or tab order.</p>
+<p>In simple terms, <code>aria-owns</code> affects how the accessibility tree is exposed to assistive technologies. It does not change DOM order or tab order.</p>
 
 <h2>5. DOM children vs <code>aria-owns</code> children</h2>
 
@@ -108,12 +108,12 @@
 
 <ul>
   <li>Owned elements are treated as children of the owner <b>in addition</b> to their DOM relationships. </li>
-  <li>In practice, this usually means that <code>aria-owns</code> children are appended after all DOM children have been processed.</li>
+  <li>In practice, this usually means that <code>aria-owns</code> children are added after all DOM children have been processed.</li>
 </ul>
 
 <p>Using our example from earlier, you can see that the two <code>aria-owns</code> elements appear last in order in the accessibility tree:</p>
 
-<pre><code>Accessibility tree result:
+<pre><code>Potential accessibility tree result:
 
 - Fruit (DOM child)
 - Vegetables (DOM child)
@@ -123,9 +123,13 @@
 
 <h2>6. IDREF order matters</h2>
 
-<p>In practice, browsers expose owned elements to assistive technologies in the order the IDs appear in the <code>aria-owns</code> attribute, rather than in document order.</p>
+<p>In most cases, browsers expose owned elements to assistive technologies in the order the IDs appear in the <code>aria-owns</code> attribute, rather than in document order.</p>
 
-<p>In the example below, <code>bbb</code> will appear in the accessibility tree order before <code>aaa</code> as this the order inside the <code>aria-owns</code> attribute:</p>
+<p>Unlike <code>aria-labelledby</code> and <code>aria-describedby</code>, whose IDREF ordering is defined in the <a href="https://www.w3.org/TR/accname-1.2/" target="_blank">Accessible Name and Description Computation 1.2 specification</a>, no equivalent rule or algorithm exists for <code>aria-owns</code>.</p>
+
+<p>Because there is no universal rule for how <code>aria-owns</code> IDREFs should be prioritised or merged with DOM children, different browsers may interpret or apply ordering differently.</p>
+
+<p>In the example below, <code>bbb</code> is exposed before <code>aaa</code> in current browser implementations, as this matches the order in the <code>aria-owns</code> attribute. This behaviour is not mandated by the specification:</p>
 
 <pre><code>&lt;ul <span class="highlight">aria-owns="bbb aaa"</span>&gt;
   &lt;li&gt;Fruit&lt;/li&gt;
@@ -137,7 +141,7 @@
   &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
-<pre><code>Accessibility tree result:
+<pre><code>Potential accessibility tree result:
 
 - Fruit
 - Vegetables
@@ -165,7 +169,7 @@
   &lt;li <span class="highlight">id="bbb"</span>&gt;Bananas&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
-<pre><code>Accessibility tree result:
+<pre><code>Potential accessibility tree result:
 
 - Apple
 - Banana
@@ -174,6 +178,8 @@
 </code></pre>
 
 <h2>8. Multiple references to the same ID</h2>
+
+<p>In practice, because <code>aria-owns</code> introduces structural relationships that cut across the DOM, it is especially sensitive to conflicts and complexity.</p>
 
 <p>An element should not be referenced by more than one <code>aria-owns</code>. If this happens:</p>
 
@@ -186,11 +192,12 @@
 
 <h2>Conclusion</h2>
 
-<p><code>aria-owns</code> affects how content is exposed to assistive technologies.</p>
+<p><strong>Bottom line:</strong> <code>aria-owns</code> is a last-resort tool. It is underdefined in the specification, inconsistently implemented, and highly sensitive to conflicts and context.</p>
 
-<p>It appends owned nodes after DOM children, follows IDREF order, and becomes unstable when misused. We should always aim to fix the DOM first and use it sparingly.</p>
+<p>Do not treat it as a reliable mechanism for ordering or structuring content. If the DOM is logical and sequential to begin with, <code>aria-owns</code> is almost never needed and should be left alone.</p>
 
 <p class="further-reading"><b>Note</b>: This article is based on the WAI-ARIA specification. Assistive technology behaviour may vary by platform and screen reader. Always test with real tools and users.</p>
+
   </main>
   <footer>
     <ul>
