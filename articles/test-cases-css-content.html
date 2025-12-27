@@ -75,14 +75,23 @@
 
   <main>
 
-<p class="metadetails">Published: <time datetime="2025-12-27">27 December 2025</time></p>
+<p class="metadetails">Published: <time datetime="2025-12-28">28 December 2025</time></p>
 
-<blockquote>
-  <p>Content intended for visual media sometimes needs alternative text for speech output or other non-visual mediums. The content property accepts alternative text to be specified after a slash (/) after the last <code>&lt;content-list&gt;</code>. If such alternative text is provided, it must be used for speech output instead.</p>
-  <p><a href="https://www.w3.org/TR/css-content-3/#alt" target="_blank">Source</a></p>
-</blockquote>
+<p>Sometimes, designers use CSS <code>content:</code> to add text or icons before or after elements. If that content is meant to be seen, it might also need an accessible version for people who can’t see it.</p>
 
-<p>This alternative text is presented as a new node in the accessibility tree, for browsers that support it.</p>
+<p>The <a href="https://www.w3.org/TR/css-content-3/#alt" target="_blank">spec</a> allows you to add alternative text by putting it after a slash in the content property. For example:</p>
+
+<pre><code>.icon::before {
+  content: "🔍" / "Search";
+}</code></pre>
+
+<p>The part before the slash is what’s shown visually - in this case, a magnifying glass icon.</p>
+
+<p>The part after the slash is intended to act as alternative text - in this case &ldquo;Search&rdquo;. </p>
+
+<p>In supporting browsers, this alternative text may be exposed to the accessibility tree and could be used by assistive technologies in place of the visible CSS content.</p>
+
+<p>As you can see in the test results below, support is inconsistent across browsers and screen readers. There is no guarantee this text will participate in accessible name computation or be announced by a screen reader, even when it appears in the accessibility tree.</p>
 
 <h2>Test criteria:</h2>
 
@@ -118,7 +127,7 @@
 
 <ol type="a">
   <li>"Visible generated content" should be announced.</li>
-  <li>Alternative text should not be announced (not present).</li>
+  <li>There is no test for alternative text as it is not present.</li>
 </ol>
 
 <h3>Example 2:</h3>
@@ -181,8 +190,7 @@
   <thead>
     <tr>
       <th style="width: 33%">Browser / SR</th>
-      <th>1a</th>
-      <th>1b</th>
+      <th>1</th>
       <th>2a</th>
       <th>2b</th>
       <th>3a</th>
@@ -197,7 +205,6 @@
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
@@ -205,7 +212,6 @@
     </tr>
     <tr>
       <td>Firefox + VoiceOver</td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
@@ -223,7 +229,6 @@
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
     </tr>
   </tbody>
 </table>
@@ -233,8 +238,7 @@
   <thead>
     <tr>
       <th style="width: 33%">Browser / SR</th>
-      <th>1a</th>
-      <th>1b</th>
+      <th>1</th>
       <th>2a</th>
       <th>2b</th>
       <th>3a</th>
@@ -248,7 +252,6 @@
       <td>Chrome + NVDA</td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
@@ -257,7 +260,6 @@
     </tr>
     <tr>
       <td>Firefox + NVDA</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
@@ -272,14 +274,12 @@
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
     </tr>
     <tr>
       <td>Firefox + JAWS</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
       <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
       <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
@@ -295,26 +295,26 @@
 
 <h2>Summary of findings</h2>
 
-<p>In the engines tested, CSS-generated alt text appears to be computed too late in the rendering pipeline to consistently participate in accessible name computation. As a result, announcements often depend on AT heuristics rather than reliable browser behaviour.</p>
+<p>In the engines tested, CSS-generated alternative text often appears too late in the rendering and accessibility pipelines to reliably participate in accessible name computation. In many cases, announcements depend on assistive technology heuristics rather than a predictable browser implementation.</p>
 
-<p>With that in mind, these tests show that the CSS <code>content</code> alternative text syntax is not reliable enough to be used as a primary accessibility mechanism.</p>
+<p>Based on these results, the CSS <code>content</code> alternative text syntax is not reliable enough to be used as a primary accessibility mechanism.</p> 
 
 <ul>
-  <li><strong>Support is highly inconsistent.</strong> No browser and screen reader combination passed all tests. Even the best stacks had a mix of passes and fails across the four examples.</li>
-  <li><strong>Being in the accessibility tree does not guarantee speech.</strong> In several cases (for example, macOS Firefox and Safari with VoiceOver), generated content and alternative text appear as nodes in the accessibility tree, but VoiceOver announces only a generic message such as “and one other item” instead of the actual text.</li>
-  <li><strong>Alt-only content is the least-bad pattern, but still fragile.</strong> Example&nbsp;2 (no visible text, alt text only) worked in some browser and screen reader combinations, but still failed in others, so it cannot be relied on for critical information.</li>
-  <li><strong>Visible + alt together is the most fragile.</strong> Example&nbsp;4 (both visible text and alternative text) almost never produced both expected announcements. Often only one string, or neither, was spoken.</li>
-  <li><strong>Some stacks fail completely.</strong> macOS Safari with VoiceOver failed all tests: neither generated content nor alternative text was announced for any example.</li>
-  <li><strong>Recommendation.</strong> At this time, the CSS generated content alternative text syntax should be treated as experimental only. For important information, continue to use semantic HTML and ARIA, rather than relying on CSS-generated content for accessibility.</li>
+  <li><strong>Support is highly inconsistent.</strong> No browser and screen reader combination passed all tests. Even the most successful stacks produced a mix of passes and fails across the four examples.</li>
+  <li><strong>Presence in the accessibility tree does not guarantee speech.</strong> In several cases (for example, macOS Firefox and Safari with VoiceOver), generated content and alternative text were exposed to the accessibility tree, but VoiceOver announced only a generic message such as “and one other item” instead of the actual text.</li>
+  <li><strong>Alt-only content is the least-bad pattern, but still fragile.</strong> Example&nbsp;2 (no visible text, alt text only) worked in some browser and screen reader combinations, but failed in others. It cannot be relied on for critical information.</li>
+  <li><strong>Visible + alt together is the most fragile.</strong> Example&nbsp;4 (visible text and alternative text) almost never produced both expected announcements. In many cases only one string, or neither, was spoken.</li>
+  <li><strong>Some stacks fail completely.</strong> macOS Safari with VoiceOver did not announce generated content or alternative text in any test.</li>
+  <li><strong>Recommendation.</strong> Treat this syntax as experimental. For important information, continue to use semantic HTML and ARIA. Do not rely on CSS-generated content as the sole mechanism for accessibility.</li> 
 </ul>
 
 <hr>
 
 <h2>Disclaimer</h2>
 
-<p>Any test results involving operating systems, browsers, and assistive technologies must be interpreted with care. There are many moving parts at play — OS versions, browser engines, assistive technology configuration, and even individual AT verbosity settings — which makes exact replication extremely difficult. My results reflect the versions and conditions listed, with screen readers kept as close to default “manufacturer settings” as possible to ensure that another tester could reasonably reproduce the behaviour observed here.</p>
+<p>Test results involving operating systems, browsers, and assistive technologies must be interpreted with care. There are many moving parts — OS versions, browser engines, assistive technology configuration, and even AT verbosity settings — which makes exact replication extremely difficult. These results reflect the versions and conditions listed, with screen readers kept as close to default “manufacturer settings” as possible to support reasonable reproducibility.</p>
 
-<p>Even with these variables, the consistency of the failures observed across multiple stacks provides meaningful evidence that this feature should continue to be treated as experimental until interoperability improves.</p>
+<p>Despite these variables, the consistency of failures across multiple stacks provides meaningful evidence that this feature should be treated as experimental until interoperability improves.</p>
 
   </main>
 
