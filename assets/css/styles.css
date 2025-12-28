@@ -746,13 +746,13 @@ classes
 }
 
 .fail {
-  color: #fff;
-  background: red;
+  color: #CC0000;
+  font-weight: bold;
 }
 
 .pass {
-  color: #fff;
-  background: green;
+  color: #007700;
+  font-weight: bold;
 }
 
 .further-reading {

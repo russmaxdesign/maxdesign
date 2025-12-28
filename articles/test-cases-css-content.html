@@ -113,7 +113,7 @@
 
 <h2>Test cases</h2>
 
-<h3>Example 1:</h3>
+<h3>Test 1: Generated content only</h3>
 
 <div class="example test-old" tabindex="0">
   This is example 1
@@ -123,14 +123,71 @@
   content: "Visible generated content";
 }</code></pre>
 
-<p>Pass should be:</p>
+<h4>Pass criteria:</h4>
 
-<ol type="a">
-  <li>"Visible generated content" should be announced.</li>
-  <li>There is no test for alternative text as it is not present.</li>
-</ol>
+<ul>
+  <li>1.1: "Visible generated content" should be announced.</li>
+</ul>
 
-<h3>Example 2:</h3>
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Screen reader</th>
+      <th>1.1</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td>VoiceOver</td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>NVDA</td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>NVDA</td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Test 2: Alternative text only</h3>
 
 <div class="example test-alt-only" tabindex="0">
   This is example 2
@@ -140,14 +197,80 @@
   content: "" / "Hello world";
 }</code></pre>
 
-<p>Pass should be:</p>
+<h4>Pass criteria:</h4>
 
-<ol type="a">
-  <li>Generated content should not be announced (left blank).</li>
-  <li>"Hello world" alternative text should be announced.</li>
-</ol>
+<ul>
+  <li>2.1: Generated content should not be announced (left blank).</li>
+  <li>2.2: "Hello world" alternative text should be announced.</li>
+</ul>
 
-<h3>Example 3:</h3>
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Screen reader</th>
+      <th>2.1</th>
+      <th>2.2</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td>VoiceOver</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>NVDA</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>NVDA</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>JAWS</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Test 3: Blank alternative text</h3>
 
 <div class="example test-visible-only" tabindex="0">
   This is example 3
@@ -157,14 +280,80 @@
   content: "Visible generated content" / "";
 }</code></pre>
 
-<p>Pass should be:</p>
+<h4>Pass criteria:</h4>
 
-<ol type="a">
-  <li>"Visible generated content" should be announced.</li>
-  <li>Alternative text should not be announced (left blank).</li>
-</ol>
+<ul>
+  <li>3.1: "Visible generated content" should be announced.</li>
+  <li>3:2: Alternative text should not be announced (left blank).</li>
+</ul>
 
-<h3>Example 4:</h3>
+<table>
+  <caption>Results</caption>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Screen reader</th>
+      <th>3.1</th>
+      <th>3.2</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <tr>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>NVDA</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>NVDA</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>JAWS</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Test 4: Generated content and alternative text</h3>
 
 <div class="example test-both" tabindex="0">
   This is example 4
@@ -174,119 +363,73 @@
   content: "Visible generated content" / "Hello world";
 }</code></pre>
 
-<p>Pass should be:</p>
+<h4>Pass criteria:</h4>
 
 <ol type="a">
   <li>"Visible generated content" should be announced.</li>
   <li>"Hello world" alternative text should be announced.</li>
 </ol>
 
-<hr>
-
-<h2>Results</h2>
-
 <table>
-  <caption>macOS results</caption>
+  <caption>Results</caption>
   <thead>
     <tr>
-      <th style="width: 33%">Browser / SR</th>
-      <th>1</th>
-      <th>2a</th>
-      <th>2b</th>
-      <th>3a</th>
-      <th>3b</th>
-      <th>4a</th>
-      <th>4b</th>
-    </tr>
+      <th>OS</th>
+      <th>Browser</th>
+      <th>Screen reader</th>
+      <th>3.1</th>
+      <th>3.2</th>
+    </tr>    
   </thead>
   <tbody>
     <tr>
-      <td>Chrome + VoiceOver</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td>macOS</td>
+      <td>Chrome</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
-      <td>Firefox + VoiceOver</td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td>macOS</td>
+      <td>Firefox</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
-      <td>Safari + VoiceOver</td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <caption>Windows results</caption>
-  <thead>
-    <tr>
-      <th style="width: 33%">Browser / SR</th>
-      <th>1</th>
-      <th>2a</th>
-      <th>2b</th>
-      <th>3a</th>
-      <th>3b</th>
-      <th>4a</th>
-      <th>4b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Chrome + NVDA</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
+      <td>macOS</td>
+      <td>Safari</td>
+      <td>VoiceOver</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
     </tr>
     <tr>
-      <td>Firefox + NVDA</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>NVDA</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="fail">FAIL</span></td>
     </tr>
     <tr>
-      <td>Chrome + JAWS</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>NVDA</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
-      <td>Firefox + JAWS</td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="fail"><img src="../assets/img/icon-cross.png" alt="Fail"></td>
-      <td class="pass"><img src="../assets/img/icon-tick.png" alt="Pass"></td>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td>JAWS</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Firefox</td>
+      <td>JAWS</td>
+      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
   </tbody>
 </table>
