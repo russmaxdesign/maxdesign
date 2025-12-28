@@ -23,7 +23,28 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Tests for CSS generated content alternative text        -->
+<!--  1. People with reduced vision and how they use technology  -->
+<!--  =========================================================  -->
+<item>
+<title>People with reduced vision and how they use technology</title>
+<link>https://www.maxdesign.com.au/articles/test-cases-css-content.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/test-cases-css-content.html</guid>
+<pubDate>Sun, 28 Dec 2025 08:10:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>Assistive technologies</category>
+<category>Accessibility</category>
+<description>Tests to determine how CSS generated content alternative text is exposed to assistive technologies.</description>
+<content:encoded>
+<![CDATA[
+<p>Sometimes, designers use CSS content: to add text or icons before or after elements. If that content is meant to be seen, it might also need an accessible version for people who can’t see it. In supporting browsers, this alternative text may be exposed to the accessibility tree and could be used by assistive technologies in place of the visible CSS content.</p>
+<p><a href="https://www.maxdesign.com.au/articles/test-cases-css-content.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -44,7 +65,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Eight quick things to remember when using aria-owns     -->
+<!--  3. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -75,7 +96,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Why role="button" on a <button> does nothing            -->
+<!--  4. Why role="button" on a <button> does nothing            -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -97,7 +118,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Did you know some ARIA roles remove child semantics?    -->
+<!--  5. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -118,7 +139,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Tests for aria-labelledby and aria-describedby          -->
+<!--  6. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -140,7 +161,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. More about screen reader speech queues                  -->
+<!--  7. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -161,7 +182,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. How aria-labelledby really works                        -->
+<!--  8. How aria-labelledby really works                        -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -185,7 +206,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Does Chrome get the header element wrong?               -->
+<!--  9. Does Chrome get the header element wrong?               -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
@@ -207,7 +228,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. What does hidden actually mean in Accessible Name computation? -->
+<!--  10. What does hidden actually mean in Accessible Name computation? -->
 <!--  =========================================================  -->
 <item>
 <title>What does hidden actually mean in Accessible Name computation?</title>
@@ -224,27 +245,6 @@
 <p>In other words: Which elements are ignored, and which can still be used to form an accessible name</p>
 <p>The steps below are plain English translations of the specification, so you can clearly see which elements are treated as hidden and which ones still count toward the accessible name.</p>
 <p><a href="https://www.maxdesign.com.au/articles/hidden-content.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Using the browser console for accessibility testing    -->
-<!--  =========================================================  -->
-<item>
-<title>Using the browser console for accessibility testing</title>
-<link>https://www.maxdesign.com.au/articles/console.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/console.html</guid>
-<pubDate>Fri, 12 Dec 2025 10:02:00 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Browser console</category>
-<category>Accessibility</category>
-<description>With a few lines of JavaScript, you can highlight headings, outline landmarks, check image alternatives, inspect accessible names, and much more — on any page.</description>
-<content:encoded>
-<![CDATA[
-<p>With a few lines of JavaScript, you can highlight headings, outline landmarks, check image alternatives, inspect accessible names, and much more — on any page. This guide includes 11 copy-and-paste snippets you can run right away.</p>
-<p><a href="https://www.maxdesign.com.au/articles/console.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
