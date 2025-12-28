@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Layers that affect assistive technology output - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A quick review of layers that can affect how assistive technologies announce information.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Layers that affect assistive technology output</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-01">01 December 2025</time></p>
+
+<p>These layers influence what a screen reader or braille device presents to a user.</p>
+
+<h2>1. Browser parsing</h2>
+
+<p>The browser turns your HTML into a DOM structure.<br>
+e.g. elements, attributes, text nodes.</p>
+
+<h2>2. Browser engine internal structures</h2>
+
+<p>The engine combines the DOM with CSS to build internal models for layout and rendering.<br>
+e.g. render tree, frame/render objects.</p>
+
+<h2>3. Browser accessibility tree</h2>
+
+<p>The engine maps eligible elements and properties into an accessibility tree for the OS.<br>
+e.g. Blink AXObject/AXNode, WebKit AXObject, Gecko Accessible.</p>
+
+<h2>4. OS accessibility API</h2>
+
+<p>The operating system exposes accessibility information to assistive technologies.<br>
+e.g. UIA (Windows), AX API (macOS/iOS), ATK/AT-SPI (Linux), AXNodeInfo (Android).</p>
+
+<h2>5. Assistive technology interpretation layer</h2>
+
+<p>The screen reader interprets the API data using its own rules and heuristics.<br>
+e.g. VoiceOver, NVDA, JAWS, Orca, TalkBack.</p>
+
+<h2>6. AT user settings</h2>
+
+<p>User preferences impact how information is announced or displayed.<br>
+e.g. verbosity, punctuation, typing echo, custom dictionaries.</p>
+
+<h2>7. Screen reader speech queue</h2>
+
+<p>The screen reader queues and orders speech or braille output before it is presented.<br>
+e.g. buffering, interruptions, overlap prevention, dropped or skipped messages.</p>
+
+<h2>8. Speech output / Braille output</h2>
+
+<p>The AT delivers the final output via speech or braille.<br>
+e.g. text-to-speech engine, braille display, braille tables.</p>
+
+<h2>Conclusion</h2>
+
+<p>What starts as simple HTML passes through many layers before it becomes speech or braille. Understanding these layers helps explain why behaviour can vary across platforms, browsers, and assistive technologies.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
