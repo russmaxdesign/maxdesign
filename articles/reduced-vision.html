@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>xxxx - Max Design</title>
+  <title>People with reduced vision and how they use technology - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="xxx">
+  <meta name="description" content="How people with low vision adjust system settings, browsers, and apps. Six key categories designers and developers should understand.">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
   </nav>
   <div class="banner-inner">
     <div class="banner-content">
-      <h1>Where do all the rules around keyboard focus live?</h1>
+      <h1>People with reduced vision and how they use technology</h1>
     </div>
   </div>  
   <main>
@@ -60,13 +60,19 @@
 
 <p>Understanding these options is essential for anyone building digital products.</p>
 
-<p>Good design and code must adapt to different viewing conditions, not break when text or interfaces get larger, smaller, bolder, or reflowed.</p>
+<hr>
 
-<p>The sections below outline seven major categories of settings and tools used by people with low vision, and how they can affect user experience.</p>
+<h2>Six categories to consider</h2>
+
+<p>The sections below describe six broad categories of settings and tools that people with low vision might use, and how they can affect user experience.</p>
+
+<p>These examples are not exhaustive or universal, and it would be unusual for a single person to experience all of these effects. They are shared here to illustrate patterns that can arise in real-world use when interfaces are not designed to adapt to a variety of settings.</p>
+
+<hr>
 
 <h2>1. System-level magnification</h2>
 
-<p>Examples:</p>
+<h3 class="h4">Examples:</h3>
 
 <ul>
   <li>Windows Magnifier</li>
@@ -74,24 +80,223 @@
   <li>GNOME or KDE screen magnifiers (Linux)</li>
 </ul>
 
-<p>Effects:</p>
-
-<ul>
-  <li>Only a portion of the screen is visible at a time.</li>
-  <li>Horizontal and vertical panning becomes part of normal navigation.</li>
-  <li>Pointer and focus tracking may lag on complex interfaces.</li>
-  <li>Buttons, icons, and links with small hit areas become difficult to target.</li>
-  <li>Multi-column layouts and fixed headers take up disproportionate space.</li>
-  <li>Hover interactions can be missed if the pointer is not directly over an element.</li>
-</ul>
-
-<p>Spaces:</p>
+<h3 class="h4">Possible environments:</h3>
 
 <ul>
   <li>Operating system interface</li>
   <li>Native apps</li>
   <li>Websites and web-based apps</li>
 </ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<p>Only a portion of the screen is visible at a time. This is the primary effect of system magnification, shaping how people navigate interfaces. This can mean:</p>
+
+<ul>
+  <li>Horizontal and vertical panning become part of normal navigation.</li>
+  <li>Buttons, icons, and links with small hit areas become difficult to target.</li>
+  <li>Multi-column layouts and fixed headers take up disproportionate space.</li>
+  <li>Hover interactions may be harder to trigger or notice if the pointer is not directly over an element.</li>
+  <li>Information placed on the far right side of the screen may sit outside the visible area due to left-to-right tracking of magnification tools.</li>
+  <li>Pop-ups, dialogs, and error messages may appear off-screen and require hunting to locate.</li>
+  <li>Notifications or toast messages may display outside the magnified region and go unnoticed.</li>
+  <li>Auto-focus jumps (e.g. cursor forced into a field) can disorient the view and cause loss of context.</li>
+</ul>
+
+<hr>
+
+<h2>2. System-level font and display scaling</h2>
+
+<h3 class="h4">Examples:</h3>
+
+<ul>
+  <li><strong>Windows:</strong> Display Scaling; Text Size controls.</li>
+  <li><strong>macOS:</strong> Display Scaling; app-specific text settings.</li>
+  <li><strong>Linux:</strong> GNOME / KDE desktop scaling; font size controls.</li>
+  <li><strong>iOS:</strong> Dynamic Type scaling; Display Zoom.</li>
+  <li><strong>Android:</strong> Font size and Display size; Bold text and High contrast text.</li>
+</ul>
+
+<h3 class="h4">Possible environments:</h3>
+
+<ul>
+  <li>Operating system interface</li>
+  <li>Native apps (mobile and desktop)</li>
+  <li>Minimal or inconsistent effect on websites and web apps, depending on browser and platform</li>
+</ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<p>Text, UI controls, and some images scale up across the system. This is the primary effect of system-level scaling. This can lead to:</p>
+
+<ul>
+  <li>Interfaces that rely on fixed pixel measurements may clip, overlap, or truncate.</li>
+  <li>Icons and bitmapped images may become blurry or distorted if they are not available in multiple resolutions.</li>
+  <li>Some apps or custom UI frameworks fail to respect scaling and appear too small or unusable.</li>
+  <li>Layouts with rigid spacing collapse when text grows beyond design assumptions.</li>
+  <li>On mobile, text may wrap or push essential elements off-screen if spacing is inflexible.</li>
+  <li>Non-responsive modal dialogs may scale beyond the viewport and hide close buttons or controls.</li>
+  <li>Tooltip or help icon text may become clipped or unreadable when containers do not resize.</li>
+  <li>Placeholder text may truncate, becoming illegible or changing meaning.</li>
+</ul>
+
+<hr>
+
+<h2>3. Browser page zoom</h2>
+
+<h3 class="h4">Examples:</h3>
+
+<ul>
+  <li>Zoom settings (Ctrl or Command + “+”) in Chrome, Firefox, Safari, Edge</li>
+  <li>Browser settings panel zoom controls</li>
+</ul>
+
+<h3 class="h4">Possible environments:</h3>
+
+<ul>
+  <li>Websites</li>
+  <li>Web-based applications</li>
+  <li>Browser chrome (menus, toolbars) usually unaffected</li>
+</ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<p>The whole page zooms, including text, images, and layout containers. This changes how the interface fits within the viewport, which can lead to:</p>
+
+<ul>
+  <li>Fixed-width layouts or pixel-perfect designs can cause horizontal scrolling.</li>
+  <li>Breakpoints may shift or behave differently than intended at different zoom levels.</li>
+  <li>Raster images and icons may appear fuzzy if not provided in multiple sizes.</li>
+  <li>Dialogs and overlays may open partially or fully off-screen when positioned with fixed coordinates.</li>
+  <li>Sticky headers, footers, or fixed nav bars may cover essential page content at high zoom levels.</li>
+  <li>Touch targets may appear smaller relative to content, making activation unpredictable.</li>
+</ul>
+
+<hr>
+
+<h2>4. Browser text-only zoom</h2>
+
+<h3 class="h4">Examples:</h3>
+
+<ul>
+  <li>Firefox: Zoom text only</li>
+  <li>Safari: Minimum font size settings</li>
+  <li>Chrome or Edge: Extensions for text resizing</li>
+</ul>
+
+<h3 class="h4">Possible environments:</h3>
+
+<ul>
+  <li>Websites</li>
+  <li>Web-based applications</li>
+</ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<p>Only text increases in size, leaving layout containers unchanged. This can result in:</p>
+
+<ul>
+  <li>Text may overlap other elements if spacing is not flexible.</li>
+  <li>Text expansion may push buttons below the fold, hiding primary actions until scrolled.</li>
+  <li>Navigation menus can wrap or overflow unexpectedly.</li>
+  <li>Form labels may wrap in ways that reduce clarity or hide controls.</li>
+  <li>Required field indicators (e.g. asterisk) may move away from labels or detach from form fields.</li>
+</ul>
+
+<hr>
+
+<h2>5. Third-party screen magnifiers</h2>
+
+<h3 class="h4">Examples:</h3>
+
+<ul>
+  <li>ZoomText Magnifier</li>
+  <li>SuperNova Magnifier</li>
+  <li>Virtual Magnifying Glass</li>
+</ul>
+
+<h3 class="h4">Possible environments:</h3>
+
+<ul>
+  <li>Operating system interface</li>
+  <li>Native apps</li>
+  <li>Websites and web-based apps</li>
+</ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<p>Only a portion of the screen is visible at a time. Third-party magnifiers behave similarly to system magnification but often add more advanced controls. This can lead to:</p>
+
+<ul>
+  <li>Right-aligned labels, icons, or calls to action may sit outside the visible area due to left-weighted scanning behaviour.</li>
+  <li>Horizontal and vertical panning become part of normal navigation.</li>
+  <li>Hover interactions may be harder to trigger or notice if the pointer is not directly over an element.</li>
+  <li>Information placed on the far right side of the screen may sit outside the visible area due to left-to-right tracking of magnification tools.</li>
+  <li>Pop-ups, dialogs, and error messages may appear off-screen and require hunting to locate.</li>
+  <li>Notifications or toast messages may display outside the magnified region and go unnoticed.</li>
+  <li>Auto-focus jumps (e.g. cursor forced into a field) can disorient the view and cause loss of context.</li>
+</ul>
+
+<hr>
+
+<h2>6. System and browser colour and contrast settings</h2>
+
+<h3 class="h4">Examples:</h3>
+
+<ul>
+  <li>Windows High Contrast Mode and Contrast Themes</li>
+  <li>macOS Increase Contrast, Reduce Transparency</li>
+  <li>iOS and Android: Colour filters, Smart Invert</li>
+  <li>Browsers using forced colours mode or reader contrast options</li>
+</ul>
+
+<h3 class="h4">Possible environments:</h3>
+
+<ul>
+  <li>Operating system interface</li>
+  <li>Native apps</li>
+  <li>Websites and web-based apps</li>
+</ul>
+
+<h3 class="h4">Possible effects:</h3>
+
+<ul>
+  <li>Background images used for legibility may disappear.</li>
+  <li>Icons and text with low contrast become invisible.</li>
+  <li>Colour-based meaning can be lost (e.g. green for success, red for error).</li>
+  <li>Interfaces that rely on subtle borders or shadows may lose structure.</li>
+  <li>Soft or low-contrast focus indicators disappear, making keyboard navigation feel non-functional.</li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Designers and developers should keep in mind that people may view digital products with increased magnification, larger fonts, zoomed layouts, different contrast settings, or any combination of these.</p>
+
+<p>These adjustments are not unusual or edge cases. They are everyday ways that people with reduced vision interact with technology.</p>
+
+<p>Products work best when they continue to function even if:</p>
+
+<ul>
+  <li>text is larger than expected</li>
+  <li>layouts reflow or wrap</li>
+  <li>magnification reduces the visible area</li>
+  <li>colours and backgrounds are replaced</li>
+  <li>buttons and labels take up more space than planned</li>
+</ul>
+
+<p>This means building interfaces that:</p>
+
+<ul>
+  <li>scale without clipping or overlapping</li>
+  <li>keep related information close together</li>
+  <li>avoid relying on right alignment for essential actions</li>
+  <li>use real text instead of images of text</li>
+  <li>allow layouts to grow and breathe when content increases</li>
+</ul>
+
+<p>Designing for these adjustments is not about catering to edge cases. It is about building products that continue to work when people change zoom, text size, or colour settings, so fewer people experience barriers.</p>
 
   </main>
   <footer>
@@ -106,4 +311,3 @@
   </footer>
 </body>
 </html>
-

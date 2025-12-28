@@ -39,6 +39,8 @@
 
 <p>This article looks at <code>aria-owns</code> from both a specification perspective and a practical, real-world perspective.</p>
 
+<hr>
+
 <h2>1. What <code>aria-owns</code> does</h2>
 
 <p><code>aria-owns</code> lets you make elements behave as if they are parent and child for assistive technologies, even when they are not nested in the DOM.</p>
@@ -67,6 +69,8 @@
 - <span class="highlight">Bananas</span>
 </code></pre>
 
+<hr>
+
 <h2>2. When <code>aria-owns</code> can be useful</h2>
 
 <p>Use <code>aria-owns</code> when:</p>
@@ -77,6 +81,8 @@
 </ul>
 
 <p>It is a <b>last-resort structural fix</b>, not a layout tool.</p>
+
+<hr>
 
 <h2>3. When <code>aria-owns</code> should not be used</h2>
 
@@ -90,6 +96,8 @@
 
 <p>If the DOM can be fixed, <b>fix the DOM</b>.</p>
 
+<hr>
+
 <h2>4. DOM order vs Tab order vs Accessibility tree order</h2>
 
 <p>These are independent systems:</p>
@@ -101,6 +109,8 @@
 </ul>
 
 <p>In simple terms, <code>aria-owns</code> affects how the accessibility tree is exposed to assistive technologies. It does not change DOM order or tab order.</p>
+
+<hr>
 
 <h2>5. DOM children vs <code>aria-owns</code> children</h2>
 
@@ -120,6 +130,8 @@
 - Apples (aria-owns child)
 - Bananas (aria-owns child)
 </code></pre>
+
+<hr>
 
 <h2>6. IDREF order matters</h2>
 
@@ -149,6 +161,8 @@
 - <span class="highlight">Apples</span>
 </code></pre>
 
+<hr>
+
 <h2>7. Defining all children when order is critical</h2>
 
 <p>If the exact order of children matters, extra care is needed.</p>
@@ -177,6 +191,8 @@
 - <span class="highlight">Vegetables</span>
 </code></pre>
 
+<hr>
+
 <h2>8. Multiple references to the same ID</h2>
 
 <p>In practice, because <code>aria-owns</code> introduces structural relationships that cut across the DOM, it is especially sensitive to conflicts and complexity.</p>
@@ -190,13 +206,27 @@
   <li>There is no guaranteed “winner”.</li>
 </ul>
 
+<hr>
+
 <h2>Conclusion</h2>
 
 <p><strong>Bottom line:</strong> <code>aria-owns</code> is a last-resort tool. It is underdefined in the specification, inconsistently implemented, and highly sensitive to conflicts and context.</p>
 
 <p>Do not treat it as a reliable mechanism for ordering or structuring content. If the DOM is logical and sequential to begin with, <code>aria-owns</code> is almost never needed and should be left alone.</p>
 
-<p class="further-reading"><b>Note</b>: This article is based on the WAI-ARIA specification. Assistive technology behaviour may vary by platform and screen reader. Always test with real tools and users.</p>
+<div class="further-reading">
+  <h2>Related articles</h2>
+
+  <h3 class="article-heading"><a href="aria-labelledby.html">How aria-labelledby really works</a></h3>
+  <p>How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.</p>
+
+  <h3 class="article-heading"><a href="test-cases-labelledby-describedby.html">Tests for aria-labelledby and aria-describedby</a></h3>
+  <p>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</p>
+
+  <h3 class="article-heading"><a href="aria-roles-semantics.html">Did you know some ARIA roles remove child semantics?</a></h3>
+  <p>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</p>
+
+ </div>
 
   </main>
   <footer>

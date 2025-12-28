@@ -64,6 +64,8 @@
 
 <p>Once this happens, the browser no longer makes any assumptions about native HTML relationships. Every meaningful part of the widget <b>must be stated explicitly using ARIA roles</b>.</p>
 
+<hr>
+
 <h2>Is this documented anywhere else?</h2>
 
 <p>This rule appears in other specifications, but only indirectly. It’s never stated as clearly as it is in Core AAM. For example:</p>
@@ -75,6 +77,8 @@
 <h3 class="h4"><a class="external" href="https://www.w3.org/TR/wai-aria-1.3/#scope" target="_blank">5.2.7 Required Accessibility Parent Role</a></h3>
 
 <p>Defines structural expectations, but not the consequence of breaking them.</p>
+
+<hr>
 
 <h2>An example: <code>menu</code> and <code>menuitem</code></h2>
 
@@ -115,6 +119,8 @@
 
 <p>This is required to rebuild the menu’s structure in the accessibility tree.</p>
 
+<hr>
+
 <h2>Other common examples where child semantics are wiped</h2>
 
 <p>The <code>menu</code> example is not unique. The same kind of structural replacement happens with many widget roles.</p>
@@ -131,6 +137,8 @@
 </ul>
 
 <p>In all of these cases, native HTML semantics may be ignored once the ARIA widget role is applied.</p>
+
+<hr>
 
 <h2>When this rule does not apply</h2>
 
@@ -209,9 +217,28 @@
 
 <p>Once you recognise this distinction, a lot of previously confusing ARIA behaviour starts to make sense.</p>
 
+<hr>
+
 <h2>Conclusion</h2>
 
 <p>Understanding which ARIA roles replace structure, and which merely reinforce it, is important. Especially when building non-native widgets.</p>
+
+<div class="further-reading">
+  <h2>Related articles</h2>
+
+  <h3 class="article-heading"><a href="aria-labelledby.html">How aria-labelledby really works</a></h3>
+  <p>How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.</p>
+
+  <h3 class="article-heading"><a href="test-cases-labelledby-describedby.html">Tests for aria-labelledby and aria-describedby</a></h3>
+  <p>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</p>
+
+  <h3 class="article-heading"><a href="aria-owns.html">Eight quick things to remember when using <code>aria-owns</code></a></h3>
+  <p>Eight quick things to rememer when using aria-owns including what it is, when to use it and when not to use it.</p>
+
+  <h3 class="article-heading"><a href="role-button.html">Why <code>role="button"</code> on a <code>&lt;button&gt;</code> does nothing</a></h3>
+  <p>Adding <code>role="button"</code> to a native <code>&lt;button&gt;</code> looks harmless, but it doesn’t change anything. This article explains why that ARIA role is ignored and how this behaviour is defined in the specification.</p>
+
+ </div>
 
   </main>
   <footer>

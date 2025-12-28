@@ -70,6 +70,8 @@
 
 <p>This rule exists to prevent assistive technologies from receiving conflicting or duplicate information.</p>
 
+<hr>
+
 <h2>Why does this rule exist?</h2>
 
 <p>The specification requires browsers to ignore <code>role="button"</code> on a native <code>&lt;button&gt;</code>.</p>
@@ -85,6 +87,8 @@
 
 <p>Adding <code>role="button"</code> does not add clarity or extra information. It simply restates what is already there.</p>
 
+<hr>
+
 <h2>The broader lesson</h2>
 
 <p>This example highlights a common point of confusion about how ARIA works.</p>
@@ -99,6 +103,8 @@
   <li>Support interaction patterns that HTML doesn’t provide on its own.</li>
   <li>Intentionally replace native semantics when building fully custom widgets.</li>
 </ul>
+
+<hr>
 
 <h2>Five rules of ARIA</h2>
 
@@ -159,11 +165,27 @@
 
 <p>Adding a role to a <code>&lt;button&gt;</code> does not solve this problem. Instead, we need to make sure the <code>&lt;button&gt;</code> has a meaningful visible text label and accessible name.</p>
 
-<h2>Takeaway</h2>
+<hr>
+
+<h2>Conclusion</h2>
 
 <p>The best accessibility practice is to use native HTML elements wherever possible.</p>
 
 <p>ARIA should only be used when native semantics are missing, insufficient, or need to be intentionally replaced.</p>
+
+<div class="further-reading">
+  <h2>Related articles</h2>
+
+  <h3 class="article-heading"><a href="aria-labelledby.html">How aria-labelledby really works</a></h3>
+  <p>How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.</p>
+
+  <h3 class="article-heading"><a href="test-cases-labelledby-describedby.html">Tests for aria-labelledby and aria-describedby</a></h3>
+  <p>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</p>
+
+  <h3 class="article-heading"><a href="aria-roles-semantics.html">Did you know some ARIA roles remove child semantics?</a></h3>
+  <p>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</p>
+
+ </div>
 
   </main>
   <footer>
