@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Sun, 28 Dec 2025 08:10:30 +1100</lastBuildDate>
-<pubDate>Sun, 28 Dec 2025 08:10:30 +1100</pubDate>
+<lastBuildDate>Mon, 29 Dec 2025 05:10:30 +1100</lastBuildDate>
+<pubDate>Mon, 29 Dec 2025 05:10:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,21 +23,22 @@
 
 
 <!--  =========================================================  -->
-<!--  1. People with reduced vision and how they use technology  -->
+<!--  1. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
-<title>People with reduced vision and how they use technology</title>
-<link>https://www.maxdesign.com.au/articles/test-cases-css-content.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/test-cases-css-content.html</guid>
-<pubDate>Sun, 28 Dec 2025 08:10:30 +1100</pubDate>
+<title>People with reduced vision: technology settings and possible impacts</title>
+<link>https://www.maxdesign.com.au/articles/reduced-vision.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/reduced-vision.html</guid>
+<pubDate>Mon, 29 Dec 2025 05:10:30 +1100</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>Assistive technologies</category>
 <category>Accessibility</category>
-<description>Tests to determine how CSS generated content alternative text is exposed to assistive technologies.</description>
+<description>How people with low vision adjust system settings, browsers, and apps. Six key categories designers and developers should understand.</description>
 <content:encoded>
 <![CDATA[
-<p>Sometimes, designers use CSS content: to add text or icons before or after elements. If that content is meant to be seen, it might also need an accessible version for people who can’t see it. In supporting browsers, this alternative text may be exposed to the accessibility tree and could be used by assistive technologies in place of the visible CSS content.</p>
-<p><a href="https://www.maxdesign.com.au/articles/test-cases-css-content.html">Read the full article</a></p>
+<p>Many people experience reduced vision at some point in their lives. This might be temporary, gradual, or permanent. It can affect how clearly someone sees text, images, and user interface elements on screens.</p>
+<p>Understanding these options is essential for anyone building digital products.</p>
+<p><a href="https://www.maxdesign.com.au/articles/reduced-vision.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
