@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Mon, 29 Dec 2025 05:10:30 +1100</lastBuildDate>
-<pubDate>Mon, 29 Dec 2025 05:10:30 +1100</pubDate>
+<lastBuildDate>Tue, 30 Dec 2025 07:00:30 +1100</lastBuildDate>
+<pubDate>Tue, 30 Dec 2025 07:00:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,29 @@
 
 
 <!--  =========================================================  -->
-<!--  1. People with reduced vision: technology settings and possible impacts  -->
+<!--  1. HTML content categories  -->
+<!--  =========================================================  -->
+<item>
+<title>HTML content categories</title>
+<link>https://www.maxdesign.com.au/articles/html-content-categories.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/html-content-categories.html</guid>
+<pubDate>Tue, 30 Dec 2025 07:00:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>HTML content categories define where elements can appear and what they’re allowed to contain with a clear, rules-based approach that improves validity, accessibility, and maintainability.</description>
+<content:encoded>
+<![CDATA[
+<p>Modern HTML, defined in the HTML Living Standard, groups elements into content categories.</p>
+<p>These categories do not control how elements look. They describe how elements fit into the document structure and how they relate to the elements around them.</p>
+<p><a href="https://www.maxdesign.com.au/articles/html-content-categories.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -45,7 +67,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Tests for CSS generated content alternative text        -->
+<!--  3. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -66,7 +88,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Eight quick things to remember when using aria-owns     -->
+<!--  4. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -97,7 +119,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Why role="button" on a <button> does nothing            -->
+<!--  5. Why role="button" on a <button> does nothing            -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -119,7 +141,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Did you know some ARIA roles remove child semantics?    -->
+<!--  6. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -140,7 +162,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Tests for aria-labelledby and aria-describedby          -->
+<!--  7. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -162,7 +184,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. More about screen reader speech queues                  -->
+<!--  8. More about screen reader speech queues                  -->
 <!--  =========================================================  -->
 <item>
 <title>More about screen reader speech queues</title>
@@ -183,7 +205,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. How aria-labelledby really works                        -->
+<!--  9. How aria-labelledby really works                        -->
 <!--  =========================================================  -->
 <item>
 <title>How aria-labelledby really works</title>
@@ -207,7 +229,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Does Chrome get the header element wrong?               -->
+<!--  10. Does Chrome get the header element wrong?              -->
 <!--  =========================================================  -->
 <item>
 <title>Does Chrome get the header element wrong?</title>
