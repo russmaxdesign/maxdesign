@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HTML content categories - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="HTML content categories define where elements can appear and what they’re allowed to contain with a clear, rules-based approach that improves validity, accessibility, and maintainability.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+    svg {
+      margin: 1em 0 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>HTML content categories</h1>    
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2025-12-30">30 December 2025</time></p>
+
+<p>If you have worked with HTML for a long time, you may have heard elements described as “block-level” or “inline.”</p>
+
+<p>These ideas came from earlier specifications and CSS defaults. They describe presentation of elements, but not their meaning.</p>
+
+<p>Modern HTML, defined in the <a href="https://html.spec.whatwg.org/multipage/" target="_blank">HTML Living Standard</a>, groups elements into <b>content categories</b>.</p>
+
+<p>These categories do not control how elements look. They describe how elements fit into the document structure and how they relate to the elements around them.</p>
+
+<p>Content categories do not decide where an element may be used or which elements it may contain. Those rules are defined separately in the specification under each element’s content model and permitted contexts.</p>
+
+<p>In this article, we focus on the categories that matter most for everyday authoring. We are not covering every edge case or specialised category here.</p>
+
+<hr>
+
+<h2>Overview of content categories</h2>
+
+<p>The HTML Living Standard defines a range of element categories, including:</p>
+
+<ul>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#metadata-content" target="_blank">Metadata</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#flow-content" target="_blank">Flow</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#sectioning-content" target="_blank">Sectioning</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#heading-content" target="_blank">Heading</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content" target="_blank">Phrasing</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#embedded-content-2" target="_blank">Embedded</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#interactive-content" target="_blank">Interactive</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content" target="_blank">Palpable content</a></li>
+  <li><a href="https://html.spec.whatwg.org/multipage/dom.html#script-supporting-elements" target="_blank">Script-supporting</a></li>
+</ul>
+
+<p>These categories are not hierarchical. They do not stack or inherit from one another.</p>
+<!-- <ul>
+  <li>not belong to any category</li>
+  <li>belong to exactly one category</li>
+  <li>belong to multiple categories at the same time</li>
+</ul> -->
+
+<p>The diagram below shows how several HTML content categories relate to each other and where they can overlap.</p>
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 770 420" style="enable-background:new 0 0 770 420;" xml:space="preserve">
+  <title>Diagram showing content model categories overlapping</title>
+  <style type="text/css">
+    .st1{opacity:0.2;fill:#AF9831;}
+    .st2{opacity:0.2;fill:#3A78B4;}
+    .st3{opacity:0.2;fill:#50893E;}
+    .st4{opacity:0.2;fill:#B06A28;}
+    .st5{opacity:0.2;fill:#814B9E;}
+    .st6{font-family:'Roboto','HelveticaNeue-Bold';font-weight:bold;}
+    .st7{font-size:24px;}
+    .st8{opacity:0.2;fill:#8C5060;}
+    .st9{fill:none;stroke:#231F20;stroke-width:2;stroke-miterlimit:10;}
+    .st10{opacity:0.5;fill:red;}
+    .st11{fill:none;stroke:#dd0000;stroke-width:4;stroke-miterlimit:10;}
+    .st12{fill:none;stroke:#231F20;stroke-width:3;stroke-linecap:round;stroke-dasharray:5 5;}
+  </style>
+  <!-- main container -->
+  <ellipse class="st9" cx="385" cy="210" rx="375" ry="200"></ellipse>
+  <!-- interactive background and border -->
+  <ellipse class="st1" cx="192" cy="165" rx="150" ry="75"></ellipse>
+  <ellipse class="st9" cx="192" cy="165" rx="150" ry="75"></ellipse>
+  <!-- phrasing background and border -->
+  <ellipse class="st2" cx="325" cy="208" rx="120" ry="125"></ellipse>
+  <ellipse class="st9" cx="325" cy="208" rx="120" ry="125"></ellipse>
+  <!-- heading background and border -->
+  <ellipse class="st3" cx="572" cy="141" rx="115" ry="65"></ellipse>
+  <ellipse class="st9" cx="572" cy="141" rx="115" ry="65"></ellipse>
+  <!-- sectioning background and border -->
+  <ellipse class="st4" cx="572" cy="283" rx="115" ry="65"></ellipse>
+  <ellipse class="st9" cx="572" cy="283" rx="115" ry="65"></ellipse>
+  <!-- metadata background -->
+  <ellipse class="st5" cx="192" cy="335" rx="150" ry="75"></ellipse>
+  <ellipse class="st12" cx="192" cy="335" rx="150" ry="75"></ellipse>
+  <!-- embedded background -->
+  <ellipse class="st8" cx="325" cy="210" rx="105" ry="40"></ellipse>
+  <ellipse class="st9" cx="325" cy="210" rx="105" ry="40"></ellipse>
+  <!-- text -->
+  <text transform="matrix(1 0 0 1 372 58)" class="st6 st7">Flow</text>
+  <text transform="matrix(1 0 0 1 516 146)" class="st6 st7">Heading</text>
+  <text transform="matrix(1 0 0 1 501 290)" class="st6 st7">Sectioning</text>
+  <text transform="matrix(1 0 0 1 134 348)" class="st6 st7">Metadata</text>
+  <text transform="matrix(1 0 0 1 70 172)" class="st6 st7">Interactive</text>
+  <text transform="matrix(1 0 0 1 265 153)" class="st6 st7">Phrasing</text>
+  <text transform="matrix(1 0 0 1 252 218)" class="st6 st7">Embedded</text>
+</svg>
+
+<h3>Some elements belong to zero categories</h3>
+
+<p>The following elements are not currently assigned to any of these categories. Their permitted usage is still fully defined in other areas of the specification:</p>
+
+<p><code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;dd&gt;</code>, <code>&lt;figcaption&gt;</code>, <code>&lt;source&gt;</code>, <code>&lt;track&gt;</code>, <code>&lt;caption&gt;</code>, <code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tfoot&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;optgroup&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;legend&gt;</code>, <code>&lt;summary&gt;</code></p>
+
+<h3>Some elements fall into multiple categories</h3>
+
+<p>For example, the <code>&lt;a&gt;</code> element can fall into several:</p>
+
+<ul>
+  <li>Flow content</li>
+  <li>Phrasing content</li>
+  <li>Interactive content (when it has an <code>href</code> attribute)</li>
+  <li>Palpable content (when it contains content users can perceive, like text or images)</li>
+</ul>
+
+<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 770 420" style="enable-background:new 0 0 770 420;" xml:space="preserve">
+  <title>Diagram showing content model categories overlapping</title>
+  <!-- main container -->
+  <ellipse class="st9" cx="385" cy="210" rx="375" ry="200"></ellipse>
+  <!-- interactive background and border -->
+  <ellipse class="st1" cx="192" cy="165" rx="150" ry="75"></ellipse>
+  <ellipse class="st9" cx="192" cy="165" rx="150" ry="75"></ellipse>
+  <!-- phrasing background and border -->
+  <ellipse class="st2" cx="325" cy="208" rx="120" ry="125"></ellipse>
+  <ellipse class="st9" cx="325" cy="208" rx="120" ry="125"></ellipse>
+  <!-- heading background and border -->
+  <ellipse class="st3" cx="572" cy="141" rx="115" ry="65"></ellipse>
+  <ellipse class="st9" cx="572" cy="141" rx="115" ry="65"></ellipse>
+  <!-- sectioning background and border -->
+  <ellipse class="st4" cx="572" cy="283" rx="115" ry="65"></ellipse>
+  <ellipse class="st9" cx="572" cy="283" rx="115" ry="65"></ellipse>
+  <!-- metadata background -->
+  <ellipse class="st5" cx="192" cy="335" rx="150" ry="75"></ellipse>
+  <ellipse class="st12" cx="192" cy="335" rx="150" ry="75"></ellipse>
+  <!-- embedded background -->
+  <ellipse class="st8" cx="325" cy="210" rx="105" ry="40"></ellipse>
+  <ellipse class="st9" cx="325" cy="210" rx="105" ry="40"></ellipse>
+  <!-- a element -->
+  <ellipse class="st10" cx="237" cy="162" rx="20" ry="20"></ellipse>
+  <ellipse class="st11" cx="237" cy="162" rx="20" ry="20"></ellipse>
+  <!-- text -->
+  <text transform="matrix(1 0 0 1 372 58)" class="st6 st7">Flow</text>
+  <text transform="matrix(1 0 0 1 516 146)" class="st6 st7">Heading</text>
+  <text transform="matrix(1 0 0 1 501 290)" class="st6 st7">Sectioning</text>
+  <text transform="matrix(1 0 0 1 134 348)" class="st6 st7">Metadata</text>
+  <text transform="matrix(1 0 0 1 70 172)" class="st6 st7">Interactive</text>
+  <text transform="matrix(1 0 0 1 265 153)" class="st6 st7">Phrasing</text>
+  <text transform="matrix(1 0 0 1 252 218)" class="st6 st7">Embedded</text>
+  <text transform="matrix(1 0 0 1 230 170)" class="st6 st7">a</text>
+</svg>
+
+<p>Let&rsquo;s take a quick look at some common category examples:</p>
+
+<hr>
+
+<h2>1. Flow content</h2>
+
+<p>Most elements that appear in the <code>&lt;body&gt;</code> belong to flow content. These elements form the main structure of the document.</p>
+
+<p>In the example below, the <code>&lt;div&gt;</code> and <code>&lt;p&gt;</code> are flow content, while <code>&lt;span&gt;</code> is phrasing content:</p>
+
+<pre><code><span class="highlight">&lt;div&gt;</span>
+  <span class="highlight">&lt;p&gt;Paragraph&lt;/p&gt;</span>
+  &lt;span&gt;Span&lt;/span&gt;
+<span class="highlight">&lt;/div&gt;</span></code></pre>
+
+<hr>
+
+<h2>2. Phrasing content</h2>
+
+<p>Phrasing elements represent text and the markup that appears within text. In most cases, only other phrasing content may appear inside them.</p>
+
+<p>In the example below, the <code>&lt;span&gt;</code> and <code>&lt;em&gt;</code> are phrasing elements. The <code>&lt;div&gt;</code> is a flow element, so it cannot be placed inside a phrasing element as shown here.</p>
+
+<pre><code><span class="highlight">&lt;span&gt;</span>
+  <span class="highlight">&lt;em&gt;Valid phrasing&lt;/em&gt;</span>
+  <s>&lt;div&gt;Non-conforming&lt;/div&gt;</s>
+<span class="highlight">&lt;/span&gt;</span></code></pre>
+
+<hr>
+
+<h2>3. Heading content</h2>
+
+<p>Heading content represents headings for sections of content.</p>
+
+<p>This category includes: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, <code>&lt;h6&gt;</code> and <code>&lt;hgroup&gt;</code> (when it contains at least one heading element).</p>
+
+<p>For accessibility, use HTML heading elements rather than styling text to look like headings. Avoid placing non-phrasing content inside them. Many screen readers allow users to navigate by heading to move efficiently through a page.</p>
+
+<p>In the example below, the <code>&lt;h1&gt;</code> is a heading. The bold text is only a visual style.</p>
+
+<pre><code><span class="highlight">&lt;h1&gt;This is a heading&lt;/h1&gt;</span>
+&lt;p&gt;&lt;b&gt;This is a visual style, not a heading&lt;/b&gt;&lt;/p&gt;
+</code></pre>
+
+<p>When headings are used inside sectioning elements like <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code>, they help express the structure of the document. Headings outside sectioning elements still provide meaningful navigation for users and assistive technologies, even if they do not contribute to a structured outline.</p>
+
+<pre><code>&lt;section&gt;
+  <span class="highlight">&lt;h1&gt;Heading inside a section&lt;/h1&gt;</span>
+&lt;/section&gt;
+</code></pre>
+
+<hr>
+
+<h2>4. Interactive content</h2>
+
+<p>Interactive content includes elements designed for user interaction. These elements are usually focusable and can be activated with the keyboard, mouse, touch, or assistive technologies.</p>
+
+<p>Examples include:</p>
+
+<pre><code>&lt;a href="#"&gt;Link&lt;/a&gt;
+&lt;button&gt;Button&lt;/button&gt;
+&lt;input type="text"&gt;
+&lt;select&gt;...&lt;/select&gt;
+&lt;textarea&gt;...&lt;/textarea&gt;
+&lt;details&gt;...&lt;/details&gt;
+&lt;audio controls&gt;&lt;/audio&gt;
+&lt;video controls&gt;&lt;/video&gt;
+&lt;img usemap="#mapname"&gt;
+</code></pre>
+
+<p>These elements are generally expected to:</p>
+
+<ul>
+  <li>be focusable (unless disabled or intentionally hidden)</li>
+  <li>support activation through keyboard and pointer</li>
+  <li>expose an interactive role to assistive technologies</li>
+</ul>
+
+<h3>Interactive elements cannot contain other interactive elements</h3>
+
+<p>Certain interactive elements, such as <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code>, do not allow other interactive controls as descendants. Nested controls can create conflicting focus and activation behaviour.</p>
+
+<p>These patterns are non-conforming:</p>
+
+<pre><code>&lt;a href="#"&gt;
+  <s>&lt;button&gt;Invalid nested button&lt;/button&gt;</s>
+&lt;/a&gt;
+
+&lt;button&gt;
+  <s>&lt;a href="#"&gt;Invalid nested link&lt;/a&gt;</s>
+&lt;/button&gt;
+</code></pre>
+
+<p>This pattern is also non-conforming because <code>tabindex</code> creates an additional focusable descendant:</p>
+
+<pre><code>&lt;a href="#"&gt;
+  <s>&lt;div tabindex="0"&gt;Focusable descendant&lt;/div&gt;</s>
+&lt;/a&gt;
+</code></pre>
+
+<p>Browsers may attempt to repair these structures, but behaviour is not consistent across browsers or assistive technologies.</p>
+
+<h3>Why this matters for accessibility</h3>
+
+<p>When controls are nested, users may experience:</p>
+
+<ul>
+  <li>unexpected focus order</li>
+  <li>duplicate or missing announcements from screen readers</li>
+  <li>activation issues (inner control triggers the outer control)</li>
+  <li>confusing hit targets on touch devices</li>
+</ul>
+
+<hr>
+
+<h2>Transparent content models</h2>
+
+<p>Some elements (such as <code>&lt;a&gt;</code> with an <code>href</code>) have a <strong>transparent content model</strong>.</p>
+
+<p>Transparent is not a content category. It is a rule that affects permitted content.</p>
+
+<p>Transparency means the element’s permitted content is determined by the context in which the element is used. In these cases, the parent element’s content model takes precedence.</p>
+
+<p>In the example below, the <code>&lt;a&gt;</code> element can contain a <code>&lt;div&gt;</code> as the parent <code>&lt;article&gt;</code> allows flow content:</p>
+
+<pre><code>&lt;article&gt;  <!-- flow container -->
+  &lt;a href="#"&gt;
+    &lt;div&gt;Permitted here (flow is allowed)&lt;/div&gt;
+  &lt;/a&gt;
+&lt;/article&gt;
+</code></pre>
+
+<p>In the example below, the <code>&lt;a&gt;</code> element cannot contain a <code>&lt;div&gt;</code> as the parent <code>&lt;span&gt;</code> allows phrasing content only:</p>
+
+<pre><code>&lt;span&gt;  <!-- phrasing container -->
+  &lt;a href="#"&gt;
+    <s>&lt;div&gt;Non-conforming here (div is flow, not phrasing)&lt;/div&gt;</s>
+  &lt;/a&gt;
+&lt;/span&gt;
+</code></pre>
+
+<p>Transparent models do not override other rules. For example, nested interactive elements remain non-conforming regardless of context.</p>
+
+<hr>
+
+<h2>Conformance, validity, and browser repair</h2>
+
+<p>When talking about HTML, the spec uses a few related terms:</p>
+
+<ul>
+  <li><strong>Conforming</strong>: The HTML follows all the rules. Nothing is out of place.</li>
+  <li><strong>Non-conforming</strong>: The HTML can still be loaded, but it breaks one or more rules.</li>
+  <li><strong>Invalid</strong>: The HTML is broken in a way that the browser cannot read without fixing it first.</li>
+</ul>
+
+<p>Browsers will usually try to “fix” invalid or non-conforming HTML so the page still shows.  
+This is called <strong>error recovery</strong> or <strong>browser repair</strong>.</p>
+
+<p>However, these repairs are not guaranteed or consistent. </p>
+
+<p>Screen readers and other assistive technologies may see a different structure than what the browser shows visually.</p>
+
+<p>For accessibility, it’s safest to write HTML that doesn’t rely on repair behaviour.</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>Content categories provide a mental model for understanding how elements behave.</p>
+
+<p>If you’re ever unsure, look up the element’s content model and permitted content in the HTML Living Standard. It’s the final source of truth for how HTML works.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
