@@ -119,7 +119,7 @@
 
 <p>The <code>&lt;blockquote&gt;</code> supports global attributes and the <code>cite</code> attribute:</p>
 
-<pre><code>&lt;blockquote <span class="highlight">cite="https://example.com</span>"&gt;
+<pre><code>&lt;blockquote <span class="highlight">cite="https://example.com"</span>&gt;
   ...
 &lt;/blockquote&gt;</code></pre>
 
@@ -127,15 +127,11 @@
 
 <p>This section links to guidance for authors and implementers. For everyday development, the author guidance is the most relevant.</p>
 
-<p>For <code>&lt;blockquote&gt;</code>, the spec states that ARIA roles could technically be applied but doing so is <strong>not recommended</strong>. The element already has a native meaning that is well supported by browsers and assistive technologies.</p>
-
-<p>In short: use <code>&lt;blockquote&gt;</code> with its default behaviour. Only consider ARIA when necessary, and only if you fully understand the implications.</p>
-
 <h3>7. DOM interface</h3>
 
 <p>This describes how the element behaves in the DOM. If you select the element with JavaScript, the DOM interface defines the properties and methods available to you.</p>
 
-<p>This is not essential for everyday HTML usage, but it is very useful when building custom elements or working with the Shadow DOM.</p>
+<p>This is not essential for everyday HTML usage, but it is very useful when building custom elements.</p>
 
 <h3>8. Notes and examples</h3>
 
@@ -143,15 +139,16 @@
 
 <hr>
 
-<h2>What is allowed inside other elements?</h2>
+<h2>Some examples in action</h2>
 
-<p>Now that you understand the structure of an element definition, you can apply this approach anywhere in the specification. The process is the same:</p>
+<p>We will now look at four examples and use the specification to determine:</p>
 
-<ol>
-  <li>Open the element in the spec.</li>
-  <li>Find the content model.</li>
-  <li>Check whether the child matches that model.</li>
-</ol>
+<ul>
+  <li>Can a <code>&lt;div&gt;</code> go inside an <code>&lt;h1&gt;</code>?</li>
+  <li>Can a <code>&lt;p&gt;</code> go inside a <code>&lt;ul&gt;</code>?</li>
+  <li>Can an <code>&lt;h2&gt;</code> go inside a <code>&lt;legend&gt;</code>?</li>
+  <li>Can a <code>&lt;div&gt;</code> go inside a <code>&lt;label&gt;</code>?</li>
+</ul>
 
 <hr>
 
@@ -164,13 +161,16 @@
 <h4>Step 2</h4>
 
 <p>Find the "Content model" section. It tells us what can go inside.</p>
+
+<h4>Step 2 result</h4>
+
 <p>For <code>&lt;h1&gt;</code> the content model is <code>phrasing content</code>.</p>
 
 <h4>Step 3</h4>
 
 <p>Check whether <code>&lt;div&gt;</code> is <a href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" target="_blank">phrasing content</a>.</p>
 
-<h4>Result</h4>
+<h4>Step 3 result</h4>
 
 <p><code>&lt;div&gt;</code> is not phrasing content. It is <a href="https://html.spec.whatwg.org/multipage/dom.html#flow-content" target="_blank">flow content</a>, which belongs to a different category.</p>
 
@@ -194,13 +194,15 @@
 
 <p>Find the "Content model" section. It tells us what can go inside.</p>
 
-<p>For <code>&lt;ul&gt;</code> the content model is: <code>zero or more &lt;li&gt; elements</code>.</p>
+<h4>Step 2 result</h4>
+
+<p>For <code>&lt;ul&gt;</code> the content model is: <code>Zero or more &lt;li&gt; and script-supporting elements</code>.</p>
 
 <h4>Step 3</h4>
 
 <p>Check whether <code>&lt;p&gt;</code> is an <code>&lt;li&gt;</code> element.</p> 
 
-<h4>Result</h4>
+<h4>Step 3 result</h4>
 
 <p><code>&lt;p&gt;</code> is a flow element, not a list item.</p>
 
@@ -224,13 +226,15 @@
 
 <p>Find the "Content model" section. It tells us what can go inside.</p> 
 
+<h4>Step 2 result</h4>
+
 <p>For <code>&lt;legend&gt;</code> the content model is: <code>phrasing content or heading content</code>.</p>
 
 <h4>Step 3</h4>
 
 <p>Check whether <code>&lt;h2&gt;</code> is heading content.</p>
 
-<h4>Result</h4> 
+<h4>Step 3 result</h4>
 
 <p>All <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> elements are heading content. <code>&lt;h2&gt;</code> matches one of the permitted content categories.</p> 
 
@@ -254,13 +258,15 @@
 
 <p>Find the "Content model" section. It tells us what can go inside.</p> 
 
+<h4>Step 2 result</h4>
+
 <p>For <code>&lt;label&gt;</code> the content model is: <code>phrasing content</code> with restrictions.</p>
 
 <h4>Step 3</h4>
 
 <p>Check whether <code>&lt;div&gt;</code> is phrasing content.</p> 
 
-<h4>Result</h4>
+<h4>Step 3 result</h4>
 
 <p>It is not. <code>&lt;div&gt;</code> is flow content. Flow content does not match the permitted phrasing content model.</p> 
 
@@ -279,6 +285,14 @@
 <p>The HTML specification is a powerful reference that describes exactly how each element can be used.</p>
 
 <p>You do not need to memorise every rule. You only need to know how to check the specification and confirm what a parent element is allowed to contain, especially when building components or reviewing generated markup.</p>
+
+<hr>
+
+<h2>Caveats</h2>
+
+<p>Examples 1, 2, and 4 are non-conforming according to the specification. Browsers will still parse this markup and construct a DOM. In some cases they may repair or rearrange elements (for example, auto-closing headings), and in other cases they may preserve the non-conforming structure (for example, a <code>&lt;p&gt;</code> inside a <code>&lt;ul&gt;</code>).</p>
+
+<p>This means the DOM may not match the intended structure, even though it renders. This can cause issues for accessibility tools and any system that relies on predictable, valid markup.</p>
 
   </main>
   <footer>
