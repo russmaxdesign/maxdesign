@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How can you tell what's allowed inside each HTML element? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A practical guide to reading the HTML Living Standard to check where elements can be used and what they are allowed to contain.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>How can you tell what's allowed inside each HTML element?</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2022-12-31">31 December 2022</time></p>
+
+<p>Modern development often sits above HTML. Developers work with frameworks, component systems, JSX, templates, and page builders. HTML can feel abstract or almost irrelevant.</p> 
+
+<p>But HTML is still the foundation. It is the layer that browsers render, that assistive technologies interpret, and that users interact with.</p>
+
+<p>Every developer and tester should understand how HTML elements can be used, so that the final HTML is well formed and valid.</p>
+
+<p>This avoids forcing browsers to repair invalid markup, which can lead to unpredictable behaviour and accessibility issues.</p>
+
+<p>The <a href="https://html.spec.whatwg.org/multipage/" target="_blank">HTML Living Standard</a> documents every element. This includes:</p>
+
+<ul>
+  <li>where elements can appear</li>
+  <li>what they are allowed to contain</li>
+  <li>which attributes they support</li>
+  <li>how they behave in the DOM</li>
+</ul>
+
+<hr>
+
+<h2>The <code>&lt;blockquote&gt;</code> element</h2>
+
+<p>We are going to use the <code>&lt;blockquote&gt;</code> element as an example. The goal is to understand how an element is documented and where to find the rules that matter.</p>
+
+<p>You can find the <code>&lt;blockquote&gt;</code> definition in the full list of elements under <a href="https://html.spec.whatwg.org/multipage/#toc-semantics" target="_blank">4. The elements of HTML</a>.</p>
+
+<p>You can also search in-browser with <kbd>Ctrl</kbd>+<kbd>F</kbd> or <kbd>Cmd</kbd>+<kbd>F</kbd>.</p>
+
+<p>When you find <code>&lt;blockquote&gt;</code> in the spec and select it, you will land on its definition: <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element" target="_blank">4.4.4 The blockquote element</a>.</p>
+
+<hr>
+
+<h2>How the <code>&lt;blockquote&gt;</code> is defined</h2>
+
+<p>Each element in the HTML specification is structured the same way. These sections explain how the element behaves, where it can be used, and what it can contain.</p>
+
+<h3>1. Categories</h3>
+
+<p>HTML content categories describe how elements fit into the document structure and how they relate to the elements around them.</p>
+
+<p>The "Categories" section lists all of the content categories that the element belongs to.</p>
+
+<p>The <code>&lt;blockquote&gt;</code> falls into two categories:</p>
+
+<ul>
+  <li>Flow content</li>
+  <li>Palpable content</li>
+</ul>
+
+<p>You can select each link in the specification to see a full list of elements that share that category.</p>
+
+<h3>2. Contexts in which this element can be used</h3>
+
+<p>This secction explains where the element may appear. Some elements are restricted to forms, lists, or tables. If an element is used outside an allowed context, the document becomes non-conforming.</p>
+
+<p>The <code>&lt;blockquote&gt;</code> can appear anywhere that flow content is expected. In practical terms, this means almost anywhere in the <code>&lt;body&gt;</code>.</p>
+
+<h3>3. Content model</h3>
+
+<p>This is one of the most important sections. It lists what can be placed <strong>inside</strong> the element.</p>
+
+<p>For example:</p>
+
+<ul>
+  <li><strong>Phrasing content only:</strong> no structural elements like <code>&lt;div&gt;</code> or <code>&lt;section&gt;</code>.</li>
+  <li><strong>Flow content:</strong> most structural elements are allowed, but nesting rules still apply.</li>
+  <li><strong>Transparent:</strong> allowed content depends on the parent’s rules.</li>
+</ul>
+
+<p>The <code>&lt;blockquote&gt;</code> accepts flow content as children.</p>
+
+<h3>4. Tag omission in text/html</h3>
+
+<p>This section describes where start or end tags may be left out. Some elements, like <code>&lt;li&gt;</code>, allow optional closing tags.</p>
+
+<p>The <code>&lt;blockquote&gt;</code> must include both:</p>
+
+<pre><code>&lt;blockquote&gt;&lt;/blockquote&gt;</code></pre>
+
+<h3>5. Content attributes</h3>
+
+<p>This lists inherited global attributes plus any element-specific attributes.</p>
+
+<p>The <code>&lt;blockquote&gt;</code> supports global attributes and the <code>cite</code> attribute:</p>
+
+<pre><code>&lt;blockquote <span class="highlight">cite="https://example.com</span>"&gt;
+  ...
+&lt;/blockquote&gt;</code></pre>
+
+<h3>6. Accessibility considerations</h3>
+
+<p>This section links to guidance for authors and implementers. For everyday development, the author guidance is the most relevant.</p>
+
+<p>For <code>&lt;blockquote&gt;</code>, the spec states that ARIA roles could technically be applied but doing so is <strong>not recommended</strong>. The element already has a native meaning that is well supported by browsers and assistive technologies.</p>
+
+<p>In short: use <code>&lt;blockquote&gt;</code> with its default behaviour. Only consider ARIA when necessary, and only if you fully understand the implications.</p>
+
+<h3>7. DOM interface</h3>
+
+<p>This describes how the element behaves in the DOM. If you select the element with JavaScript, the DOM interface defines the properties and methods available to you.</p>
+
+<p>This is not essential for everyday HTML usage, but it is very useful when building custom elements or working with the Shadow DOM.</p>
+
+<h3>8. Notes and examples</h3>
+
+<p>This section provides clarifications, edge cases, and examples that explain why certain rules exist.</p>
+
+<hr>
+
+<h2>What is allowed inside other elements?</h2>
+
+<p>Now that you understand the structure of an element definition, you can apply this approach anywhere in the specification. The process is the same:</p>
+
+<ol>
+  <li>Open the element in the spec.</li>
+  <li>Find the content model.</li>
+  <li>Check whether the child matches that model.</li>
+</ol>
+
+<hr>
+
+<h2>Example 1: Can a <code>&lt;div&gt;</code> go inside an <code>&lt;h1&gt;</code>?</h2>
+
+<h4>Step 1</h4>
+
+<p>Open the <a href="https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements" target="_blank">definition for <code>&lt;h1&gt;</code></a> in the HTML specification.</p>
+
+<h4>Step 2</h4>
+
+<p>Find the "Content model" section. It tells us what can go inside.</p>
+<p>For <code>&lt;h1&gt;</code> the content model is <code>phrasing content</code>.</p>
+
+<h4>Step 3</h4>
+
+<p>Check whether <code>&lt;div&gt;</code> is <a href="https://html.spec.whatwg.org/multipage/dom.html#phrasing-content-2" target="_blank">phrasing content</a>.</p>
+
+<h4>Result</h4>
+
+<p><code>&lt;div&gt;</code> is not phrasing content. It is <a href="https://html.spec.whatwg.org/multipage/dom.html#flow-content" target="_blank">flow content</a>, which belongs to a different category.</p>
+
+<h4>Conclusion</h4>
+
+<p>Categories must match. Because <code>&lt;div&gt;</code> is not phrasing content, it is not allowed inside <code>&lt;h1&gt;</code>:</p>
+
+<pre><code>&lt;h1&gt;
+  <s>&lt;div&gt;Not allowed&lt;/div&gt;</s>
+&lt;/h1&gt;</code></pre>
+
+<hr>
+
+<h2>Example 2: Can a <code>&lt;p&gt;</code> go inside a <code>&lt;ul&gt;</code>?</h2>
+
+<h4>Step 1</h4>
+
+<p>Open the <a href="https://html.spec.whatwg.org/multipage/grouping-content.html#the-ul-element" target="_blank">definition for <code>&lt;ul&gt;</code></a> in the HTML specification.</p>
+
+<h4>Step 2</h4>
+
+<p>Find the "Content model" section. It tells us what can go inside.</p>
+
+<p>For <code>&lt;ul&gt;</code> the content model is: <code>zero or more &lt;li&gt; elements</code>.</p>
+
+<h4>Step 3</h4>
+
+<p>Check whether <code>&lt;p&gt;</code> is an <code>&lt;li&gt;</code> element.</p> 
+
+<h4>Result</h4>
+
+<p><code>&lt;p&gt;</code> is a flow element, not a list item.</p>
+
+<h4>Conclusion</h4>
+
+<p>Because <code>&lt;ul&gt;</code> only allows <code>&lt;li&gt;</code> children, a <code>&lt;p&gt;</code> is not allowed:</p>
+
+<pre><code>&lt;ul&gt;
+  <s>&lt;p&gt;Not allowed&lt;/p&gt;</s>
+&lt;/ul&gt;</code></pre>
+
+<hr>
+
+<h2>Example 3: Can an <code>&lt;h2&gt;</code> go inside a <code>&lt;legend&gt;</code>?</h2>
+
+<h4>Step 1</h4>
+
+<p>Open the <a href="https://html.spec.whatwg.org/multipage/form-elements.html#the-legend-element" target="_blank">definition for <code>&lt;legend&gt;</code></a> in the HTML specification.</p> 
+
+<h4>Step 2</h4>
+
+<p>Find the "Content model" section. It tells us what can go inside.</p> 
+
+<p>For <code>&lt;legend&gt;</code> the content model is: <code>phrasing content or heading content</code>.</p>
+
+<h4>Step 3</h4>
+
+<p>Check whether <code>&lt;h2&gt;</code> is heading content.</p>
+
+<h4>Result</h4> 
+
+<p>All <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> elements are heading content. <code>&lt;h2&gt;</code> matches one of the permitted content categories.</p> 
+
+<h4>Conclusion</h4> 
+
+<p><code>&lt;h2&gt;</code> is allowed as a child of <code>&lt;legend&gt;</code>:</p>
+
+<pre><code>&lt;legend&gt;
+  &lt;h2&gt;Section title&lt;/h2&gt;
+&lt;/legend&gt;</code></pre>
+
+<hr>
+
+<h2>Example 4: Can a <code>&lt;div&gt;</code> go inside a <code>&lt;label&gt;</code>?</h2>
+
+<h4>Step 1</h4>
+
+<p>Open the <a href="https://html.spec.whatwg.org/multipage/forms.html#the-label-element" target="_blank">definition for <code>&lt;label&gt;</code></a> in the HTML specification.</p>
+
+<h4>Step 2</h4>
+
+<p>Find the "Content model" section. It tells us what can go inside.</p> 
+
+<p>For <code>&lt;label&gt;</code> the content model is: <code>phrasing content</code> with restrictions.</p>
+
+<h4>Step 3</h4>
+
+<p>Check whether <code>&lt;div&gt;</code> is phrasing content.</p> 
+
+<h4>Result</h4>
+
+<p>It is not. <code>&lt;div&gt;</code> is flow content. Flow content does not match the permitted phrasing content model.</p> 
+
+<h4>Conclusion</h4>
+
+<p><code>&lt;div&gt;</code> is not allowed as a child of <code>&lt;label&gt;</code>:</p>
+
+<pre><code>&lt;label&gt;
+  &lt;div&gt;Not allowed&lt;/div&gt;
+&lt;/label&gt;</code></pre>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>The HTML specification is a powerful reference that describes exactly how each element can be used.</p>
+
+<p>You do not need to memorise every rule. You only need to know how to check the specification and confirm what a parent element is allowed to contain, especially when building components or reviewing generated markup.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
