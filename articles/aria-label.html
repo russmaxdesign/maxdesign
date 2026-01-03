@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Is aria-label allowed on static elements? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="An examination of how aria-label behaves on static elements across browsers, and why real-world support differs from common assumptions.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+.menulist {
+  margin: 0;
+  list-style: none;
+  padding: 20px;
+  border: 2px solid red;
+}
+
+.example nav {
+  margin: 0;
+  padding: 1em;
+  border: 2px solid red;
+}
+
+table {
+margin: 1.5em 0 2em;
+}
+
+.example32,
+.fa {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid red;
+}
+
+.example32:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #000;
+}
+
+button .fa {
+  border: 2px solid #fff;
+}
+caption {
+  margin: 0;
+  font-size: 1em;
+  color: #514D4D;
+  line-height: 1.2;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Is <code>aria-label</code> allowed on static elements?</h1> 
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-01-03">03 January 2026</time></p>
+
+<p>There is a commonly held belief that the <code>aria-label</code> attribute “cannot” be used on static (or non-interactive) elements.</p>
+
+<p>However, there is nothing in the ARIA or HTML specifications that explicitly forbids the use of <code>aria-label</code> on these types of elements.</p>
+
+<p>As you will see below, there <em>are</em> legitimate cases where static elements use <code>aria-label</code>, either because they have a native role or because an appropriate ARIA <code>role</code> is applied.</p>
+
+<p>In this article, we examine how <code>aria-label</code> behaves on static elements in practice, across browsers and platforms, and why real-world behaviour is often more nuanced than common assumptions suggest.</p>
+
+<p>The examples include clearly flagged bad-practice patterns alongside legitimate use cases, to show what is exposed at the accessibility API level — and why exposure alone does not imply recommendation.</p>
+
+<hr>
+
+<h2>Different ways <code>aria-label</code> could be used</h2>
+
+<p>Let’s look at some methods that could be used to apply the <code>aria-label</code> to elements, and how they are rendered in different browsers accessibility trees.</p>
+
+<h3>Notes:</h3>
+
+<ol>
+  <li>Some of the examples below intentionally demonstrate poor or incomplete accessibility patterns. They are included only to test whether an accessible name is exposed, not to endorse their use in real-world interfaces.</li>
+  <li>Several of the examples shown here are also flagged as invalid HTML. This further reinforces why these patterns should not be used in production, even if an accessible name appears to be exposed.</li>
+  <li>These results show exposure at the accessibility API level. Actual announcement and user experience may vary by assistive technology.</li>
+  <li>“Pass” indicates that a name is exposed in the accessibility tree for the purposes of testing. It does not imply that the pattern is recommended or appropriate for production use.</li>
+</ol>
+
+<hr>
+
+<h2>Group 1. Interactive elements with <code>aria-label</code> (control group)</h2>
+
+<h3>1.1 No visible label - such as an icon inside a button</h3>
+
+<div class="example">
+  <button class="button" aria-label="Dismiss">
+    <img src="../assets/img/icon-cross.png" alt="">
+  </button>
+</div>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Dismiss"</span>&gt;
+  &lt;img src="icon-cross.png" alt=""&gt;
+&lt;/button&gt;</code></pre>
+
+<p>This method is acceptable if there is no visible text label available. For example, the button inludes an icon only.</p>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Dismiss" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>1.1 Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>1.2 Different accessible name to visible text label</h3>
+
+<div class="example">
+  <button class="button" aria-label="Add to cart">Add</button>
+</div>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Add to cart"</span>&gt;
+  Add
+&lt;/button&gt;</code></pre>
+
+<p>This method is acceptable if you wish to add additional context for assistive technologies. The accessible name should match the visible text label as closely as possible.</p>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Add to cart" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>1.2 Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Group 2. Static elements with native roles and <code>aria-label</code></h2>
+
+<div class="example">
+  <nav aria-label="Primary">
+  </nav>
+</div>
+
+<pre><code>&lt;nav <span class="highlight">aria-label="Primary"</span>&gt;
+&lt;/nav&gt;</code></pre>
+
+<p>This method is acceptable for adding names to landmark roles. These elements have native roles in place. This is especially important when there are more than one instance of the landmark in the document. For example, multiple <code>&lt;nav&gt;</code> elements.</p>
+
+<p>Pass criteria: The <code>&lt;nav&gt;</code> has a name "Primary" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>2. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Group 3. Static elements with ARIA roles and <code>aria-label</code></h2>
+
+<p>The examples below are a small selection of user-cases where a <code>role</code> and <code>aria-label</code> may be associated with a static element.</p>
+
+<h3>3.1. <code>role="menu"</code></h3>
+
+<div class="example">
+  <ul role="menu" aria-label="Actions" class="menulist">
+    <li role="menuitem">Item 1</li>
+    <li role="menuitem">Item 2</li>
+    <li role="menuitem">Item 3</li>
+  </ul>
+</div>
+
+<pre><code>&lt;ul <span class="highlight">role="menu"</span> <span class="highlight">aria-label="Actions"</span>&gt;
+  &lt;li role="menuitem"&gt;Item 1&lt;/li&gt;
+  &lt;li role="menuitem"&gt;Item 2&lt;/li&gt;
+  &lt;li role="menuitem"&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>This pattern is shown for demonstration purposes only and is not recommended in production in this current form, as it does not include the required interaction behaviour.</p>
+
+<p>However, it is valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA <code>role</code> is present.</p>
+
+<p>Pass criteria: The <code>&lt;ul&gt;</code> has a name "Actions" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>3.1. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.2. <code>role="img"</code></h3>
+
+<div class="example">
+  <span role="img" aria-label="Rating: 4 out of 5 stars">
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>☆</span>
+  </span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">role="img"</span> <span class="highlight">aria-label="Rating: 4 out of 5 stars"</span>&gt;
+  &lt;span&gt;★&lt;/span&gt;
+  &lt;span&gt;★&lt;/span&gt;
+  &lt;span&gt;★&lt;/span&gt;
+  &lt;span&gt;★&lt;/span&gt;
+  &lt;span&gt;☆&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+
+<p>This is an example of a legitimate use case for <code>role="img"</code> on a static element. It represents a single visual object composed of multiple characters.</p>
+
+<p>This is another valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA <code>role</code> is present.</p>
+
+<p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Rating: 4 out of 5 stars" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>3.2. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Group 4. Static elements with <code>aria-label</code> inside interactive elements (bad practice)</h2>
+
+<p>This pattern often appears when icon libraries are used. Developers may apply the accessible name to the icon element itself rather than the interactive control.</p>
+
+<div class="example">
+  <button class="button">
+    <i class="fa fa-close" aria-label="Close"></i>
+  </button>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;i class="fa fa-close" <span class="highlight">aria-label="Close"</span>&gt;&lt;/i&gt;
+&lt;/button&gt;</code></pre>
+
+<p>Font Awesome does not recommend applying accessible names to the <code>&lt;i&gt;</code> element itself. This example reflects a common developer mistake, not recommended usage.</p>
+
+<p>While this method provides an accessible name for the button via name-from-content, a more robust solution would be to add the <code>aria-label</code> directly to the <code>&lt;button&gt;</code> element.</p>
+
+<p>This pattern is also invalid HTML. For <code>&lt;i&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+
+<p>Pass criteria: The <code>&lt;button&gt;</code> has a name "Close" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>4. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Group 5. Static elements with no role, but <code>aria-label</code> (bad practice)</h2>
+
+<h3>5.1 Static elements without role or focus</h3>
+
+<div class="example">
+  <span aria-label="Contact" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">aria-label="Contact"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>This pattern is shown for demonstration purposes only and is not recommended in production.</p>
+
+<p>This pattern is also invalid HTML. For <code>&lt;span&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+
+<p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Contact" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>5.1. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 Static elements that can receive focus</h3>
+
+<div class="example">
+  <div tabindex="0" aria-label="Card" class="example32"></div>
+</div>
+
+<pre><code>&lt;div <span class="highlight">tabindex="0"</span> <span class="highlight">aria-label="Card"</span>&gt;
+&lt;/div&gt;</code></pre>
+
+<p>This pattern is shown for demonstration purposes only and is not recommended in production without additional work.</p>
+
+<p>This pattern is also invalid HTML. For <code>&lt;div&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+
+<p>Pass criteria: The <code>&lt;div&gt;</code> has a name "Card" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>5.2. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Group 6. Static elements with name explicitly suppressed (bad practice)</h2>
+
+<h3>6.1 Role suppresses semantics</h3>
+
+<div class="example">
+  <span role="presentation" aria-label="Help" class="example32"></span>
+</div>
+
+<pre><code>&lt;span <span class="highlight">role="presentation"</span> <span class="highlight">aria-label="Help"</span>&gt;
+&lt;/span&gt;</code></pre>
+
+<p>This pattern is shown for demonstration purposes only and is not recommended in production.</p>
+
+<p>This pattern is also invalid HTML. For <code>&lt;span&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+
+<p>Pass criteria: The <code>&lt;span&gt;</code> has a name "Help" that is presented in the accessibility tree.</p>
+
+<table>
+  <caption>6.1. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>6.2 Element using <code>aria-hidden</code></h3>
+
+<div class="example">
+  <i class="fa fa-delete" aria-hidden="true" aria-label="Delete"></i>
+</div>
+
+<pre><code>&lt;i  class="fa fa-delete" <span class="highlight">aria-hidden="true"</span> <span class="highlight">aria-label="Delete"</span>&gt;
+&lt;/i&gt;</code></pre>
+
+<p>This pattern also appears in icon-library usage. Developers may correctly hide the icon from assistive technologies using <code>aria-hidden="true"</code>, but then mistakenly add an <code>aria-label</code>, assuming it will still be announced to assistive technologies.</p>
+
+<p>Because the element is explicitly hidden from the accessibility tree, the accessible name is never exposed. This pattern does not provide an accessible name and should be avoided.</p>
+
+<p>This pattern is also invalid HTML. For <code>&lt;i&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+
+<p>Pass criteria: The element should have no name in the accessibility tree.</p>
+
+<table>
+  <caption>6.2. Results</caption>
+  <thead>
+    <tr>
+      <th>Operating System</th>
+      <th>Browser</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>MacOS</td>
+      <td>Safari</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>Chrome</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>FireFox</td>
+      <td><span class="pass">Pass</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>At the start of this article, we noted that neither the ARIA nor HTML specifications explicitly forbid the use of <code>aria-label</code> on static elements.</p>
+
+<p>The tests above help explain why this belief exists. In practice, modern browsers and assistive technologies often do surface accessible names from static elements, even if they have no explicit role.</p>
+
+<p>However, the fact that these patterns may appear to work does not mean they are robust, future-proof, or produce valid markup. Some of the demonstrated patterns rely on browser heuristics, may behave inconsistently across platforms or assistive technologies, and in several cases are also <b>invalid HTML</b>.</p>
+
+<p>For these reasons, when an accessible name is critical to understanding or operating an interface, <b>you should first aim to use native text or native semantic mechanisms</b>.</p>
+
+<p>If this is not possible, the name should be applied directly to a name-bearing element using well-supported, valid patterns.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
