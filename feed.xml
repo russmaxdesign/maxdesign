@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Wed, 31 Dec 2025 10:00:30 +1100</lastBuildDate>
-<pubDate>Wed, 31 Dec 2025 10:00:30 +1100</pubDate>
+<lastBuildDate>Mon, 05 Jan 2026 00:15:30 +1100</lastBuildDate>
+<pubDate>Mon, 05 Jan 2026 00:15:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,52 @@
 
 
 <!--  =========================================================  -->
-<!--  1. How can you tell what's allowed inside each HTML element?  -->
+<!--  1. Do screen readers announce “bullet” when a list uses list-style: none? -->
+<!--  =========================================================  -->
+<item>
+<title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
+<link>https://www.maxdesign.com.au/articles/lists.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/lists.html</guid>
+<pubDate>Mon, 05 Jan 2026 00:15:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>An explanation of why list-style: none removes bullet announcements in screen readers by tracing browser, accessibility tree, and screen reader behaviour.</description>
+<content:encoded>
+<![CDATA[
+<p>If you remove bullets from an unordered list using list-style: none, do screen readers still announce “bullet” before each list item?</p>
+<p>At first glance, this feels like a screen reader question. But the answer actually lives deeper in the browser pipeline:</p>
+<p>To explore this, we’ll start with a simple unordered list, then follow what happens as it moves through the browser, into the accessibility tree, and finally into screen reader output.</p>
+<p><a href="https://www.maxdesign.com.au/articles/lists.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Is aria-label allowed on static elements?               -->
+<!--  =========================================================  -->
+<item>
+<title>Is aria-label allowed on static elements?</title>
+<link>https://www.maxdesign.com.au/articles/aria-label.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-label.html</guid>
+<pubDate>Sat, 03 Jan 2026 10:00:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>An examination of how aria-label behaves on static elements across browsers, and why real-world support differs from common assumptions.</description>
+<content:encoded>
+<![CDATA[
+<p>In this article, we examine how aria-label behaves on static elements in practice, across browsers and platforms, and why real-world behaviour is often more nuanced than common assumptions suggest.</p>
+<p>The examples include clearly flagged bad-practice patterns alongside legitimate use cases, to show what is exposed at the accessibility API level — and why exposure alone does not imply recommendation.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-label.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  3. How can you tell what's allowed inside each HTML element?  -->
 <!--  =========================================================  -->
 <item>
 <title>How can you tell what's allowed inside each HTML element?</title>
@@ -44,7 +89,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. HTML content categories  -->
+<!--  4. HTML content categories                                 -->
 <!--  =========================================================  -->
 <item>
 <title>HTML content categories</title>
@@ -66,7 +111,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. People with reduced vision: technology settings and possible impacts  -->
+<!--  5. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -88,7 +133,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Tests for CSS generated content alternative text        -->
+<!--  6. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -109,7 +154,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Eight quick things to remember when using aria-owns     -->
+<!--  7. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -140,7 +185,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Why role="button" on a <button> does nothing            -->
+<!--  8. Why role="button" on a <button> does nothing            -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -162,7 +207,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Did you know some ARIA roles remove child semantics?    -->
+<!--  9. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -183,7 +228,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Tests for aria-labelledby and aria-describedby          -->
+<!--  10. Tests for aria-labelledby and aria-describedby          -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for aria-labelledby and aria-describedby</title>
@@ -199,51 +244,6 @@
 <p>aria-labelledby and aria-describedby do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
 <p>These 13 tests review how aria-labelledby and aria-describedby actually treat hidden content.</p>
 <p><a href="https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  9. More about screen reader speech queues                  -->
-<!--  =========================================================  -->
-<item>
-<title>More about screen reader speech queues</title>
-<link>https://www.maxdesign.com.au/articles/more-about-speech-queues.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/more-about-speech-queues.html</guid>
-<pubDate>Thu, 18 Dec 2025 06:30:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>This article explores a single example to show why they don’t always behave the way you might expect. In fact, we are going to look at one specific vehicle type - motor scooters.</description>
-<content:encoded>
-<![CDATA[
-<p>More about screen reader speech queues is a follow-up to Understanding screen reader speech queues, focusing on a single, deceptively simple interaction: typing. Using the “traffic and vehicles” analogy, the article explores why typing events don’t always result in predictable speech output — and why the “last character” isn’t always announced the way people expect.</p>
-<p><a href="https://www.maxdesign.com.au/articles/more-about-speech-queues.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. How aria-labelledby really works                        -->
-<!--  =========================================================  -->
-<item>
-<title>How aria-labelledby really works</title>
-<link>https://www.maxdesign.com.au/articles/aria-labelledby.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-labelledby.html</guid>
-<pubDate>Wed, 17 Dec 2025 08:30:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>ARIA</category>
-<category>Accessibility</category>
-<description>How aria-labelledby works, including naming precedence, multiple references, hidden content, broken IDs, and shadow DOM boundaries.</description>
-<content:encoded>
-<![CDATA[
-<p>You probably know how aria-labelledby works — but do you know how it behaves in these edge cases?</p>
-<p>aria-labelledby is one of the most useful accessibility features available — when you use it correctly.</p>
-<p>Most developers think they’ve got it figured out… until they run into quirks that catch them by surprise.</p>
-<p>This article dives into some areas that many people don’t fully understand, including how aria-labelledby behaves across Shadow DOM boundaries and how it works with hidden elements.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-labelledby.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
