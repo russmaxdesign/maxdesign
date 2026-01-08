@@ -87,26 +87,27 @@
 
 <p>The part before the slash is what’s shown visually - in this case, a magnifying glass icon.</p>
 
-<p>The part after the slash is intended to act as alternative text - in this case &ldquo;Search&rdquo;. </p>
+<p>As per the <a href="https://www.w3.org/TR/css-content-3/" target="_blank">CSS Generated Content Module Level 3 specification</a>, the slash alternative text is <b>intended as a replacement</b> for speech output - in this case the speech output should be &ldquo;Search&rdquo;.</p>
+
+<blockquote>
+  <p>If such alternative text is provided, it must be used for speech output instead.</p>
+</blockquote>
 
 <p>In supporting browsers, this alternative text may be exposed to the accessibility tree and could be used by assistive technologies in place of the visible CSS content.</p>
 
-<p>As you can see in the test results below, support is inconsistent across browsers and screen readers. There is no guarantee this text will participate in accessible name computation or be announced by a screen reader, even when it appears in the accessibility tree.</p>
+<p>Let&rsquo;s look at four variations:</p>
+
+<hr>
 
 <h2>Test criteria:</h2>
 
-<ol>
-  <li>Is the <b>generated content</b> announced for assistive technologies when the element receives focus?</li>
-  <li>Is the generated content <b>alternative text</b> announced for assistive technologies when the element receives focus?</li>
-</ol>
+<p>For these tests, “announced” means that the exact string (for example, “Visible generated content” or “Hello world”) is spoken when the block receives focus. Partial or generic announcements like “and one other item” are treated as failures.</p>
 
-<p>For these tests, “announced” means that the exact string (for example, “Visible generated content” or “Hello world”) is spoken when the block receives keyboard focus (such as via the <kbd>TAB</kbd> key). Partial or generic announcements like “and one other item” are treated as failures.</p>
+<p>These tests distinguish between:</p>
 
-<h3>Notes</h3>
 <ul>
-  <li>Each block is <code>tabindex="0"</code> for easy focus testing.</li>
-  <li>Generated text is from <code>::after</code> pseudo-elements.</li>
-  <li>The part after <code>/</code> is the alternative text for assistive technologies.</li>
+  <li>Keyboard focus navigation (e.g. using the <kbd>TAB</kbd> key)</li>
+  <li>Screen reader reading navigation (e.g. line-by-line or virtual cursor navigation)</li>
 </ul>
 
 <hr>
@@ -150,13 +151,13 @@
       <td>macOS</td>
       <td>Firefox</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Safari</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
@@ -201,7 +202,8 @@
 
 <ul>
   <li>2.1: Generated content should not be announced (left blank).</li>
-  <li>2.2: "Hello world" alternative text should be announced.</li>
+  <li>2.2: "Hello world" alternative text should be announced when navigating via keyboard focus (TAB).</li>
+  <li>2.3: "Hello world" alternative text should be announced when navigating line-by-line using a screen reader.</li>
 </ul>
 
 <table>
@@ -213,6 +215,7 @@
       <th>Screen reader</th>
       <th>2.1</th>
       <th>2.2</th>
+      <th>2.3</th>
     </tr>    
   </thead>
   <tbody>
@@ -222,26 +225,32 @@
       <td>VoiceOver</td>
       <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Firefox</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Safari</td>
       <td>VoiceOver</td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="fail">FAIL</span></td>
       <td><span class="fail">FAIL</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>NVDA</td>
       <td><span class="pass">PASS</span></td>
+      <td><span class="fail">FAIL</span></td>
       <td><span class="fail">FAIL</span></td>
     </tr>
     <tr>
@@ -250,11 +259,15 @@
       <td>NVDA</td>
       <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
@@ -262,6 +275,7 @@
       <td>Windows</td>
       <td>Firefox</td>
       <td>JAWS</td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="fail">FAIL</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
@@ -283,8 +297,9 @@
 <h4>Pass criteria:</h4>
 
 <ul>
-  <li>3.1: "Visible generated content" should be announced.</li>
-  <li>3:2: Alternative text should not be announced (left blank).</li>
+  <li>3.1: "Visible generated content" should not be announced. Even though the value is blank, it is still considered alternative text as the slash and quotes are present.</li>
+  <li>3.2: No generated or alternative text should be announced when navigating via keyboard focus (TAB).</li>
+  <li>3.3: No generated or alternative text should be announced when navigating line-by-line using a screen reader.</li>
 </ul>
 
 <table>
@@ -296,57 +311,69 @@
       <th>Screen reader</th>
       <th>3.1</th>
       <th>3.2</th>
-    </tr>    
+      <th>3.3</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
       <td>macOS</td>
       <td>Chrome</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Firefox</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Safari</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>NVDA</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
       <td>Firefox</td>
       <td>NVDA</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>JAWS</td>
       <td><span class="pass">PASS</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
       <td>Firefox</td>
       <td>JAWS</td>
-      <td><span class="fail">FAIL</span></td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
     </tr>
   </tbody>
 </table>
@@ -365,10 +392,11 @@
 
 <h4>Pass criteria:</h4>
 
-<ol type="a">
-  <li>"Visible generated content" should be announced.</li>
-  <li>"Hello world" alternative text should be announced.</li>
-</ol>
+<ul>
+  <li>4.1: "Visible generated content" should not be announced because the alternative text replaces this content.</li>
+  <li>4.2: "Hello world" alternative text should be announced when navigating via keyboard focus (TAB).</li>
+  <li>4.3: "Hello world" alternative text should be announced when navigating line-by-line using a screen reader.</li>
+</ul>
 
 <table>
   <caption>Results</caption>
@@ -377,8 +405,9 @@
       <th>OS</th>
       <th>Browser</th>
       <th>Screen reader</th>
-      <th>3.1</th>
-      <th>3.2</th>
+      <th>4.1</th>
+      <th>4.2</th>
+      <th>4.3</th>
     </tr>    
   </thead>
   <tbody>
@@ -386,27 +415,33 @@
       <td>macOS</td>
       <td>Chrome</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Firefox</td>
       <td>VoiceOver</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>macOS</td>
       <td>Safari</td>
       <td>VoiceOver</td>
+      <td><span class="pass">FAIL</span></td>
       <td><span class="fail">FAIL</span></td>
       <td><span class="fail">FAIL</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>NVDA</td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="fail">FAIL</span></td>
       <td><span class="fail">FAIL</span></td>
     </tr>
@@ -414,21 +449,26 @@
       <td>Windows</td>
       <td>Firefox</td>
       <td>NVDA</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
+
+
     <tr>
       <td>Windows</td>
       <td>Chrome</td>
       <td>JAWS</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
     <tr>
       <td>Windows</td>
       <td>Firefox</td>
       <td>JAWS</td>
-      <td><span class="fail">FAIL</span></td>
+      <td><span class="pass">PASS</span></td>
+      <td><span class="pass">PASS</span></td>
       <td><span class="pass">PASS</span></td>
     </tr>
   </tbody>
@@ -438,26 +478,22 @@
 
 <h2>Summary of findings</h2>
 
-<p>In the engines tested, CSS-generated alternative text often appears too late in the rendering and accessibility pipelines to reliably participate in accessible name computation. In many cases, announcements depend on assistive technology heuristics rather than a predictable browser implementation.</p>
+<p>As support is still slightly inconsistent across browser and screen reader combinations, this syntax should probably be treated as experimental. For important information, continue to use semantic HTML and ARIA, and do not rely on CSS-generated content as the sole mechanism for accessibility.</p>
 
-<p>Based on these results, the CSS <code>content</code> alternative text syntax is not reliable enough to be used as a primary accessibility mechanism.</p> 
+<hr>
+
+<h2>Footnotes</h2>
 
 <ul>
-  <li><strong>Support is highly inconsistent.</strong> No browser and screen reader combination passed all tests. Even the most successful stacks produced a mix of passes and fails across the four examples.</li>
-  <li><strong>Presence in the accessibility tree does not guarantee speech.</strong> In several cases (for example, macOS Firefox and Safari with VoiceOver), generated content and alternative text were exposed to the accessibility tree, but VoiceOver announced only a generic message such as “and one other item” instead of the actual text.</li>
-  <li><strong>Alt-only content is the least-bad pattern, but still fragile.</strong> Example&nbsp;2 (no visible text, alt text only) worked in some browser and screen reader combinations, but failed in others. It cannot be relied on for critical information.</li>
-  <li><strong>Visible + alt together is the most fragile.</strong> Example&nbsp;4 (visible text and alternative text) almost never produced both expected announcements. In many cases only one string, or neither, was spoken.</li>
-  <li><strong>Some stacks fail completely.</strong> macOS Safari with VoiceOver did not announce generated content or alternative text in any test.</li>
-  <li><strong>Recommendation.</strong> Treat this syntax as experimental. For important information, continue to use semantic HTML and ARIA. Do not rely on CSS-generated content as the sole mechanism for accessibility.</li> 
+  <li>08/02/2026: Tests 3.1 and 4.1 were updated to align with the CSS specification’s replacement model for alternative text. The results were adjusted accordingly.</li>
+  <li>08/02/2026: Additional tests added to determine different navigation methods.</li>
 </ul>
 
 <hr>
 
 <h2>Disclaimer</h2>
 
-<p>Test results involving operating systems, browsers, and assistive technologies must be interpreted with care. There are many moving parts — OS versions, browser engines, assistive technology configuration, and even AT verbosity settings — which makes exact replication extremely difficult. These results reflect the versions and conditions listed, with screen readers kept as close to default “manufacturer settings” as possible to support reasonable reproducibility.</p>
-
-<p>Despite these variables, the consistency of failures across multiple stacks provides meaningful evidence that this feature should be treated as experimental until interoperability improves.</p>
+<p>Test results involving operating systems, browsers, and assistive technologies should be interpreted with care. Behaviour can vary across versions, browser engines, and assistive technology settings, even when default configurations are used.</p>
 
 <div class="further-reading">
   <h2>Related articles</h2>

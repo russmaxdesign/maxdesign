@@ -226,11 +226,11 @@
 <p>And in Firefox, the list now this looks something like:</p>
 
 <pre><code>list: ""
-  listitem: "• Red"
+  listitem: "Red"
     text leaf: "Red"
-  listitem: "• Green"
+  listitem: "Green"
     text leaf: "Green"
-  listitem: "• Blue"
+  listitem: "Blue"
     text leaf: "Blue"</code></pre>
 
 <hr>
@@ -244,8 +244,7 @@
 <h3>VoiceOver</h3>
 
 <ul>
-  <li><code>&lt;ul&gt;</code>: &ldquo;List 3 items&rdquo;</li>
-  <li>First <code>&lt;li&gt;</code>: &ldquo;Red 1 of 3&rdquo;</li>
+  <li>First <code>&lt;li&gt;</code>: &ldquo;Red&rdquo;</li>
 </ul>
 
 <h3>NVDA</h3>
@@ -278,6 +277,12 @@
 <h2>Caveats</h2>
 
 <p>This article describes observed browser behaviour using Chrome and Firefox as examples, rather than defining requirements of the HTML or CSS specifications.</p>
+
+<hr>
+
+<h2>Footnotes</h2>
+
+<p><b>07/02/2026</b>: This article was updated to reflect Safari + VoiceOver behaviour, where applying <code>list-style: none</code> removes list semantics entirely due to a WebKit design decision. The earlier example showing list announcements does not apply in that configuration.</p>
 
   </main>
   <footer>
