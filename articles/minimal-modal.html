@@ -39,47 +39,47 @@
 
 <p>In this article, we’ll look at two small experiments that explore what the platform can already do, and what small enhancements can improve the experience for real users.</p>
 
-<h3 class="h4">Option 1: “what is the minimum needed for a modal to work?”</h3>
+<h2 class="h4">Option 1: “what is the minimum needed for a modal to work?”</h2>
 
 <p>This example shows the minimum required for a modal dialog to work using native HTML. This uses the new dialog element and some experimental attributes - just to see how lean we can go! Focus moves to the first focusable element inside the dialog, which is one expected method.</p>
 
-<h3 class="h4">Option 2: “what is the minimum we can do to make this modal easier to understand for real users?”</h3>
+<h2 class="h4">Option 2: “what is the minimum we can do to make this modal easier to understand for real users?”</h2>
 
 <p>This example adds a small amount of JavaScript to move focus to the dialog heading instead. In user testing, this provided better context for screen reader users before they chose to interact with or close the modal. Again, we are still focusing on lean and experimental, not for real world use.</p>
 
 <hr>
 
-<h2>Option 1</h2>
+<h2>Option 1: Minimal version</h2>
 
-<p><a href="https://intopia.github.io/exercise/testing-modal-minimal.html" target="_blank">Option 1 demo</a></p>
+<p><a class="button" href="https://intopia.github.io/exercise/testing-modal-minimal.html" target="_blank">Option 1 demo</a></p>
 
 <h3>1. Open button</h3>
 
-<pre><code>&lt;button type="button" commandfor="demo-dialog" command="show-modal"&gt;
+<pre><code>&lt;button <span class="highlight">commandfor="demo-dialog"</span> <span class="highlight">command="show-modal"</span>&gt;
   Open modal
 &lt;/button&gt;</code></pre>
 
 <p><code>commandfor="demo-dialog"</code> links the button to the element with <code>id="demo-dialog"</code>. It tells the browser which element the button will control.</p>
 
-<p>(<a href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-commandfor" target="_blank">More information on <code>commandfor</code></a>).</p>
+<p><a class="external" href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-commandfor" target="_blank">More information on <code>commandfor</code></a></p>
 
-<p><code>command="show-modal"</code> tells the browser what to do to that element. For a <code>&lt;dialog&gt;</code>, show-modal maps to opening it as a modal (equivalent to dialog.showModal()), so the browser handles the modal behaviour for you.</p>
+<p><code>command="show-modal"</code> tells the browser what to do to that element. For a <code>&lt;dialog&gt;</code>, <code>show-modal</code> maps to opening it as a modal (equivalent to <code>dialog.showModal()</code>), so the browser handles the modal behaviour for you.</p>
 
-<p>(<a href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-command" target="_blank">More information on <code>command</code></a>).</p>
+<p><a class="external" href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-command" target="_blank">More information on <code>command</code></a></p>
 
 <h3>2. The dialog container</h3>
 
-<pre><code>&lt;dialog id="demo-dialog" aria-labelledby="dialog-title"&gt;</code></pre>
+<pre><code>&lt;dialog id="demo-dialog" <span class="highlight">aria-labelledby="dialog-title"</span>&gt;</code></pre>
 
-<p>The <code>&lt;dialog&gt;</code> is a native dialog element, so you do not need <code>role="dialog"</code>.</p>
+<p>The <code>&lt;dialog&gt;</code> is a native dialog element, so you do not need <code>role="dialog"</code>. It has an id of <code>demo-dialog</code>, so this is the element affected by the button.</p>
 
-<p>(<a href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element" target="_blank">More information on the <code>&lt;dialog&gt;</code> element</a>).</p>
+<p><code>aria-labelledby</code> gives the dialog an accessible name by referencing the visible text in the modal heading.</p>
 
-<p><code>aria-labelledby</code> gives the dialog an accessible name by referencing visible text in the page, which is still useful even if focus is moved to the heading.</p>
+<p><a class="external" href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element" target="_blank">More information on the <code>&lt;dialog&gt;</code> element</a></p>
 
 <h3>3. Close button</h3>
 
-<pre><code>&lt;button type="button" commandfor="demo-dialog" command="close"&gt;
+<pre><code>&lt;button <span class="highlight">commandfor="demo-dialog"</span> <span class="highlight">command="close"</span>&gt;
   Close
 &lt;/button&gt;</code></pre>
 
@@ -88,6 +88,8 @@
 <p><code>command="close"</code> tells the browser to close the dialog (equivalent to <code>dialog.close()</code>), again without needing custom scripting.</p>
 
 <p>This keeps open and close symmetrical, readable, and declarative.</p>
+
+<p>Focus will return the original button on the page.</p>
 
 <h3>4. Dialog minimal styling</h3>
 
@@ -110,25 +112,25 @@
 
 <p><code>dialog::backdrop</code> styles the browser-provided backdrop for modal dialogs. This darkens the page and helps users understand that the dialog is the active layer.</p>
 
-<p>(<a href="https://drafts.csswg.org/css-position-4/#backdrop" target="_blank">More information on <code>backdrop</code></a>).</p>
+<p><a class="external" href="https://drafts.csswg.org/css-position-4/#backdrop" target="_blank">More information on <code>backdrop</code></a></p>
 
 <hr>
 
-<h2>Option 2</h2>
+<h2>Option 2: Slightly enhanced version</h2>
 
-<p><a href="https://intopia.github.io/exercise/testing-modal-enhanced.html" target="_blank">Option 2 demo</a></p>
+<p><a class="button" href="https://intopia.github.io/exercise/testing-modal-enhanced.html" target="_blank">Option 2 demo</a></p>
 
 <h3>6. The modal heading</h3>
 
-<pre><code>&lt;h2 id="dialog-title" tabindex="-1"&gt;
+<pre><code>&lt;h2 id="dialog-title" <span class="highlight">tabindex="-1"</span>&gt;
   Dialog heading
 &lt;/h2&gt;</code></pre>
 
-<p>We will send focus to this heading to provide context for the modal.</p>
+<p>For the enhanced version, we will send focus to this heading to provide context for the modal.</p>
 
-<p>This is preferred to sending focus to a focusable element that may not provide enough context for the modal or its purpose.</p>
+<p>User testing has shown that this is a better solution than sending focus to a focusable element within the modal. Often, these focusable elements do not provide enough context for the modal or identify its purpose.</p>
 
-<p><code>tabindex="-1"</code> makes the heading programmatically focusable but keeps it out of the normal Tab order. This is ideal when you want focus to land here once, on open, but not become an extra Tab stop during interaction.</p>
+<p><code>tabindex="-1"</code> makes the heading programmatically focusable but keeps it out of the normal <kbd>TAB</kbd> order. This is ideal when you want focus to land here once, on open, but not become an extra <kbd>TAB</kbd> stop during interaction.</p>
 
 <h3>7. A tiny script</h3>
 
@@ -172,8 +174,6 @@
 
 <h2>Conclusion</h2>
 
-<p>What do you think? Could it be simpler? Would you add additional enhancements?</p>
-
 <p>This article focuses on what is required for a modal to work, and what can be added to make it easier to understand for real users.</p>
 
 <p>If you’ve been building modals with large amounts of JavaScript and ARIA, it may be worth revisiting how much the platform now provides for free.</p>
@@ -186,7 +186,7 @@
 
 <ul>
   <li>The examples in this article use the commandfor and command attributes, which are still experimental and not yet supported in all browsers. They are included here to explore what the platform is beginning to make possible, rather than as a ready-to-ship solution.</li>
-  <li>The term “minimum” focuses on moving away from complex markup and JavaScript, to explore what is possible using native HTML elements as the primary mechanism.<li>
+  <li>The term “minimum” focuses on moving away from complex markup and JavaScript, to explore what is possible using native HTML elements as the primary mechanism.</li>
   <li>This article does not make any claims about accessibility or support in various assistive technologies. It is literally an experiment in HTML markup.</li>
 </ul>
 
