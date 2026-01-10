@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What is the minimum markup needed to create a modal? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A practical look at the minimum HTML needed to create a modal dialog, with an optional enhancement based on real user testing.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>What is the minimum markup needed to create a modal?</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-01-10">10 January 2026</time></p>
+
+<p>Is it possible to build a modal dialog without any JavaScript at all?</p>
+
+<p>In this article, we’ll look at two small experiments that explore what the platform can already do, and what small enhancements can improve the experience for real users.</p>
+
+<h3 class="h4">Option 1: “what is the minimum needed for a modal to work?”</h3>
+
+<p>This example shows the minimum required for a modal dialog to work using native HTML. This uses the new dialog element and some experimental attributes - just to see how lean we can go! Focus moves to the first focusable element inside the dialog, which is valid and expected behaviour.</p>
+
+<h3 class="h4">Option 2: “what is the minimum we can do to make this modal easier to understand for real users?”</h3>
+
+<p>This example adds a small amount of JavaScript to move focus to the dialog heading instead. In user testing, this provided better context for screen reader users before they chose to interact with or close the modal. Again, we are still focusing on lean and experimental, not for real world use.</p>
+
+<hr>
+
+<h2>Option 1</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-modal-minimal.html" target="_blank">Option 1 demo</a></p>
+
+<h3>1. Open button</h3>
+
+<pre><code>&lt;button type="button" commandfor="demo-dialog" command="show-modal"&gt;
+  Open modal
+&lt;/button&gt;</code></pre>
+
+<p><code>commandfor="demo-dialog"</code> links the button to the element with <code>id="demo-dialog"</code>. It tells the browser which element the button will control.</p>
+
+<p>(<a href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-commandfor" target="_blank">More information on <code>commandfor</code></a>).</p>
+
+<p><code>command="show-modal"</code> tells the browser what to do to that element. For a <code>&lt;dialog&gt;</code>, show-modal maps to opening it as a modal (equivalent to dialog.showModal()), so the browser handles the modal behaviour for you.</p>
+
+<p>(<a href="https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-command" target="_blank">More information on <code>command</code></a>).</p>
+
+<h3>2. The dialog container</h3>
+
+<pre><code>&lt;dialog id="demo-dialog" aria-labelledby="dialog-title"&gt;</code></pre>
+
+<p>The <code>&lt;dialog&gt;</code> is a native dialog element, so you do not need <code>role="dialog"</code>.</p>
+
+<p>(<a href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element" target="_blank">More information on the <code>&lt;dialog&gt;</code> element</a>).</p>
+
+<p><code>aria-labelledby</code> gives the dialog an accessible name by referencing visible text in the page, which is still useful even if focus is moved to the heading.</p>
+
+<h3>3. Close button</h3>
+
+<pre><code>&lt;button type="button" commandfor="demo-dialog" command="close"&gt;
+  Close
+&lt;/button&gt;</code></pre>
+
+<p><code>commandfor="demo-dialog"</code> points to the same dialog element as the open button.</p>
+
+<p><code>command="close"</code> tells the browser to close the dialog (equivalent to <code>dialog.close()</code>), again without needing custom scripting.</p>
+
+<p>This keeps open and close symmetrical, readable, and declarative.</p>
+
+<h3>4. Dialog minimal styling</h3>
+
+<pre><code>dialog {
+  border: 1px solid #000;
+  border-radius: 0.3em;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+  padding: 2.5rem 2rem 2rem;
+  max-width: 32rem;
+  width: calc(100% - 2rem);
+}</code></pre>
+
+<p>This is purely visual. It makes the dialog boundary obvious and gives it a simple “floating surface” look. You can replace all of this with your own styles without affecting the dialog behaviour</p>
+
+<h3>5. Backdrop</h3>
+
+<pre><code>dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}</code></pre>
+
+<p><code>dialog::backdrop</code> styles the browser-provided backdrop for modal dialogs. This darkens the page and helps users understand that the dialog is the active layer.</p>
+
+<p>(<a href="https://drafts.csswg.org/css-position-4/#backdrop" target="_blank">More information on <code>backdrop</code></a>).</p>
+
+<hr>
+
+<h2>Option 2</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-modal-enhanced.html" target="_blank">Option 2 demo</a></p>
+
+<h3>6. The modal heading</h3>
+
+<pre><code>&lt;h2 id="dialog-title" tabindex="-1"&gt;
+  Dialog heading
+&lt;/h2&gt;</code></pre>
+
+<p>We will send focus to this heading to provide context for the modal.</p>
+
+<p>This is preferred to sending focus to a focusable element that may not provide enough context for the modal or its purpose.</p>
+
+<p><code>tabindex="-1"</code> makes the heading programmatically focusable but keeps it out of the normal Tab order. This is ideal when you want focus to land here once, on open, but not become an extra Tab stop during interaction.</p>
+
+<h3>7. A tiny script</h3>
+
+<pre><code>&lt;script&gt;
+  const dialog = document.getElementById('demo-dialog');
+  const title = document.getElementById('dialog-title');
+
+  dialog.addEventListener('toggle', () => {
+    if (dialog.open) {
+      title.focus();
+    }
+  });
+&lt;/script&gt;</code></pre>
+
+<p>This script looks for the heading via the <code>dialog-title</code> ID and sends focus to this element.</p>
+
+<h3>8. Some optional focus CSS</h3>
+
+<pre><code>#dialog-title:focus,
+#dialog-title:focus-visible {
+  outline: 2px dotted #000;
+  animation: fade 3s forwards;
+}
+
+@keyframes fade {
+  0% {
+    background-color: #FFFF00;
+    outline-color: #000;
+  }
+  100% {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+}</code></pre>
+
+<p>This CSS is optional and included as a teaching aid.</p>
+
+<p>When focus is moved to the heading (especially if it has <code>tabindex="-1"</code>), there is no default visible focus style. The brief highlight makes the focus move obvious, then fades away so it does not look like a permanent UI state.</p>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>What do you think? Could it be simpler? Would you add additional enhancements?</p>
+
+<p>This article focuses on what is required for a modal to work, and what can be added to make it easier to understand for real users.</p>
+
+<p>If you’ve been building modals with large amounts of JavaScript and ARIA, it may be worth revisiting how much the platform now provides for free.</p>
+
+<p>What do you think? Could it be simpler? Would you add additional enhancements?</p>
+
+<hr>
+
+<h2>Caveats</h2>
+
+<ul>
+  <li>The examples in this article use the commandfor and command attributes, which are still experimental and not yet supported in all browsers. They are included here to explore what the platform is beginning to make possible, rather than as a ready-to-ship solution.</li>
+  <li>The term “minimum” focuses on moving away from complex markup and JavaScript, to explore what is possible using native HTML elements as the primary mechanism.<li>
+  <li>This article does not make any claims about accessibility or support in various assistive technologies. It is literally an experiment in HTML markup.</li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
+
