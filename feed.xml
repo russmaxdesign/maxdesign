@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Mon, 05 Jan 2026 00:15:30 +1100</lastBuildDate>
-<pubDate>Mon, 05 Jan 2026 00:15:30 +1100</pubDate>
+<lastBuildDate>Sat, 10 Jan 2026 06:40:30 +1100</lastBuildDate>
+<pubDate>Sat, 10 Jan 2026 06:40:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,30 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Do screen readers announce “bullet” when a list uses list-style: none? -->
+<!--  1. What is the minimum markup needed to create a modal?    -->
+<!--  =========================================================  -->
+<item>
+<title>What is the minimum markup needed to create a modal?</title>
+<link>https://www.maxdesign.com.au/articles/minimal-modal.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/minimal-modal.html</guid>
+<pubDate>Sat, 10 Jan 2026 06:40:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>A practical look at the minimum HTML needed to create a modal dialog, with an optional enhancement based on real user testing.</description>
+<content:encoded>
+<![CDATA[
+<p>Is it possible to build a modal dialog without any JavaScript at all? In this article, we’ll look at two small experiments that explore what the platform can already do, and what small enhancements can improve the experience for real users.</p>
+<p>Option 1: what is the minimum needed for a modal to work?</p>
+<p>Option 2: what is the minimum we can do to make this modal easier to understand for real users?</p>
+<p><a href="https://www.maxdesign.com.au/articles/minimal-modal.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Do screen readers announce “bullet” when a list uses list-style: none? -->
 <!--  =========================================================  -->
 <item>
 <title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
@@ -46,7 +69,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Is aria-label allowed on static elements?               -->
+<!--  3. Is aria-label allowed on static elements?               -->
 <!--  =========================================================  -->
 <item>
 <title>Is aria-label allowed on static elements?</title>
@@ -68,7 +91,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. How can you tell what's allowed inside each HTML element?  -->
+<!--  4. How can you tell what's allowed inside each HTML element?  -->
 <!--  =========================================================  -->
 <item>
 <title>How can you tell what's allowed inside each HTML element?</title>
@@ -89,7 +112,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. HTML content categories                                 -->
+<!--  5. HTML content categories                                 -->
 <!--  =========================================================  -->
 <item>
 <title>HTML content categories</title>
@@ -111,7 +134,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. People with reduced vision: technology settings and possible impacts  -->
+<!--  6. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -133,7 +156,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Tests for CSS generated content alternative text        -->
+<!--  7. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -154,7 +177,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Eight quick things to remember when using aria-owns     -->
+<!--  8. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -185,7 +208,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Why role="button" on a <button> does nothing            -->
+<!--  9. Why role="button" on a <button> does nothing            -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -207,7 +230,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Did you know some ARIA roles remove child semantics?    -->
+<!--  10. Did you know some ARIA roles remove child semantics?    -->
 <!--  =========================================================  -->
 <item>
 <title>Did you know some ARIA roles remove child semantics?</title>
@@ -222,28 +245,6 @@
 <![CDATA[
 <p>Some ARIA roles introduce an entirely new semantic model, replacing native HTML structure and removing child semantics. This article explores where that behaviour is defined, how it affects common widgets like menus and tabs, and when child roles must be explicitly redefined. Understanding this distinction helps explain why ARIA sometimes behaves in unexpected ways.</p>
 <p><a href="https://www.maxdesign.com.au/articles/aria-roles-semantics.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Tests for aria-labelledby and aria-describedby          -->
-<!--  =========================================================  -->
-<item>
-<title>Tests for aria-labelledby and aria-describedby</title>
-<link>https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html</guid>
-<pubDate>Sat, 20 Dec 2025 01:30:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>A series of tests to determine how hidden content is used by aria-labelledby and aria-describedby.</description>
-<content:encoded>
-<![CDATA[
-<p>aria-labelledby and aria-describedby do not ask the browser to discover text automatically. Instead, the author explicitly tells the browser which elements to use by referencing their IDs.</p>
-<p>These 13 tests review how aria-labelledby and aria-describedby actually treat hidden content.</p>
-<p><a href="https://www.maxdesign.com.au/articles/test-cases-labelledby-describedby.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
