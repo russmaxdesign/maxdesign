@@ -8,8 +8,8 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Sat, 10 Jan 2026 06:40:30 +1100</lastBuildDate>
-<pubDate>Sat, 10 Jan 2026 06:40:30 +1100</pubDate>
+<lastBuildDate>Tue, 13 Jan 2026 09:10:30 +1100</lastBuildDate>
+<pubDate>Tue, 13 Jan 2026 09:10:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +23,28 @@
 
 
 <!--  =========================================================  -->
-<!--  1. What is the minimum markup needed to create a modal?    -->
+<!--  1. Three accessibility assumptions                         -->
+<!--  =========================================================  -->
+<item>
+<title>Three accessibility assumptions</title>
+<link>https://www.maxdesign.com.au/articles/assumptions.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/assumptions.html</guid>
+<pubDate>Tue, 13 Jan 2026 09:10:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>Three accessibility assumptions about the DOM, accessibility trees, and screen reader output that shape how we test, debug, and interpret results.</description>
+<content:encoded>
+<![CDATA[
+<p>Accessibility tooling encourages us to build simplified mental models of how browsers and assistive technologies work. This article unpacks three common accessibility assumptions about the DOM, accessibility trees, and screen reader speech output, and explains why real-world testing often feels unpredictable despite best practices.</p>
+<p><a href="https://www.maxdesign.com.au/articles/assumptions.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. What is the minimum markup needed to create a modal?    -->
 <!--  =========================================================  -->
 <item>
 <title>What is the minimum markup needed to create a modal?</title>
@@ -46,7 +67,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Do screen readers announce “bullet” when a list uses list-style: none? -->
+<!--  3. Do screen readers announce “bullet” when a list uses list-style: none? -->
 <!--  =========================================================  -->
 <item>
 <title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
@@ -69,7 +90,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Is aria-label allowed on static elements?               -->
+<!--  4. Is aria-label allowed on static elements?               -->
 <!--  =========================================================  -->
 <item>
 <title>Is aria-label allowed on static elements?</title>
@@ -91,7 +112,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. How can you tell what's allowed inside each HTML element?  -->
+<!--  5. How can you tell what's allowed inside each HTML element?  -->
 <!--  =========================================================  -->
 <item>
 <title>How can you tell what's allowed inside each HTML element?</title>
@@ -112,7 +133,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. HTML content categories                                 -->
+<!--  6. HTML content categories                                 -->
 <!--  =========================================================  -->
 <item>
 <title>HTML content categories</title>
@@ -134,7 +155,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. People with reduced vision: technology settings and possible impacts  -->
+<!--  7. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -156,7 +177,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. Tests for CSS generated content alternative text        -->
+<!--  8. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -177,7 +198,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Eight quick things to remember when using aria-owns     -->
+<!--  9. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -208,7 +229,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Why role="button" on a <button> does nothing            -->
+<!--  10. Why role="button" on a <button> does nothing           -->
 <!--  =========================================================  -->
 <item>
 <title>Why role="button" on a button does nothing</title>
@@ -224,27 +245,6 @@
 <p>You may have seen role="button" in real-world markup and wondered why it’s there. This article looks at why adding an ARIA role to a native button has no effect, and how the Core Accessibility API Mappings specification defines what browsers must do when native HTML and ARIA describe the same semantics.</p>
 <p>Using this small example, the article explores a broader lesson about ARIA: it doesn’t enhance native elements, and it isn’t something to add “just in case”. Instead, ARIA is meant for situations where native semantics are missing, insufficient, or need to be replaced intentionally.</p>
 <p><a href="https://www.maxdesign.com.au/articles/role-button.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Did you know some ARIA roles remove child semantics?    -->
-<!--  =========================================================  -->
-<item>
-<title>Did you know some ARIA roles remove child semantics?</title>
-<link>https://www.maxdesign.com.au/articles/aria-roles-semantics.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-roles-semantics.html</guid>
-<pubDate>Sun, 21 Dec 2025 02:30:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>Some ARIA roles replace native HTML structure and remove child semantics. Learn how this works, why it happens, and when child roles must be explicitly defined.</description>
-<content:encoded>
-<![CDATA[
-<p>Some ARIA roles introduce an entirely new semantic model, replacing native HTML structure and removing child semantics. This article explores where that behaviour is defined, how it affects common widgets like menus and tabs, and when child roles must be explicitly redefined. Understanding this distinction helps explain why ARIA sometimes behaves in unexpected ways.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-roles-semantics.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>

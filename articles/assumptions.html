@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Three accessibility assumptions - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Three accessibility assumptions about the DOM, accessibility trees, and screen reader output that shape how we test, debug, and interpret results.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Three accessibility assumptions</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-01-13">13 January 2026</time></p>
+
+<p>When we work with accessibility tools, we naturally build mental models to help us understand what’s happening under the hood.</p>
+
+<p>Many of these models are reasonable, widely shared, and even reinforced by browser tooling and documentation. But some of them are also a little too neat.</p> 
+
+<p>Below are three accessibility assumptions that can quietly shape how we test, debug, and interpret results.</p>
+
+<hr>
+
+<h2>1. The DOM we see in DevTools is the real DOM</h2>
+
+<h3 class="h4">The assumption</h3>
+
+<p>The DOM shown in browser DevTools is the actual DOM. It represents a stable tree of elements that reflects what the browser is working with at any given moment.</p>
+
+<h3 class="h4">The reality</h3>
+
+<ul>
+  <li>The DevTools DOM is a developer-facing representation, not the browser’s internal source of truth.</li>
+  <li>It is simplified and reconciled to make it easier to inspect.</li>
+  <li>The DOM is constantly mutating as scripts run, styles resolve, users interact, and layouts update.</li>
+  <li>What we see is a snapshot only.</li>
+</ul>
+
+<h3 class="h4">For a deeper dive</h3>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/dom-mutations.html">What are DOM mutations?</a></li>
+</ul>
+
+<hr>
+
+<h2>2. The accessibility tree we see is an accurate picture of what assistive technologies receive</h2>
+
+<h3 class="h4">The assumption</h3>
+
+<p>The accessibility tree shown in browser tooling accurately represents what is exposed to assistive technologies, and inspecting it tells us what screen readers and other AT will perceive.</p>
+
+<h3 class="h4">The reality</h3>
+
+<ul>
+  <li>The tree we see is a debugging view, not the full internal model.</li>
+  <li>Browsers maintain more than one accessibility-related representation.</li>
+  <li>Some parts of the accessibility pipeline are implicit and not exposed.</li>
+  <li>What reaches platform APIs and assistive technologies is filtered, reshaped, and context-dependent.</li>
+</ul>
+
+<h3 class="h4">For a deeper dive</h3>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/two-trees.html">Did you know your browser has two accessibility trees?</a></li>
+</ul>
+
+<hr>
+
+<h2>3. Screen reader output is a clean, ordered sequence of events</h2>
+
+<h3 class="h4">The assumption</h3>
+
+<p>Changes in the DOM or accessibility tree result in predictable, ordered announcements from screen readers, with each event mapping cleanly to a spoken output.</p>
+
+<h3 class="h4">The reality</h3>
+
+<ul>
+  <li>Screen readers operate speech queues, not direct event streams.</li>
+  <li>Announcements can be merged, interrupted, delayed, or dropped.</li>
+  <li>Timing, verbosity settings, and user interaction all influence output.</li>
+  <li>What is spoken is often a priority-driven outcome, not a precise reflection of events.</li>
+</ul>
+
+<h3 class="h4">For a deeper dive</h3>
+
+<ul>
+  <li><a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html">Understanding screen reader speech queues</a></li>
+  <li><a href="https://www.maxdesign.com.au/articles/more-about-speech-queues.html">More about screen reader speech queues</a></li>
+</ul>
+
+<hr>
+
+<h2>Why is it important to unpack these assumptions?</h2>
+
+<p>The DOM and accessibility tree are reliable guides most of the time, until you hit the edges where they stop being authoritative.</p>
+
+<p>Understanding the nuances of the DOM, accessibility tree, and speech queue can help when testing and interpreting results.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
