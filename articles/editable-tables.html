@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Editable tables: choosing the right approach - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A practical guide to the three common approaches to editable tables, when to use each, and their accessibility trade-offs.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Editable tables: choosing the right approach</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-01-02">2 February 2026</time></p>
+
+<p>When people ask about an “editable table”, they’re often describing very different interaction models. Before choosing a solution, it helps to understand the three most common approaches and what each one is actually good at.</p>
+
+<hr>
+
+<h2>1. Native HTML table with form controls</h2>
+
+<p>This approach uses a standard HTML <code>&lt;table&gt;</code> and places native form controls inside table cells.</p>
+
+<p>The table remains a document-style structure, and users move between inputs using <kbd>TAB</kbd> and <kbd>SHIFT</kbd> + <kbd>TAB</kbd>.</p>
+
+<p>The browser and assistive technologies handle almost all navigation and semantics automatically.</p>
+
+<h3>Code example</h3>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Order quantities&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ID number&lt;/th&gt;
+      &lt;th&gt;Product&lt;/th&gt;
+      &lt;th id="col-qty"&gt;Quantity&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;A234&lt;/td&gt;
+      &lt;th id="prod-a234"&gt;6mm Stainless Coach Screws&lt;/th&gt;
+      &lt;td&gt;
+        &lt;input
+          type="number"
+          inputmode="numeric"
+          min="0"
+          placeholder="0"
+          aria-labelledby="col-qty prod-a234"
+        /&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+<p>In this example, the <code>&lt;input&gt;</code> does not have a visible label. Instead, it is labelled using the table’s column header (“Quantity”) and row header (the product name). The <code>placeholder</code> is used only as a visual hint, not as a label.</p>
+
+<h3>When this is the best option</h3>
+
+<ul>  
+  <li>Editing happens via standard form fields</li>
+  <li>Users move between fields using <kbd>TAB</kbd></li>
+  <li>The table is primarily a document, not an application</li>
+  <li>You want the lowest accessibility risk and testing cost</li>
+</ul>
+
+<p>This should be the <b>default choice</b> unless you have a clear reason not to use it.</p>
+
+<hr>
+
+<h2>2. ARIA table with custom row wrappers</h2>
+
+<p>This approach uses non-table elements styled as a table, with ARIA table roles applied. </p>
+
+<p>Because the markup is no longer constrained by the table content model, you can wrap rows with additional elements for layout, styling, or interaction.</p>
+
+<p>The structure still exposes rows and cells to assistive technologies, but you take on more responsibility for getting it right.</p>
+
+<h3>Code example</h3>
+
+<pre><code>&lt;div <span class="highlight">role="table"</span> aria-label="Order quantities"&gt;
+  &lt;div <span class="highlight">role="rowgroup"</span>&gt;
+    &lt;div <span class="highlight">role="row"</span>&gt;
+      &lt;div <span class="highlight">role="columnheader"</span>&gt;ID number&lt;/div&gt;
+      &lt;div <span class="highlight">role="columnheader"</span>&gt;Product&lt;/div&gt;
+      &lt;div <span class="highlight">role="columnheader"</span> id="col-qty"&gt;Quantity&lt;/div&gt;
+      &lt;div <span class="highlight">role="columnheader"</span>&gt;Actions&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div <span class="highlight">role="rowgroup"</span>&gt;
+    <span class="comment">&lt;!-- Wrapper used for styling, JS hooks --&gt;</span>
+    &lt;div class="row-wrapper" data-item-id="A234"&gt;
+      <span class="comment">&lt;!-- Optional extra affordance outside the cells --&gt;</span>
+      &lt;button
+        type="button"
+        class="drag-handle"
+        aria-label="Reorder item A234"
+      &gt;
+        ⠿
+      &lt;/button&gt;
+
+      &lt;div <span class="highlight">role="row"</span>&gt;
+        &lt;div <span class="highlight">role="cell</span>"&gt;A234&lt;/div&gt;
+
+        &lt;div <span class="highlight">role="cell"</span> id="prod-a234"&gt;
+          6mm Stainless Coach Screws
+        &lt;/div&gt;
+
+        &lt;div <span class="highlight">role="cell"</span>&gt;
+          &lt;input
+            type="number"
+            inputmode="numeric"
+            min="0"
+            placeholder="0"
+            aria-labelledby="col-qty prod-a234"
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;div <span class="highlight">role="cell"</span>&gt;
+          &lt;button
+            type="button"
+            class="delete-row"
+            aria-label="Delete 6mm Stainless Coach Screws"
+          &gt;
+            Delete
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>This approach trades native table guarantees for layout and interaction flexibility. See caveats below.</p>
+
+<h3>When this is the best option</h3>
+
+<ul>
+  <li>You need wrappers around rows for layout or interaction</li>
+  <li>Row-level UI cannot fit cleanly inside a native table</li>
+  <li>The interaction model is still table-like, not spreadsheet-like</li>
+  <li>You are comfortable validating structure and announcements across screen readers</li>
+</ul>
+
+<hr>
+
+<h2>3. ARIA grid (application-style table)</h2>
+
+<p>
+  An ARIA grid represents an application-style data widget, not a document-style
+  table. It is designed for experiences where users must move between cells using
+  the keyboard (for example with arrow keys), similar to a spreadsheet.
+</p>
+
+<p>
+  In an ARIA grid, data cells use <code>role="gridcell"</code> instead of
+  <code>role="cell"</code>, which signals that the table behaves as an interactive
+  widget rather than a document.
+</p>
+
+<p>
+  The following example shows <strong>HTML structure only</strong> and does not
+  include the JavaScript required to make the grid usable.
+</p>
+
+<h3>Code example</h3>
+
+<pre><code>&lt;div
+  <span class="highlight">role="grid"</span>
+  aria-label="Simple editable grid"
+  tabindex="0"
+  aria-rowcount="2"
+  aria-colcount="2"
+&gt;
+  &lt;div <span class="highlight">role="row"</span>&gt;
+    &lt;div <span class="highlight">role="columnheader"</span>&gt;Name&lt;/div&gt;
+    &lt;div <span class="highlight">role="columnheader"</span>&gt;Email&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div <span class="highlight">role="row"</span>&gt;
+    &lt;div <span class="highlight">role="gridcell"</span>&gt;Asha&lt;/div&gt;
+    &lt;div <span class="highlight">role="gridcell"</span>&gt;
+      &lt;label for="grid-email-asha"&gt;Email&lt;/label&gt;
+      &lt;input
+        id="grid-email-asha"
+        name="grid-email-asha"
+        type="email"
+        value="asha@example.com"
+      /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>This pattern is intended for spreadsheet-style, keyboard-driven interaction. See caveats below.</p>
+
+<h3>When this is the best option</h3>
+
+<ul>
+  <li>Users must move cell-to-cell using arrow keys</li>
+  <li>Spreadsheet-style interaction is a core requirement</li>
+  <li>You need selection, ranges, or dense data editing</li>
+  <li>You have time and expertise to implement and test it properly</li>
+</ul>
+
+<hr>
+
+<h2>Final takeaway</h2>
+
+<p>Use a native table where possible. They are accessible, stable and semantic.</p>
+
+<p>Use an ARIA table only when you need additional markup around rows or cells.</p>
+
+<p>Use a grid only when you are genuinely building a data-driven application that requires keyboard navigation within the table.</p>
+
+<hr>
+
+<h2>Caveats and implementation notes</h2>
+
+<p>The following notes expand on the trade-offs and risks of the more complex patterns described above.</p>
+
+<h3>Example 2: ARIA tables with custom row wrappers</h3>
+
+<p>This example shows a hypothetical ARIA table used to illustrate why teams sometimes move away from native tables, and what that extra flexibility enables.</p>
+
+<p>The key difference from a native table is the presence of an element wrapping each row. This wrapper exists purely to provide layout and interaction flexibility that HTML tables do not allow. For example, it can be used to:</p>
+
+<ul>
+  <li>attach JavaScript hooks,</li>
+  <li>add hover or selection styling,</li>
+  <li>provide drag handles or other non-tabular affordances.</li>
+</ul>
+
+<p>Importantly, the wrapper itself is not interactive by default. Instead, this pattern supports two common approaches to row-level interaction:</p>
+
+<p>Explicit actions inside the row, such as a “Delete” button placed in a dedicated Actions cell. This is the most robust and accessible option.</p>
+
+<p>Row-level interaction managed via JavaScript, where the wrapper acts as a hook for selection, drag-and-drop, or other behaviours that do not map cleanly to a native table.</p>
+
+<p>This example is intentionally simplified. It does not prescribe a specific interaction model, but demonstrates how ARIA table roles can be used to preserve table semantics while allowing patterns that are not possible with native <code>&lt;table&gt;</code> markup.</p>
+
+<h3>Example 3: aria-grid</h3>
+
+<p>
+  Adding <code>role="grid"</code> changes how assistive technologies interpret the
+  region and creates expectations of spreadsheet-style interaction. Without
+  additional behaviour, an ARIA grid is incomplete and should not be considered
+  usable.
+</p>
+
+<p>A usable grid typically requires JavaScript to handle:</p>
+
+<ul>
+  <li>arrow key navigation between cells</li>
+  <li>focus management (roving tabindex or active descendant)</li>
+  <li>navigation vs editing modes</li>
+  <li>announcements of the current row, column, and cell</li>
+</ul>
+
+<p>
+  This pattern has the highest implementation and testing cost of all three
+  options. It should only be used when keyboard-driven, cell-by-cell interaction
+  is a core requirement.
+</p>
+
+<p>
+  Any use of an ARIA grid should be tested across multiple browsers and screen
+  readers.
+</p>
+
+<hr>
+
+<h2>Further reading</h2>
+
+<ul>
+  <li>
+    <a
+      href="https://www.w3.org/WAI/ARIA/apg/patterns/table/"
+      class="external"
+    >
+      ARIA Authoring Practices: Table pattern
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/"
+      class="external"
+    >
+      ARIA Authoring Practices: Grid pattern
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://adrianroselli.com/2017/11/hey-its-still-ok-to-use-tables.html"
+      class="external"
+    >
+      Hey, It’s Still OK to Use Tables
+    </a>
+      — Adrian Roselli
+  </li>
+  <li>
+    <a
+      href="https://adrianroselli.com/2024/07/be-careful-using-grid.html"
+      class="external"
+    >
+      Be Careful Using ‘Grid’
+    </a>
+      — Adrian Roselli
+  </li>
+</ul>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>

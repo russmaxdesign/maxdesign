@@ -745,6 +745,10 @@ classes
   background: rgba(255,255,0,.3);
 }
 
+.comment {
+  color: #999;
+}
+
 .fail {
   color: #CC0000;
   font-weight: bold;
