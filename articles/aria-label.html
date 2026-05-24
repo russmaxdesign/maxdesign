@@ -82,6 +82,12 @@ caption {
 <p>While the ARIA and HTML specifications do not forbid <code>aria-label</code> purely on the basis of an element being ‘static’, they do prohibit its use when an element’s implicit or explicit role does not support ‘name from author’ (see
 <a href="https://w3c.github.io/html-aria/#docconformance">ARIA in HTML, section 5.2.8</a>).</p>
 
+<p>The simplest way to think about it:</p>
+
+<p style="font-size: 1.2em; padding-left: 1em; border-left: .2em solid #ccc;"><code>aria-label</code> is intended for elements whose roles support author-provided accessible names. These roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</p>
+
+<p>Note that "static" (meaning non-interactive) is not a term the specs use; the actual criterion is always about the role, not interactivity.</p>
+
 <p>As you will see below, there <em>are</em> legitimate cases where static elements use <code>aria-label</code>, either because they have a native role or because an appropriate ARIA <code>role</code> is applied.</p>
 
 <p>In this article, we examine how <code>aria-label</code> behaves on static elements in practice, across browsers and platforms, and why real-world behaviour is often more nuanced than common assumptions suggest.</p>
@@ -92,7 +98,7 @@ caption {
 
 <h2>Different ways <code>aria-label</code> could be used</h2>
 
-<p>Let’s look at some methods that could be used to apply the <code>aria-label</code> to elements, and how they are rendered in different browsers accessibility trees.</p>
+<p>Let’s look at some methods that could be used to apply the <code>aria-label</code> to elements, and how they are rendered in different browsers' accessibility trees.</p>
 
 <h3>Notes:</h3>
 
