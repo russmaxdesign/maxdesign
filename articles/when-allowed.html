@@ -35,13 +35,15 @@
 
 <p class="metadetails">Published: <time datetime="2026-05-24">24 May 2026</time></p>
 
-<p><code>aria-label</code> and <code>aria-labelledby</code> are intended for elements whose roles support author-provided accessible names. These roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</p>
+<p>Where can the <code>aria-label</code> and <code>aria-labelledby</code> attributes be used?</p>
 
-<p>To understand this, we first need to understand roles.</p>
+<p><b>The answer</b>: <code>aria-label</code> and <code>aria-labelledby</code> are intended for elements whose roles support author-provided accessible names. These roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</p>
+
+<p>This statement does a lot of work, so let’s break it down into smaller parts.</p>
 
 <h2>What are roles?</h2>
 
-<p>Roles provide meaning to HTML elements so browsers and assistive technologies can understand what each element is and how it should behave.</p>
+<p>Roles communicate the purpose and expected behaviour of elements to assistive technologies such as screen readers.</p>
 
 <p>For example, a role can identify an element as a:</p>
 
@@ -52,8 +54,6 @@
   <li>checkbox</li>
   <li>dialog</li>
 </ul>
-
-<p>Roles communicate the purpose and expected behaviour of elements to assistive technologies such as screen readers.</p>
 
 <h2>What are implicit and explicit roles?</h2>
 
@@ -75,6 +75,8 @@
 
 <pre><code>&lt;div <span class="highlight">role="button"</span>&gt;Save&lt;/div&gt;</code></pre>
 
+<p>This example is used only to demonstrate an explicit role. In practice, native button elements are generally preferred.</p>
+
 <h2>What are accessible names?</h2>
 
 <p>Accessible names identify elements for assistive technologies such as screen readers. For example:</p>
@@ -95,11 +97,13 @@
   <li><code>aria-labelledby</code></li>
 </ul>
 
+<p>Where possible, visible text labels are preferred over ARIA-only labels.</p>
+
 <p>Whether an element can have an accessible name depends on its role.</p>
 
 <h2>Which roles can have names?</h2>
 
-<p>Many interactive and page-structure roles allow accessible names. Examples of roles that commonly allow names include:</p>
+<p>Many interactive, structural, and landmark roles allow accessible names. Examples of roles that commonly allow names include:</p>
 
 <ul>
   <li><code>button</code></li>
@@ -114,7 +118,7 @@
 
 <p>For example, a <code>button</code> role can have the name “Save”, and a <code>dialog</code> role can have the name “Settings”.</p>
 
-<p>Some roles are not intended to represent meaningful content or interactive controls, so they do not allow accessible names. Examples include:</p>
+<p>Some roles are intended only for presentation or generic structure, so they do not allow accessible names. Examples include:</p>
 
 <ul>
   <li><code>presentation</code></li>
@@ -127,9 +131,13 @@
 
 <pre><code>&lt;div <span class="highlight">role="presentation"</span>&gt;&lt;/div&gt;</code></pre>
 
-<p>This is why <code>aria-label</code> and <code>aria-labelledby</code> should only be applied to elements whose role supports naming.</p>
+<h2>Putting this all together</h2>
 
-<p>Applying them to roles like <code>presentation</code> or <code>generic</code> is not supported by the ARIA specification, even though some browsers or assistive technologies may still expose names in certain situations.</p>
+<p><code>aria-label</code> and <code>aria-labelledby</code> should only be used on elements whose implicit or explicit roles support author-provided accessible names.</p>
+
+<p>If a role prohibits author-provided names, applying these attributes is not supported by the ARIA specification, even though some browsers or assistive technologies may still expose names in certain situations.</p>
+
+<p>For the most reliable results, use <code>aria-label</code> and <code>aria-labelledby</code> only on elements whose roles allow author-provided accessible names.</p>
 
 <h2>Further reading</h2>
 
