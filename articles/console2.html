@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Using the browser console for accessibility testing - Part 2 - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Learn how to use browser console scripts to test aria-invalid, aria-hidden, aria-expanded, tabindex, accessible names, required fields and name-prohibited roles.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+video {
+  max-width: 640px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.video-headings {
+  margin: 4em 0 1em;
+}
+
+details {
+  border: 1px solid #aaa;
+  border-radius: .3em;
+  margin: 1em 0;
+  padding: 0;
+}
+
+details:hover {
+  border: 1px solid #3A3636;
+  box-shadow: 0 0 5px #999;
+}
+
+summary {
+  padding: 1em;
+  border-radius: .3em .3em 0 0;
+}
+
+summary:focus {
+  outline: 0;
+  color: #fff;
+  background: #3A3636;
+}
+
+details pre {
+  margin: .5em 0 0;
+}
+
+.copy-container {
+  padding: .5em 0 0;
+  background: #3A3636;
+}
+
+.copy-btn {
+  display: inline-block;
+  margin: 0 0 0 1em;
+}
+
+h2 {
+  margin: 3em 0 1em;
+}
+
+h3 {
+  margin: 1em 0;
+}
+  </style>
+
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Using the browser console for accessibility testing - Part 2</h1>
+    </div>
+  </div>
+
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-06-07">7 June 2026</time></p>
+
+<p>This article follows on from <a href="https://www.maxdesign.com.au/articles/console.html">Using the browser console for accessibility testing</a>.</p>
+
+<p>The examples below show how simple console scripts can help identify accessibility features and potential issues directly in the browser.</p>
+
+<p>You can use the <a href="https://intopia.github.io/exercise/testing-console.html" target="_blank">testing page</a> to try each script as you work through the examples.</p>
+
+<h2>1. Highlight <code>aria-invalid="true"</code></h2>
+
+<h3>What it does</h3>
+
+<p>Finds all elements where <code>aria-invalid="true"</code> has been applied and highlights them with a badge.</p>
+
+<h3>Why it is important</h3>
+
+<p>When a form field contains an error, users need to know. Sighted users might see a red border or an error message, but screen reader users rely on <code>aria-invalid="true"</code> to identify fields that have failed validation. </p>
+
+<p>This script helps confirm that the invalid state is being exposed programmatically.</p>
+
+<h3>Caveats</h3>
+
+<p>The script only targets the explicit value <code>"true"</code>. It will not flag <code>aria-invalid="spelling"</code> or <code>aria-invalid="grammar"</code>, which are also valid values.</p>
+
+<h3>Usage</h3>
+
+<p>Run the script after triggering validation errors on the page. If no validation errors have been triggered, elements may not yet have <code>aria-invalid="true"</code> applied.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-01-aria-invalid.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[aria-invalid='true']").forEach(el => {
+
+  // Outline the element
+  el.style.outline = "3px solid #b00020";
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = "aria-invalid=\"true\"";
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#b00020";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+
+
+<h2>2. Highlight <code>required</code> and <code>aria-required="true"</code></h2>
+
+<h3>What it does</h3>
+
+<p>Finds all form fields using either the native HTML <code>required</code> attribute or <code>aria-required="true"</code> and highlights them in two different colours to distinguish the two approaches.</p>
+
+<h3>Why it is important</h3>
+
+<p>Users need to know which fields are required before submitting a form. The <code>required</code> and <code>aria-required="true"</code> attributes communicate this information through the accessibility tree, allowing screen readers and other assistive technologies to announce that a field is required.</p>
+
+<p>This script helps testers quickly identify which approach has been used and whether required fields have been marked consistently across a page.</p>
+
+<h3>Caveats</h3>
+
+<p>The two approaches are similar, but not identical. The native <code>required</code> attribute also triggers built-in browser validation, while <code>aria-required="true"</code> does not.</p>
+
+<h3>Usage</h3>
+
+<p>If a field has both <code>required</code> and <code>aria-required="true"</code> applied, it will receive two badges. In most cases this is unnecessary, as the native <code>required</code> attribute already exposes the required state to assistive technologies.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-02-aria-required.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Colour map
+// ----------------------
+const colours = {
+  required:      "#b05a00",
+  ariaRequired:  "#6a1b9a"
+};
+
+// ----------------------
+// Helper: draw badge
+// ----------------------
+function drawBadge(el, label, colour) {
+
+  // Outline the element
+  el.style.outline = `3px solid ${colour}`;
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = label;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = colour;
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+}
+
+// ----------------------
+// Main logic
+// ----------------------
+
+// 1. HTML required attribute
+document.querySelectorAll("[required]").forEach(el => {
+  drawBadge(el, "required", colours.required);
+});
+
+// 2. aria-required="true"
+document.querySelectorAll("[aria-required='true']").forEach(el => {
+  drawBadge(el, "aria-required=\"true\"", colours.ariaRequired);
+});</code></pre>
+
+  </div>
+</details>
+
+
+<h2>3. Highlight <code>aria-hidden="true"</code></h2>
+
+<h3>What it does</h3>
+
+<p>Finds all elements where <code>aria-hidden="true"</code> has been applied and highlights them with a badge.</p>
+
+<h3>Why it is important</h3>
+
+<p><code>aria-hidden="true"</code> removes content from the accessibility tree while leaving it visible on the page.</p>
+
+<p>This means that screen reader users cannot access the content.</p>
+
+<p>This is sometimes intentional. For example, authors may hide decorative icons that provide no useful information. However, it can also create accessibility issues.</p>
+
+<p>Hidden content may create a completely different experience for screen reader users, including:</p>
+
+<ul>
+  <li>Focusable elements hidden with <code>aria-hidden</code></li>
+  <li>Large sections of content accidentally removed from the tree</li>
+</ul>
+
+<p>This script helps identify content that has been hidden from assistive technologies.</p>
+
+<h3>Caveats</h3>
+
+<p>The presence of <code>aria-hidden="true"</code> is not automatically an error.</p>
+
+<h3>Usage</h3>
+
+<p>Review each flagged element and ask: should this content be available to screen reader users?</p>
+
+<p>Also check whether any flagged element contains focusable children. See the footnotes for more information.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-03-aria-hidden.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[aria-hidden='true']").forEach(el => {
+
+  // Outline the element
+  el.style.outline = "3px solid #b00020";
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = "aria-hidden=\"true\"";
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#b00020";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+
+<h2>4. Highlight <code>aria-expanded</code></h2>
+
+<h3>What it does</h3>
+
+<p>Finds all elements with an <code>aria-expanded</code> attribute and highlights them, using green for <code>"true"</code> and orange for <code>"false"</code> to show the current state.</p>
+
+<h3>Why it is important</h3>
+
+<p><code>aria-expanded</code> communicates whether a component is open or closed to screen reader users.</p>
+
+<p>Common examples include:</p>
+
+<ul>
+  <li>Accordions</li>
+  <li>Dropdown menus</li>
+  <li>Navigation menus</li>
+</ul>
+
+<p>Without this information, users may activate a control but have no indication whether anything expanded or collapsed.</p>
+
+<p>This script helps testers quickly identify elements using <code>aria-expanded</code> and confirm whether the current state is being exposed correctly.</p>
+
+<h3>Caveats</h3>
+
+<p>This script only captures the state of the page at the moment it runs.</p>
+
+<p>If you expand or collapse components after running the script, the badges will not update automatically. Run the script again to see the current state.</p>
+
+<h3>Usage</h3>
+
+<p>Run the script and review any highlighted elements.</p>
+
+<p>Expand and collapse components, then run the script again to confirm that the <code>aria-expanded</code> value changes between <code>"true"</code> and <code>"false"</code> as expected.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-04-aria-expanded.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Colour map
+// ----------------------
+const colours = {
+  expanded:   "#1b5e20",
+  collapsed:  "#b05a00"
+};
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[aria-expanded]").forEach(el => {
+
+  const value = el.getAttribute("aria-expanded").trim().toLowerCase();
+  const isExpanded = value === "true";
+  const colour = isExpanded ? colours.expanded : colours.collapsed;
+  const label = isExpanded ? "aria-expanded=\"true\"" : "aria-expanded=\"false\"";
+
+  // Outline the element
+  el.style.outline = `3px solid ${colour}`;
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = label;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = colour;
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+
+<h2>5. Highlight <code>tabindex</code></h2>
+
+<h3>What it does</h3>
+
+<p>Finds all elements with a <code>tabindex</code> attribute and highlights them in three colours:</p>
+
+<ul>
+  <li>Green for <code>"-1"</code></li>
+  <li>Blue for <code>"0"</code></li>
+  <li>Red for any positive value</li>
+</ul>
+
+<h3>Why it is important</h3>
+
+<p>Keyboard users rely on a logical and predictable focus order when navigating a page.</p>
+
+<p>The <code>tabindex</code> attribute can be used to manage keyboard focus, but it can also create accessibility issues when used incorrectly. This script helps testers quickly identify where <code>tabindex</code> has been applied and assess whether it is being used appropriately.</p>
+
+<h3>Usage</h3>
+
+<p>Review the highlighted elements and check how each <code>tabindex</code> value is being used:</p>
+
+<h4>Green (<code>tabindex="-1"</code>)</h4>
+
+<p>The element can receive focus programmatically but is not included in the normal tab order.</p>
+
+<p>Common uses include:</p>
+
+<ul>
+  <li>Error messages</li>
+  <li>Dialogs</li>
+  <li>Dynamically injected content</li>
+</ul>
+
+<p>Check that focus is being sent to these elements at the appropriate time.</p>
+
+<h4>Blue (<code>tabindex="0"</code>)</h4>
+
+<p>The element has been added to the normal tab order.</p>
+
+<p>This may be appropriate for custom widgets, but it is worth checking whether a native interactive element could be used instead.</p>
+
+<h4>Red (positive value)</h4>
+
+<p>The element has been given a specific position in the tab order.</p>
+
+<p>This is almost always a mistake because it overrides the natural document order and can create a confusing keyboard experience.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-05-tabindex.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Colour map
+// ----------------------
+const colours = {
+  negative: "#1b5e20",  // green  - tabindex="-1"
+  zero:     "#0a558c",  // blue   - tabindex="0"
+  positive: "#b00020"   // red    - tabindex > 0
+};
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll("[tabindex]").forEach(el => {
+
+  const raw = el.getAttribute("tabindex").trim();
+  const value = parseInt(raw, 10);
+
+  // Determine colour and label based on value
+  let colour;
+  if (value < 0) {
+    colour = colours.negative;
+  } else if (value === 0) {
+    colour = colours.zero;
+  } else {
+    colour = colours.positive;
+  }
+
+  // Outline the element
+  el.style.outline = `3px solid ${colour}`;
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `tabindex="${value}"`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = colour;
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+
+<h2>6. Highlight visible label vs accessible name mismatch</h2>
+
+<h3>What it does</h3>
+
+<p>Finds all links and buttons on the page, compares the visible text with the accessible name, and highlights each one in one of three colours:</p>
+
+<ul>
+  <li>Green for an exact match</li>
+  <li>Blue where the accessible name starts with the visible text</li>
+  <li>Red where the two have no relationship</li>
+</ul>
+
+<h3>Why it is important</h3>
+
+<p>People using speech input software often activate buttons and links by speaking the visible text shown on screen.</p>
+
+<p>If the accessible name does not contain that visible text, speech commands may fail or produce unexpected results.</p>
+
+<p>This script helps identify cases where the visible label and accessible name do not match, making potential issues easy to spot without inspecting each element individually.</p>
+
+<h3>Usage</h3>
+
+<p>Review the highlighted elements and check how the visible label compares to the accessible name.</p>
+
+<h4>Green (MATCH)</h4>
+
+<p>The visible text and accessible name are identical. No issue.</p>
+
+<h4>Blue (MODIFIED)</h4>
+
+<p>The accessible name starts with the visible text and adds extra context. This is valid and common. For example, a visible label of "Read more" may have an accessible name of "Read more about accessibility testing".</p>
+
+<p>Review these cases to confirm that any additional context is useful and relevant.</p>
+
+<h4>Red (MISMATCH)</h4>
+
+<p>The accessible name has no relationship to the visible text. This may indicate a failure of WCAG 2.5.3 Label in Name and should be investigated.</p>
+
+<p>The comparison is case-insensitive, so differences in capitalisation alone will not trigger a red badge.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-06-mismatch.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Colour map
+// ----------------------
+const colours = {
+  match:    "#1b5e20",  // green - exact match
+  modified: "#0a558c",  // blue  - accessible name starts with visible text
+  mismatch: "#b00020"   // red   - no relationship between the two
+};
+
+// ----------------------
+// Helper: get visible text
+// ----------------------
+function getVisibleText(el) {
+  return el.textContent.trim().replace(/\s+/g, " ");
+}
+
+// ----------------------
+// Helper: get accessible name
+// ----------------------
+function getAccessibleName(el) {
+
+  // 1. aria-labelledby
+  const labelledby = el.getAttribute("aria-labelledby");
+  if (labelledby) {
+    const parts = labelledby.trim().split(/\s+/).map(id => {
+      const ref = document.getElementById(id);
+      return ref ? ref.textContent.trim() : "";
+    }).filter(Boolean);
+    const name = parts.join(" ").trim();
+    if (name) return name;
+  }
+
+  // 2. aria-label
+  const ariaLabel = el.getAttribute("aria-label");
+  if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+  // 3. visible text fallback
+  return getVisibleText(el);
+}
+
+// ----------------------
+// Main logic
+// ----------------------
+const selector = 'a, button, [role="button"], [role="link"]';
+
+document.querySelectorAll(selector).forEach(el => {
+
+  const visibleText = getVisibleText(el);
+  const accessibleName = getAccessibleName(el);
+
+  // Case-insensitive comparison
+  const visibleLower = visibleText.toLowerCase();
+  const nameLower = accessibleName.toLowerCase();
+
+  // Determine match type
+  let colour;
+  let label;
+
+  if (nameLower === visibleLower) {
+    colour = colours.match;
+    label = `MATCH: ${accessibleName}`;
+  } else if (nameLower.startsWith(visibleLower)) {
+    colour = colours.modified;
+    label = `MODIFIED: ${accessibleName}`;
+  } else {
+    colour = colours.mismatch;
+    label = `MISMATCH: ${accessibleName}`;
+  }
+
+  // Outline the element
+  el.style.outline = `3px solid ${colour}`;
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = label;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = colour;
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+<h2>7. Highlight roles that must never have author-provided names</h2>
+
+<h3>What it does</h3>
+
+<p>Finds elements with roles that prohibit accessible naming and have been given a name using <code>aria-label</code> or <code>aria-labelledby</code>.</p>
+
+<p>Each issue is highlighted with a <b>NAME PROHIBITED</b> badge showing the role involved.</p>
+
+<h3>Why it is important</h3>
+
+<p>Some elements have roles that <a href="https://www.w3.org/TR/wai-aria-1.2/#namefromprohibited" target="_blank">prohibit naming</a>.</p>
+
+<p>Applying <code>aria-label</code> or <code>aria-labelledby</code> to these roles should not produce accessible names.</p>
+
+<p>However, some browsers and assistive technologies still expose these names, which can lead to unexpected behaviour.</p>
+
+<p>This script makes roles with prohibited names immediately visible.</p>
+
+<h3>Caveats</h3>
+
+<p>The script covers name-prohibited roles from both ARIA 1.2 and ARIA 1.3.</p>
+
+<p>The lists differ slightly between versions. For example:</p>
+
+<ul>
+  <li><code>presentation</code> is name-prohibited in ARIA 1.2 but not ARIA 1.3</li>
+  <li>Several new roles are included in ARIA 1.3, including <code>definition</code>, <code>mark</code>, <code>none</code>, <code>suggestion</code>, <code>term</code>, <code>time</code>, and <code>tooltip</code></li>
+</ul>
+
+<h3>Usage</h3>
+
+<p>Review each highlighted element and remove any unnecessary <code>aria-label</code> or <code>aria-labelledby</code> attributes.</p>
+
+<p>If you see a <b>NAME PROHIBITED: generic</b> badge on an element that should have a more specific role, check the markup carefully. Browsers fall back to the <code>generic</code> role when a role value is unrecognised or misspelled.</p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/console2-07-name.mp4"></video>
+
+<details>
+  <summary>View the script</summary>
+
+  <div class="copy-container">
+    <button class="copy-btn">Copy script</button>
+
+<pre><code>// ----------------------
+// Scroll-safe overlay container
+// ----------------------
+const overlay = document.createElement("div");
+overlay.style.position = "absolute";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.pointerEvents = "none";
+overlay.style.zIndex = "999999";
+document.body.appendChild(overlay);
+
+// ----------------------
+// Roles that must never be named
+// ARIA 1.2: caption, code, deletion, emphasis, generic,
+//           insertion, paragraph, presentation, strong,
+//           subscript, superscript
+// ARIA 1.3 adds: definition, mark, none, suggestion,
+//           term, time, tooltip
+// Note: presentation is 1.2 only; none is the 1.3 preferred synonym
+// ----------------------
+const forbiddenNamedRoles = [
+  // ARIA 1.2
+  "caption",
+  "code",
+  "deletion",
+  "emphasis",
+  "generic",
+  "insertion",
+  "paragraph",
+  "presentation",
+  "strong",
+  "subscript",
+  "superscript",
+  // ARIA 1.3
+  "definition",
+  "mark",
+  "none",
+  "suggestion",
+  "term",
+  "time",
+  "tooltip"
+];
+
+// ----------------------
+// Native elements that implicitly carry these roles
+// ----------------------
+const implicitRoleMap = {
+  // ARIA 1.2
+  caption:  "caption",
+  code:     "code",
+  del:      "deletion",
+  s:        "deletion",
+  em:       "emphasis",
+  div:      "generic",
+  span:     "generic",
+  ins:      "insertion",
+  p:        "paragraph",
+  strong:   "strong",
+  sub:      "subscript",
+  sup:      "superscript",
+  // ARIA 1.3
+  dfn:      "definition",
+  mark:     "mark",
+  time:     "time"
+};
+
+// ----------------------
+// Build selectors
+// ----------------------
+const roleAttrSelectors = forbiddenNamedRoles.map(r => `[role="${r}"]`).join(", ");
+const implicitTagSelectors = Object.keys(implicitRoleMap).join(", ");
+
+// ----------------------
+// Main logic
+// ----------------------
+document.querySelectorAll(`${roleAttrSelectors}, ${implicitTagSelectors}`).forEach(el => {
+
+  const hasAriaLabel = el.hasAttribute("aria-label") && el.getAttribute("aria-label").trim() !== "";
+  const hasAriaLabelledby = el.hasAttribute("aria-labelledby") && el.getAttribute("aria-labelledby").trim() !== "";
+
+  // Only flag elements that have an incorrectly applied name
+  if (!hasAriaLabel && !hasAriaLabelledby) return;
+
+  // Determine the role -- explicit takes priority over implicit
+  const explicitRole = el.getAttribute("role");
+  const role = (explicitRole && forbiddenNamedRoles.includes(explicitRole))
+    ? explicitRole
+    : implicitRoleMap[el.tagName.toLowerCase()];
+
+  // Outline the element
+  el.style.outline = "3px solid #b00020";
+
+  // Compute position
+  const rect = el.getBoundingClientRect();
+  const left = rect.left + window.scrollX;
+  const top = rect.top + window.scrollY;
+
+  // Floating badge
+  const badge = document.createElement("div");
+  badge.textContent = `NAME PROHIBITED: ${role}`;
+  badge.style.position = "absolute";
+  badge.style.left = `${left}px`;
+  badge.style.top = `${top - 30}px`;
+  badge.style.background = "#b00020";
+  badge.style.color = "white";
+  badge.style.padding = "5px";
+  badge.style.borderRadius = "5px";
+  badge.style.fontSize = "16px";
+  badge.style.whiteSpace = "nowrap";
+  badge.style.pointerEvents = "none";
+  badge.style.zIndex = "999999";
+
+  overlay.appendChild(badge);
+});</code></pre>
+  </div>
+</details>
+
+
+<h2>Footnotes</h2>
+
+<p>A focusable element inside <code>aria-hidden="true"</code> should always be investigated as an accessibility issue.</p>
+
+<p>Some browsers may still expose parts of that element to assistive technologies. For example, Chrome may expose the button’s name in the accessibility tree.</p>
+
+<p>This does not make the pattern safe.</p>
+
+<p>The ARIA specification says that elements are considered hidden when they, or any of their ancestors, have <code>aria-hidden="true"</code> applied. If a focusable control is inside that hidden content, different browsers and assistive technologies may handle it differently.</p>
+
+<p>Do not rely on browser forgiveness. Move the focusable element outside the <code>aria-hidden="true"</code> content, or remove <code>aria-hidden="true"</code> from the parent.</p>
+
+
+<script>
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('copy-btn')) {
+    const pre = e.target.nextElementSibling;
+    const code = pre.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      e.target.textContent = "Copied!";
+      setTimeout(() => e.target.textContent = "Copy script", 1500);
+    });
+  }
+});
+</script>
+
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>
+

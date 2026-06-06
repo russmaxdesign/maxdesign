@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>When are aria-label and aria-labelledby allowed for naming elements? - Max Design</title>
+  <title>Where can aria-label and aria-labelledby be used for naming elements? - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="A simple explanation of where aria-label and aria-labelledby can and cannot be applied.">
+  <meta name="description" content="A simple explanation of how and where to use aria-label and aria-labelledby correctly.">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,18 +28,30 @@
   </nav>
   <div class="banner-inner">
     <div class="banner-content">
-      <h1>When are <code>aria-label</code> and <code>aria-labelledby</code> allowed for naming elements?</h1> 
+      <h1>Where can <code>aria-label</code> and <code>aria-labelledby</code> be used for naming elements?</h1> 
     </div>
   </div>  
   <main>
 
-<p class="metadetails">Published: <time datetime="2026-05-24">24 May 2026</time></p>
+<p class="metadetails">Published: <time datetime="2026-05-27">27 May 2026</time></p>
 
-<p>Where can the <code>aria-label</code> and <code>aria-labelledby</code> attributes be used?</p>
+<h2>What are they?</h2>
 
-<p><b>The answer</b>: <code>aria-label</code> and <code>aria-labelledby</code> are intended for elements whose roles support author-provided accessible names. These roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</p>
+<p><code>aria-label</code> and <code>aria-labelledby</code> are ARIA attributes that allow authors to provide an accessible name to elements.</p>
 
-<p>This statement does a lot of work, so let’s break it down into smaller parts.</p>
+<ul>
+  <li><code>aria-label</code> supplies the name as a text string directly in the attribute.</li>
+  <li><code>aria-labelledby</code> references another element whose content is used as the accessible name.</li>
+</ul>
+
+<h2>Which elements can they be applied to?</h2>
+
+<ul>
+  <li><code>aria-label</code> and <code>aria-labelledby</code> are intended for elements whose roles support author-provided accessible names.</li>
+  <li>Those roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</li>
+</ul>
+
+<p>This is a lot to unpack, so let's break it down into smaller parts.</p>
 
 <h2>What are roles?</h2>
 
@@ -67,7 +79,7 @@
   <li><code>&lt;main&gt;</code> has an implicit role of <code>main</code></li>
 </ul>
 
-<p>Browsers automatically provide these roles without needing extra markup.</p>
+<p>These roles are automatically exposed by browsers without needing extra markup.</p>
 
 <p><b>Explicit roles</b> are roles added manually by authors using the <code>role</code> attribute.</p>
 
@@ -75,7 +87,7 @@
 
 <pre><code>&lt;div <span class="highlight">role="button"</span>&gt;Save&lt;/div&gt;</code></pre>
 
-<p>This example is used only to demonstrate an explicit role. In practice, native button elements are generally preferred.</p>
+<p>This example is used only to demonstrate an explicit role. Where possible, use native <code>&lt;button&gt;</code> elements.</p>
 
 <h2>What are accessible names?</h2>
 
@@ -99,11 +111,21 @@
 
 <p>Where possible, visible text labels are preferred over ARIA-only labels.</p>
 
-<p>Whether an element can have an accessible name depends on its role.</p>
+<h2>What are author-provided accessible names?</h2>
 
-<h2>Which roles can have names?</h2>
+<p>Author-provided accessible names are names supplied directly by the author using <code>aria-label</code> or <code>aria-labelledby</code>, rather than being produced from element content or other native HTML methods.</p>
 
-<p>Many interactive, structural, and landmark roles allow accessible names. Examples of roles that commonly allow names include:</p>
+<p>For example, a <code>button</code> role can have the name “Save” from the button&rsquo;s content.</p>
+
+<pre><code>&lt;button&gt;<span class="highlight">Save</span>&lt;/button&gt;</code></pre>
+
+<p>But it could also be given an author-provided accessible name, in this case to provide additional context.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-label="Dismiss alert"</span>&gt;Dismiss&lt;/button&gt;</code></pre>
+
+<h2>Which roles can have author-provided names?</h2>
+
+<p>Many interactive, structural, and landmark roles support author-provided accessible names. Examples include:</p>
 
 <ul>
   <li><code>button</code></li>
@@ -116,32 +138,45 @@
   <li><code>dialog</code></li>
 </ul>
 
-<p>For example, a <code>button</code> role can have the name “Save”, and a <code>dialog</code> role can have the name “Settings”.</p>
-
-<p>Some roles are intended only for presentation or generic structure, so they do not allow accessible names. Examples include:</p>
+<p>Some roles are intended only for presentation or generic structure, so they do not allow author-provided accessible names. In ARIA 1.2, roles that cannot be named are:</p>
 
 <ul>
-  <li><code>presentation</code></li>
-  <li><code>none</code></li>
+  <li><code>caption</code></li>
+  <li><code>code</code></li>
+  <li><code>deletion</code></li>
+  <li><code>emphasis</code></li>
   <li><code>generic</code></li>
-  <li><code>separator</code> (when not focusable)</li>
+  <li><code>insertion</code></li>
+  <li><code>paragraph</code></li>
+  <li><code>presentation</code></li>
+  <li><code>strong</code></li>
+  <li><code>subscript</code></li>
+  <li><code>superscript</code></li>
 </ul>
 
-<p>In the example below, the element is treated as purely presentational, so giving it an accessible name would have no meaning.</p>
+<p>In fact, most roles in this list are also the implicit roles of common HTML elements. This means applying <code>aria-label</code> or <code>aria-labelledby</code> to those elements is equally unsupported.</p>
+
+<p>In this example, the <code>&lt;div&gt;</code> is explicitly assigned the role of <code>presentation</code>.</p>
 
 <pre><code>&lt;div <span class="highlight">role="presentation"</span>&gt;&lt;/div&gt;</code></pre>
 
-<h2>Putting this all together</h2>
+<p>In this example, <code>&lt;p&gt;</code> has an implicit role of <code>paragraph</code>.</p>
 
-<p><code>aria-label</code> and <code>aria-labelledby</code> should only be used on elements whose implicit or explicit roles support author-provided accessible names.</p>
+<pre><code>&lt;p&gt;Hello world&lt;/p&gt;</code></pre>
 
-<p>If a role prohibits author-provided names, applying these attributes is not supported by the ARIA specification, even though some browsers or assistive technologies may still expose names in certain situations.</p>
+<p>In both cases, these roles do not support author-provided accessible names, even though some browsers may still expose names in practice.</p>
 
-<p>For the most reliable results, use <code>aria-label</code> and <code>aria-labelledby</code> only on elements whose roles allow author-provided accessible names.</p>
+<h2>Summary</h2>
+
+<ul>
+  <li><code>aria-label</code> and <code>aria-labelledby</code> are used to apply author-provided accessible names to elements.</li>
+  <li>They are intended for elements whose roles support author-provided accessible names.</li>
+  <li>Those roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</li>
+</ul>
 
 <h2>Further reading</h2>
 
-<p>The rules above describe what the ARIA specification intends. In practice, browsers are often more tolerant than the spec requires. They sometimes expose accessible names even when they shouldn't.</p>
+<p>The rules above describe the ARIA specification requirements. In practice, browsers are often more tolerant than the spec requires. They sometimes expose accessible names even when they shouldn&rsquo;t.</p>
 
 <p>For a detailed look at how browsers actually behave, see <a href="https://www.maxdesign.com.au/articles/aria-label.html" target="_blank">aria-label and static elements</a>, including test results across browsers and platforms.</p>
 
@@ -165,7 +200,7 @@
       <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
       <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
     </ul>
-    <p>Copyright &copy; Max Design 2025</p>
+    <p>Copyright &copy; Max Design 2026</p>
   </footer>
 </body>
 </html>

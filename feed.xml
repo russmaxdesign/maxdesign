@@ -8,8 +8,9 @@
 <title>Max Design articles</title>
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
-<lastBuildDate>Tue, 13 Jan 2026 09:10:30 +1100</lastBuildDate>
-<pubDate>Tue, 13 Jan 2026 09:10:30 +1100</pubDate>
+<language>en-au</language>
+<lastBuildDate>Tue, 26 May 2026 09:00:30 +1100</lastBuildDate>
+<pubDate>Tue, 26 May 2026 09:00:30 +1100</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -23,7 +24,28 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Three accessibility assumptions                         -->
+<!--  1. Where can aria-label and aria-labelledby be used for naming elements?  -->
+<!--  =========================================================  -->
+<item>
+<title>Where can aria-label and aria-labelledby be used for naming elements?</title>
+<link>https://www.maxdesign.com.au/articles/when-allowed.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/when-allowed.html</guid>
+<pubDate>Tue, 26 May 2026 09:00:30 +1100</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>A simple explanation of how and where to use aria-label and aria-labelledby correctly.</description>
+<content:encoded>
+<![CDATA[
+<p>A simple explanation of how aria-label and aria-labelledby work, where they can be used, and why some elements and roles do not support accessible naming.</p>
+<p><a href="https://www.maxdesign.com.au/articles/when-allowed.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Three accessibility assumptions                         -->
 <!--  =========================================================  -->
 <item>
 <title>Three accessibility assumptions</title>
@@ -44,7 +66,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. What is the minimum markup needed to create a modal?    -->
+<!--  3. What is the minimum markup needed to create a modal?    -->
 <!--  =========================================================  -->
 <item>
 <title>What is the minimum markup needed to create a modal?</title>
@@ -67,7 +89,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Do screen readers announce “bullet” when a list uses list-style: none? -->
+<!--  4. Do screen readers announce “bullet” when a list uses list-style: none? -->
 <!--  =========================================================  -->
 <item>
 <title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
@@ -90,7 +112,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Is aria-label allowed on static elements?               -->
+<!--  5. Is aria-label allowed on static elements?               -->
 <!--  =========================================================  -->
 <item>
 <title>Is aria-label allowed on static elements?</title>
@@ -112,7 +134,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. How can you tell what's allowed inside each HTML element?  -->
+<!--  6. How can you tell what's allowed inside each HTML element?  -->
 <!--  =========================================================  -->
 <item>
 <title>How can you tell what's allowed inside each HTML element?</title>
@@ -133,7 +155,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. HTML content categories                                 -->
+<!--  7. HTML content categories                                 -->
 <!--  =========================================================  -->
 <item>
 <title>HTML content categories</title>
@@ -155,7 +177,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. People with reduced vision: technology settings and possible impacts  -->
+<!--  8. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -177,7 +199,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. Tests for CSS generated content alternative text        -->
+<!--  9. Tests for CSS generated content alternative text        -->
 <!--  =========================================================  -->
 <item>
 <title>Tests for CSS generated content alternative text</title>
@@ -198,7 +220,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Eight quick things to remember when using aria-owns     -->
+<!--  10. Eight quick things to remember when using aria-owns     -->
 <!--  =========================================================  -->
 <item>
 <title>Eight quick things to remember when using aria-owns</title>
@@ -223,28 +245,6 @@
   <li>Multiple references to the same ID</li>
 </ul>
 <p><a href="https://www.maxdesign.com.au/articles/aria-owns.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Why role="button" on a <button> does nothing           -->
-<!--  =========================================================  -->
-<item>
-<title>Why role="button" on a button does nothing</title>
-<link>https://www.maxdesign.com.au/articles/role-button.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/role-button.html</guid>
-<pubDate>Mon, 22 Dec 2025 05:30:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>Why adding role=button to a native button has no effect, how the specification defines this behaviour, and what it teaches us about when ARIA should and shouldn’t be used.</description>
-<content:encoded>
-<![CDATA[
-<p>You may have seen role="button" in real-world markup and wondered why it’s there. This article looks at why adding an ARIA role to a native button has no effect, and how the Core Accessibility API Mappings specification defines what browsers must do when native HTML and ARIA describe the same semantics.</p>
-<p>Using this small example, the article explores a broader lesson about ARIA: it doesn’t enhance native elements, and it isn’t something to add “just in case”. Instead, ARIA is meant for situations where native semantics are missing, insufficient, or need to be replaced intentionally.</p>
-<p><a href="https://www.maxdesign.com.au/articles/role-button.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
