@@ -908,11 +908,17 @@ document.querySelectorAll(`${roleAttrSelectors}, ${implicitTagSelectors}`).forEa
 
 <p>A focusable element inside <code>aria-hidden="true"</code> should always be investigated as an accessibility issue.</p>
 
+<p>An example could be a button inside a parent that is set to <code>aria-hidden="true"</code>:</p>
+
+<pre><code>&lt;div aria-hidden="true"&gt;
+  &lt;button&gt;Hidden button&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
 <p>Some browsers may still expose parts of that element to assistive technologies. For example, Chrome may expose the button’s name in the accessibility tree.</p>
 
 <p>This does not make the pattern safe.</p>
 
-<p>The ARIA specification says that elements are considered hidden when they, or any of their ancestors, have <code>aria-hidden="true"</code> applied. If a focusable control is inside that hidden content, different browsers and assistive technologies may handle it differently.</p>
+<p>The <a href="https://www.w3.org/TR/wai-aria-1.2/#aria-hidden" target="_blank">ARIA specification</a> says that elements are considered hidden when they, or any of their ancestors, have <code>aria-hidden="true"</code> applied. If a focusable control is inside that hidden content, different browsers and assistive technologies may handle it differently.</p>
 
 <p>Do not rely on browser forgiveness. Move the focusable element outside the <code>aria-hidden="true"</code> content, or remove <code>aria-hidden="true"</code> from the parent.</p>
 

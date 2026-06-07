@@ -9,8 +9,8 @@
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
 <language>en-au</language>
-<lastBuildDate>Tue, 26 May 2026 09:00:30 +1100</lastBuildDate>
-<pubDate>Tue, 26 May 2026 09:00:30 +1100</pubDate>
+<lastBuildDate>Sunday, 7 June 2026 11:20:30 +1000</lastBuildDate>
+<pubDate>Sunday, 7 June 2026 11:20:30 +1000</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -24,7 +24,47 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Where can aria-label and aria-labelledby be used for naming elements?  -->
+<!--  1. A bookmarklet highlighting roles that must never have author-provided names  -->
+<!--  =========================================================  -->
+<item>
+<title>A bookmarklet highlighting roles that must never have author-provided names</title>
+<link>https://www.maxdesign.com.au/articles/name-bookmarklet.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/name-bookmarklet.html</guid>
+<pubDate>Sun, 07 Jun 2026 13:10:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This bookmarklet highlights elements with name-prohibited roles.</description>
+<content:encoded>
+<![CDATA[
+<p>A bookmarklet that highlights ARIA roles where author-provided accessible names are forbidden. A practical way to find naming errors and better understand ARIA naming rules.</p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Using the browser console for accessibility testing - Part 2  -->
+<!--  =========================================================  -->
+<item>
+<title>Using the browser console for accessibility testing - Part 2</title>
+<link>https://www.maxdesign.com.au/articles/console2.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/console2.html</guid>
+<pubDate>Sunday, 07 June 2026 10:20:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>Learn how to use browser console scripts to test aria-invalid, aria-hidden, aria-expanded, tabindex, accessible names, required fields and name-prohibited roles.</description>
+<content:encoded>
+<![CDATA[
+<p>Build on browser-based accessibility testing techniques using the console. This article explores additional JavaScript snippets that help inspect accessible names, descriptions, roles, states and properties directly in the browser.</p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  3. Where can aria-label and aria-labelledby be used for naming elements?  -->
 <!--  =========================================================  -->
 <item>
 <title>Where can aria-label and aria-labelledby be used for naming elements?</title>
@@ -45,7 +85,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Three accessibility assumptions                         -->
+<!--  4. Three accessibility assumptions                         -->
 <!--  =========================================================  -->
 <item>
 <title>Three accessibility assumptions</title>
@@ -66,7 +106,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. What is the minimum markup needed to create a modal?    -->
+<!--  5. What is the minimum markup needed to create a modal?    -->
 <!--  =========================================================  -->
 <item>
 <title>What is the minimum markup needed to create a modal?</title>
@@ -89,7 +129,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Do screen readers announce “bullet” when a list uses list-style: none? -->
+<!--  6. Do screen readers announce “bullet” when a list uses list-style: none? -->
 <!--  =========================================================  -->
 <item>
 <title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
@@ -112,7 +152,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Is aria-label allowed on static elements?               -->
+<!--  7. Is aria-label allowed on static elements?               -->
 <!--  =========================================================  -->
 <item>
 <title>Is aria-label allowed on static elements?</title>
@@ -134,7 +174,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. How can you tell what's allowed inside each HTML element?  -->
+<!--  8. How can you tell what's allowed inside each HTML element?  -->
 <!--  =========================================================  -->
 <item>
 <title>How can you tell what's allowed inside each HTML element?</title>
@@ -155,7 +195,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. HTML content categories                                 -->
+<!--  9. HTML content categories                                 -->
 <!--  =========================================================  -->
 <item>
 <title>HTML content categories</title>
@@ -177,7 +217,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. People with reduced vision: technology settings and possible impacts  -->
+<!--  10. People with reduced vision: technology settings and possible impacts  -->
 <!--  =========================================================  -->
 <item>
 <title>People with reduced vision: technology settings and possible impacts</title>
@@ -196,59 +236,6 @@
 ]]>
 </content:encoded>
 </item>
-
-
-<!--  =========================================================  -->
-<!--  9. Tests for CSS generated content alternative text        -->
-<!--  =========================================================  -->
-<item>
-<title>Tests for CSS generated content alternative text</title>
-<link>https://www.maxdesign.com.au/articles/test-cases-css-content.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/test-cases-css-content.html</guid>
-<pubDate>Sun, 28 Dec 2025 08:10:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>Tests to determine how CSS generated content alternative text is exposed to assistive technologies.</description>
-<content:encoded>
-<![CDATA[
-<p>Sometimes, designers use CSS content: to add text or icons before or after elements. If that content is meant to be seen, it might also need an accessible version for people who can’t see it. In supporting browsers, this alternative text may be exposed to the accessibility tree and could be used by assistive technologies in place of the visible CSS content.</p>
-<p><a href="https://www.maxdesign.com.au/articles/test-cases-css-content.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Eight quick things to remember when using aria-owns     -->
-<!--  =========================================================  -->
-<item>
-<title>Eight quick things to remember when using aria-owns</title>
-<link>https://www.maxdesign.com.au/articles/aria-owns.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-owns.html</guid>
-<pubDate>Sat, 27 Dec 2025 07:25:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>Eight quick things to remember when using aria-owns including what it is, when to use it and when not to use it.</description>
-<content:encoded>
-<![CDATA[
-<p>This article explores:</p>
-<ul>
-  <li>What <code>aria-owns</code> does</li>
-  <li>When <code>aria-owns</code> can be useful</li>
-  <li>When <code>aria-owns</code> should not be used</li>
-  <li>DOM order vs Tab order vs Accessibility tree order</li>
-  <li>DOM children vs <code>aria-owns</code> children</li>
-  <li>IDREF order matters</li>
-  <li>Defining all children when order is critical</li>
-  <li>Multiple references to the same ID</li>
-</ul>
-<p><a href="https://www.maxdesign.com.au/articles/aria-owns.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
 
 </channel>
 </rss>

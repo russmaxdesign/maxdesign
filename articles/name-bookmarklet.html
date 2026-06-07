@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A bookmarklet highlighting roles that must never have author-provided names - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This bookmarklet highlights elements with name-prohibited roles">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+video {
+  max-width: 640px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.video-headings {
+  margin: 4em 0 1em;
+}
+a.bookmarklet {
+  display: inline-block;
+  background-image: url(../img/bookmark.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center left 10px !important;
+  padding: .5em 1em !important;
+  color: #000;
+  box-shadow: 4px 4px 4px 0 #ccc;
+}
+
+a.bookmarklet:link, a.bookmarklet:visited {
+  background-color: #eee;
+  padding: .5em 1em;
+  border: 1px solid #666;
+  border-radius: .3em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>A bookmarklet highlighting roles that must never have author-provided names</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-06-07">7 June 2026</time></p>
+
+<p>This follows on from my recent article: <a href="https://www.maxdesign.com.au/articles/console2.html" target="_blank">Using the browser console for accessibility testing - Part 2</a>.</p>
+
+<p>I converted one of those console scripts into a standalone bookmarklet. Unlike console scripts, bookmarklets require no DevTools, no installation, and work in any browser.</p>
+
+<h2>Usage</h2>
+
+<p>Drag the following bookmarklet into your address bar:</p>
+
+<p>
+  <a class="bookmarklet" href="javascript:(function(){const%20overlay%20%3D%20document.createElement(%22div%22)%3Boverlay.style.position%3D%22absolute%22%3Boverlay.style.top%3D%220%22%3Boverlay.style.left%3D%220%22%3Boverlay.style.width%3D%22100%25%22%3Boverlay.style.pointerEvents%3D%22none%22%3Boverlay.style.zIndex%3D%22999999%22%3Bdocument.body.appendChild(overlay)%3Bconst%20forbiddenNamedRoles%3D%5B%22caption%22%2C%22code%22%2C%22deletion%22%2C%22emphasis%22%2C%22generic%22%2C%22insertion%22%2C%22paragraph%22%2C%22presentation%22%2C%22strong%22%2C%22subscript%22%2C%22superscript%22%2C%22definition%22%2C%22mark%22%2C%22none%22%2C%22suggestion%22%2C%22term%22%2C%22time%22%2C%22tooltip%22%5D%3Bconst%20implicitRoleMap%3D%7Bcaption%3A%22caption%22%2Ccode%3A%22code%22%2Cdel%3A%22deletion%22%2Cs%3A%22deletion%22%2Cem%3A%22emphasis%22%2Cdiv%3A%22generic%22%2Cspan%3A%22generic%22%2Cins%3A%22insertion%22%2Cp%3A%22paragraph%22%2Cstrong%3A%22strong%22%2Csub%3A%22subscript%22%2Csup%3A%22superscript%22%2Cdfn%3A%22definition%22%2Cmark%3A%22mark%22%2Ctime%3A%22time%22%7D%3Bconst%20roleAttrSelectors%3DforbiddenNamedRoles.map(r%3D%3E%60%5Brole%3D%22%24%7Br%7D%22%5D%60).join(%22%2C%20%22)%3Bconst%20implicitTagSelectors%3DObject.keys(implicitRoleMap).join(%22%2C%20%22)%3Bdocument.querySelectorAll(%60%24%7BroleAttrSelectors%7D%2C%20%24%7BimplicitTagSelectors%7D%60).forEach(el%3D%3E%7Bconst%20hasAriaLabel%3Del.hasAttribute(%22aria-label%22)%26%26el.getAttribute(%22aria-label%22).trim()!%3D%3D%22%22%3Bconst%20hasAriaLabelledby%3Del.hasAttribute(%22aria-labelledby%22)%26%26el.getAttribute(%22aria-labelledby%22).trim()!%3D%3D%22%22%3Bif(!hasAriaLabel%26%26!hasAriaLabelledby)return%3Bconst%20explicitRole%3Del.getAttribute(%22role%22)%3Bconst%20role%3D(explicitRole%26%26forbiddenNamedRoles.includes(explicitRole))%3FexplicitRole%3AimplicitRoleMap%5Bel.tagName.toLowerCase()%5D%3Bel.style.outline%3D%223px%20solid%20%23b00020%22%3Bconst%20rect%3Del.getBoundingClientRect()%3Bconst%20left%3Drect.left%2Bwindow.scrollX%3Bconst%20top%3Drect.top%2Bwindow.scrollY%3Bconst%20badge%3Ddocument.createElement(%22div%22)%3Bbadge.textContent%3D%22NAME%20PROHIBITED%3A%20%22%2Brole%3Bbadge.style.position%3D%22absolute%22%3Bbadge.style.left%3Dleft%2B%22px%22%3Bbadge.style.top%3D(top-30)%2B%22px%22%3Bbadge.style.background%3D%22%23b00020%22%3Bbadge.style.color%3D%22white%22%3Bbadge.style.padding%3D%225px%22%3Bbadge.style.borderRadius%3D%225px%22%3Bbadge.style.fontSize%3D%2216px%22%3Bbadge.style.whiteSpace%3D%22nowrap%22%3Bbadge.style.pointerEvents%3D%22none%22%3Bbadge.style.zIndex%3D%22999999%22%3Boverlay.appendChild(badge)%7D)%7D)()%3B">Highlight roles that must never have author-provided names</a>
+</p>
+
+<p>Click the bookmarklet on any page to highlight elements with name-prohibited roles. Any violations found will be outlined in red with a label identifying the role and the prohibited name.</p>
+
+<p>You can test it on this sample page: <a href="https://intopia.github.io/exercise/testing-console.html" target="_blank">Testing accessibility console scripts</a></p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/bookmarklet-name.mp4"></video>
+
+<h2>What's it about?</h2>
+
+<p>Some ARIA roles are defined as "name prohibited". This means authors must not give them an accessible name via any method, including aria-label or aria-labelledby.</p>
+
+<p>If one of these roles is given an accessible name, assistive technologies may ignore it, announce it unexpectedly, or behave inconsistently.</p>
+
+<p>In ARIA 1.2, the <a href="https://www.w3.org/TR/wai-aria-1.2/#namefromprohibited" target="_blank">name-prohibited roles</a> are:</p>
+
+<ul>
+  <li><code>caption</code></li>
+  <li><code>code</code></li>
+  <li><code>deletion</code></li>
+  <li><code>emphasis</code></li>
+  <li><code>generic</code></li>
+  <li><code>insertion</code></li>
+  <li><code>paragraph</code></li>
+  <li><code>presentation</code></li>
+  <li><code>strong</code></li>
+  <li><code>subscript</code></li>
+  <li><code>superscript</code></li>
+</ul>
+
+<p>ARIA 1.3 (currently a working draft) adds these <a href="https://www.w3.org/TR/wai-aria-1.3/#namefromprohibited" target="_blank">name-prohibited roles</a>:</p>
+
+<ul>
+  <li><code>definition</code></li>
+  <li><code>mark</code></li>
+  <li><code>none</code> (replacing presentation)</li>
+  <li><code>suggestion</code></li>
+  <li><code>term</code></li>
+  <li><code>time</code></li>
+  <li><code>tooltip</code></li>
+</ul>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2025</p>
+  </footer>
+</body>
+</html>
