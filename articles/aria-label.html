@@ -77,16 +77,21 @@ caption {
 
 <p class="metadetails">Published: <time datetime="2026-01-03">03 January 2026</time></p>
 
-<p>There is a commonly held belief that the <code>aria-label</code> attribute “cannot” be used on static (or non-interactive) elements.</p>
+<p>I am often asked by people during training: "Is <code>aria-label</code> allowed on static elements?"</p>
 
-<p>While the ARIA and HTML specifications do not forbid <code>aria-label</code> purely on the basis of an element being ‘static’, they do prohibit its use when an element’s implicit or explicit role does not support ‘name from author’ (see
-<a href="https://w3c.github.io/html-aria/#docconformance">ARIA in HTML, section 5.2.8</a>).</p>
+<p>Before exploring some different scenarios, let's address two key points.</p>
+
+<h2>1. Static elements</h2>
+
+<p>The term "static" is not used in the specs; the actual criterion is always about the role, not interactivity. However, some developers use the term to describe elements that are non-interactive.</p>
+
+<h2>2. Naming elements</h2>
+
+<p>While the ARIA and HTML specifications do not forbid <code>aria-label</code> purely on the basis of an element being "static", they do prohibit its use when an element's implicit or explicit role does not support "name from author" (see <a href="https://w3c.github.io/html-aria/#docconformance">ARIA in HTML, section 5.2.8</a>).</p>
 
 <p>The simplest way to think about it:</p>
 
 <p style="font-size: 1.2em; padding-left: 1em; border-left: .2em solid #ccc;"><code>aria-label</code> is intended for elements whose roles support author-provided accessible names. These roles can be either implicit (native to the HTML element) or explicit (assigned via ARIA).</p>
-
-<p>Note that "static" (meaning non-interactive) is not a term the specs use; the actual criterion is always about the role, not interactivity.</p>
 
 <p>As you will see below, there <em>are</em> legitimate cases where static elements use <code>aria-label</code>, either because they have a native role or because an appropriate ARIA <code>role</code> is applied.</p>
 
