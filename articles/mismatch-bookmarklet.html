@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A bookmarklet highlighting mismatches between the visible label and accessible name - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This bookmarklet highlights a, button and elements with role=button or role=link to determine if their visible names match their accessible names">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+video {
+  max-width: 640px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.video-headings {
+  margin: 4em 0 1em;
+}
+a.bookmarklet {
+  display: inline-block;
+  background-image: url(../img/bookmark.png) !important;
+  background-repeat: no-repeat !important;
+  background-position: center left 10px !important;
+  padding: .5em 1em !important;
+  color: #000;
+  box-shadow: 4px 4px 4px 0 #ccc;
+}
+
+a.bookmarklet:link, a.bookmarklet:visited {
+  background-color: #eee;
+  padding: .5em 1em;
+  border: 1px solid #666;
+  border-radius: .3em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>A bookmarklet highlighting mismatches between the visible label and accessible name</h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-06-08">8 June 2026</time></p>
+
+<p>This follows on from my recent article: <a href="https://www.maxdesign.com.au/articles/console2.html" target="_blank">Using the browser console for accessibility testing - Part 2</a>.</p>
+
+<p>I converted another of those console scripts into a standalone bookmarklet.</p>
+
+<h2>Usage</h2>
+
+<p>Drag the following bookmarklet into your address bar:</p>
+
+<p>
+  <a class="bookmarklet" href="javascript:(function(){const%20overlay%20%3D%20document.createElement(%22div%22)%3Boverlay.style.position%3D%22absolute%22%3Boverlay.style.top%3D%220%22%3Boverlay.style.left%3D%220%22%3Boverlay.style.width%3D%22100%25%22%3Boverlay.style.pointerEvents%3D%22none%22%3Boverlay.style.zIndex%3D%22999999%22%3Bdocument.body.appendChild(overlay)%3Bconst%20colours%3D%7Bmatch%3A%22%231b5e20%22%2Cmodified%3A%22%230a558c%22%2Cmismatch%3A%22%23b00020%22%7D%3Bfunction%20getVisibleText(el)%7Breturn%20el.textContent.trim().replace(%2F%5Cs%2B%2Fg%2C%22%20%22)%7Dfunction%20getAccessibleName(el)%7Bconst%20labelledby%3Del.getAttribute(%22aria-labelledby%22)%3Bif(labelledby)%7Bconst%20parts%3Dlabelledby.trim().split(%2F%5Cs%2B%2F).map(id%3D%3E%7Bconst%20ref%3Ddocument.getElementById(id)%3Breturn%20ref%3Fref.textContent.trim()%3A%22%22%7D).filter(Boolean)%3Bconst%20name%3Dparts.join(%22%20%22).trim()%3Bif(name)return%20name%7Dconst%20ariaLabel%3Del.getAttribute(%22aria-label%22)%3Bif(ariaLabel%26%26ariaLabel.trim())return%20ariaLabel.trim()%3Breturn%20getVisibleText(el)%7Ddocument.querySelectorAll('a%2Cbutton%2C%5Brole%3D%22button%22%5D%2C%5Brole%3D%22link%22%5D').forEach(el%3D%3E%7Bconst%20visibleText%3DgetVisibleText(el)%3Bconst%20accessibleName%3DgetAccessibleName(el)%3Bconst%20visibleLower%3DvisibleText.toLowerCase()%3Bconst%20nameLower%3DaccessibleName.toLowerCase()%3Blet%20colour%2Clabel%3Bif(nameLower%3D%3D%3DvisibleLower)%7Bcolour%3Dcolours.match%3Blabel%3D%22MATCH%3A%20%22%2BaccessibleName%7Delse%20if(nameLower.startsWith(visibleLower))%7Bcolour%3Dcolours.modified%3Blabel%3D%22MODIFIED%3A%20%22%2BaccessibleName%7Delse%7Bcolour%3Dcolours.mismatch%3Blabel%3D%22MISMATCH%3A%20%22%2BaccessibleName%7Del.style.outline%3D%223px%20solid%20%22%2Bcolour%3Bconst%20rect%3Del.getBoundingClientRect()%3Bconst%20left%3Drect.left%2Bwindow.scrollX%3Bconst%20top%3Drect.top%2Bwindow.scrollY%3Bconst%20badge%3Ddocument.createElement(%22div%22)%3Bbadge.textContent%3Dlabel%3Bbadge.style.position%3D%22absolute%22%3Bbadge.style.left%3Dleft%2B%22px%22%3Bbadge.style.top%3D(top-30)%2B%22px%22%3Bbadge.style.background%3Dcolour%3Bbadge.style.color%3D%22white%22%3Bbadge.style.padding%3D%225px%22%3Bbadge.style.borderRadius%3D%225px%22%3Bbadge.style.fontSize%3D%2216px%22%3Bbadge.style.whiteSpace%3D%22nowrap%22%3Bbadge.style.pointerEvents%3D%22none%22%3Bbadge.style.zIndex%3D%22999999%22%3Boverlay.appendChild(badge)%7D)%7D)()%3B">Highlight visible label vs accessible name mismatch</a>
+</p>
+
+<p>Click the bookmarklet on any page to highlight <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, and elements with <code>role="button"</code> or <code>role="link"</code> to determine if their visible names match their accessible names.</p>
+
+<p>You can test it on this sample page: <a href="https://intopia.github.io/exercise/testing-console.html" target="_blank">Testing accessibility console scripts</a></p>
+
+<video preload="none" width="1440" height="900" poster="../assets/img/poster.png" controls src="../assets/mp4/bookmarklet-mismatch.mp4"></video>
+
+<h2>What's it about?</h2>
+
+<p>People using speech input software often activate buttons and links by speaking the visible text shown on screen.</p>
+
+<p>If the accessible name does not contain that visible text, speech commands may fail or produce unexpected results.</p>
+
+<p>This script helps identify cases where the visible label and accessible name do not match, making potential issues easy to spot without inspecting each element individually.</p>
+
+<h3>Green (MATCH)</h3>
+
+<p>The visible text and accessible name are identical. No issue.</p>
+
+<h3>Blue (MODIFIED)</h3>
+
+<p>The accessible name starts with the visible text and adds extra context. This is valid and common. For example, a visible label of "Read more" may have an accessible name of "Read more about accessibility testing".</p>
+
+<p>Review these cases to confirm that any additional context is useful and relevant.</p>
+
+<h3>Red (MISMATCH)</h3>
+
+<p>The accessible name has no relationship to the visible text. This may indicate a failure of WCAG 2.5.3 Label in Name and should be investigated.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>
