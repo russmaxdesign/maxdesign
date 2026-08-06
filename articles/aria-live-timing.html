@@ -126,7 +126,7 @@
 ––––––––––––––––––––––––––  -->
 
 
-<h2>2. System-Driven Scheduling (Browser / Event Loop Layer)</h2>
+<h2>2. System-Driven Scheduling (Accessibility Subsystem Layer)</h2>
 
 <p>Before a screen reader can speak anything, the browser must:</p>
 
@@ -138,64 +138,61 @@
   <li>Which then delivers it to the screen reader.</li>
 </ul>
 
-<p>This pipeline runs on the browser’s internal scheduling systems, which include (but are not limited to) the JavaScript event loop, microtasks, rendering pipeline timing, and asynchronous accessibility tree updates.</p>
+<p>This pipeline runs on the browser's accessibility subsystem, a system that operates independently of the JavaScript engine, often on its own thread or process. It is not a stage inside the JavaScript event loop, and the event loop does not schedule or gate AXEvents.</p>
 
-<p>The event loop management includes:</p>
+<p>What the event loop <em>does</em> control is when your JavaScript runs and when it yields control back to the browser:</p>
 
 <ul>
   <li>The call stack <sup class="ref-target" id="ref-callstack"><a href="#callstack">5</a></sup>.</li>
   <li>The microtask queue <sup class="ref-target" id="ref-microtaskqueue"><a href="#microtaskqueue">6</a></sup>.</li>
-  <li>Rendering pipeline (layout, paint, compositing).</li>
   <li>Timers.</li>
-  <li>Input events.</li>
-  <li>Animation frames.</li>
-  <li>AX tree updates.</li>
+  <li>Input event dispatch.</li>
 </ul>
 
-<p>This is the other half of live region timing.</p>
+<p>Rendering (layout, paint, compositing) and AX tree updates are separate subsystems again. They are not part of event loop management, but their timing is indirectly affected by it: a DOM mutation cannot be detected by the accessibility subsystem until the JavaScript that caused it has actually run, and the event loop determines when that happens. Once JavaScript yields, the accessibility subsystem is free to detect the mutation and act on its own schedule, independently of any further event loop activity.</p>
+
+<p>This is the other half of live region timing: not the event loop itself, but the independent, less-predictable systems that pick up where the event loop's involvement ends.</p>
 
 <p>Let&rsquo;s explore how <b>assertive</b> and <b>polite</b> differ at the scheduling layer.</p>
 
 <h3>Assertive Timing</h3>
 
-<p><b>Assertive</b> live region AX events are scheduled as soon as possible:</p>
+<p><b>Assertive</b> live region AX events tend to be detected and fired soon after the triggering script yields:</p>
 
 <ul>
   <li>JavaScript-driven DOM mutation <sup class="ref-target" id="ref-javascriptdrivenmutation"><a href="#javascriptdrivenmutation">7</a></sup>.</li>
-  <li>Call stack becomes empty.</li>
-  <li>Microtasks drain <sup class="ref-target" id="ref-microtasksdrain"><a href="#microtasksdrain">8</a></sup>.</li>
-  <li><b>ASSERTIVE AX EVENT FIRES ←</b></li>
-  <li>Rendering may happen after this.</li>
+  <li>Call stack becomes empty, microtasks drain <sup class="ref-target" id="ref-microtasksdrain"><a href="#microtasksdrain">8</a></sup>.</li>
+  <li>JavaScript yields control back to the browser.</li>
+  <li>The accessibility subsystem detects the mutation and, in most implementations, does not wait for a render tick before generating the AX event.</li>
+  <li><b>ASSERTIVE AX EVENT TYPICALLY FIRES AROUND HERE ←</b></li>
+  <li>Rendering may happen before, during, or after this, independently.</li>
   <li>Task queue work happens later.</li>
 </ul>
 
-<p>Why <b>assertive</b> is fast:</p>
+<p>Why <b>assertive</b> tends to be fast:</p>
 
 <ul>
-  <li>It fires after the current JavaScript job, when the microtask queue empties.</li>
-  <li>It occurs before rendering changes.</li>
-  <li>It is never delayed by a render cycle.</li>
-  <li>It is not postponed by animations, layouts, or timers.</li>
+  <li>It generally does not wait on a render tick the way polite updates do.</li>
+  <li>It is not typically postponed by animations, layouts, or timers, though browsers may still batch or coalesce AX events internally.</li>
 </ul>
 
-<p>The only thing that can delay <b>assertive</b> is potential microtask starvation. This happens when microtasks keep running forever, so the browser never gets a chance to move on to the next task.</p>
+<p>The main thing that can delay the JavaScript side of this is microtask starvation, where microtasks keep queuing more microtasks, so the browser never yields and the mutation is never handed off for the accessibility subsystem to detect. Beyond that, actual AX event timing is implementation-dependent and not something the event loop guarantees.</p>
 
-<p>This explains why <b>assertive</b> is reliable and immediate in practice.</p>
+<p>This explains why <b>assertive</b> is comparatively fast and consistent in practice, though not because the event loop is driving it, only because it has fewer independent systems to wait on downstream.</p>
 
 <h3>Polite Timing</h3>
 
-<p><b>Polite</b> live region AX events are intentionally delayed:</p>
+<p><b>Polite</b> live region AX events are intentionally delayed, typically until the browser reaches a stable render state:</p>
 
 <ul>
   <li>JavaScript-driven DOM mutation.</li>
-  <li>Call stack becomes empty.</li>
-  <li>Microtasks drain.</li>
-  <li>Wait for the next rendering opportunity after style/layout have settled.</li>
+  <li>Call stack becomes empty, microtasks drain, JavaScript yields.</li>
+  <li>The accessibility subsystem waits for a stable render state before generating the AX event.</li>
   <li><b>POLITE AX EVENT FIRES ←</b></li>
   <li>Task queue work happens later.</li>
 </ul>
 
-<p><b>Polite</b> must wait for a future render tick, and a “stable render state” can be delayed by:</p>
+<p><b>Polite</b> must wait for a future render tick, and a "stable render state" can be delayed by:</p>
 
 <ul>
   <li>active layouts</li>
@@ -211,7 +208,7 @@
   <li>pending task queue events</li>
 </ul>
 
-<p>These delays affect the scheduling of the announcement, before the screen reader ever receives it.</p>
+<p>These delays affect the scheduling of the announcement inside the accessibility subsystem, before the screen reader ever receives it. The event loop's only role here is upstream: making sure the DOM mutation itself has actually happened before any of this can begin.</p>
 
 <hr>
 

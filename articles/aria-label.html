@@ -130,7 +130,7 @@ caption {
   &lt;img src="icon-cross.png" alt=""&gt;
 &lt;/button&gt;</code></pre>
 
-<p>This method is acceptable if there is no visible text label available. For example, the button inludes an icon only.</p>
+<p>This method is acceptable if there is no visible text label available. For example, the button includes an icon only.</p>
 
 <p>Pass criteria: The <code>&lt;button&gt;</code> has a name of "Dismiss" that is presented in the accessibility tree.</p>
 
@@ -282,7 +282,7 @@ caption {
 
 <h2>Group 3. Static elements with ARIA roles and <code>aria-label</code></h2>
 
-<p>The examples below are a small selection of user-cases where a <code>role</code> and <code>aria-label</code> may be associated with a static element.</p>
+<p>The examples below are a small selection of use-cases where a <code>role</code> and <code>aria-label</code> may be associated with a static element.</p>
 
 <h3>3.1. <code>role="menu"</code></h3>
 
@@ -302,7 +302,7 @@ caption {
 
 <p>This pattern is shown for demonstration purposes only and is not recommended in production in this current form, as it does not include the required interaction behaviour.</p>
 
-<p>However, it is valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA <code>role</code> is present.</p>
+<p>However, it is a valid use-case where <code>aria-label</code> can be applied to a static element, because an ARIA <code>role</code> is present.</p>
 
 <p>Pass criteria: The <code>&lt;ul&gt;</code> has a name "Actions" that is presented in the accessibility tree.</p>
 
@@ -428,7 +428,7 @@ caption {
 
 <p>While this method provides an accessible name for the button via name-from-content, a more robust solution would be to add the <code>aria-label</code> directly to the <code>&lt;button&gt;</code> element.</p>
 
-<p>This pattern is also invalid HTML. For <code>&lt;i&gt;</code> elements, <code>aria-label</code> must not be used if there is no ARIA role present. It also must not be used when the element has any of the following roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
+<p>This pattern is also invalid HTML. <code>aria-label</code> must not be used on this element, because its role (explicit or implicit) is one of the following name-prohibited roles: <code>caption</code>, <code>code</code>, <code>deletion</code>, <code>emphasis</code>, <code>generic</code>, <code>insertion</code>, <code>paragraph</code>, <code>presentation</code>, <code>strong</code>, <code>subscript</code>, or <code>superscript</code>.</p>
 
 <p>Pass criteria: The <code>&lt;button&gt;</code> has a name "Close" that is presented in the accessibility tree.</p>
 
