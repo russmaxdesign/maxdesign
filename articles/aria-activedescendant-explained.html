@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-activedescendant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A plain-language explanation of aria-activedescendant, comparing a native select to a custom listbox to show how it tells assistive technology which option is active without moving keyboard focus.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-activedescendant</code></h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-11">11 August 2026</time></p>
+
+<p>This article explains <code>aria-activedescendant</code> in plain language, starting with a familiar native <code>&lt;select&gt;</code> and then showing what changes when developers build their own custom version.</p>
+
+<h2>1. Native control</h2>
+
+<p>Let&rsquo;s start with a normal HTML <code>&lt;select&gt;</code>, as this will help us understand what <code>aria-activedescendant</code> is trying to achieve.</p>
+
+<pre><code>&lt;label for="animal"&gt;Choose an animal&lt;/label&gt;
+
+&lt;select id="animal"&gt;
+  &lt;option&gt;Dog&lt;/option&gt;
+  &lt;option&gt;Cat&lt;/option&gt;
+  &lt;option&gt;Rabbit&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>A native control like this comes with a lot of behaviour already built in.</p>
+
+<p>The browser knows its <strong>name</strong>:</p>
+
+<blockquote>"Choose an animal"</blockquote>
+
+<p>It knows its <strong>role</strong>:</p>
+
+<blockquote>"This is a select control with a list of options."</blockquote>
+
+<p>It also knows the normal keyboard behaviour for that control. A keyboard user can move to it with <code>Tab</code>, then use the arrow keys to move through the options.</p>
+
+<p>For example, pressing &darr; moves from &ldquo;Dog&rdquo; to &ldquo;Cat&rdquo;:</p>
+
+<pre><code>Dog     &larr; was current
+Cat     &larr; current option
+Rabbit
+</code></pre>
+
+<p>This behaviour is already understood by the browser. The developer does not have to invent which keys should work.</p>
+
+<p>It is also familiar to users. If someone has used a select before, they can reasonably expect the arrow keys to move through its options.</p>
+
+<p>Most importantly, as the current option changes, the browser also passes that information to assistive technology.</p>
+
+<p>As the user moves from &ldquo;Dog&rdquo; to &ldquo;Cat&rdquo; to &ldquo;Rabbit&rdquo;, the screen reader can announce those options.</p>
+
+<p>A lot is happening automatically to help screen readers understand the control:</p>
+
+<ul>
+  <li>the name of the control: "Choose an animal"</li>
+  <li>the type of control: a select or list of options</li>
+  <li>which option is currently active</li>
+  <li>when that option changes</li>
+</ul>
+
+<p>That is one of the big advantages of using a native HTML control.</p>
+
+<h2>2. Non-native control</h2>
+
+<p>So why would a developer choose not to use it?</p>
+
+<p>Sometimes a native select just cannot do what's needed. For example:</p>
+
+<ul>
+  <li>The options may need to show a small preview image next to each one.</li>
+  <li>The list may need to filter as the user types, like a search box that narrows down country names as you type "au".</li>
+  <li>The design may call for a dropdown that looks nothing like a browser's default select and no amount of styling can get a native select looking that way.</li>
+</ul>
+
+<p>In these situations, a developer may choose to build their own version of a <code>&lt;select&gt;</code> using generic HTML elements, then add the missing behaviour back in with JavaScript.</p>
+
+<p>The markup may look like this:</p>
+
+<pre><code>&lt;div&gt;Choose an animal&lt;/div&gt;
+
+&lt;div&gt;Dog&lt;/div&gt;
+&lt;div&gt;Cat&lt;/div&gt;
+&lt;div&gt;Rabbit&lt;/div&gt;
+</code></pre>
+
+<p>Visually, it might look almost exactly the same.</p>
+
+<p>The text <strong>"Choose an animal"</strong> is there, so people looking at the page can understand the name.</p>
+
+<p>But the other features we got from the native control are missing.</p>
+
+<p>The browser does not automatically know:</p>
+
+<ul>
+  <li>what this thing is</li>
+  <li>that this is supposed to behave like a list of options</li>
+  <li>that &ldquo;Dog&rdquo;, &ldquo;Cat&rdquo; and &ldquo;Rabbit&rdquo; are options</li>
+  <li>that the arrow keys should move through them</li>
+  <li>which option is currently active</li>
+  <li>what should be announced to a screen reader as the user moves</li>
+</ul>
+
+<p>The developer now has to recreate those things.</p>
+
+<p>ARIA can help explain to screen readers what the control and its parts are, such as its <b>name</b> and <b>role</b>. The control also needs a <code>tabindex="0"</code> so that it can receive keyboard focus, since a plain <code>&lt;div&gt;</code> is not focusable on its own:</p>
+
+<pre><code>&lt;div
+  <span class="highlight">role="listbox"</span>
+  <span class="highlight">aria-label="Choose an animal"</span>
+  <span class="highlight">tabindex="0"</span>
+&gt;
+</code></pre>
+
+<p>ARIA can also define the role of each option:</p>
+
+<pre><code>&lt;div <span class="highlight">role="option"</span>&gt;Dog&lt;/div&gt;
+&lt;div <span class="highlight">role="option"</span>&gt;Cat&lt;/div&gt;
+&lt;div <span class="highlight">role="option"</span>&gt;Rabbit&lt;/div&gt;
+</code></pre>
+
+<p>ARIA does not provide the keyboard behaviour, so the developer still needs JavaScript to add it.</p>
+
+<p>For example, JavaScript can listen for the down-arrow key and keep track of which option the user has moved to:</p>
+
+<pre><code>Dog     &larr; was current
+Cat     &larr; current option
+Rabbit
+</code></pre>
+
+<p>However, in some custom controls, the developer does not actually move keyboard focus onto &ldquo;Dog&rdquo;, then &ldquo;Cat&rdquo;, then &ldquo;Rabbit&rdquo;.</p>
+
+<p>Instead, keyboard focus stays on the main control while JavaScript keeps track of which option the user is moving through.</p>
+
+<p>Keeping keyboard focus on the main control can be useful in some custom controls. For example, in an editable combobox, focus can stay in the text field while the user moves through a list of suggestions.</p>
+
+<p>So the browser needs to be told:</p>
+
+<blockquote>"The keyboard is still on this control, but Cat is the option the user is currently on."</blockquote>
+
+<p>That is where <code>aria-activedescendant</code> comes in.</p>
+
+<p>The name itself is a clue. It is made up of two words, active and descendant.</p>
+
+<p>A descendant just means an element that lives inside another one. Dog, Cat and Rabbit are all descendants of the main control, the same way children live inside a family tree.</p>
+
+<p>So <code>aria-activedescendant</code> identifies which descendant of the main control is currently active.</p>
+
+<p>Each option is given an <code>id</code>, and the main control&rsquo;s <code>aria-activedescendant</code> value is set to match the <code>id</code> of the currently active option. An <code>aria-selected="true"</code> attribute is also added to that option to mark it as the current selection:</p>
+
+<pre><code>&lt;div
+  role="listbox"
+  aria-label="Choose an animal"
+  tabindex="0"
+  <span class="highlight">aria-activedescendant="dog"</span>
+&gt;
+  &lt;div role="option" <span class="highlight">id="dog"</span> <span class="highlight">aria-selected="true"</span>&gt;Dog&lt;/div&gt;
+  &lt;div role="option" id="cat"&gt;Cat&lt;/div&gt;
+  &lt;div role="option" id="rabbit"&gt;Rabbit&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Which basically means:</p>
+
+<blockquote>"Dog is the active item inside me."</blockquote>
+
+<p>When the user presses &darr;, JavaScript changes the main control&rsquo;s <code>aria-activedescendant</code> to <code>"cat"</code>, and moves <code>aria-selected="true"</code> onto the Cat option.</p>
+
+<p><code>aria-activedescendant</code> does <strong>not</strong> move keyboard focus. Keyboard focus stays on the main control.</p>
+
+<p>Instead, JavaScript updates the value of <code>aria-activedescendant</code> as the user moves through the options. The changing value tells the browser and screen reader which option should be treated as the current one.</p>
+
+<p>The important point is that <strong>focus itself is not moving between &ldquo;Dog&rdquo;, &ldquo;Cat&rdquo; and &ldquo;Rabbit&rdquo;</strong>. JavaScript is changing <code>aria-activedescendant</code> to tell assistive technology which option should be treated as if focus were there.</p>
+
+<p>The active option may also be visually highlighted as the user moves through the list, but keyboard focus remains on the main control.</p>
+
+<h2>Take away</h2>
+
+<p><strong>Native control:</strong> the browser already knows the name, role, expected keys, how movement works, and which option to report.</p>
+
+<p><strong>Custom control:</strong> in some cases the developer has to recreate those behaviours. Where needed, JavaScript can be used to handle the movement, and <code>aria-activedescendant</code> can be used to tell assistive technology which item is currently active.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>

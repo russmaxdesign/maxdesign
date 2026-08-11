@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="How aria-details lets you provide additional information for other elements.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-details</code></h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-13">13 August 2026</time></p>
+
+<p>This article explains <code>aria-details</code> in plain language, showing how it connects something on a page to additional detailed content, how that content is exposed to screen reader users, and how it differs from <code>aria-describedby</code>.</p>
+
+<h2>What is it?</h2>
+
+<p>The <code>aria-details</code> attribute is used when something on a page has <strong>additional detailed information available elsewhere</strong>.</p>
+
+<p>It creates a connection between that thing and the more detailed content.</p>
+
+<p>For example, a chart might have a short description:</p>
+
+<blockquote>
+  <p>Sales increased steadily throughout the year.</p>
+</blockquote>
+
+<p>But there may also be a much more detailed explanation elsewhere on the page, including figures, trends and exceptions.</p>
+
+<p><code>aria-details</code> can point from the chart to that detailed information.</p>
+
+<pre><code class="language-html">&lt;img
+  src="sales-chart.png"
+  alt="Sales increased steadily throughout the year"
+  <span class="highlight">aria-details="sales-details"</span>
+&gt;
+
+&lt;div <span class="highlight">id="sales-details"</span>&gt;
+  &lt;h2&gt;Detailed sales information&lt;/h2&gt;
+
+  &lt;p&gt;
+    Sales began at $20,000 in January, increased to $24,000
+    in February, and reached $31,000 in March.
+  &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>The matching <code>sales-details</code> values tell assistive technologies:</p>
+
+<blockquote>
+  <p>There is more detailed information about this item, and this is where it can be found.</p>
+</blockquote>
+
+<h2>What does a screen reader announce?</h2>
+
+<p>When a screen reader user reaches the image, the screen reader does <strong>not</strong> normally read all of the detailed information.</p>
+
+<p>Instead, it will generally announce something along the lines of:</p>
+
+<blockquote>
+  <p>"Sales increased steadily throughout the year, image, <b>has details</b>."</p>
+</blockquote>
+
+<p>The exact words and order will vary depending on the screen reader, browser and user settings. The important thing is that the user hears:</p>
+
+<ol>
+  <li>the image's short alternative text</li>
+  <li>that it is an image</li>
+  <li>that additional details are available</li>
+</ol>
+
+<p>And then it stops. The detailed content is <strong>not automatically read as part of the element</strong>. The user can choose to move to or explore it using the features provided by their screen reader.</p>
+
+<p>This is one of the key reasons <code>aria-details</code> exists: it can point to a large amount of information without forcing the screen reader to announce all of that information every time the user encounters the original item.</p>
+
+<p>If the user chooses to explore the details, they're moving to actual content on the page, navigable as normal — for example, hearing "Detailed sales information, heading level 2," followed by the paragraph text. Because the content is exposed this way, it can contain more than a long sentence — headings, paragraphs, lists, links, tables, or other structured content, all of which the user can move through individually.</p>
+
+<h2>What can <code>aria-details</code> be used on?</h2>
+
+<p><code>aria-details</code> is not just for images. It can be used whenever content has additional details associated with it, such as:</p>
+
+<ul>
+  <li>a chart that has a detailed explanation</li>
+  <li>a paragraph that has one or more reviewer comments</li>
+  <li>a form field that has extensive instructions</li>
+  <li>a table that has detailed notes or assumptions</li>
+  <li>a button whose action has complex consequences</li>
+  <li>a section of a document that has additional annotations</li>
+</ul>
+
+<p>For example, a paragraph in a document editor could point to two separate comments:</p>
+
+<pre><code class="language-html">&lt;p <span class="highlight">aria-details="comment-1 comment-2"</span>&gt;
+  All customer records will be retained for seven years.
+&lt;/p&gt;</code></pre>
+
+<pre><code class="language-html">&lt;div <span class="highlight">id="comment-1"</span>&gt;
+  &lt;p&gt;Should this retention period be reviewed?&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div <span class="highlight">id="comment-2"</span>&gt;
+  &lt;p&gt;Legal has confirmed that seven years is required.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<p>In ARIA 1.3, <code>aria-details</code> can reference multiple pieces of content by using space-separated IDs.</p>
+
+<h2>How is this different from <code>aria-describedby</code>?</h2>
+
+<p><code>aria-describedby</code> is useful when the extra information can simply be presented as a description. The referenced text becomes part of the item's description, and the user doesn't normally have to go anywhere else to hear it. This makes it well suited to relatively short, straightforward descriptive information.</p>
+
+<blockquote>
+  <p>"Here is some extra text to read with this."</p>
+</blockquote>
+
+<p><code>aria-details</code> works differently: the referenced information is not added to the announcement. Instead, the user is told details exist and can decide whether to go and explore them.</p>
+
+<blockquote>
+  <p>"There is more detailed content available if you want to explore it."</p>
+</blockquote>
+
+<p>Here's the same image marked up using <code>aria-describedby</code>:</p>
+
+<pre><code class="language-html">&lt;!-- aria-describedby --&gt;
+&lt;img
+  src="sales-chart.png"
+  alt="Sales increased steadily throughout the year"
+  <span class="highlight">aria-describedby="sales-details"</span>
+&gt;
+
+&lt;div <span class="highlight">id="sales-details"</span>&gt;
+  &lt;h2&gt;Detailed sales information&lt;/h2&gt;
+
+  &lt;p&gt;
+    Sales began at $20,000 in January, increased to $24,000
+    in February, and reached $31,000 in March.
+  &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<blockquote>
+  <p>"Sales increased steadily throughout the year, image. Detailed sales information. Sales began at $20,000 in January, increased to $24,000 in February, and reached $31,000 in March."</p>
+</blockquote>
+
+<p>With <code>aria-describedby</code>, the detailed information effectively becomes part of the image's description, read out in full every time. It's also flattened into a single string of text — the user can't skip between parts of it or jump to just the piece they want, the way they can with normal semantic content. It's all or nothing.</p>
+
+<p>Here's the same image marked up using <code>aria-details</code>:</p>
+
+<pre><code class="language-html">&lt;!-- aria-details --&gt;
+&lt;img
+  src="sales-chart.png"
+  alt="Sales increased steadily throughout the year"
+  <span class="highlight">aria-details="sales-details"</span>
+&gt;
+
+&lt;div <span class="highlight">id="sales-details"</span>&gt;
+  &lt;h2&gt;Detailed sales information&lt;/h2&gt;
+
+  &lt;p&gt;
+    Sales began at $20,000 in January, increased to $24,000
+    in February, and reached $31,000 in March.
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<blockquote>
+  <p>"Sales increased steadily throughout the year, image, has details."</p>
+</blockquote>
+
+<p>With <code>aria-details</code>, the user hears that more is available and chooses whether to explore it — and once they do, they're in the content's actual structure (headings, lists, links) and can navigate it piece by piece, skipping ahead or jumping between elements, rather than being stuck with one long flattened block of descriptive text.</p>
+
+<h2>When should you use each one?</h2>
+
+<p>Use <code>aria-describedby</code> when the additional information makes sense to hear as part of the item's description — short, straightforward, useful to hear immediately.</p>
+
+<pre><code class="language-html">&lt;button aria-describedby="delete-help"&gt;
+  Delete account
+&lt;/button&gt;
+
+&lt;p id="delete-help"&gt;
+  This action cannot be undone.
+&lt;/p&gt;</code></pre>
+
+<blockquote>
+  <p>"Delete account, button. This action cannot be undone."</p>
+</blockquote>
+
+<p>Use <code>aria-details</code> when the additional information is something the user may want to explore separately — long, complex, structured, or made up of several distinct pieces.</p>
+
+<pre><code class="language-html">&lt;button aria-details="delete-details"&gt;
+  Delete account
+&lt;/button&gt;
+
+&lt;div id="delete-details"&gt;
+  &lt;h2&gt;What happens when you delete your account?&lt;/h2&gt;
+
+  &lt;p&gt;Your profile and saved preferences will be deleted.&lt;/p&gt;
+
+  &lt;p&gt;Your transaction records will be retained for seven years.&lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;a href="/data-retention"&gt;Read our data retention policy&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<blockquote>
+  <p>"Delete account, button, has details."</p>
+</blockquote>
+
+<p>The first example is a short warning that makes sense to hear with the button. The second is substantial information that's better explored separately.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>
+

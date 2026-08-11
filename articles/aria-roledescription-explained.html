@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-roledescription</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="How aria-roledescription lets you give an existing native or ARIA role a more specific description, without creating a new role or changing what the element actually is.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-roledescription</code></h1>
+    </div>
+  </div>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-12">12 August 2026</time></p>
+
+<p>This article explains <code>aria-roledescription</code> in plain language, starting with how native and ARIA roles work, then showing how <code>aria-roledescription</code> can provide a more specific description without creating a new role.</p>
+
+<h2>What are roles?</h2>
+
+<p>When you use a website, many HTML elements on the page have specific roles.</p>
+
+<p>For example, an element might be a <strong>button</strong>, a <strong>link</strong>, a <strong>heading</strong>, or a <strong>region containing a particular part of the page</strong>.</p>
+
+<p>Screen readers use these roles to help people understand the purpose of different elements. For example, a screen reader might announce:</p>
+
+<blockquote>
+<p>“Submit, button”</p>
+</blockquote>
+
+<p>The word <strong>“Submit”</strong> is the element’s name, while <strong>“button”</strong> identifies <strong>the element’s role</strong>.</p>
+
+<h2>Native HTML roles</h2>
+
+<p>Sometimes the role is provided automatically by the HTML element. This is known as a <strong>native role</strong>.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;button&gt;Submit&lt;/button&gt;</code></pre>
+
+<p>A screen reader already knows this element is a <strong>button</strong>, so the developer does not need to add <code>role="button"</code>.</p>
+
+<h2>ARIA roles</h2>
+
+<p>Sometimes HTML does not provide enough information about what an element is being used for, so developers can add a role using ARIA.</p>
+
+<p>This commonly happens in two situations.</p>
+
+<p>First, developers may use a generic HTML element such as a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> to build a custom widget. These elements do not provide a useful role on their own, so an ARIA role may be needed to explain what the element represents.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;div
+  <span class="highlight">role="region"</span>
+  aria-label="Featured products"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Here, <code>role="region"</code> tells assistive technologies that this otherwise generic element should be treated as a <strong>region</strong>. The <code>aria-label</code> gives the region a name.</p>
+
+<p>Second, an HTML element may already have a native role, but developers can sometimes replace that role with a permitted ARIA role when they are building a different type of control.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;input 
+  type="text"
+  <span class="highlight">role="combobox"</span>
+&gt;</code></pre>
+
+<p>The <code>&lt;input&gt;</code> would normally have the role of <code>textbox</code>. Adding <code>role="combobox"</code> changes the role exposed to assistive technologies to <code>combobox</code>.</p>
+
+<p>This provides more specific information about the control. Instead of understanding it as a simple text field, a screen reader user can understand that it is a combobox, which may provide additional options or suggestions as they type.</p>
+
+<p>Note that a working combobox needs more than the <code>role</code> attribute alone &ndash; attributes such as <code>aria-expanded</code>, and usually <code>aria-controls</code> or <code>aria-haspopup</code>, are also required. The example above is simplified to show the role change only.</p>
+
+<h2>So what does <code>aria-roledescription</code> do?</h2>
+
+<p><code>aria-roledescription</code> can give an <strong>existing role a more specific or useful description</strong>.</p>
+
+<p>Imagine a web-based presentation containing a series of slides. Each slide might have the ARIA role of <code>region</code> and an accessible name:</p>
+
+<pre><code>&lt;div
+  <span class="highlight">role="region"</span>
+  aria-labelledby="slide-heading"
+&gt;
+  &lt;h2 id="slide-heading"&gt;Quarterly results&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+
+<p>A screen reader might therefore announce:</p>
+
+<blockquote>
+<p>“Quarterly results, region”</p>
+</blockquote>
+
+<p>But <strong>“region”</strong> does not make it clear that this part of the page is a slide in a presentation. The developer could add <code>aria-roledescription="slide"</code>:</p>
+
+<pre><code>&lt;div
+  role="region"
+  aria-labelledby="slide-heading"
+  <span class="highlight">aria-roledescription="slide"</span>
+&gt;
+  &lt;h2 id="slide-heading"&gt;Quarterly results&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Now the screen reader may announce:</p>
+
+<blockquote>
+<p>“Quarterly results, slide”</p>
+</blockquote>
+
+<p>The underlying role is still <code>region</code>, but the screen reader may present its role description as <strong>“slide”</strong> instead of <strong>“region”</strong>.</p>
+
+<p>This gives the screen reader user more useful context.</p>
+
+<h2>It does not create a new role</h2>
+
+<p><code>aria-roledescription</code> doesn&rsquo;t let developers <strong>invent new roles</strong>.</p>
+
+<p>In the example above, <code>slide</code> has not become a new ARIA role. The element&rsquo;s actual role is still <strong>region</strong>.</p>
+
+<p><code>aria-roledescription</code> changes how that existing role may be <strong>described to the screen reader user</strong>. It does not change the underlying role or its meaning.</p>
+
+<p>That existing role could be:</p>
+
+<ul>
+  <li>a <strong>native role</strong>, such as the <code>button</code> role automatically provided by a <code>&lt;button&gt;</code></li>
+  <li>an <strong>ARIA role</strong>, such as <code>role="region"</code></li>
+</ul>
+
+<p>So the simplest way to remember it is:</p>
+
+<blockquote>
+<p><code>aria-roledescription</code> gives a more specific way of describing a role that already exists. It does not create a new role or change what the element actually is.</p>
+</blockquote>
+
+<h2>When should I use <code>aria-roledescription</code>?</h2>
+
+<p>Use <code>aria-roledescription</code> when the existing role is correct, but a more specific description would help a screen reader user understand what the element represents.</p>
+
+<p>The ARIA specification recommends limiting its use to situations where:</p>
+
+<ul>
+  <li>a general container role, such as <code>region</code> or <code>group</code>, could be described more clearly in a particular context</li>
+  <li>an existing widget role is correct, but a more specific description would make its purpose easier to understand</li>
+  </ul>
+
+<p><code>aria-roledescription</code> should be used carefully because it can replace a familiar role description with different wording. If that wording is unclear or unfamiliar, it could make the element harder to understand or use.</p>
+
+<p>The existing native or ARIA role should still accurately describe the element. <code>aria-roledescription</code> should only provide <strong>a more specific way of describing that role</strong>, not change what the role means.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>
