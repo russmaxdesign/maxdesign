@@ -35,7 +35,7 @@
 
 <p class="metadetails">Published: <time datetime="2026-08-12">12 August 2026</time></p>
 
-<p>This article explains <code>aria-roledescription</code> in plain language, starting with how native and ARIA roles work, then showing how <code>aria-roledescription</code> can provide a more specific description without creating a new role.</p>
+<p>This article explains <code>aria-roledescription</code> in plain language, starting with how native and ARIA roles work, then showing how it can override how a role is announced, without creating a new role.</p>
 
 <h2>What are roles?</h2>
 
@@ -69,7 +69,7 @@
 
 <p>First, developers may use a generic HTML element such as a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> to build a custom widget. These elements do not provide a useful role on their own, so an ARIA role may be needed to explain what the element represents.</p>
 
-<p>For example:</p>
+<p>In the following example, <code>role="region"</code> tells assistive technologies that this otherwise generic element should be treated as a <strong>region</strong>. The <code>aria-label</code> gives the region a name.</p>
 
 <pre><code>&lt;div
   <span class="highlight">role="region"</span>
@@ -77,20 +77,16 @@
 &gt;
 &lt;/div&gt;</code></pre>
 
-<p>Here, <code>role="region"</code> tells assistive technologies that this otherwise generic element should be treated as a <strong>region</strong>. The <code>aria-label</code> gives the region a name.</p>
-
 <p>Second, an HTML element may already have a native role, but developers can sometimes replace that role with a permitted ARIA role when they are building a different type of control.</p>
 
-<p>For example:</p>
+<p>In the following example, the <code>&lt;input&gt;</code> would normally have the role of <code>textbox</code>. Adding <code>role="combobox"</code> changes the role exposed to assistive technologies to <code>combobox</code>.</p>
 
 <pre><code>&lt;input 
   type="text"
   <span class="highlight">role="combobox"</span>
 &gt;</code></pre>
 
-<p>The <code>&lt;input&gt;</code> would normally have the role of <code>textbox</code>. Adding <code>role="combobox"</code> changes the role exposed to assistive technologies to <code>combobox</code>.</p>
-
-<p>This provides more specific information about the control. Instead of understanding it as a simple text field, a screen reader user can understand that it is a combobox, which may provide additional options or suggestions as they type.</p>
+<p>This new role provides more specific information about the control. Instead of understanding it as a simple text field, a screen reader user can understand that it is a combobox, which may provide additional options or suggestions as they type.</p>
 
 <p>Note that a working combobox needs more than the <code>role</code> attribute alone &ndash; attributes such as <code>aria-expanded</code>, and usually <code>aria-controls</code> or <code>aria-haspopup</code>, are also required. The example above is simplified to show the role change only.</p>
 
@@ -168,6 +164,10 @@
 <p><code>aria-roledescription</code> should be used carefully because it can replace a familiar role description with different wording. If that wording is unclear or unfamiliar, it could make the element harder to understand or use.</p>
 
 <p>The existing native or ARIA role should still accurately describe the element. <code>aria-roledescription</code> should only provide <strong>a more specific way of describing that role</strong>, not change what the role means.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-roledescription.html" target="_blank">Testing aria-roledescription</a></p>
 
   </main>
   <footer>
