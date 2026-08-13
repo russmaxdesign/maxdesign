@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-valuenow</title>
+</head>
+<body>
+
+<h1>Understanding aria-valuenow</h1>
+
+<p>This article explains <code>aria-valuenow</code> in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</p>
+
+<h2>1. Native control</h2>
+
+<p>Let's start with a normal HTML range input, because this will help us understand what <code>aria-valuenow</code> is trying to achieve.</p>
+
+<p>A range input is a UI control that allows users to move a handle along a bar to choose a value.</p>
+
+<p>It looks something like this:</p>
+
+<!-- image placeholder: screenshot of a native range slider -->
+
+<p>And the markup might look like this:</p>
+
+<pre><code>&lt;label for="volume-select"&gt;Volume&lt;/label&gt;
+
+&lt;input
+  type="range"
+  id="volume-select"
+  min="0"
+  max="100"
+  value="40"
+&gt;</code></pre>
+
+<p>A native control like this comes with a lot of information and behaviour already built in.</p>
+
+<p>The browser knows its <strong>name</strong>:</p>
+
+<blockquote><p>&ldquo;Volume&rdquo;</p></blockquote>
+
+<p>It knows its <strong>role</strong>:</p>
+
+<blockquote><p>&ldquo;This is a slider.&rdquo;</p></blockquote>
+
+<p>It knows the lowest possible value:</p>
+
+<blockquote><p>0</p></blockquote>
+
+<p>It knows the highest possible value:</p>
+
+<blockquote><p>100</p></blockquote>
+
+<p>And most importantly for this article, it knows the <strong>current value</strong>:</p>
+
+<blockquote><p>40</p></blockquote>
+
+<p>If the user moves the slider, the browser updates that value automatically.</p>
+
+<p>For example, if the user presses the right arrow key and moves the slider from 40 to 41, the browser knows that the current value is now 41.</p>
+
+<p>It can also pass that information to assistive technology, so a screen reader can announce the changing value as the user interacts with the control.</p>
+
+<p>That is one of the big advantages of using a native HTML control: the browser already understands what the control is, how it behaves, and what its current value is.</p>
+
+<h2>2. Non-native control</h2>
+
+<p>Sometimes a native range input does not provide enough control over how the slider needs to look or behave.</p>
+
+<p>For example:</p>
+
+<ul>
+  <li>the browser may limit how much the slider track and handle can be styled</li>
+  <li>the design may require a very different visual appearance</li>
+  <li>the slider may need extra information, labels or markers along the track</li>
+  <li>the slider may need more complex behaviour than a native range input provides</li>
+</ul>
+
+<p>In these situations, a developer may choose to build their own slider using generic HTML elements, then add the missing behaviour with JavaScript.</p>
+
+<p>The markup might start out looking something like this:</p>
+
+<pre><code>&lt;div&gt;Volume&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Visually, it could be styled to look almost exactly like a slider.</p>
+
+<p>But the browser does not automatically know:</p>
+
+<ul>
+  <li>that this is a slider</li>
+  <li>what its name is</li>
+  <li>what its lowest possible value is</li>
+  <li>what its highest possible value is</li>
+  <li>what its current value is</li>
+  <li>how the keyboard should interact with it</li>
+  <li>what information should be passed to assistive technology</li>
+</ul>
+
+<p>The developer now has to recreate those things.</p>
+
+<h2>3. Rebuilding the missing information</h2>
+
+<p>Let's start adding back the information and behaviour that the native range input gave us automatically.</p>
+
+<p>First, we need to tell the browser what kind of control this is:</p>
+
+<pre><code>&lt;div
+  role="slider"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The <code>role="slider"</code> tells assistive technologies:</p>
+
+<blockquote><p>&ldquo;This is a slider.&rdquo;</p></blockquote>
+
+<p>Next, the slider needs an accessible name. We can use the visible &ldquo;Volume&rdquo; text as its label:</p>
+
+<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+
+&lt;div
+  role="slider"
+  aria-labelledby="volume-label"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Now the browser can understand both the control's <strong>name</strong> and <strong>role</strong>.</p>
+
+<p>The slider also needs to be keyboard focusable. A normal <code>&lt;div&gt;</code> is not focusable by default, so we can add:</p>
+
+<pre><code>tabindex="0"</code></pre>
+
+<p>Next, we need to provide information about the slider's range.</p>
+
+<p>Our volume control goes from 0 to 100, so we can add:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuemax="100"</code></pre>
+
+<p>At this point, our slider looks like this:</p>
+
+<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+
+&lt;div
+  role="slider"
+  tabindex="0"
+  aria-labelledby="volume-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The browser now knows:</p>
+
+<ul>
+  <li>this is a slider</li>
+  <li>its name is &ldquo;Volume&rdquo;</li>
+  <li>its lowest possible value is 0</li>
+  <li>its highest possible value is 100</li>
+</ul>
+
+<p>But one important piece of information is still missing:</p>
+
+<blockquote><p>What is the slider's <strong>current value</strong>?</p></blockquote>
+
+<p>This is where <code>aria-valuenow</code> comes in.</p>
+
+<h2>4. So what does <code>aria-valuenow</code> do?</h2>
+
+<p><code>aria-valuenow</code> tells assistive technology the <strong>current numeric value</strong> of a range control.</p>
+
+<p>For our volume slider, the current value is 40:</p>
+
+<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+
+&lt;div
+  role="slider"
+  tabindex="0"
+  aria-labelledby="volume-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="40"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The <code>aria-valuenow="40"</code> basically means:</p>
+
+<blockquote><p>&ldquo;The current value of this slider is 40.&rdquo;</p></blockquote>
+
+<p>Now the browser has the important information about the slider's range and current value:</p>
+
+<ul>
+  <li>the lowest possible value is 0</li>
+  <li>the current value is 40</li>
+  <li>the highest possible value is 100</li>
+</ul>
+
+<p>If the user moves the slider, the visual position of the handle needs to change.</p>
+
+<p>But because this is a custom slider, the developer also needs to update <code>aria-valuenow</code> at the same time.</p>
+
+<p>For example, if the user presses the right arrow key and moves the slider from 40 to 41, JavaScript should change:</p>
+
+<pre><code>aria-valuenow="40"</code></pre>
+
+<p>to:</p>
+
+<pre><code>aria-valuenow="41"</code></pre>
+
+<p>That changing value is what tells assistive technology that the slider's current value has changed.</p>
+
+<p>In the working example, the same JavaScript update keeps the visual slider position, the visible number and <code>aria-valuenow</code> in sync.</p>
+
+<p>If a developer updates the visual slider position but forgets to also update <code>aria-valuenow</code>, the accessible value does not just go missing, it goes stale and wrong, silently telling screen reader users the value is still 40 long after it has actually moved to 75. That is a worse outcome than having no ARIA at all, since a confidently wrong value is harder to notice than an obviously missing one.</p>
+
+<p>The important point is that <code>aria-valuenow</code> does <strong>not</strong> move the slider or create the interaction.</p>
+
+<p>JavaScript provides the behaviour and updates the value.</p>
+
+<p><code>aria-valuenow</code> communicates that current value to assistive technology.</p>
+
+<h2>Take away</h2>
+
+<p><code>aria-valuenow</code> communicates the current numeric value of a range control to assistive technology.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-slider-native-vs-custom.html" target="_blank">Testing a native vs custom slider</a></p>
+
+</body>
+</html>
