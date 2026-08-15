@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-valuetext - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Explains aria-valuetext in plain language, showing how to give a numeric value a more useful text description for assistive technology.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-valuetext</code></h1>
+    </div>
+  </div>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-15">15 August 2026</time></p>
+
+<p>This article explains <code>aria-valuetext</code> in plain language. It show how to give a numeric value a more useful text description for assistive technology.</p>
+
+<h2>1. Starting with <code>aria-valuenow</code></h2>
+
+<p>In the <a href="aria-valuenow-explained.html">previous article on aria-valuenow</a>, we looked at how <code>aria-valuenow</code> tells assistive technology the current numeric value of a custom slider.</p>
+
+<p>We used this volume slider:</p>
+
+<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+
+&lt;div
+  role="slider"
+  tabindex="0"
+  aria-labelledby="volume-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  <span class="highlight">aria-valuenow="40"</span>
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Here, <code>aria-valuenow="40"</code> tells assistive technology:</p>
+
+<blockquote><p>&ldquo;The current value of this slider is 40.&rdquo;</p></blockquote>
+
+<p>That works well because the number itself is meaningful.</p>
+
+<p>But what if the number is only being used internally, and there is a more useful way to describe the value to the user?</p>
+
+<p>This is where <code>aria-valuetext</code> comes in.</p>
+
+<h2>2. When the numeric value is not enough</h2>
+
+<p>The slider still needs a <strong>numeric value</strong> because that is how the control works internally. But this number may not be the best information to give the user.</p>
+
+<p>Imagine that our volume slider still uses values from 0 to 100, but shows the user simpler descriptions instead:</p>
+
+<ul>
+  <li>0 to 30 = Low</li>
+  <li>31 to 70 = Medium</li>
+  <li>71 to 100 = High</li>
+</ul>
+
+<p>The slider might still have:</p>
+
+<pre><code>aria-valuenow="40"</code></pre>
+
+<p>So assistive technology gets the current numeric value of 40.</p>
+
+<p>But visually, the interface may be showing:</p>
+
+<blockquote><p>&ldquo;Medium&rdquo;</p></blockquote>
+
+<p>In this case, the numeric value is correct, but it may not be the most useful information for the user.</p>
+
+<h2>3. Adding <code>aria-valuetext</code></h2>
+
+<p><code>aria-valuetext</code> provides a <strong>text description of the current value</strong>.</p>
+
+<p>For our volume slider, we can add:</p>
+
+<pre><code>aria-valuetext="Medium"</code></pre>
+
+<p>So the slider becomes:</p>
+
+<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+
+&lt;div
+  role="slider"
+  tabindex="0"
+  aria-labelledby="volume-label"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="40"
+  <span class="highlight">aria-valuetext="Medium"</span>
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>The two attributes now give users different information:</p>
+
+<ul>
+  <li><code>aria-valuenow="40"</code> gives users the current numeric value</li>
+  <li><code>aria-valuetext="Medium"</code> gives users a more useful text description of that value</li>
+</ul>
+
+<p>You can think of it like this:</p>
+
+<blockquote><p>&ldquo;The current numeric value is 40, but tell the user it is Medium.&rdquo;</p></blockquote>
+
+<p>If the slider changes, JavaScript needs to keep both values up to date.</p>
+
+<p>For example, if the slider moves to 80:</p>
+
+<pre><code>aria-valuenow="80"
+aria-valuetext="High"</code></pre>
+
+<p><code>aria-valuenow</code> is still used internally by the browser to work out the value’s position within the range.</p>
+
+<p><code>aria-valuetext</code> is meant to <em>replace</em> what gets announced to the user, not sit alongside it. When <code>aria-valuetext</code> is used, assistive technology should announce the text instead of the number. For example, &ldquo;Medium&rdquo; instead of &ldquo;40&rdquo;.</p>
+
+<p><b>Note</b>: In our testing, some screen reader and browser combinations announced both the number and the text. This is different from the behaviour described in the ARIA specification, so it is worth testing your own implementation.</p>
+
+<h2>4. When should you use <code>aria-valuetext</code>?</h2>
+
+<p>Use <code>aria-valuetext</code> if it can give users more useful information than <code>aria-valuenow</code>.</p>
+
+<p>For example:</p>
+
+<ul>
+  <li>40 may be more useful as &ldquo;Medium&rdquo;</li>
+  <li>1 may be more useful as &ldquo;Monday&rdquo;</li>
+  <li>3 may be more useful as &ldquo;Large&rdquo;</li>
+</ul>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-valuetext.html">Testing aria-valuetext</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

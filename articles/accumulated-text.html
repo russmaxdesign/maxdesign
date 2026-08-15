@@ -52,7 +52,7 @@
 
 <h2>An &ldquo;accumulated text&rdquo; example</h2>
 
-<p>In the example below, the button’s <code>aria-labelledby</code> attribute references two IDs. This means its accessible name is built from two separate sources:</p>
+<p>In the example below, the button’s <code>aria-labelledby</code> attribute references two IDs. Its accessible name is created from both sources:</p>
 
 <pre><code>&lt;button aria-labelledby="aaa bbb"&gt;&lt;/button&gt;
 &lt;p id="aaa"&gt;Buy Lawn Mower&lt;/p&gt;
@@ -88,7 +88,7 @@
 &lt;p id="aaa" style="display: none;"&gt;Goodbye world&lt;/p&gt;
 </code></pre>
 
-<p>Even though the button contains visible text (“Hello world”), the <code>aria-labelledby</code> rule overrides it.</p>
+<p>The button contains visible text (“Hello world”), but the <code>aria-labelledby</code> rule overrides it.</p>
 
 <p>The browser must:</p>
 
@@ -107,7 +107,7 @@
 
 <h2>Conclusion</h2>
 
-<p>Understanding “accumulated text” and “total accumulated text” helps make sense of how browsers build accessible names. By picturing these steps as a bucket being filled, emptied, and finally combined into a single string, it becomes much easier to understand how the specification works in practice.</p>
+<p>It can help to think of “accumulated text” and “total accumulated text” as buckets. Text is added as the browser works through the naming process, then combined to create the accessible name.</p>
 
   </main>
   <footer>

@@ -119,7 +119,7 @@ Screen reader</code></pre>
 
 <p>AX nodes are not DOM nodes — they are a separate structure derived from the DOM.</p>
 
-<p>A node becomes <b>dirty</b> when its accessible representation must be refreshed, such as when:</p>
+<p>A node becomes <b>dirty</b> when its accessibility information needs to be updated, such as when:</p>
 
 <ul>
   <li>its accessible name changes</li>
@@ -191,7 +191,7 @@ Screen reader</code></pre>
 
 <h3>8. Each BrowserAccessibility node has a platform-specific accessibility wrapper</h3>
 
-<p>Every node in the BrowserAccessibility tree is paired with a persistent platform wrapper, such as:</p>
+<p>Every node in the BrowserAccessibility tree is matched with a persistent platform wrapper, such as:</p>
 
 <ul>
   <li>macOS: <code>BrowserAccessibilityCocoa</code></li>

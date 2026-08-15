@@ -56,11 +56,13 @@
 
 <p class="metadetails">Published: <time datetime="2025-12-05">5 December 2025</time></p>
 
-<p>The DOM is a tree-like structure representing all elements in the document. It is a live, reactive browser data structure, not a passive copy of your HTML.</p>
+<p>The DOM is a tree-like structure that shows all the elements in your HTML document.</p>
 
-<p>DOM mutations are any changes to this tree. These mutations can happen with or without JavaScript.</p>
+<p>It is live", which means it reacts to changes. It is not a passive version of your HTML.</p>
 
-<p>The browser constantly modifies the DOM to reflect:</p>
+<p>"DOM mutations" are any changes that happen to this tree. These mutations can happen with or without JavaScript.</p>
+
+<p>Browsers constantl check and modify the DOM to reflect things like:</p>
 
 <ul>
   <li><b>state changes</b> — e.g. a checkbox becoming checked, a <code>&lt;details&gt;</code> element becoming open.</li>
@@ -84,7 +86,7 @@
   <li><b>spellchecking behaviour</b> — e.g. the browser wrapping misspelled words in internal DOM markers for underlining.</li>
 </ul>
 
-<p>None of these modifications require JavaScript. These changes happen because many HTML elements have built-in behaviour, and the browser must update the DOM to keep the element’s internal state, visual UI, and accessibility information in sync.</p>
+<p>None of these modifications need to be made using JavaScript. Many HTML elements have built-in behaviours. This means that browsers have to update the DOM to keep a range of things "in sync". This includes the element’s internal state, visual UI, and accessibility information.</p>
 
 <p>Here are some quick examples you can try yourself:</p>
 
@@ -130,7 +132,7 @@
 
 <h2>Why DOM mutations matter for accessibility</h2>
 
-<p>Every DOM mutation requires the browser to update the AXTree (accessibility tree). This tree is the internal structure used by screen readers and other assistive technologies.</p>
+<p>Every DOM mutation means that browsers need to update the accessibility tree (AXTree). Screen readers and other assistive technologies use this tree.</p>
 
 <p>Whenever the DOM changes:</p>
 
@@ -172,16 +174,16 @@ Instead, it continuously updates accessibility information from the live, consta
 
 <h2>Why this matters</h2>
 
-<p>DOM mutations directly influence:</p>
+<p>DOM mutations have a directly influence over the following:</p>
 
 <ul>
-  <li>What screen readers announce</li>
-  <li>How quickly announcements occur</li>
+  <li>What screen readers announce.</li>
+  <li>How quickly these announcements occur</li>
   <li>Which events interrupt others</li>
   <li>Whether changes are even detectable</li>
 </ul>
 
-<p>These effects happen because every DOM mutation requires the browser to update accessibility information and fire accessibility events.</p>
+<p>Every DOM mutation means that browsers have to update accessibility information and fire accessibility events.</p>
 
 
 <!--  –––––––––––––––––––––––––

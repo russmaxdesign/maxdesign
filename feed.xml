@@ -9,8 +9,8 @@
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
 <language>en-au</language>
-<lastBuildDate>Sunday, 7 June 2026 11:20:30 +1000</lastBuildDate>
-<pubDate>Sunday, 7 June 2026 11:20:30 +1000</pubDate>
+<lastBuildDate>Sunday, 16 August 2026 09:00:30 +1000</lastBuildDate>
+<pubDate>Sunday, 16 August 2026 09:00:30 +1000</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -24,7 +24,153 @@
 
 
 <!--  =========================================================  -->
-<!--  1. A bookmarklet highlighting roles that must never have author-provided names  -->
+<!--  1. Understanding aria-valuemin and aria-valuemax            -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-valuemin and aria-valuemax</title>
+<link>https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html</guid>
+<pubDate>Sun, 16 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-valuemin and aria-valuemax in plain language. It shows how assistive technology can understand the boundaries of a range control.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-valuemin and aria-valuemax in plain language. It shows how assistive technology can understand the boundaries of a range control.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Understanding aria-valuetext                             -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-valuetext</title>
+<link>https://www.maxdesign.com.au/articles/aria-valuetext-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuetext-explained.html</guid>
+<pubDate>Sat, 15 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-valuetext in plain language, building on aria-valuenow to show how a numeric value can be given a more useful text description for assistive technology.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-valuetext in plain language, building on aria-valuenow to show how a numeric value can be given a more useful text description for assistive technology.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-valuetext-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  3. Understanding aria-valuenow                              -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-valuenow</title>
+<link>https://www.maxdesign.com.au/articles/aria-valuenow-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuenow-explained.html</guid>
+<pubDate>Fri, 14 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-valuenow in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-valuenow in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-valuenow-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  4. Understanding aria-details                               -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-details</title>
+<link>https://www.maxdesign.com.au/articles/aria-details-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-details-explained.html</guid>
+<pubDate>Thu, 13 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-details in plain language, showing how it connects elements on a page to additional content, how that content is exposed to screen reader users, and how it differs from aria-describedby.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-details in plain language, showing how it connects elements on a page to additional content, how that content is exposed to screen reader users, and how it differs from aria-describedby.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-details-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  5. Understanding aria-roledescription                       -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-roledescription</title>
+<link>https://www.maxdesign.com.au/articles/aria-roledescription-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-roledescription-explained.html</guid>
+<pubDate>Wed, 12 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-roledescription in plain language, starting with how native and ARIA roles work, then showing how it can override how a role is announced, without creating a new role.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-roledescription in plain language, starting with how native and ARIA roles work, then showing how it can override how a role is announced, without creating a new role.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-roledescription-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  6. Understanding aria-activedescendant                      -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-activedescendant</title>
+<link>https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html</guid>
+<pubDate>Tue, 11 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>This article explains aria-activedescendant in plain language, starting with a familiar native select and then showing what changes when developers build their own custom version.</description>
+<content:encoded>
+<![CDATA[
+<p>This article explains aria-activedescendant in plain language, starting with a familiar native select and then showing what changes when developers build their own custom version.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  7. A bookmarklet highlighting mismatches between the visible label and accessible name  -->
+<!--  =========================================================  -->
+<item>
+<title>A bookmarklet highlighting mismatches between the visible label and accessible name</title>
+<link>https://www.maxdesign.com.au/articles/mismatch-bookmarklet.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/mismatch-bookmarklet.html</guid>
+<pubDate>Mon, 08 Jun 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>A bookmarklet that highlights accessible names for links that match, partially match or mismatch.</description>
+<content:encoded>
+<![CDATA[
+<p>A bookmarklet that highlights accessible names for links that match, partially match or mismatch.</p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  8. A bookmarklet highlighting roles that must never have author-provided names  -->
 <!--  =========================================================  -->
 <item>
 <title>A bookmarklet highlighting roles that must never have author-provided names</title>
@@ -44,7 +190,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Using the browser console for accessibility testing - Part 2  -->
+<!--  9. Using the browser console for accessibility testing - Part 2  -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing - Part 2</title>
@@ -64,7 +210,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Where can aria-label and aria-labelledby be used for naming elements?  -->
+<!--  10. Where can aria-label and aria-labelledby be used for naming elements?  -->
 <!--  =========================================================  -->
 <item>
 <title>Where can aria-label and aria-labelledby be used for naming elements?</title>
@@ -79,160 +225,6 @@
 <![CDATA[
 <p>A simple explanation of how aria-label and aria-labelledby work, where they can be used, and why some elements and roles do not support accessible naming.</p>
 <p><a href="https://www.maxdesign.com.au/articles/when-allowed.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  4. Three accessibility assumptions                         -->
-<!--  =========================================================  -->
-<item>
-<title>Three accessibility assumptions</title>
-<link>https://www.maxdesign.com.au/articles/assumptions.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/assumptions.html</guid>
-<pubDate>Tue, 13 Jan 2026 09:10:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>Three accessibility assumptions about the DOM, accessibility trees, and screen reader output that shape how we test, debug, and interpret results.</description>
-<content:encoded>
-<![CDATA[
-<p>Accessibility tooling encourages us to build simplified mental models of how browsers and assistive technologies work. This article unpacks three common accessibility assumptions about the DOM, accessibility trees, and screen reader speech output, and explains why real-world testing often feels unpredictable despite best practices.</p>
-<p><a href="https://www.maxdesign.com.au/articles/assumptions.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  5. What is the minimum markup needed to create a modal?    -->
-<!--  =========================================================  -->
-<item>
-<title>What is the minimum markup needed to create a modal?</title>
-<link>https://www.maxdesign.com.au/articles/minimal-modal.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/minimal-modal.html</guid>
-<pubDate>Sat, 10 Jan 2026 06:40:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>A practical look at the minimum HTML needed to create a modal dialog, with an optional enhancement based on real user testing.</description>
-<content:encoded>
-<![CDATA[
-<p>Is it possible to build a modal dialog without any JavaScript at all? In this article, we’ll look at two small experiments that explore what the platform can already do, and what small enhancements can improve the experience for real users.</p>
-<p>Option 1: what is the minimum needed for a modal to work?</p>
-<p>Option 2: what is the minimum we can do to make this modal easier to understand for real users?</p>
-<p><a href="https://www.maxdesign.com.au/articles/minimal-modal.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  6. Do screen readers announce “bullet” when a list uses list-style: none? -->
-<!--  =========================================================  -->
-<item>
-<title>Do screen readers announce “bullet” when a list uses list-style: none?</title>
-<link>https://www.maxdesign.com.au/articles/lists.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/lists.html</guid>
-<pubDate>Mon, 05 Jan 2026 00:15:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>An explanation of why list-style: none removes bullet announcements in screen readers by tracing browser, accessibility tree, and screen reader behaviour.</description>
-<content:encoded>
-<![CDATA[
-<p>If you remove bullets from an unordered list using list-style: none, do screen readers still announce “bullet” before each list item?</p>
-<p>At first glance, this feels like a screen reader question. But the answer actually lives deeper in the browser pipeline:</p>
-<p>To explore this, we’ll start with a simple unordered list, then follow what happens as it moves through the browser, into the accessibility tree, and finally into screen reader output.</p>
-<p><a href="https://www.maxdesign.com.au/articles/lists.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  7. Is aria-label allowed on static elements?               -->
-<!--  =========================================================  -->
-<item>
-<title>Is aria-label allowed on static elements?</title>
-<link>https://www.maxdesign.com.au/articles/aria-label.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-label.html</guid>
-<pubDate>Sat, 03 Jan 2026 10:00:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>An examination of how aria-label behaves on static elements across browsers, and why real-world support differs from common assumptions.</description>
-<content:encoded>
-<![CDATA[
-<p>In this article, we examine how aria-label behaves on static elements in practice, across browsers and platforms, and why real-world behaviour is often more nuanced than common assumptions suggest.</p>
-<p>The examples include clearly flagged bad-practice patterns alongside legitimate use cases, to show what is exposed at the accessibility API level — and why exposure alone does not imply recommendation.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-label.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  8. How can you tell what's allowed inside each HTML element?  -->
-<!--  =========================================================  -->
-<item>
-<title>How can you tell what's allowed inside each HTML element?</title>
-<link>https://www.maxdesign.com.au/articles/allowed-inside-elements.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/allowed-inside-elements.html</guid>
-<pubDate>Wed, 31 Dec 2025 10:00:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>A practical guide to reading the HTML Living Standard to check where elements can be used and what they are allowed to contain.</description>
-<content:encoded>
-<![CDATA[
-<p>The HTML Living Standard documents every element. This includes: where elements can appear, what they are allowed to contain, which attributes they support and how they behave in the DOM.</p>
-<p><a href="https://www.maxdesign.com.au/articles/allowed-inside-elements.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  9. HTML content categories                                 -->
-<!--  =========================================================  -->
-<item>
-<title>HTML content categories</title>
-<link>https://www.maxdesign.com.au/articles/html-content-categories.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/html-content-categories.html</guid>
-<pubDate>Tue, 30 Dec 2025 07:00:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>HTML content categories define where elements can appear and what they’re allowed to contain with a clear, rules-based approach that improves validity, accessibility, and maintainability.</description>
-<content:encoded>
-<![CDATA[
-<p>Modern HTML, defined in the HTML Living Standard, groups elements into content categories.</p>
-<p>These categories do not control how elements look. They describe how elements fit into the document structure and how they relate to the elements around them.</p>
-<p><a href="https://www.maxdesign.com.au/articles/html-content-categories.html">Read the full article</a></p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. People with reduced vision: technology settings and possible impacts  -->
-<!--  =========================================================  -->
-<item>
-<title>People with reduced vision: technology settings and possible impacts</title>
-<link>https://www.maxdesign.com.au/articles/reduced-vision.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/reduced-vision.html</guid>
-<pubDate>Mon, 29 Dec 2025 05:10:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>Assistive technologies</category>
-<category>Accessibility</category>
-<description>How people with low vision adjust system settings, browsers, and apps. Six key categories designers and developers should understand.</description>
-<content:encoded>
-<![CDATA[
-<p>Many people experience reduced vision at some point in their lives. This might be temporary, gradual, or permanent. It can affect how clearly someone sees text, images, and user interface elements on screens.</p>
-<p>Understanding these options is essential for anyone building digital products.</p>
-<p><a href="https://www.maxdesign.com.au/articles/reduced-vision.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>

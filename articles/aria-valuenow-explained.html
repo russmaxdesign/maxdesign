@@ -2,23 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Understanding aria-valuenow</title>
+  <title>Understanding aria-valuenow - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="This article explains aria-valuenow in plain language, starting with a familiar native range input and then showing what needs to changes when developers build their own custom slider.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
 </head>
 <body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-valuenow</code></h1>
+    </div>
+  </div>
+  <main>
 
-<h1>Understanding aria-valuenow</h1>
+<p class="metadetails">Published: <time datetime="2026-08-14">14 August 2026</time></p>
 
-<p>This article explains <code>aria-valuenow</code> in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</p>
+<p>A quick explanation of <code>aria-valuenow</code> - looking at native and non-native controls.</p>
 
 <h2>1. Native control</h2>
 
-<p>Let's start with a normal HTML range input, because this will help us understand what <code>aria-valuenow</code> is trying to achieve.</p>
+<p>Let's start with a normal HTML range input. This will help us understand what <code>aria-valuenow</code> is trying to achieve.</p>
 
-<p>A range input is a UI control that allows users to move a handle along a bar to choose a value.</p>
+<p>A range input is a UI control that allows users to move a handle along a bar to choose a value. It is commonly known as a slider.</p>
 
-<p>It looks something like this:</p>
+<p>It looks something like this, depending on the browser:</p>
 
-<!-- image placeholder: screenshot of a native range slider -->
+<p><img src="../assets/img/slider.png" alt="A simple range slider showing a volume label and the slider set to 40"></p>
 
 <p>And the markup might look like this:</p>
 
@@ -75,7 +102,7 @@
   <li>the slider may need more complex behaviour than a native range input provides</li>
 </ul>
 
-<p>In these situations, a developer may choose to build their own slider using generic HTML elements, then add the missing behaviour with JavaScript.</p>
+<p>In these situations, a developer may choose to build their own slider using generic HTML elements, then add the necessary styles with CSS and behaviour with JavaScript.</p>
 
 <p>The markup might start out looking something like this:</p>
 
@@ -103,12 +130,12 @@
 
 <h2>3. Rebuilding the missing information</h2>
 
-<p>Let's start adding back the information and behaviour that the native range input gave us automatically.</p>
+<p>Let's start adding the information and behaviour that the native range input gave us automatically.</p>
 
 <p>First, we need to tell the browser what kind of control this is:</p>
 
 <pre><code>&lt;div
-  role="slider"
+  <span class="highlight">role="slider"</span>
 &gt;
 &lt;/div&gt;</code></pre>
 
@@ -118,37 +145,35 @@
 
 <p>Next, the slider needs an accessible name. We can use the visible &ldquo;Volume&rdquo; text as its label:</p>
 
-<pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
+<pre><code>&lt;span <span class="highlight">id="volume-label"</span>&gt;Volume&lt;/span&gt;
 
 &lt;div
   role="slider"
-  aria-labelledby="volume-label"
+  <span class="highlight">aria-labelledby="volume-label"</span>
 &gt;
 &lt;/div&gt;</code></pre>
 
 <p>Now the browser can understand both the control's <strong>name</strong> and <strong>role</strong>.</p>
 
-<p>The slider also needs to be keyboard focusable. A normal <code>&lt;div&gt;</code> is not focusable by default, so we can add:</p>
+<p>The slider also needs to be keyboard focusable. A normal <code>&lt;div&gt;</code> is not focusable by default, so we can add <code>tabindex="0"</code>.</p>
 
-<pre><code>tabindex="0"</code></pre>
+<pre><code>&lt;div
+  role="slider"
+  aria-labelledby="volume-label"
+  <span class="highlight">tabindex="0"</span>
+&gt;
+&lt;/div&gt;</code></pre>
 
-<p>Next, we need to provide information about the slider's range.</p>
-
-<p>Our volume control goes from 0 to 100, so we can add:</p>
-
-<pre><code>aria-valuemin="0"
-aria-valuemax="100"</code></pre>
-
-<p>At this point, our slider looks like this:</p>
+<p>Next, we need to provide information about the slider's range. Our volume control goes from <code>0</code> to <code>100</code>, so we can add:</p>
 
 <pre><code>&lt;span id="volume-label"&gt;Volume&lt;/span&gt;
 
 &lt;div
   role="slider"
-  tabindex="0"
   aria-labelledby="volume-label"
-  aria-valuemin="0"
-  aria-valuemax="100"
+  tabindex="0"
+  <span class="highlight">aria-valuemin="0"</span>
+  <span class="highlight">aria-valuemax="100"</span>
 &gt;
 &lt;/div&gt;</code></pre>
 
@@ -181,7 +206,7 @@ aria-valuemax="100"</code></pre>
   aria-labelledby="volume-label"
   aria-valuemin="0"
   aria-valuemax="100"
-  aria-valuenow="40"
+  <span class="highlight">aria-valuenow="40"</span>
 &gt;
 &lt;/div&gt;</code></pre>
 
@@ -215,13 +240,9 @@ aria-valuemax="100"</code></pre>
 
 <p>If a developer updates the visual slider position but forgets to also update <code>aria-valuenow</code>, the accessible value does not just go missing, it goes stale and wrong, silently telling screen reader users the value is still 40 long after it has actually moved to 75. That is a worse outcome than having no ARIA at all, since a confidently wrong value is harder to notice than an obviously missing one.</p>
 
-<p>The important point is that <code>aria-valuenow</code> does <strong>not</strong> move the slider or create the interaction.</p>
-
-<p>JavaScript provides the behaviour and updates the value.</p>
-
-<p><code>aria-valuenow</code> communicates that current value to assistive technology.</p>
-
 <h2>Take away</h2>
+
+<p><code>aria-valuenow</code> does <strong>not</strong> move the slider or create the interaction. JavaScript provides the behaviour and updates the value.</p>
 
 <p><code>aria-valuenow</code> communicates the current numeric value of a range control to assistive technology.</p>
 
@@ -229,5 +250,18 @@ aria-valuemax="100"</code></pre>
 
 <p><a href="https://intopia.github.io/exercise/testing-slider-native-vs-custom.html" target="_blank">Testing a native vs custom slider</a></p>
 
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
 </body>
 </html>

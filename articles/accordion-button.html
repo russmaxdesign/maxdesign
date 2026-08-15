@@ -91,7 +91,7 @@
 
 <p>This code listens for the click and updates the DOM by toggling <code>aria-expanded</code> between <code>"false"</code> and <code>"true"</code>.</p>
 
-<p>The browser will run this JavaScript later in the flow.</p>
+<p>The browser will run this script later in the flow.</p>
 
 <p>Let’s review the entire process from start to finish.</p>
 
@@ -125,7 +125,7 @@
 
 <h3>3. The click event enters the task queue</h3>
 
-<p>The browser does <b>not</b> run your JavaScript immediately.</p>
+<p>The browser does <b>not</b> run your script immediately.</p>
 
 <p>Instead, it schedules a “dispatch click event” task <sup class="ref-target" id="ref-dispatchclickevent"><a href="#dispatchclickevent">3</a></sup> and places it into the Task Queue <sup class="ref-target" id="ref-taskqueue"><a href="#taskqueue">4</a></sup>.</p>
 
@@ -181,9 +181,9 @@
 
 <h3>10. Screen reader receives events and queues utterances</h3>
 
-<p>The screen reader receives the notification and decides what to announce based on user settings.</p>
+<p>The screen reader gets the notification. It then decides what to announce based on user settings.</p>
 
-<p>It adds the message to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">7</a></sup>, which manages order, interruptions, and priority.</p>
+<p>The message is added to its internal speech queue <sup class="ref-target" id="ref-internalspeechqueue"><a href="#internalspeechqueue">7</a></sup>. This queue manages things like order, interruptions, and priority.</p>
 
 <p>It then outputs speech or braille.</p>
 
@@ -196,11 +196,11 @@
 <h2>Caveats and nuances</h2>
 
 <ul>
-  <li>This explanation is a broad generalisation of how modern browsers work.</li>
-  <li>The overall pattern is consistent across Blink, WebKit and Gecko, though internal details differ.</li>
-  <li>Screen readers vary in how they interpret events and generate speech.</li>
+  <li>This a broad generalisation of how browsers work.</li>
+  <li>Internals may differ across different browsers</li>
+  <li>Screen readers may differ in how they interpret events and generate speech.</li>
   <li>Many steps happen automatically and are not visible to developers.</li>
-  <li>Actual behaviour depends on browser, OS, assistive tech, and user settings.</li>
+  <li>The final behaviour may depend on a range of factors including: browser, OS, assistive tech, and user settings.</li>
 </ul>
 
 <hr>

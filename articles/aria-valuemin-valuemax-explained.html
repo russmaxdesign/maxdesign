@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-valuemin and aria-valuemax - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Explains aria-valuemin and aria-valuemax in plain language, showing how assistive technology can understand the boundaries of a range control.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-valuemin</code> and <code>aria-valuemax</code></h1>
+    </div>
+  </div>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-16">16 August 2026</time></p>
+
+
+<p>This article explains <code>aria-valuemin</code> and <code>aria-valuemax</code> in plain language. It shows how assistive technology can understand the boundaries of a range control.</p>
+
+<h2>1. Starting with aria-valuenow</h2>
+
+<p>In a <a href="aria-valuenow-explained.html">previous article on <code>aria-valuenow</code></a>, we looked at how <code>aria-valuenow</code> communicates the current numeric value of a custom slider to assistive technology.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;div
+  role="slider"
+  aria-label="Volume"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  <span class="highlight">aria-valuenow="40"</span>
+  tabindex="0"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Here, <code>aria-valuenow="40"</code> tells assistive technology:</p>
+
+<blockquote>
+<p>"The current value of this slider is 40."</p>
+</blockquote>
+
+<p>But a current value makes more sense when we also know the boundaries of the range.</p>
+
+<p>In this example:</p>
+
+<ul>
+<li>the range starts at 0</li>
+<li>the current value is 40</li>
+<li>the range ends at 100</li>
+</ul>
+
+<h2>2. The <code>aria-valuemin</code> and <code>aria-valuemax</code> attributes</h2>
+
+<p><code>aria-valuemin</code> communicates the <strong>lowest possible value</strong> of the range.</p>
+
+<pre><code>aria-valuemin="0"</code></pre>
+
+<p><code>aria-valuemax</code> communicates the <strong>highest possible value</strong> of the range.</p>
+
+<pre><code>aria-valuemax="100"</code></pre>
+
+<p>Together with <code>aria-valuenow</code>, they provide the context for the current value:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuenow="40"
+aria-valuemax="100"</code></pre>
+
+<p>You can think of it like this:</p>
+
+<blockquote>
+<p>"This slider goes from 0 to 100, and its current value is 40."</p>
+</blockquote>
+
+<h2>3. Are these values announced?</h2>
+
+<p>When a screen reader user moves to a slider, the screen reader will usually announce information such as the slider's name, role and current value.</p>
+
+<p>For example:</p>
+
+<blockquote>
+<p>"Volume, slider, 40."</p>
+</blockquote>
+
+<p>The minimum and maximum values may not be announced every time the slider is encountered.</p>
+
+<p>However, <code>aria-valuemin</code> and <code>aria-valuemax</code> make the boundaries of the range available to assistive technology. This allows assistive technology to understand the size of the range and, where appropriate, communicate that information to the user.</p>
+
+<p>So these attributes are still important even if the user does not hear:</p>
+
+<blockquote>
+<p>"Minimum 0, maximum 100."</p>
+</blockquote>
+
+<p>every time they interact with the control.</p>
+
+<h2>4. Minimum and maximum usually stay the same</h2>
+
+<p>There is an important difference between these attributes.</p>
+
+<p><code>aria-valuenow</code> is normally <strong>dynamic</strong>. As the user moves the slider, its value changes.</p>
+
+<p>For example:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuenow="40"
+aria-valuemax="100"</code></pre>
+
+<p>If the user moves the slider one step forward:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuenow="41"
+aria-valuemax="100"</code></pre>
+
+<p>Only <code>aria-valuenow</code> has changed.</p>
+
+<p><code>aria-valuemin</code> and <code>aria-valuemax</code> usually stay the same because they define the boundaries of the range.</p>
+
+<p>These values can be changed dynamically if the valid range changes. Only change them when there is a clear reason, as this may affect how users understand the control.</p>
+
+<h2>5. Negative and decimal values?</h2>
+
+<p>The minimum and maximum do not have to start at zero or use positive numbers.</p>
+
+<p>For example, a temperature control might use a range from -20 to 40:</p>
+
+<pre><code>aria-valuemin="-20"
+aria-valuenow="5"
+aria-valuemax="40"</code></pre>
+
+<p>This tells assistive technology that:</p>
+
+<ul>
+  <li>the lowest possible value is -20</li>
+  <li>the current value is 5</li>
+  <li>the highest possible value is 40</li>
+</ul>
+
+<p>The values can also contain decimal numbers.</p>
+
+<p>For example:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuenow="0.5"
+aria-valuemax="1"</code></pre>
+
+<p>The important thing is that the values accurately describe the numeric range used by the control.</p>
+
+<h2>6. ARIA does not enforce the range</h2>
+
+<p><code>aria-valuemin</code> and <code>aria-valuemax</code> do not stop a custom slider from moving outside its range.</p>
+
+<p>They communicate the boundaries of the range to assistive technology.</p>
+
+<p>The developer still needs JavaScript to make sure the control behaves correctly and does not allow values below the minimum or above the maximum.</p>
+
+<p>For example, if the slider is defined as:</p>
+
+<pre><code>aria-valuemin="0"
+aria-valuemax="100"</code></pre>
+
+<p>JavaScript should prevent the slider from moving to values such as -1 or 101.</p>
+
+<h2>Take away</h2>
+
+<p><code>aria-valuemin</code> and <code>aria-valuemax</code> communicate the lowest and highest values of a range control.</p>
+
+<p>They usually stay the same while <code>aria-valuenow</code> changes as the user moves within that range.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-valuemin-valuemax.html">Testing aria-valuemin and aria-valuemax</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

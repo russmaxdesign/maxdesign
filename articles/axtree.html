@@ -38,7 +38,7 @@
 <p class="metadetails">Published: <time datetime="2025-12-07">7 December 2025</time></p>
 
 <div class="further-reading">
-  <p style="margin: 0; font-size: .9em;"><b>Note</b>: The following steps represent my understanding of how Chrome constructs its accessibility tree. This is based on information from Chromium’s open-source codebase. Source references are listed at the end.</p>
+  <p style="margin: 0; font-size: .9em;"><b>Note</b>: The following steps show my understanding of how Chrome builds its accessibility tree, based on Chromium’s open-source code. Source references are listed at the end.</p>
 </div>
 
 <p>We’re often told that the browser builds its accessibility tree ‘from the DOM,’ but what does that actually involve?</p>
@@ -51,7 +51,7 @@
 
 <h2>2. Compute the AXRole for each element</h2>
 
-<p>Blink determines the accessibility role using native semantics first, then ARIA roles when valid, and finally fallback mappings when ARIA is incorrect or unsupported.</p>
+<p>Blink works out the accessibility role using native HTML first, then ARIA, with a fallback if the ARIA role cannot be used.</p>
 
 <h2>3. Compute the Accessible Name + Description</h2>
 
@@ -63,43 +63,43 @@
 
 <h2>5. Build the AX Tree Hierarchy (Parent/Child Relationships)</h2>
 
-<p>Chrome constructs parent/child relationships using DOM structure, flattening rules, ARIA re-parenting (<code>aria-owns</code>), and virtual nodes for controls like lists, tables, and form elements.</p>
+<p>Chrome builds parent and child relationships using the DOM structure, ARIA such as <code>aria-owns</code>, and extra nodes created for some controls such as lists, tables and form elements.</p>
 
 <h2>6. Compute Relationships</h2>
 
-<p>Blink resolves all semantic links: labelledby, describedby, controls, active-descendant, cell/table relationships, and other references.</p>
+<p>Blink connects related accessibility information, including <code>aria-labelledby</code>, <code>aria-describedby</code>, <code>aria-controls</code>, <code>aria-activedescendant</code>, and table relationships.</p>
 
 <h2>7. Compute States and Properties</h2>
 
-<p>Chrome computes states such as focus, checked, expanded, disabled, busy, required, and selected, and applies all ARIA states and properties that affect accessibility.</p>
+<p>Chrome works out states such as focus, checked, expanded, disabled, busy, required and selected, and adds any relevant ARIA states and properties.</p>
 
 <h2>8. Compute Bounding Boxes + Layout-dependent attributes</h2>
 
-<p>Chrome retrieves the onscreen position and size of each AXNode based on layout, transforms, scrolling, and composited layers. This step allows hit-testing, virtual cursor navigation, and spatial reasoning for ATs.</p>
+<p>Chrome works out the onscreen position and size of each accessibility node. This helps assistive technology find and move between elements on the page.</p>
 
 <h2>9. Finalise the AXTree snapshot</h2>
 
-<p>Blink assembles a stable representation of the current accessibility tree, caches computed values, and marks any nodes that have changed since the previous snapshot.</p>
+<p>Blink builds a stable version of the accessibility tree, stores calculated values, and tracks which nodes have changed.</p>
 
 <div class="further-reading" style="background-color: rgba(200,0,0,.1);">
-  <p style="margin: 0;"><b>Note</b>: This “what changed?” information is crucial — it is exactly how Blink determines whether an AXEvent needs to fire. It is the differences between the old and new snapshots that trigger accessibility events.</p>
+  <p style="margin: 0;"><b>Note</b>: This “what changed?” information is crucial. Blink uses it to decide whether an accessibility event needs to be sent. It is the differences between the old and new snapshots that trigger accessibility events.</p>
 </div>
 
 <h2>10. Generate AXEvents based on tree changes</h2>
 
-<p>Chrome compares old and new AXNode data and fires events (e.g., name changed, value changed, focus changed, live region update) only where actual accessibility-relevant changes occurred.</p>
+<p>Chrome compares the old and new accessibility data, then sends events when something important has changed, such as a name, value, focus or live region.</p>
 
 <h2>11. Deliver the AXTree + AXEvents to the OS Accessibility API</h2>
 
-<p>Blink maps its internal AXNodes to the platform’s accessibility objects (AX API, UIA, AT-SPI) and updates the platform tree.</p>
+<p>Blink maps its internal accessibility nodes to the platform accessibility API, such as AX API, UIA or AT-SPI, and updates the accessibility tree.</p>
 
 <h2>12. OS API delivers events → Assistive Technology receives them</h2>
 
-<p>The operating system hands these events to the screen reader, which then interprets them and decides what — and when — to speak.</p>
+<p>The operating system hands these events to the screen reader, which then interprets them and decides what, and when to speak.</p>
 
 <h2>And all of this happens in the blink of an eye (pun intended).</h2>
 
-<p>Modern browsers run through all these steps continuously, incrementally, and with a lot of optimisation — often within microseconds.</p>
+<p>Modern browsers run through all these steps continuously, incrementally, and with a lot of optimisation. This often within microseconds!</p>
 
 <hr>
 
