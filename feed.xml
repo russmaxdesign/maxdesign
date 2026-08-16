@@ -9,8 +9,8 @@
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
 <language>en-au</language>
-<lastBuildDate>Sunday, 16 August 2026 09:00:30 +1000</lastBuildDate>
-<pubDate>Sunday, 16 August 2026 09:00:30 +1000</pubDate>
+<lastBuildDate>Sunday, 16 August 2026 17:35:00 +1000</lastBuildDate>
+<pubDate>Sunday, 16 August 2026 17:35:00 +1000</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -24,7 +24,28 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Understanding aria-valuemin and aria-valuemax            -->
+<!--  1. Understanding aria-pressed                                -->
+<!--  =========================================================  -->
+<item>
+<title>Understanding aria-pressed</title>
+<link>https://www.maxdesign.com.au/articles/aria-pressed-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-pressed-explained.html</guid>
+<pubDate>Sun, 16 Aug 2026 09:00:30 +1000</pubDate>
+<dc:creator>Russ Weakley</dc:creator>
+<category>HTML</category>
+<category>Accessibility</category>
+<description>A quick explanation of aria-pressed - including an example, when it can be used, and when it should not be used.</description>
+<content:encoded>
+<![CDATA[
+<p>A quick explanation of aria-pressed - including an example, when it can be used, and when it should not be used.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-pressed-explained.html">Read the full article</a></p>
+]]>
+</content:encoded>
+</item>
+
+
+<!--  =========================================================  -->
+<!--  2. Understanding aria-valuemin and aria-valuemax            -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-valuemin and aria-valuemax</title>
@@ -45,7 +66,7 @@
 
 
 <!--  =========================================================  -->
-<!--  2. Understanding aria-valuetext                             -->
+<!--  3. Understanding aria-valuetext                             -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-valuetext</title>
@@ -66,7 +87,7 @@
 
 
 <!--  =========================================================  -->
-<!--  3. Understanding aria-valuenow                              -->
+<!--  4. Understanding aria-valuenow                              -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-valuenow</title>
@@ -87,7 +108,7 @@
 
 
 <!--  =========================================================  -->
-<!--  4. Understanding aria-details                               -->
+<!--  5. Understanding aria-details                               -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-details</title>
@@ -108,7 +129,7 @@
 
 
 <!--  =========================================================  -->
-<!--  5. Understanding aria-roledescription                       -->
+<!--  6. Understanding aria-roledescription                       -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-roledescription</title>
@@ -129,7 +150,7 @@
 
 
 <!--  =========================================================  -->
-<!--  6. Understanding aria-activedescendant                      -->
+<!--  7. Understanding aria-activedescendant                      -->
 <!--  =========================================================  -->
 <item>
 <title>Understanding aria-activedescendant</title>
@@ -150,7 +171,7 @@
 
 
 <!--  =========================================================  -->
-<!--  7. A bookmarklet highlighting mismatches between the visible label and accessible name  -->
+<!--  8. A bookmarklet highlighting mismatches between the visible label and accessible name  -->
 <!--  =========================================================  -->
 <item>
 <title>A bookmarklet highlighting mismatches between the visible label and accessible name</title>
@@ -170,7 +191,7 @@
 
 
 <!--  =========================================================  -->
-<!--  8. A bookmarklet highlighting roles that must never have author-provided names  -->
+<!--  9. A bookmarklet highlighting roles that must never have author-provided names  -->
 <!--  =========================================================  -->
 <item>
 <title>A bookmarklet highlighting roles that must never have author-provided names</title>
@@ -190,7 +211,7 @@
 
 
 <!--  =========================================================  -->
-<!--  9. Using the browser console for accessibility testing - Part 2  -->
+<!--  10. Using the browser console for accessibility testing - Part 2  -->
 <!--  =========================================================  -->
 <item>
 <title>Using the browser console for accessibility testing - Part 2</title>
@@ -204,27 +225,6 @@
 <content:encoded>
 <![CDATA[
 <p>Build on browser-based accessibility testing techniques using the console. This article explores additional JavaScript snippets that help inspect accessible names, descriptions, roles, states and properties directly in the browser.</p>
-]]>
-</content:encoded>
-</item>
-
-
-<!--  =========================================================  -->
-<!--  10. Where can aria-label and aria-labelledby be used for naming elements?  -->
-<!--  =========================================================  -->
-<item>
-<title>Where can aria-label and aria-labelledby be used for naming elements?</title>
-<link>https://www.maxdesign.com.au/articles/when-allowed.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/when-allowed.html</guid>
-<pubDate>Tue, 26 May 2026 09:00:30 +1100</pubDate>
-<dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
-<category>Accessibility</category>
-<description>A simple explanation of how and where to use aria-label and aria-labelledby correctly.</description>
-<content:encoded>
-<![CDATA[
-<p>A simple explanation of how aria-label and aria-labelledby work, where they can be used, and why some elements and roles do not support accessible naming.</p>
-<p><a href="https://www.maxdesign.com.au/articles/when-allowed.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>

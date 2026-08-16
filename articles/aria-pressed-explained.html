@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-pressed - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A quick explanation of aria-pressed - including an example, when it can be used, and when it should not be used.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-pressed</code></h1>
+    </div>
+  </div>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-17">17 August 2026</time></p>
+
+<p>A quick explanation of <code>aria-pressed</code> - including an example, when it can be used, and when it should not be used.</p>
+
+<h2>An example to set the scene</h2>
+
+<p>Imagine a table listing a set of servers. At the right, each server has a button that lets you switch the server "on", or back to the default state of "off".</p>
+
+<p>Above these server buttons, there is an overall button. This overall button allows you to switch all servers "on" or "off".</p>
+
+<p>The image below shows all buttons in the default state of "off".</p>
+
+<p><img style="max-width: 400px;" src="../assets/img/pressed01.png" alt="All four buttons stacked on top of each other in the off state so they are grey"></p>
+
+<p>The image below shows all buttons in the new state of "on".</p>
+
+<p><img style="max-width: 400px;" src="../assets/img/pressed02.png" alt="All four buttons stacked on top of each other in the on state so they are green"></p>
+
+<p>But what happens if you switch Server 1 from "off" to "on"?</p>
+
+<p>The overall button would change to a new state between "all off" and "all on", called a mixed state.</p>
+
+<p>For this example, the overall button has been coloured orange to help flag this mixed state.</p>
+
+<p><img style="max-width: 400px;" src="../assets/img/pressed03.png" alt="Overall button at top is orange to indicate mixed state, second button is green to indicate on, other buttons are grey to indicate off"></p>
+
+<p>If this overall button is activated again, all child buttons would be immediately turned off, so they all return to the same state.</p>
+
+<p>But how can we inform assistive technologies users of these different states?</p>
+
+<h2>The <code>aria-pressed</code> attribute</h2>
+
+<p><code>aria-pressed</code> tells assistive technologies whether a toggle button is currently pressed. It accepts three values: <code>true</code>, <code>false</code>, or <code>mixed</code>. </p>
+
+<p>These values can be changed dynamically using JavaScript based on user input.</p>
+
+<p>In our example, the overall button would initially be:</p>
+
+<pre><code>&lt;button type="button" <span class="highlight">aria-pressed="false"</span>&gt;
+  Turn all servers on
+&lt;/button&gt;</code></pre>
+
+<p>When activated, this overall button would change to:</p>
+
+<pre><code>&lt;button type="button" <span class="highlight">aria-pressed="true"</span>&gt;
+  Turn all servers off
+&lt;/button&gt;</code></pre>
+
+<p>If a child button were to be activated, the overall button would change to:</p>
+
+<pre><code>&lt;button type="button" <span class="highlight">aria-pressed="mixed"</span>&gt;
+  Turn all servers off
+&lt;/button&gt;</code></pre>
+
+<h2>Two types of elements</h2>
+
+<p><code>aria-pressed</code> can generally be applied to two types of elements:</p>
+
+<ul>
+  <li>Enhance native buttons, where HTML alone doesn&rsquo;t provide pressed or mixed states.</li>
+  <li>Enhance custom controls, such as a <code>&lt;div&gt;</code> being used as a toggle button.</li>
+</ul>
+
+<p>Be aware that custom controls require additional accessibility features:</p>
+
+<ul>
+  <li>need to be given <code>role="button"</code>.</li>
+  <li>need to receive keyboard focus, for example with <code>tabindex="0"</code>.</li>
+  <li>need to respond to expected keyboard commands such as <kbd>Enter</kbd> and <kbd>Space</kbd>.</li>
+  <li>need clear visual states for default, hover, focus and pressed.</li>
+</ul>
+
+<h2>When to use <code>aria-pressed</code></h2>
+
+<ul>
+  <li>when a button represents a two-state or three-state toggle that the user can switch, and the state remains until they change it again.</li>
+  <li>when the button represents a state, rather than simply triggering an action.</li>
+  <li>when a group of related toggle buttons allows more than one button to be active at the same time.</li>
+  <li>when a single toggle button represents the combined state of several related controls, including when those controls are not all in the same state.</li>
+</ul>
+
+<h2>When not to use <code>aria-pressed</code></h2>
+
+<ul>
+  <li>on a button that triggers a one-off action, such as "Save," "Delete," or "Submit." These buttons perform an action rather than represent a persistent state.</li>
+  <li>on buttons that open or reveal something, such as a menu, dialog, accordion panel, or additional content. Use attributes such as <code>aria-expanded</code> when the important state is whether content is open or closed.</li>
+  <li>for mutually exclusive options where only one option can be selected at a time. Use the semantic pattern that matches the control, such as tabs, radio buttons, or another appropriate single-select pattern.</li>
+  <li>for checkbox-style settings in a form. If the control behaves like a checkbox, use a native checkbox where possible, or <code>role="checkbox"</code> with <code>aria-checked</code>.</li>
+  <li>on a button simply because its appearance changes when it is activated.</li>
+</ul>
+
+<h2>Takeaway</h2>
+
+<p><code>aria-pressed</code> provides a clear way to communicate the current state of toggle buttons, including when that state is mixed.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-pressed.html" target="_blank">Testing aria-pressed</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>
+

@@ -240,7 +240,7 @@
 
 <p>If a developer updates the visual slider position but forgets to also update <code>aria-valuenow</code>, the accessible value does not just go missing, it goes stale and wrong, silently telling screen reader users the value is still 40 long after it has actually moved to 75. That is a worse outcome than having no ARIA at all, since a confidently wrong value is harder to notice than an obviously missing one.</p>
 
-<h2>Take away</h2>
+<h2>Takeaway</h2>
 
 <p><code>aria-valuenow</code> does <strong>not</strong> move the slider or create the interaction. JavaScript provides the behaviour and updates the value.</p>
 
