@@ -41,15 +41,15 @@
 
 <p>Imagine a table listing a set of servers. At the right, each server has a button that lets you switch the server "on", or back to the default state of "off".</p>
 
-<p>Above these server buttons, there is an overall button. This overall button allows you to switch all servers "on" or "off".</p>
+<p>Above these server buttons, there is an overall button that allows you to switch all servers "on" or "off".</p>
 
 <p>The image below shows all buttons in the default state of "off".</p>
 
-<p><img style="max-width: 400px;" src="../assets/img/pressed01.png" alt="All four buttons stacked on top of each other in the off state so they are grey"></p>
+<p><img style="max-width: 500px;" src="../assets/img/pressed04.png" alt="All four buttons stacked on top of each other in the off state so they are grey"></p>
 
 <p>The image below shows all buttons in the new state of "on".</p>
 
-<p><img style="max-width: 400px;" src="../assets/img/pressed02.png" alt="All four buttons stacked on top of each other in the on state so they are green"></p>
+<p><img style="max-width: 500px;" src="../assets/img/pressed05.png" alt="All four buttons stacked on top of each other in the on state so they are green"></p>
 
 <p>But what happens if you switch Server 1 from "off" to "on"?</p>
 
@@ -57,9 +57,11 @@
 
 <p>For this example, the overall button has been coloured orange to help flag this mixed state.</p>
 
-<p><img style="max-width: 400px;" src="../assets/img/pressed03.png" alt="Overall button at top is orange to indicate mixed state, second button is green to indicate on, other buttons are grey to indicate off"></p>
+<p><img style="max-width: 500px;" src="../assets/img/pressed06.png" alt="Overall button at top is orange to indicate mixed state, second button is green to indicate on, other buttons are grey to indicate off"></p>
 
 <p>If this overall button is activated again, all child buttons would be immediately turned off, so they all return to the same state.</p>
+
+<p>This is a deliberately detailed example to show the "mixed" state in action. The <a href="https://intopia.github.io/exercise/testing-aria-pressed.html" target="_blank">full working example</a> also explores some of the design and UX issues involved with this type of control.</p>
 
 <p>But how can we inform assistive technologies users of these different states?</p>
 
@@ -87,41 +89,39 @@
   Turn all servers off
 &lt;/button&gt;</code></pre>
 
-<h2>Two types of elements</h2>
+<h2>Which controls can use <code>aria-pressed</code>?</h2>
 
-<p><code>aria-pressed</code> can generally be applied to two types of elements:</p>
+<ol>
+  <li><b>Native buttons</b>: HTML alone doesn’t provide pressed or mixed states.</li>
+  <li><b>Custom controls</b>: a <code>&lt;div&gt;</code> can be used as a toggle button.</li>
+</ol>
 
-<ul>
-  <li>Enhance native buttons, where HTML alone doesn&rsquo;t provide pressed or mixed states.</li>
-  <li>Enhance custom controls, such as a <code>&lt;div&gt;</code> being used as a toggle button.</li>
-</ul>
+<p>Be aware that custom controls require additional accessibility features. They need to:</p>
 
-<p>Be aware that custom controls require additional accessibility features:</p>
-
-<ul>
-  <li>need to be given <code>role="button"</code>.</li>
-  <li>need to receive keyboard focus, for example with <code>tabindex="0"</code>.</li>
-  <li>need to respond to expected keyboard commands such as <kbd>Enter</kbd> and <kbd>Space</kbd>.</li>
-  <li>need clear visual states for default, hover, focus and pressed.</li>
+<ul>  
+  <li>Have <code>role="button"</code>.</li>
+  <li>Receive keyboard focus, for example with <code>tabindex="0"</code>.</li>
+  <li>Respond to expected keyboard commands such as <kbd>Enter</kbd> and <kbd>Space</kbd>.</li>
+  <li>Have clear visual states for default, hover, focus and pressed.</li>
 </ul>
 
 <h2>When to use <code>aria-pressed</code></h2>
 
 <ul>
-  <li>when a button represents a two-state or three-state toggle that the user can switch, and the state remains until they change it again.</li>
-  <li>when the button represents a state, rather than simply triggering an action.</li>
-  <li>when a group of related toggle buttons allows more than one button to be active at the same time.</li>
-  <li>when a single toggle button represents the combined state of several related controls, including when those controls are not all in the same state.</li>
+  <li>When a button represents a two-state or three-state toggle that the user can switch, and the state remains until they change it again.</li>
+  <li>When the button represents a state, rather than simply triggering an action.</li>
+  <li>When a group of related toggle buttons allows more than one button to be active at the same time.</li>
+  <li>When a single toggle button represents the combined state of several related controls, including when those controls are not all in the same state.</li>
 </ul>
 
 <h2>When not to use <code>aria-pressed</code></h2>
 
 <ul>
-  <li>on a button that triggers a one-off action, such as "Save," "Delete," or "Submit." These buttons perform an action rather than represent a persistent state.</li>
-  <li>on buttons that open or reveal something, such as a menu, dialog, accordion panel, or additional content. Use attributes such as <code>aria-expanded</code> when the important state is whether content is open or closed.</li>
-  <li>for mutually exclusive options where only one option can be selected at a time. Use the semantic pattern that matches the control, such as tabs, radio buttons, or another appropriate single-select pattern.</li>
-  <li>for checkbox-style settings in a form. If the control behaves like a checkbox, use a native checkbox where possible, or <code>role="checkbox"</code> with <code>aria-checked</code>.</li>
-  <li>on a button simply because its appearance changes when it is activated.</li>
+  <li>On a button that triggers a one-off action, such as "Save," "Delete," or "Submit." These buttons perform an action rather than represent a persistent state.</li>
+  <li>On a button that opens or reveals something, such as a menu, dialog, accordion panel, or additional content. Use attributes such as <code>aria-expanded</code> when the important state is whether content is open or closed.</li>
+  <li>For mutually exclusive options where only one option can be selected at a time. Use the semantic pattern that matches the control, such as tabs, radio buttons, or another appropriate single-select pattern.</li>
+  <li>For checkbox-style settings in a form. If the control behaves like a checkbox, use a native checkbox where possible, or <code>role="checkbox"</code> with <code>aria-checked</code>.</li>
+  <li>On a button simply because its appearance changes when it is activated.</li>
 </ul>
 
 <h2>Takeaway</h2>
