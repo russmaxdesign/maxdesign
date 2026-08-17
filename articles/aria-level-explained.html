@@ -66,7 +66,7 @@
 
 <p>Let's look at three uses for <code>aria-level</code>.</p>
 
-<h2>Example 1: creating a heading (<a href="https://intopia.github.io/exercise/testing-aria-level.html#example-2">try it on the test page</a>)</h2>
+<h2>Example 1: creating a heading</h2>
 
 <p>Imagine content is being added to a page from a CMS field, a syndicated feed or an API response.</p>
 
@@ -76,7 +76,9 @@
   This behaves like a heading, level 2
 &lt;/div&gt;</code></pre>
 
-<h2>Example 2: headings inside cards (<a href="https://intopia.github.io/exercise/testing-aria-level.html#example-3">try it on the test page</a>)</h2>
+<p><a href="https://intopia.github.io/exercise/testing-aria-level.html#example-1">View Example 1 on the testing page</a></p>
+
+<h2>Example 2: headings inside cards</h2>
 
 <p>Imagine a related content card that gets its title from a CMS or API. The title is just a string, with no heading level attached to it.</p>
 
@@ -103,6 +105,8 @@
 &lt;/div&gt;</code></pre>
 
 <p>This means that the same card component can use a heading level that fits its position on the page.</p>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-level.html#example-2">View Example 2 on the testing page</a></p>
 
 <h2>Example 3: <code>aria-level</code> in a treegrid (<a href="https://intopia.github.io/exercise/testing-aria-level.html#example-4">try it on the test page</a>)</h2>
 
@@ -138,9 +142,17 @@
 
 <p>A treegrid can use whatever level the hierarchy needs, there's more on limits and support just below.</p>
 
+<p><a href="https://intopia.github.io/exercise/testing-aria-level.html#example-3">View Example 3 on the testing page</a></p>
+
 <h2>Is there really no limit?</h2>
 
 <p>The spec places no upper limit on <code>aria-level</code>, so it doesn't stop at <code>6</code> like native heading levels do. In practice, though, support for heading levels above 6 is inconsistent: the ARIA 1.3 draft notes that values above 6 can cause difficulties for users, Windows' UI Automation accessibility API caps heading levels at 9, and Chromium enforces this by falling back to 6 for anything higher.<sup><a href="#fn1">1</a></sup> This constraint is documented for headings specifically, whether it also applies to <code>aria-level</code> on treegrid rows is untested.</p>
+
+<p>The spec places no upper limit on <code>aria-level</code>, so it doesn't stop at <code>6</code> like native heading levels do. In practice, support for heading levels above 6 can vary.</p>
+
+<p>The ARIA 1.3 draft notes that values above 6 may cause difficulties for users, Windows' UI Automation accessibility API supports heading levels up to 9, and <a href="https://adrianroselli.com/2024/05/level-setting-heading-levels.html">Chromium falls back to 6 for higher values</a>.</p>
+
+<p>These limits are documented for headings. It is unclear whether they also affect <code>aria-level</code> on treegrid rows.</p></p>
 
 <h2>Takeaway</h2>
 
@@ -149,12 +161,6 @@
 <h2>Test page</h2>
 
 <p><a href="https://intopia.github.io/exercise/testing-aria-level.html" target="_blank">Testing aria-level</a></p>
-
-<h2>Footnotes</h2>
-
-<ul>
-  <li id="fn1"><a href="https://adrianroselli.com/2024/05/level-setting-heading-levels.html">Adrian Roselli, "Level-Setting Heading Levels"</a></li>
-</ul>
 
   </main>
   <footer>
