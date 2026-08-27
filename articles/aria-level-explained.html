@@ -5,7 +5,7 @@
   <title>Understanding aria-level - Max Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="A quick explanation of aria-levels - including three possible real-world examples.">
+  <meta name="description" content="A quick explanation of aria-level - including three possible real-world examples.">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,18 +26,18 @@
       <li><a href="../articles/index.html" class="current">Articles</a></li>
     </ul>
   </nav>
-  <div class="banner-inner">
+  <section class="banner-inner">
     <div class="banner-content">
       <h1>Understanding <code>aria-level</code></h1>
     </div>
-  </div>
+  </section>
   <main>
 
-<p class="metadetails">Published: <time datetime="2026-08-17">17 August 2026</time></p>
+<p class="metadetails">Published: <time datetime="2026-08-18">18 August 2026</time></p>
 
 <h2>What is the <code>aria-level</code> attribute?</h2>
 
-<p><code>aria-level</code> tells assistive technology where an item sits in a hierarchy. </p>
+<p><code>aria-level</code> allows authors to define an element's level within a hierarchy so assistive technology can understand that structure.</p>
 
 <p>The value must be a whole number starting at <code>1</code>. An item at the first level uses <code>1</code>, an item nested under it uses <code>2</code>, and an item nested under that uses <code>3</code>.</p>
 
@@ -63,9 +63,11 @@
 
 <h2>Example 1: creating a heading</h2>
 
-<p>Imagine content is being added to a page from a CMS field, a syndicated feed or an API response.</p>
+<p>Imagine content is being added to a page from a CMS, a content feed or an API.</p>
 
-<p>The content is a title string with no indication of what heading level it should use. In cases like this, heading structure could be added with <code>role="heading"</code> and <code>aria-level</code>.</p>
+<p>The content is just a string of text with no indication of what heading level it should use.</p>
+
+<p>In cases like this, <code>role="heading"</code> and <code>aria-level</code> can be used to give the content meaningful heading structure for assistive technology.</p>
 
 <pre><code>&lt;div <span class="highlight">role="heading"</span> <span class="highlight">aria-level="2"</span>&gt;
   This behaves like a heading, level 2
@@ -75,15 +77,15 @@
 
 <h2>Example 2: headings inside cards</h2>
 
-<p>Imagine a related content card that gets its title from a CMS or API. The title is just a string, with no heading level attached to it.</p>
+<p>Imagine a related content card that gets its title from a CMS or API. As with the previous example, the title is just a string, with no heading level attached to it.</p>
 
-<p>The same card could be used in different parts of a page. In one place, its title might need to be a level 2 heading. In another, it might need to be level 3.</p>
+<p>The same card could be used in different parts of the same page.</p>
 
-<p>Because the card doesn't know where it will appear on the page, it may not know which heading level to use.</p>
+<p><code>aria-level</code> allows you to define a heading level for the title content based on the hierarchy in that section.</p>
 
-<p>In cases like this, the heading level can be set when the card is added to the page.</p>
+<p>In one place, its title might need to be a level 2 heading. In another, it might need to be level 3.</p>
 
-<p>In the first example, the card heading is set to level <code>2</code>:</p>
+<p>In the first example, the card heading is set to level 2:</p>
 
 <pre><code>&lt;div class="card"&gt;
   &lt;div <span class="highlight">role="heading"</span> <span class="highlight">aria-level="2"</span>&gt;
@@ -91,7 +93,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-<p>The same card could then use a different level in another part of the page. In this case, level <code>3</code>.</p>
+<p>The same card could use level 3 in another part of the page:</p>
 
 <pre><code>&lt;div class="card"&gt;
   &lt;div <span class="highlight">role="heading"</span> <span class="highlight">aria-level="3"</span>&gt;
@@ -99,24 +101,22 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-<p>This means that the same card component can use a heading level that fits its position on the page.</p>
-
 <p><a href="https://intopia.github.io/exercise/testing-aria-level.html#example-2">View Example 2 on the testing page</a></p>
 
 <h2>Example 3: <code>aria-level</code> in a treegrid</h2>
 
 <p><code>aria-level</code> can also be used on rows inside a <code>treegrid</code>.</p>
 
-<p>A <code>treegrid</code> can show "hierarchical data" in rows and columns. The rows may sit one-after-another in the DOM, even when some rows are visually nested inside others.</p>
+<p>A <code>treegrid</code> can show hierarchical data in rows and columns. The rows may sit one after another in the DOM, with no nested hierarchy, even when they appear visually nested.</p>
 
 <p>In this case, <code>aria-level</code> tells assistive technology the level of each row.</p>
 
 <p>For example, in a file browser:</p>
 
 <ul>  
-  <li>"Reports" could be at level <code>1</code>.</li>
-  <li>a folder inside "Reports", like "Archive", could be at level <code>2</code>.</li>
-  <li>a file inside that folder, like "Q1 report.docx" could be at level <code>3</code>.</li>
+  <li>Row 1: "Reports" is at level <code>1</code>.</li>
+  <li>Row 2: "Archive", a folder inside "Reports", is at level <code>2</code>.</li>
+  <li>Row 3: "Q1 report.docx", a file inside "Archive", is at level <code>3</code>.</li>
 </ul>
 
 <p>The hierarchy comes from the <code>aria-level</code> value on each row rather than from nested HTML.</p>
@@ -135,15 +135,20 @@
 
 <p>A native table is usually the better choice for flat data. But a <code>treegrid</code> is useful when the data has a hierarchy, multiple columns and interactive keyboard navigation between cells.</p>
 
-<p>A treegrid can use whatever level the hierarchy needs, there's more on limits and support just below.</p>
-
 <p><a href="https://intopia.github.io/exercise/testing-aria-level.html#example-3">View Example 3 on the testing page</a></p>
 
 <h2>Is there really no limit?</h2>
 
-<p>The spec places no upper limit on <code>aria-level</code>, so it doesn't stop at <code>6</code> like native heading levels do. In practice, support for heading levels above 6 can vary.</p>
+<p>The ARIA specification sets a minimum value of 1 for <code>aria-level</code>, but does not set a maximum.</p>
 
-<p>The ARIA 1.3 draft notes that values above 6 may cause difficulties for users, Windows' UI Automation accessibility API supports heading levels up to 9, and <a href="https://adrianroselli.com/2024/05/level-setting-heading-levels.html">Chromium falls back to 6 for higher values</a>.</p>
+<p>In practice, support for heading levels above 6 can vary:</p>
+
+<blockquote>
+  <p>On elements with role heading, values for aria-level above 6 can create difficulties for users. Also, at the time of this writing, most combinations of user agents and assistive technologies only support aria-level integers 1-9 on headings.</p>
+  <p><a href="https://www.w3.org/TR/wai-aria-1.3/#aria-level" target="_blank">ARIA 1.3: aria-level</a></p>
+</blockquote>
+
+<p><a href="https://adrianroselli.com/2024/05/level-setting-heading-levels.html">Chromium falls back to 6 for higher values</a>.</p>
 
 <p>These limits are documented for headings. It is unclear whether they also affect <code>aria-level</code> on treegrid rows.</p>
 

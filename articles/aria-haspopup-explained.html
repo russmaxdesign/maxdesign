@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-haspopup - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A plain-English explainer on aria-haspopup: what it does and the seven values it can take.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-haspopup</code></h1>
+    </div>
+  </section>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-21">21 August 2026</time></p>
+
+<h2>A dropdown menu</h2>
+
+<p>Imagine an interface where a control opens a popup that contains actions such as Edit, Duplicate or Delete.</p>
+
+<p>Sighted users can see that the control opens a menu and can immediately understand the type of content that has appeared. In the example below, the control triggers a dropdown menu with three options.</p>
+
+<p><img style="max-width: 200px" src="../assets/img/aria-haspopup.png" alt="An example dropdown menu with Edit highlighted"></p>
+
+<p>But how can we tell screen reader users that the control opens a popup, and what type of popup will appear?</p>
+
+<p>This is where <code>aria-haspopup</code> can help.</p>
+
+<p><code>aria-haspopup</code> tells assistive technologies that the control opens a popup, and what type of popup it is.</p>
+
+<p>In some cases, HTML already provides a native solution. For example, a <code>&lt;select&gt;</code> element provides a list of options without needing <code>aria-haspopup</code>.</p>
+
+<p>For popup menus, trees, and grids, there is no native HTML equivalent. Dialogs are a partial exception because HTML provides the <code>&lt;dialog&gt;</code> element, which gives the dialog its own role and behaviour once it opens.</p>
+
+<p>But the button that opens the dialog is still just a button. It doesn't tell assistive technologies in advance that a dialog will appear, so <code>aria-haspopup="dialog"</code> can still be useful.</p>
+
+<h2>On the control</h2>
+
+<p><code>aria-haspopup</code> is added to the control that opens the popup, not the popup itself.</p>
+
+<p>It gives screen reader users useful information before they activate the control.</p>
+
+<p>The popup still needs its own role and behaviour once it opens. The <code>aria-haspopup</code> value should match that role. For example, if you use <code>aria-haspopup="tree"</code>, the popup should have <code>role="tree"</code>.</p>
+
+<p>It takes one of seven values.</p>
+
+<h2><code>false</code></h2>
+
+<p>The default. The control does not have a popup. Most buttons never need to state this explicitly, it's what's already assumed.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="false"</span>&gt;Plain button&lt;/button&gt;</code></pre>
+
+<h2><code>true</code> (alias for <code>menu</code>)</h2>
+
+<p>Treated the same as <code>menu</code>. It means the popup is a <code>menu</code>.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="true"</span>&gt;
+  Options
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#true">View <code>true</code> example on the testing page</a></p>
+
+<h2><code>menu</code></h2>
+
+<p>Opens a set of actions or commands, such as Save, Rename or Delete. Items use <code>role="menuitem"</code>, or <code>menuitemcheckbox</code> and <code>menuitemradio</code> when an item also has its own selected state.</p>
+
+<p>Choosing an item performs an action rather than changing the button's value, so the button's label usually stays the same.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="menu"</span>&gt;
+  Actions
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#menu">View <code>menu</code> example on the testing page</a></p>
+
+<h2><code>listbox</code></h2>
+
+<p>Opens a flat list of choices, similar to the options in a native <code>&lt;select&gt;</code> element. Items use <code>role="option"</code>, with <code>aria-selected</code> showing which options are selected.</p>
+
+<p>A <code>listbox</code> can allow one or more selections. When used as a value picker, the trigger usually updates to show the current selection.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="listbox"</span>&gt;
+  Sort by: Newest
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#listbox">View <code>listbox</code> example on the testing page</a></p>
+
+<h2><code>tree</code></h2>
+
+<p>Opens a hierarchical set of choices, such as categories with sub-categories or folders containing files. Items use <code>role="treeitem"</code>. If an item can expand, its child items are placed inside a nested <code>role="group"</code>.</p>
+
+<p><code>aria-haspopup="tree"</code> is only used when the tree appears as a popup from a trigger.</p>
+
+<p>Many trees, such as a file browser sidebar or site navigation, are always visible. These do not use <code>aria-haspopup</code>.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="tree"&</span>gt;
+  Browse categories
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#tree">View <code>tree</code> example on the testing page</a></p>
+
+<h2><code>grid</code></h2>
+
+<p>Opens a two-dimensional structure with rows and columns, rather than a simple list. A date picker is a common example.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="grid"</span>&gt;
+  Choose a date
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#grid">View <code>grid</code> example on the testing page</a></p>
+
+<h2><code>dialog</code></h2>
+
+<p>Opens a dialog, often for a confirmation or short form. The native <code>&lt;dialog&gt;</code> element handles the dialog itself once it opens, but <code>aria-haspopup="dialog"</code> on the trigger tells assistive technologies in advance that a dialog will appear.</p>
+
+<pre><code>&lt;button <span class="highlight">aria-haspopup="dialog"</span>&gt;
+  Delete item
+&lt;/button&gt;</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html#dialog">View <code>dialog</code> example on the testing page</a></p>
+
+<h2>What's the difference between <code>menu</code>, <code>listbox</code> and <code>tree</code>?</h2>
+
+<p>Of the five popup types, <code>menu</code>, <code>listbox</code>, and <code>tree</code> are the easiest to confuse. They can look very similar: a panel opens and arrow keys are often used to move between items.</p>
+
+<p>The main difference is what the items represent and what happens when you choose one.</p>
+
+<p>A simple way to tell them apart:</p>
+
+<ul>
+  <li><strong><code>menu</code></strong> = perform an action</li>
+  <li><strong><code>listbox</code></strong> = choose a flat value</li>
+  <li><strong><code>tree</code></strong> = choose from a hierarchy</li>
+</ul>
+
+<p>Another useful clue is whether the trigger changes afterward.</p>
+
+<p>With a <code>menu</code>, the trigger usually stays the same. &ldquo;More actions&rdquo; is still &ldquo;More actions&rdquo; after choosing Save or Delete because you performed an action.</p>
+
+<p>With a <code>listbox</code>, the trigger usually updates to show the selected value. &ldquo;Sort by: Newest&rdquo; might become &ldquo;Sort by: Oldest&rdquo;.</p>
+
+<p>A <code>tree</code> can work the same way when it is used as a picker. But many trees, such as file browser sidebars or site navigation, are always visible and do not use <code>aria-haspopup</code> at all.</p>
+
+<h2>Wrapup</h2>
+
+<p><code>aria-haspopup</code> plays an important role in telling assistive technologies that a control opens a popup, and what type it is.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-haspopup.html">Testing aria-haspopup</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

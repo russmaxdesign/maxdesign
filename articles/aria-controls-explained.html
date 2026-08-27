@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-controls - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A plain-English explainer on aria-controls: What it does, when it is useful, and current support.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-controls</code></h1>
+    </div>
+  </section>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-21">21 August 2026</time></p>
+
+<h2>A tab panel</h2>
+
+<p>Imagine a page with a set of tabs labelled "Wombats", "Emus" and "Bandicoots". Each tab reveals a different panel with content related to the tab.</p>
+
+<p><img style="max-width: 600px" src="../assets/img/aria-controls.png" alt="An example tablist showing the first tab - Wombats - activated"></p>
+
+<p>For a sighted user, the relationship between the tabs and panels may be obvious because selecting a tab visibly changes the content nearby.</p>
+
+<p>But for assistive technology users, that relationship may not be as obvious.</p>
+
+<p><code>aria-controls</code> can be used to explicitly define the relationship between two elements.</p>
+
+<p>In this case, each tab <b>controls</b> a panel below.</p>
+
+<h2>What <code>aria-controls</code> does</h2>
+
+<p><code>aria-controls</code> identifies another element that is controlled by the current element.</p>
+
+<p>In the following example, the <code>aria-controls</code> value matches the <code>id</code> of the element being controlled. This creates a programmatic relationship between the two elements.</p>
+
+<pre><code><span class="comment">&lt;!-- Button --&gt;</span>
+&lt;button <span class="highlight">aria-controls="details"</span>&gt;
+  Show details
+&lt;/button&gt;
+
+<span class="comment">&lt;!-- Panel --&gt;</span>
+&lt;div <span class="highlight">id="details"</span>&gt;
+  ...
+&lt;/div&gt;</code></pre>
+
+<p><code>aria-controls</code> can reference more than one element. In the following example, the button controls two panels:</p>
+
+<pre><code><span class="comment">&lt;!-- Button --&gt;</span>
+&lt;button <span class="highlight">aria-controls="details1 details2"</span>&gt;
+  Show details
+&lt;/button&gt;
+
+<span class="comment">&lt;!-- Panel --&gt;</span>
+&lt;div <span class="highlight">id="details1"</span>&gt;
+  ...
+&lt;/div&gt;
+
+&lt;div <span class="highlight">id="details2"</span>&gt;
+  ...
+&lt;/div&gt;</code></pre>
+
+<h2>What <code>aria-controls</code> does not tell you</h2>
+
+<p><code>aria-controls</code> does not affect the appearance or behaviour of either element. It does not control whether elements open, close, show or hide. Something else, such as JavaScript, is needed to make those changes happen.</p>
+
+<p>It also does not tell assistive technology whether the controlled content is currently visible.</p>
+
+<p>If a control expands and collapses content, <code>aria-expanded</code> is generally used to communicate the current state.</p>
+
+<ul>
+  <li><code>aria-controls</code> describes the relationship.</li>
+  <li><code>aria-expanded</code> describes the state.</li>
+</ul>
+
+<h2>When <code>aria-controls</code> is useful</h2>
+
+<p><code>aria-controls</code> is useful when one element controls or changes another element, and making that relationship explicit can help assistive technologies understand how the elements are connected. For example:</p>
+
+<ul>
+  <li>A tab controls its associated tab panel.</li>
+  <li>A toolbar button controls a sidebar elsewhere on the page.</li>
+  <li>A button controls a panel in another part of the page.</li>
+</ul>
+
+<p>In these cases, <code>aria-controls</code> provides an explicit programmatic connection between the controlling element and the element it affects.</p>
+
+<h2>Support</h2>
+
+<p>Even when <code>aria-controls</code> is set up correctly, assistive technology may not announce it. Support for the attribute has always been inconsistent. It also does not tell users what the relationship means, only that a relationship exists.</p>
+
+<p>JAWS has historically provided the strongest support. Up to JAWS 2019, there was a setting to announce the presence of <code>aria-controls</code>, but that setting was removed from JAWS 2020 onward (<a href="https://a11ysupport.io/tests/tech__aria__aria-controls">Accessibility Support: aria-controls test results</a>).</p>
+
+<p>Other screen readers have historically offered little or no support. Testing over the years has also produced different results depending on the browser and screen reader version (<a href="https://tink.uk/using-the-aria-controls-attribute/">Léonie Watson, "Using the aria-controls attribute"</a>; <a href="https://heydonworks.com/article/aria-controls-is-poop/">Heydon Pickering, "Aria-Controls is Poop"</a>).</p>
+
+<p>Because of this, don't rely on <code>aria-controls</code> as the only way to connect a control to what it affects. Use other techniques where appropriate:</p>
+
+<ul>
+  <li>Move keyboard focus into revealed content when that makes sense, so users can find the new content without relying on <code>aria-controls</code>.</li>
+  <li>Use <code>aria-expanded</code> to communicate whether content is expanded or collapsed. It is better supported than <code>aria-controls</code>.</li>
+</ul>
+
+<p><code>aria-controls</code> is still worth adding. It does no harm when assistive technology does not support it, and it may help users when it does.</p>
+
+<h2>Wrapup</h2>
+
+<p><code>aria-controls</code> answers the question: "What does this control affect?"</p>
+
+<p>Use it to create an explicit relationship between a control and the element or elements it affects. Don't rely on it alone, since assistive technology support for actually conveying that relationship to users is inconsistent.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-controls.html">Testing aria-controls</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

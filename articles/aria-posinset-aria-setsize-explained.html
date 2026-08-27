@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-posinset and aria-setsize - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A plain-English explainer on aria-posinset and aria-setsize: what they do, which roles support them, and when you actually need them.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-posinset</code> and <code>aria-setsize</code></h1>
+    </div>
+  </section>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-19">19 August 2026</time></p>
+
+<h2>Using a <code>treegrid</code> example</h2>
+
+<p>In my last article, I focussed on <a href="https://www.maxdesign.com.au/articles/aria-level-explained.html">understanding <code>aria-level</code></a>. The third example in the article outlined a <code>treegrid</code> that displayed a full file structure.</p>
+
+<p>This file structure included icons for file types and indentation to show different levels. But these were all visual. In the markup, each row was just a series of <code>&lt;div&gt;</code> elements with no structure or meaning.</p>
+
+<p><code>aria-level</code> was used to inform assistive technologies of the level of each row.</p>
+
+<p><img style="max-width: 600px;" src="../assets/img/aria-level.png" alt="A treegrid table showing file names, file types and midification dates. Each row contains a file with icon and relevant information"></p>
+
+<p>Let's use a simpler example:</p>
+
+<pre><code>Documents (aria-level="1")
+  Reports (aria-level="2")
+    Report A (aria-level="3")
+    Report B (aria-level="3")
+  Notes (aria-level="2")
+    Note A (aria-level="3")
+    Note B (aria-level="3")
+    Note C (aria-level="3")</code></pre>
+
+<p>In this example, "Documents" is level 1, "Reports" is level 2, and "Report A" and "Report B" are level 3.</p>
+
+<p>"Report A" and "Report B" form a set: items that share the same parent and sit at the same <code>aria-level</code>.</p>
+
+<h2>Providing information about sets</h2>
+
+<p>Imagine navigating down each row and having to maintain a mental model of each row, its level, and whether there are other items at the same level or in the same set.</p>
+
+<p><code>aria-posinset</code> and <code>aria-setsize</code> provide key information:</p>
+
+<ul>
+  <li><code>aria-posinset</code> defines the position of the current item within the set.</li>
+  <li><code>aria-setsize</code> defines the total number of items in the set.</li>
+</ul>
+
+<p>They are almost always used together. A position on its own doesn't mean much without a total to compare it to, and a total on its own doesn't tell you where you are within it.</p>
+
+<p>So, "Report A" would be:</p>
+
+<ul>
+  <li><code>aria-posinset="1"</code>: the first item in the set</li>
+  <li><code>aria-setsize="2"</code>: in a set of 2</li>
+</ul>
+
+<p>And "Report B" would be:</p>
+
+<ul>
+  <li><code>aria-posinset="2"</code>: the second item in the set</li>
+  <li><code>aria-setsize="2"</code>: in a set of 2</li>
+</ul>
+
+<p>When we move to "Note A", we are now in a new set of three, so "Note A" would be:</p>
+
+<ul>
+  <li><code>aria-posinset="1"</code>: the first item in the set</li>
+  <li><code>aria-setsize="3"</code>: in a set of 3</li>
+</ul>
+
+<h2>Where can these two attributes be used?</h2>
+
+<p>These attributes can be used on roles that represent items within a set, including:</p>
+
+<ul>
+  <li><code>article</code></li>
+  <li><code>comment</code></li>
+  <li><code>listitem</code></li>
+  <li><code>menuitem</code></li>
+  <li><code>menuitemcheckbox</code></li>
+  <li><code>menuitemradio</code></li>
+  <li><code>option</code></li>
+  <li><code>radio</code></li>
+  <li><code>tab</code></li>
+  <li><code>treeitem</code></li>
+  <li><code>row</code>, but only when that row sits inside a <code>treegrid</code></li>
+</ul>
+
+<p>They are added to the individual items, not to the container that holds them.</p>
+
+<p>That last one catches people out. <code>row</code> can also appear in an ordinary <code>table</code> or <code>grid</code>, but <code>aria-posinset</code> and <code>aria-setsize</code> don't apply there, only when the row descends from a <code>treegrid</code>.</p>
+
+<h2>Things to be aware of</h2>
+
+<p><code>aria-posinset</code> starts at 1, not 0.</p>
+
+<p>The position should also make sense compared with the set size. For example, <code>aria-posinset="12"</code> would not make sense with <code>aria-setsize="10"</code>.</p>
+
+<p>If the total number of items is genuinely unknown, <code>aria-setsize="-1"</code> can be used.</p>
+
+<p>For ordinary grids and tables, <code>aria-rowindex</code> and <code>aria-rowcount</code> are usually preferred. <code>aria-posinset</code> and <code>aria-setsize</code> have a more specific use for rows in a <code>treegrid</code>.</p>
+
+<p>These attributes should not be used when the browser already has enough information to calculate the position and set size itself. Their main purpose is to provide information that is missing from the DOM.</p>
+
+<h2>Takeaway</h2>
+
+<p>Use <code>aria-posinset</code> and <code>aria-setsize</code> to tell assistive technologies where an item sits within a set when that information cannot be worked out from the DOM.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-setsize-posinset.html">Testing aria-setsize and aria-posinset</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

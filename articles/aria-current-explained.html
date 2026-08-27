@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding aria-current - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A plain-English explainer on aria-current: what it does and the seven values it can take.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>aria-current</code></h1>
+    </div>
+  </section>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-20">20 August 2026</time></p>
+
+<h2>An accessible menu</h2>
+
+<p>The menu below shows "About us" as the current section, clearly indicated through colour and styling. This is obvious to a sighted user.</p>
+
+<p><img style="max-width: 500px" src="../assets/img/aria-current.png" alt="An example navigation menu with About us highlighted"></p>
+
+<p>But what about assistive technology users? They hear a list of links, all announced the same way. Nothing in the page structure tells them "this is the section you're in."</p>
+
+<pre><code>&lt;nav aria-label="Example navigation"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+<p><code>aria-current</code> fills this gap. It marks an element as the current one within a set and lets assistive technology announce that information.</p>
+
+<p>It takes one of seven values.</p>
+
+<h2><code>page</code></h2>
+
+<p><code>aria-current="page"</code> identifies the current page within a set of pages.</p>
+
+<p>In the example below, <strong>Home</strong> is identified as the current page in the navigation.</p>
+
+<pre><code>&lt;nav aria-label="Example navigation"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#" <span class="highlight">aria-current="page"</span>&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+<h2><code>step</code></h2>
+
+<p><code>aria-current="step"</code> identifies the current step within a process.</p>
+
+<p>In the example below, <strong>Cart</strong> is identified as the current step in the checkout process.</p>
+
+<pre><code>&lt;ol aria-label="Checkout steps"&gt;
+  &lt;li <span class="highlight">aria-current="step"</span>&gt;1. Cart&lt;/li&gt;
+  &lt;li&gt;2. Delivery&lt;/li&gt;
+  &lt;li&gt;3. Payment&lt;/li&gt;
+  &lt;li&gt;4. Confirmation&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+<h2><code>location</code></h2>
+
+<p><code>aria-current="location"</code> identifies the current location within a set of locations.</p>
+
+<p>In the example below, <strong>Dinosaurs</strong> is identified as the visitor's current location in the museum.</p>
+
+<pre><code>&lt;ul class="museum-list" aria-label="Museum floor plan"&gt;
+  &lt;li&gt;Entrance&lt;/li&gt;
+  &lt;li&gt;Ancient Egypt&lt;/li&gt;
+  &lt;li <span class="highlight">aria-current="location"</span>&gt;Dinosaurs&lt;/li&gt;
+  &lt;li&gt;Space exploration&lt;/li&gt;
+  &lt;li&gt;Gift shop&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<h2><code>date</code></h2>
+
+<p><code>aria-current="date"</code> identifies the current date within a set of dates.</p>
+
+<p>In the example below, <strong>5 March</strong> is identified as the current date in the calendar.</p>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;March 2026&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Su&lt;/th&gt;
+      &lt;th&gt;Mo&lt;/th&gt;
+      &lt;th&gt;Tu&lt;/th&gt;
+      &lt;th&gt;We&lt;/th&gt;
+      &lt;th&gt;Th&lt;/th&gt;
+      &lt;th&gt;Fr&lt;/th&gt;
+      &lt;th&gt;Sa&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td <span class="highlight">aria-current="date"</span>&gt;5&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+<h2><code>time</code></h2>
+
+<p><code>aria-current="time"</code> identifies the current time within a set of times.</p>
+
+<p>In the example below, the <strong>10:30am Client call</strong> is identified as the current item in the schedule.</p>
+
+<pre><code>&lt;ol aria-label="Today's schedule"&gt;
+  &lt;li&gt;9:00am, Team standup&lt;/li&gt;
+  &lt;li <span class="highlight">aria-current="time"</span>&gt;10:30am, Client call&lt;/li&gt;
+  &lt;li&gt;1:00pm, Lunch&lt;/li&gt;
+  &lt;li&gt;2:30pm, Design review&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+<h2><code>true</code></h2>
+
+<p><code>aria-current="true"</code> identifies an item as current when none of the more specific values are appropriate.</p>
+
+<p>In the example below, <strong>Accessibility</strong> is identified as the current category.</p>
+
+<pre><code>&lt;div role="group" aria-label="Filter by category"&gt;
+  &lt;ul class="filter-tabs"&gt;
+    &lt;li&gt;&lt;button type="button"&gt;All&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button" <span class="highlight">aria-current="true"</span>&gt;Accessibility&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button"&gt;Development&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button type="button"&gt;Design&lt;/button&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+<h2><code>false</code></h2>
+
+<p><code>aria-current="false"</code> explicitly marks an item as not current. This is the default value, so it rarely needs to be stated, but it can be useful when toggling state via JavaScript, setting it explicitly on the previously-current item as current moves to a new one.</p>
+
+<p>In the example below, <strong>1</strong> has just lost current status as <strong>2</strong> becomes current.</p>
+
+<pre><code>&lt;nav aria-label="Pagination"&gt;
+  &lt;a href="#" <span class="highlight">aria-current="false"</span>&gt;1&lt;/a&gt;
+  &lt;a href="#" aria-current="page"&gt;2&lt;/a&gt;
+  &lt;a href="#"&gt;3&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+<p>Picking the specific value over <code>true</code> matters. <code>aria-current="page"</code> on a nav link and <code>aria-current="true"</code> on the same link aren't guaranteed to be announced the same way, and the specific value carries more meaning for the user.</p>
+
+<h2>Where to use it</h2>
+
+<p><code>aria-current</code> is a global attribute, so technically it can be added to any element. In practice it's mostly seen on <code>a</code>, <code>li</code>, <code>button</code>, and table cells inside calendar markup. Some specific examples:</p>
+
+<ul>
+  <li>Navigation menus, marking the current page (<code>aria-current="page"</code>)</li>
+  <li>Museum floor plans, wayfinding, or similar sequences, marking the current location (<code>aria-current="location"</code>)</li>
+  <li>Multi-step forms or wizards, marking the current step (<code>aria-current="step"</code>)</li>
+  <li>Calendars and date pickers, marking the current date (<code>aria-current="date"</code>)</li>
+</ul>
+
+<p>The common thread: somewhere a sighted user gets a visual "you are here" signal that isn't otherwise available from the accessible name or role.</p>
+
+<h2>Where to avoid it</h2>
+
+<p><code>aria-current</code> is not a substitute for <code>aria-selected</code> or <code>aria-checked</code>. Current, selected and checked are three different states with three different meanings, don't reach for <code>aria-current</code> just because something happens to be selected.</p>
+
+<p>It's also not something to set once and forget. In some cases, it may need to dynamically change in the DOM as users interact with the page.</p>
+
+<h2>Takeaway</h2>
+
+<p>Use <code>aria-current</code> to give AT users the same "you are here" context that sighted users get through styling.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-current.html">Testing aria-current</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>

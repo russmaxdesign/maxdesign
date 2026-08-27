@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Understanding readonly and aria-readonly - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="The readonly and aria-readonly attributes both communicate that a value cannot be changed, but only one of them changes behaviour.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner">
+    <div class="banner-content">
+      <h1>Understanding <code>readonly</code> and <code>aria-readonly</code></h1>
+    </div>
+  </section>
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-08-21">21 August 2026</time></p>
+
+<p>The <code>readonly</code> and <code>aria-readonly</code> attributes both tell users that a value cannot be changed. However, they work in different ways.</p>
+
+<h2 id="the-readonly-attribute">The <code>readonly</code> attribute</h2>
+
+<p>The <code>readonly</code> attribute is used for form controls that have a value users would normally be able to edit.</p>
+
+<p>It prevents users from changing that value, while still allowing them to focus the control, read the value, select it and copy it.</p>
+
+<p><img style="max-width: 400px" src="../assets/img/aria-readonly.png" alt="An example form field that has been set with aria-readonly"></p>
+
+<p>In the following example, the boolean readonly attribute has been used. Users cannot change the value "ABC-123-XYZ", but the value is still submitted with the form.</p>
+
+<pre><code>&lt;label for="order-id"&gt;Order ID&lt;/label&gt;
+&lt;input
+  id="order-id"
+  value="ABC-123-XYZ"
+  <span class="highlight">readonly</span>
+&gt;</code></pre>
+
+<p>A useful way to think about <code>readonly</code> is:</p>
+
+<blockquote>
+  <p>The value is still there for users. They just can't change it.</p>
+</blockquote>
+
+<p>It applies to controls where users normally enter a value. The value remains available for them to inspect, select or copy, but users cannot edit it.</p>
+
+<p>Because <code>readonly</code> is built into HTML, browsers automatically expose the read-only state through accessibility APIs. There is no need to add ARIA.</p>
+
+<h2 id="when-to-use-readonly">When to use <code>readonly</code></h2>
+
+<p>The <code>readonly</code> attribute can be useful when a field has information that users need to see but should not be able to change.</p>
+
+<p>For example:</p>
+
+<ul>
+  <li>an order number</li>
+  <li>a calculated total</li>
+  <li>information confirmed during an earlier step</li>
+  <li>information supplied by another system</li>
+</ul>
+
+<p>It is particularly useful when users may still need to focus the field, read the value or copy it.</p>
+
+<h2 id="which-elements-support-readonly">Which elements support <code>readonly</code>?</h2>
+
+<p>The <code>readonly</code> attribute can be used with <code>&lt;textarea&gt;</code> and with text-based <code>&lt;input&gt;</code> types, including:</p>
+
+<ul>
+  <li><code>text</code></li>
+  <li><code>search</code></li>
+  <li><code>tel</code></li>
+  <li><code>url</code></li>
+  <li><code>email</code></li>
+  <li><code>password</code></li>
+  <li><code>date</code></li>
+  <li><code>month</code></li>
+  <li><code>week</code></li>
+  <li><code>time</code></li>
+  <li><code>datetime-local</code></li>
+  <li><code>number</code></li>
+</ul>
+
+<p>In the following example, the <code>&lt;textarea&gt;</code> has been set to read-only:</p>
+
+<pre><code>&lt;label for="notes"&gt;Notes&lt;/label&gt;
+&lt;textarea id="notes" name="notes" <span class="highlight">readonly</span>&gt;
+  Prefilled content the user can read but not edit.
+&lt;/textarea&gt;</code></pre>
+
+<p>It does not apply to controls such as checkboxes, radio buttons, range controls, colour inputs or buttons.</p>
+
+<p>These controls are about making a choice or performing an action rather than editing a value in the same way as a text field.</p>
+
+<p>The same applies to <code>&lt;select&gt;</code>.</p>
+
+<p>A <code>&lt;select&gt;</code> gives users a set of choices. They choose an option rather than enter or edit text, so there is no editable text value for readonly to preserve.</p>
+
+<h2 id="the-aria-readonly-attribute">The <code>aria-readonly</code> attribute</h2>
+
+<p><code>aria-readonly</code> provides a similar read-only state for ARIA widgets.</p>
+
+<p>In the following example, an element has been given <code>aria-readonly="true"</code>:</p>
+
+<pre><code>&lt;div
+  role="textbox"
+  <span class="highlight">aria-readonly="true"</span>
+  aria-label="Confirmation code"
+&gt;
+  ABC-123-XYZ
+&lt;/div&gt;</code></pre>
+
+<p>The attribute tells assistive technologies that the widget cannot be edited, but users can still interact with it in other ways.</p>
+
+<p>It accepts two values:</p>
+
+<pre><code>aria-readonly="<span class="highlight">true</span>"
+aria-readonly="<span class="highlight">false</span>"</code></pre>
+
+<p><code>true</code> means the value cannot be changed.</p>
+
+<p><code>false</code> means the value can be changed and is the default, so it usually does not need to be set explicitly.</p>
+
+<h2 id="aria-readonly-does-not-create-behaviour"><code>aria-readonly</code> does not create behaviour</h2>
+
+<p>There is an important difference between <code>readonly</code> and <code>aria-readonly</code>.</p>
+
+<p>Native <code>readonly</code> actually prevents users from editing the control. <code>aria-readonly</code> does not.</p>
+
+<p>ARIA communicates information to assistive technologies. It does not automatically change how a custom control behaves.</p>
+
+<p>In the following example, <code>aria-readonly="true"</code> does not, by itself, prevent the content from being edited.</p>
+
+<pre><code>&lt;div
+  role="textbox"
+  contenteditable="true"
+  <span class="highlight">aria-readonly="true"</span>
+  aria-label="Comment"
+&gt;
+  Some text
+&lt;/div&gt;</code></pre>
+
+<p>If you create a custom widget, you must also provide the behaviour that prevents users from changing its value.</p>
+
+<p>Otherwise, screen reader users could be told that a control is read-only while the control can still be edited.</p>
+
+<h2 id="when-to-use-aria-readonly">When to use <code>aria-readonly</code></h2>
+
+<p>Use <code>aria-readonly</code> when you are creating a custom ARIA widget that supports a read-only state and there is no suitable native HTML equivalent.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;div
+  role="textbox"
+  <span class="highlight">aria-readonly="true"</span>
+  aria-label="Confirmation code"
+&gt;
+  ABC-123-XYZ
+&lt;/div&gt;</code></pre>
+
+<p>If the widget later becomes editable, the state could be changed dynamically:</p>
+
+<pre><code>&lt;div
+  role="textbox"
+  <span class="highlight">contenteditable="true"</span>
+  <span class="highlight">aria-readonly="false"</span>
+  aria-label="Comment"
+&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Where possible, native HTML is still the best solution. For a standard text field or textarea, use the native <code>readonly</code> attribute instead.</p>
+
+<h2 id="which-roles-support-aria-readonly">Which roles support <code>aria-readonly</code>?</h2>
+
+<p><code>aria-readonly</code> can be used with roles that support a read-only state, including:</p>
+
+<ul>
+  <li><code>checkbox</code></li>
+  <li><code>combobox</code></li>
+  <li><code>grid</code></li>
+  <li><code>gridcell</code></li>
+  <li><code>listbox</code></li>
+  <li><code>radiogroup</code></li>
+  <li><code>slider</code></li>
+  <li><code>spinbutton</code></li>
+  <li><code>textbox</code></li>
+</ul>
+
+<p>It is also inherited by some related roles, including:</p>
+
+<ul>
+  <li><code>columnheader</code></li>
+  <li><code>rowheader</code></li>
+  <li><code>searchbox</code></li>
+  <li><code>switch</code></li>
+  <li><code>treegrid</code></li>
+</ul>
+
+<p>This means <code>aria-readonly</code> is broader than the native HTML <code>readonly</code> attribute.</p>
+
+<p>Some of these roles, such as checkbox, slider and switch, do not have an editable text value. For these roles, <code>aria-readonly="true"</code> means that users cannot change the current state or selection.</p>
+
+<h3 id="grid-and-treegrid-work-a-little-differently">Grid and treegrid work a little differently</h3>
+
+<p><code>grid</code> and <code>treegrid</code> behave a bit differently again. Setting <code>aria-readonly="true"</code> on the grid or treegrid element itself propagates down to its <code>gridcell</code>, <code>columnheader</code> and <code>rowheader</code> children, so you don't need to set it on every cell individually.</p>
+
+<p>For <code>grid</code> and <code>treegrid</code> roles, <code>aria-readonly="true"</code> can be set on the parent element. The read-only state then applies to its cells and headers.</p>
+
+<pre><code>&lt;div role="grid" <span class="highlight">aria-readonly="true"</span>&gt;
+  &lt;div role="row"&gt;
+    &lt;div role="gridcell"&gt;Value 1&lt;/div&gt;
+    &lt;div role="gridcell"&gt;Value 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Individual cells can still use <code>aria-readonly="false"</code> if they need to remain editable.</p>
+
+<h2 id="dont-add-aria-readonly-to-native-read-only-fields">Don't add <code>aria-readonly</code> to native read-only fields</h2>
+
+<p>This is unnecessary. The native <code>readonly</code> attribute already provides both the behaviour and the accessibility information.</p>
+
+<pre><code>&lt;input
+  type="text"
+  value="ABC-123-XYZ"
+  readonly
+  aria-readonly="true"
+&gt;</code></pre>
+
+<h2 id="in-summary">Wrapup</h2>
+
+<p>Use native HTML whenever possible.</p>
+
+<p>For native text fields and textareas, <code>readonly</code> provides both the read-only behaviour and the accessibility information.</p>
+
+<p>For custom ARIA widgets, <code>aria-readonly="true"</code> communicates the read-only state to assistive technologies, but you must provide the actual behaviour yourself.</p>
+
+<h2>Test page</h2>
+
+<p><a href="https://intopia.github.io/exercise/testing-aria-readonly.html">Testing aria-readonly</a></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+
+    <p>Copyright &copy; Max Design 2026</p>
+
+  </footer>
+</body>
+</html>
