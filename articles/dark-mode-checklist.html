@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dark mode checklist - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A practical checklist for designing, developing and testing dark mode, including colour choices, contrast, images, CSS colour schemes, toggles and forced colours.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1 id="a1">Dark mode checklist</h1>
+    </div>
+  </section>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-09-14">14 September 2026</time></p>
+
+<h2>What is dark mode?</h2>
+
+<p>Dark mode is a display setting that uses darker background colours and lighter text and interface elements. It provides an alternative colour scheme for people who prefer it or find it more comfortable.</p>
+
+<p>It is a complete colour scheme that can affect colours, images and other parts of an interface.</p>
+
+<h2>How does the system preference reach the page?</h2>
+
+<ol>
+  <li>The operating system has a light or dark appearance setting.</li>
+  <li>The browser reads that preference and makes it available through <code>prefers-color-scheme</code>.</li>
+  <li>CSS can then use that preference to apply light or dark styles.</li>
+</ol>
+
+<p>It is important to remember that <code>prefers-color-scheme</code> only tells you what the user prefers. The site still needs to provide the corresponding styles.</p>
+
+<h2>This checklist</h2>
+
+<p>This checklist covers some of the most common things to check when reviewing a design or interface in dark mode.</p>
+
+<h2>Design</h2>
+
+<h3>Set light and dark values for</h3>
+
+<ul>
+  <li>page backgrounds</li>
+  <li>component and surface backgrounds</li>
+  <li>text, including secondary and muted text</li>
+  <li>links</li>
+  <li>borders and dividers</li>
+  <li>icons</li>
+  <li>form controls</li>
+</ul>
+
+<h3>Colours</h3>
+
+<ul>
+  <li>
+    <strong>Be careful with pure black backgrounds and pure white text</strong>
+    <p>Very high contrast can make text appear to glow or blur for some people, including people with astigmatism. Research on this effect in dark mode is limited, but using an off-black background with slightly softer text can help. Some people with low vision also find light text on a dark background easier to read, so the aim is to tune dark mode rather than avoid it.</p>
+  </li>
+  <li>
+    <strong>Lighten and desaturate brand and accent colours</strong>
+    <p>Highly saturated colours that work well on a light background can feel too strong against a dark one.</p>
+  </li>
+  <li>
+    <strong>Check status colours</strong>
+    <p>Error, warning and success colours should remain distinct and recognisable in dark mode.</p>
+  </li>
+  <li>
+    <strong>Check contrast</strong>
+    <p>Text, icons, borders and controls should have sufficient contrast in both modes. The contrast calculation is the same in light and dark mode, but the colours differ, so check each mode separately.</p>
+  </li>
+  <li>
+    <strong>Check states</strong>
+    <p>Hover, focus, active, selected, visited and disabled states should be checked in both modes.</p>
+  </li>
+</ul>
+
+<h3>Shadows and overlays</h3>
+
+<ul>
+  <li>Shadows can be hard to see on dark surfaces. Consider using lighter surface colours to distinguish raised elements.</li>
+  <li>Check overlays and gradients to make sure they still work well against dark backgrounds.</li>
+</ul>
+
+<h3>Images and graphics</h3>
+
+<ul>
+  <li>Check logos, illustrations, charts and diagrams against both light and dark backgrounds.</li>
+  <li>Check transparent images for unwanted light or dark edges.</li>
+  <li>Swap images if they don’t work in both modes:</li>
+</ul>
+<pre><code>&lt;picture&gt;
+  &lt;source srcset="logo-dark.svg" media="(prefers-color-scheme: dark)"&gt;
+  &lt;img src="logo-light.svg" alt="Example logo"&gt;
+&lt;/picture&gt;</code></pre>
+
+<h2>Development</h2>
+
+<h3>Tokens and variables</h3>
+
+<p>Avoid hard-coded colours.</p>
+
+<ul>
+  <li>Use semantic colour variables or design tokens:</li>
+</ul>
+<pre><code>color: var(--text-color);
+background-color: var(--surface-color);</code></pre>
+
+<ul>
+  <li>Make sure foreground and background colours change together. A colour without its matching background is a bug waiting to happen.</li>
+  <li>Avoid <code>!important</code> on colour declarations. It can make theme overrides harder to manage because later styles may also need <code>!important</code>, along with careful control of specificity and source order.</li>
+</ul>
+
+<h3>Declaring the colour scheme</h3>
+
+<p>Start by declaring the colour schemes your site supports, then choose how you want to provide the light and dark values.</p>
+
+<h4>Step 1: declare <code>color-scheme</code></h4>
+
+<p><code>color-scheme</code> tells the browser which colour schemes your page supports. This lets browser-provided elements, such as form controls and scrollbars, match the current scheme.</p>
+
+<pre><code>:root {
+  color-scheme: light dark;
+}</code></pre>
+
+<p>The first value is the preferred scheme and the second is also supported.</p>
+
+<p>You can also declare the colour scheme in the <code>&lt;head&gt;</code>. Because the browser reads the meta element before the stylesheet loads, it can use the right page colour from the start.</p>
+
+<pre><code>&lt;meta name="color-scheme" content="light dark"&gt;</code></pre>
+
+<p>Only declare schemes that the site actually supports. If you declare both light and dark, make sure your own colours and styles also work correctly in both.</p>
+
+<h4>Step 2: choose how to provide light and dark values</h4>
+
+<p><strong>Option A: <code>prefers-color-scheme</code></strong></p>
+
+<p>Use <code>prefers-color-scheme</code> to apply styles based on the user's system setting.</p>
+
+<pre><code>@media (prefers-color-scheme: dark) {
+  /* dark mode styles */
+}</code></pre>
+
+<p><strong>Option B: <code>light-dark()</code></strong></p>
+
+<p><code>light-dark()</code> lets you provide a light value and a dark value together, without repeating them in a media query.</p>
+
+<pre><code>:root {
+  color-scheme: light dark;
+  --text-color: light-dark(#1a1a1a, #e6e6e6);
+}</code></pre>
+
+<p>The first value is used for light mode and the second for dark mode.</p>
+
+<p><code>light-dark()</code> relies on <code>color-scheme</code>, so make sure Step 1 is in place when using it.</p>
+
+<h3>If using a toggle</h3>
+
+<ul>
+  <li>If the control overrides the system setting, consider offering light, dark and system options so users can return to following their system preference.</li>
+  <li>Persist the user's choice.</li>
+  <li>Default to the system setting.</li>
+  <li>Give the control an accessible name and make its current state clear.</li>
+</ul>
+
+<h3>Things that may not follow the theme</h3>
+
+<ul>
+  <li>Third-party embeds: maps, video players, payment widgets, captchas, iframes.</li>
+  <li>Syntax highlighting in code samples.</li>
+  <li>Background images and other assets designed for a light background.</li>
+  <li>Email templates and PDFs generated by the site.</li>
+</ul>
+
+<h3>Things that get missed</h3>
+
+<ul>
+  <li>Styled form controls, including inputs, selects and checkboxes, as well as placeholder text.</li>
+  <li><code>accent-color</code> on checkboxes, radios, range inputs and progress bars.</li>
+  <li>SVG <code>fill</code> and <code>stroke</code> values. Use <code>currentColor</code> where appropriate.</li>
+  <li>Pseudo-elements such as <code>::before</code> and <code>::after</code>.</li>
+  <li>Gradients, shadows and semi-transparent colours.</li>
+  <li>Print styles, which should not inherit the dark theme.</li>
+  <li><code>&lt;meta name="theme-color"&gt;</code> for the browser interface. You can provide different colours for light and dark mode:</li>
+</ul>
+<pre><code>&lt;meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"&gt;
+&lt;meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)"&gt;</code></pre>
+
+<h2>Final check</h2>
+
+<p>Test all pages and components in both light and dark mode, including hover and focus states, form and validation states, and disabled and selected states.</p>
+
+<p>Dark mode and forced-colours mode, such as Windows contrast themes (previously called High Contrast), work differently. A site that works well in dark mode may still have problems in forced-colours mode, so test both separately.</p>
+
+<p>Most importantly, test with dark mode on a real device!</p>
+  </main>
+</body>
+</html>

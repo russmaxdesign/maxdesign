@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dark mode test: Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Training in web design, development, and accessibility for professionals and teams.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+#result {
+  color: #fff;
+  background: #000;
+  font-size: 1.2em;
+  padding: 1em;
+  margin: 1em 0 3em;
+}
+
+@media (prefers-color-scheme: dark) {
+  #result {
+    color: #000;
+    background: #fff;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="index.html" class="current">Home</a></li>
+      <li><a href="/about/index.html">About</a></li>
+      <li><a href="/resources/index.html">Resources</a></li>
+      <li><a href="/talks/index.html">Presentations</a></li>
+      <li><a href="/articles/index.html">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1 id="a1">Welcome to Max Design</h1>
+      <p>Design • Development • Accessibility • Training • Articles</p>
+    </div>
+  </section>
+  <main class="main-home">
+
+<h2>Dark mode test</h2>
+
+<p id="result"></p>
+
+<h2>How does the system preference reach the page?</h2>
+
+<ol>
+  <li>The operating system has a light or dark appearance setting.</li>
+  <li>The browser reads that preference and makes it available through <code>prefers-color-scheme</code>.</li>
+  <li>CSS can then use that preference to apply light or dark styles.</li>
+</ol>
+
+<p>For this page, JavaScript uses <code>matchMedia()</code> to read the same preference and display whether light or dark mode is currently preferred. It also updates when the preference changes.
+</p>
+
+
+<script>
+const result = document.querySelector('#result');
+const darkMode = matchMedia('(prefers-color-scheme: dark)');
+
+function updateResult() {
+  result.textContent = darkMode.matches
+    ? 'Dark preference detected'
+    : 'Light preference detected';
+}
+
+updateResult();
+
+darkMode.addEventListener('change', updateResult);
+</script>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>
