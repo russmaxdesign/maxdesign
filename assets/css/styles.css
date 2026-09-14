@@ -10,6 +10,7 @@ Gobal styles
   color-scheme: light dark;
 }
 
+
 /* ---------------------
 containers
 ----------------------*/
@@ -134,7 +135,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
-  margin: 1em 0 .5em;
+  margin: 1em 0;
   font-size: 1em;
 }
 
@@ -210,6 +211,7 @@ figcaption {
   display: block;
   margin: .5em 0 0;
 }
+
 
 /* ---------------------
 links
@@ -403,6 +405,7 @@ legend {
   background: #6D0E53;
   color: #fff;
 }
+
 
 /* ---------------------
 banner
@@ -789,8 +792,9 @@ classes
   white-space: nowrap !important;
 }
 
+
 /* ---------------------
-classes
+Dark mode styles
 ----------------------*/
 
 @media (prefers-color-scheme: dark) {
@@ -846,12 +850,16 @@ classes
     background-color: #5CA4BF;
   }
 
+  nav a:focus,
+  .button:focus {
+    color: #1F1F1F;
+    background-color: #D8FF8A;
+}
+
   hr,
   footer,
-  .article {
-    border-color: #969292;
-  }
-
+  .article,
+  .further-reading,
   blockquote {
     border-color: #969292;
   }
@@ -913,5 +921,13 @@ classes
     border-color: #969292;
     background-image: linear-gradient(#3A3636, #2B2B2B);
     box-shadow: .05em .05em .1em #111;
+  }
+
+  a:focus,
+  nav a:focus,
+  .button:focus,
+  .input:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
   }
 }

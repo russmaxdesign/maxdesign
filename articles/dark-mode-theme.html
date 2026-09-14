@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple steps for declaring a dark mode colour scheme - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Simple steps for setting up a dark mode colour scheme using color-scheme, prefers-color-scheme, light-dark() and theme-color.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+h4 {
+  margin: 2em 0 1em;
+}
+  </style>
+
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1 id="a1">Simple steps for declaring a dark mode colour scheme</h1>
+    </div>
+  </section>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-09-15">15 September 2026</time></p>
+
+<p>This article covers the basics of setting up a dark mode colour scheme: how to tell the browser which schemes your site supports, and how to provide light and dark values.</p>
+
+<p>It focuses on following the user's system preference. A manual light and dark toggle involves some additional steps, so it is not covered here.</p>
+
+<p>For guidance on what to check once dark mode is in place, such as contrast, images, borders and shadows, see the <a href="dark-mode-checklist.html">dark mode checklist</a>.</p>
+
+<h2>What is dark mode?</h2>
+
+<p>Dark mode is a display setting that uses darker background colours and lighter text and interface elements. It provides an alternative colour scheme for people who prefer it or find it more comfortable.</p>
+
+<p>It is a complete colour scheme that can affect colours, images and other parts of an interface.</p>
+
+<h3>How do system preferences reach the page?</h3>
+
+<ol>
+  <li>The operating system has a light or dark appearance setting.</li>
+  <li>The browser reads that preference and makes it available through <code>prefers-color-scheme</code>.</li>
+  <li>CSS can then use that preference to apply light or dark styles.</li>
+</ol>
+
+<p>It is important to remember that <code>prefers-color-scheme</code> only tells you what the user prefers. The site still needs to provide the corresponding styles.</p>
+
+<hr>
+
+<h2>Declare which colour schemes you support</h2>
+
+<p>Start by declaring the colour schemes your site supports. You can do this in the <code>&lt;head&gt;</code>, in CSS, or both.</p>
+
+<h3>Step 1: Add a meta element (optional)</h3>
+
+<p>You can declare the colour scheme in the <code>&lt;head&gt;</code>. The browser reads the meta element before the stylesheet loads, so it can use the right page colour from the start and avoid a flash of the wrong colour.</p>
+
+<pre><code>&lt;meta name="color-scheme" <span class="highlight">content="light dark"</span>&gt;</code></pre>
+
+<p>Declare the colour schemes your site is designed to support. If you use <code>light dark</code>, make sure your own colours and styles work correctly in both modes.</p>
+
+<p>If the site supports light mode only, you can declare that instead. For example, <code>content="only light"</code> tells the browser to keep the page in light mode rather than applying its own dark mode adjustments.</p>
+
+<h3>Step 2: Declare <code>color-scheme</code> in CSS</h3>
+
+<p><code>color-scheme</code> tells the browser which colour schemes your page supports. This lets browser-provided elements, such as form controls and scrollbars, match the current scheme.</p>
+
+<pre><code>:root {
+  <span class="highlight">color-scheme: light dark;</span>
+}</code></pre>
+
+<p>The browser uses whichever of these schemes matches the user's current setting. The order only matters when there is no preference to match, in which case the first value is used.</p>
+
+<p>This declares the same supported colour schemes as the meta element in Step 1. The meta element arrives earlier because it does not wait for the stylesheet to load. The CSS version is easier to keep alongside the rest of your styles. You can use one or both, but if you use both, make sure the values match.</p>
+
+<hr>
+
+<h2>Provide light and dark values</h2>
+
+<p>Declaring <code>color-scheme</code> handles the browser's own elements. Your own colours still need light and dark values.</p>
+
+<h3>Step 3: Choose how to provide light and dark values</h3>
+
+<p>There are two ways to do this. You can use either one, or mix them on the same site.</p>
+
+<h4>Option A: <code>prefers-color-scheme</code></h4>
+
+<p>Use <code>prefers-color-scheme</code> to apply dark mode styles when the user's system is set to dark mode.</p>
+
+<pre><code>@media (<span class="highlight">prefers-color-scheme: dark</span>) {
+  /* dark mode styles */
+}</code></pre>
+
+<p>Your normal styles are used by default, and the styles inside the media query are applied when dark mode is preferred.</p>
+
+<h4>Option B: <code>light-dark()</code></h4>
+
+<p><code>light-dark()</code> lets you provide a light value and a dark value together, without repeating them in a media query.</p>
+
+<pre><code>:root {
+  color-scheme: light dark;
+  <span class="highlight">--text-color</span>: light-dark(#1a1a1a, #e6e6e6);
+  <span class="highlight">--background-color</span>: light-dark(#fff, #1f1f1f);
+}
+
+body {
+  color: var(<span class="highlight">--text-color</span>);
+  background: var(<span class="highlight">--background-color</span>);
+}</code></pre>
+
+<p>The first value is used for light mode and the second for dark mode. For paired colour values, this gives the same result as Option A in fewer lines.</p>
+
+<p><code>light-dark()</code> relies on <code>color-scheme</code>, so make sure Step 2 is in place when using it.</p>
+
+<p><code>light-dark()</code> is newer than <code>prefers-color-scheme</code>, so check browser support if you need to support older browsers.</p>
+
+<hr>
+
+<h2>Set the browser interface colour</h2>
+
+<h3>Step 4: Add <code>theme-color</code> meta elements (optional)</h3>
+
+<p>The <code>theme-color</code> meta element can suggest a colour for parts of the browser interface, such as the toolbar or title bar. It does not change the colours of the page itself.</p>
+
+<pre><code>&lt;meta
+  name="theme-color"
+  content="#ffffff"
+  media="(prefers-color-scheme: light)"
+&gt;
+&lt;meta
+  name="theme-color"
+  content="#1a1a1a"
+  media="(prefers-color-scheme: dark)"
+&gt;</code></pre>
+
+<p>Support varies between browsers, and the effect is most noticeable on mobile. Treat this as an optional enhancement rather than a required step.</p>
+
+<p>Simple! Now go forth and darken your site.</p>
+
+  </main>
+</body>
+</html>
