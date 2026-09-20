@@ -74,47 +74,73 @@
 <pre><code>&lt;button <span class="highlight">title="Hello world"</span>&gt;&lt;/button&gt;</code></pre>
 
 
-<h2>More on button content</h2>
+<!-- section -->
 
-<p>Let's look more closely at "Option 3", where the <code>&lt;button&gt;</code> element's content is used for the accessible name.</p>
 
-<p>This accessible name is concatenated from:</p>
+<h2>A strange button example</h2>
 
-<ul>
-  <li>Any content (text strings) directly within the element</li>
-  <li>The accessible names of all child or descendant elements, if relevant</li>
-</ul>
+<p>In the example below, the <code>&lt;button&gt;</code> element's accessible name is concatenated into a text string from the accessible names of all of its descendant elements. The button below has an accessible name of:</p>
 
-<p>The result of these two possible sources generates the final accessible name, expressed as text strings.</p>
-
-<p>The <code>&lt;button&gt;</code> element below has 6 child elements. For each of these, any possible accessible name must be calculated before being applied to the overall accessible name.</p>
-
-<p>In this case, the final accessible name is: <em>"Hello how are you doing today?"</em></p>
+<p><em><q>Hello how are you doing today ?</q></em></p>
 
 <div class="example">
-  <button>
-    Hello
-    <span>how</span>
-    <span>are</span>
-    <span>you</span>
+  <button class="button">
+    <img src="../assets/img/icon-cross.png" alt="Hello">
+    <span class="hidden">how are you</span>
     <span role="img" aria-label="doing"></span>
-    <span role="img" aria-labelledby="bbb"></span>
-    <span title="?"></span>
+    <span role="img" aria-labelledby="aaa"></span>
+    <span role="img" title="?"></span>
   </button>
-  <p id="bbb">today</p>
-</div>
-<pre><code>&lt;button&gt;
-  <span class="highlight">Hello</span>
-  &lt;span&gt;<span class="highlight">how</span>&lt;/span&gt;
-  &lt;span&gt;<span class="highlight">are</span>&lt;/span&gt;
-  &lt;span&gt;<span class="highlight">you</span>&lt;/span&gt;
-  &lt;span role="img" aria-label="<span class="highlight">doing</span>"&gt;&lt;/span&gt;
-  &lt;span role="img" aria-labelledby="bbb"&gt;&lt;/span&gt;
-  &lt;span title="<span class="highlight">?</span>"&gt;&lt;/span&gt;
-&lt;/button&gt;
-&lt;p id="bbb"&gt;<span class="highlight">today</span>&lt;/p&gt;</code></pre>
 
-<p><a class="button" href="https://codepen.io/russweakley/pen/rNKjeqe" target="_blank">CodePen demo</a></p>
+  <p id="aaa" style="display: none;">today</p>
+</div>
+
+<pre><code>&lt;button&gt;
+  &lt;img src="cross.png" alt="Hello"&gt;
+  &lt;span class="hidden"&gt;how are you&lt;/span&gt;
+  &lt;span role="img" aria-label="doing"&gt;&lt;/span&gt;
+  &lt;span role="img" aria-labelledby="aaa"&gt;&lt;/span&gt;
+  &lt;span role="img" title="?"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;p id="aaa" style="display: none;"&gt;today&lt;/p&gt;</code></pre>
+
+<!-- section -->
+
+
+<h3>Explanation</h3>
+
+<p>Buttons use “name from contents”, meaning their accessible name is built from the accessible text alternatives of descendant content. Different child elements can contribute text in different ways, and the final name is concatenated together.</p>
+
+<p>The image provides <code>alt</code> text: "Hello"</p>
+
+<pre><code>&lt;img src="cross.png" alt="Hello"&gt;</code></pre>
+
+<p>Even though visually hidden, the first <code>&lt;span&gt;</code> provides text: "how are you". Buttons build their accessible name from descendant content, so visually hidden text can still participate in the button’s name calculation. This works because the content is visually hidden only. It would not work if the element used <code>display: none</code>, <code>visibility: hidden</code>, or <code>aria-hidden="true"</code>.</p>
+
+<pre><code>&lt;span class="hidden"&gt;how are you&lt;/span&gt;</code></pre>
+
+<p>The second <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a name via <code>aria-label</code>: "doing"</p>
+
+<pre><code>&lt;span role="img" aria-label="doing"&gt;&lt;/span&gt;</code></pre>
+
+<p>The third <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a name via <code>aria-labelledby</code>: "today"</p>
+
+<pre><code>&lt;span role="img" aria-labelledby="aaa"&gt;&lt;/span&gt;
+...
+&lt;p id="aaa" style="display: none;"&gt;today&lt;/p&gt;</code></pre>
+
+<p>The fourth <code>&lt;span&gt;</code> has a role of <code>img</code> and therefore provides a fallback accessible name via the <code>title</code>: "?"</p>
+
+<pre><code>&lt;span role="img" title="?"&gt;&lt;/span&gt;</code></pre>
+
+<h3>Why is there a space before the question mark?</h3>
+
+<p><em><q>Hello how are you doing today ?</q></em></p>
+
+<p>The space comes from how the browser computes accessible names. Each child element’s contribution is usually separated by a space when the final name is concatenated together. So the <code>&lt;span role="img" title="?"&gt;</code> contributes its own separate text token, producing "today ?" rather than "today?".</p>
+
+
 
   </main>
   <footer>

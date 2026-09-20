@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="HTML content categories define where elements can appear and what they’re allowed to contain with a clear, rules-based approach that improves validity, accessibility, and maintainability.">
+  <meta name="description" content="HTML content categories group elements by how they fit into document structure, and each element’s content model is written in terms of them.">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,9 @@
 
 <p>These categories do not control how elements look. They describe how elements fit into the document structure and how they relate to the elements around them.</p>
 
-<p>Content categories do not decide where an element may be used or which elements it may contain. Those rules are defined separately in the specification under each element’s content model and permitted contexts.</p>
+<p>Content categories don't define the rules themselves, but the rules are written in terms of them. Each element's content model usually states which categories of content it can contain. So you need to consider both the categories an element belongs to and the content model of its intended parent.</p>
+
+<p>The specific rules are defined separately in the specification under each element's content model and permitted contexts.</p>
 
 <p>In this article, we focus on the categories that matter most for everyday authoring. We are not covering every edge case or specialised category here.</p>
 
@@ -140,8 +142,10 @@
   <li>Flow content</li>
   <li>Phrasing content</li>
   <li>Interactive content (when it has an <code>href</code> attribute)</li>
-  <li>Palpable content (when it contains content users can perceive, like text or images)</li>
+  <li>Palpable content (when it is not empty)</li>
 </ul>
+
+<p>For more on that last one, see <a href="https://www.maxdesign.com.au/articles/what-is-palpable-content.html">What is palpable content?</a></p>
 
 <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 770 420" style="enable-background:new 0 0 770 420;" xml:space="preserve">
   <title>Diagram showing content model categories overlapping</title>
@@ -236,18 +240,22 @@
 
 <p>Interactive content includes elements designed for user interaction. These elements are usually focusable and can be activated with the keyboard, mouse, touch, or assistive technologies.</p>
 
-<p>Examples include:</p>
+<p>Interactive content:</p>
 
-<pre><code>&lt;a href="#"&gt;Link&lt;/a&gt;
-&lt;button&gt;Button&lt;/button&gt;
-&lt;input type="text"&gt;
-&lt;select&gt;...&lt;/select&gt;
-&lt;textarea&gt;...&lt;/textarea&gt;
-&lt;details&gt;...&lt;/details&gt;
-&lt;audio controls&gt;&lt;/audio&gt;
-&lt;video controls&gt;&lt;/video&gt;
-&lt;img usemap="#mapname"&gt;
-</code></pre>
+<ul>
+  <li><code>&lt;a&gt;</code> (if the <code>href</code> attribute is present)</li>
+  <li><code>&lt;audio&gt;</code> (if the <code>controls</code> attribute is present)</li>
+  <li><code>&lt;button&gt;</code></li>
+  <li><code>&lt;details&gt;</code></li>
+  <li><code>&lt;embed&gt;</code></li>
+  <li><code>&lt;iframe&gt;</code></li>
+  <li><code>&lt;img&gt;</code> (if the <code>usemap</code> or <code>controls</code> attribute is present)</li>
+  <li><code>&lt;input&gt;</code> (if the <code>type</code> attribute is not in the Hidden state)</li>
+  <li><code>&lt;label&gt;</code></li>
+  <li><code>&lt;select&gt;</code></li>
+  <li><code>&lt;textarea&gt;</code></li>
+  <li><code>&lt;video&gt;</code> (if the <code>controls</code> attribute is present)</li>
+</ul>
 
 <p>These elements are generally expected to:</p>
 
@@ -279,7 +287,7 @@
 &lt;/a&gt;
 </code></pre>
 
-<p>Browsers may attempt to repair these structures, but behaviour is not consistent across browsers or assistive technologies.</p>
+<p>Browsers parse these structures without complaint, so nothing visibly breaks. The inconsistency shows up in focus, activation and how assistive technologies handle the nested pair.</p>
 
 <h3>Why this matters for accessibility</h3>
 
@@ -296,7 +304,7 @@
 
 <h2>Transparent content models</h2>
 
-<p>Some elements (such as <code>&lt;a&gt;</code> with an <code>href</code>) have a <strong>transparent content model</strong>.</p>
+<p>Some elements (such as <code>&lt;a&gt;</code>, <code>&lt;ins&gt;</code> and <code>&lt;del&gt;</code>) have a <strong>transparent content model</strong>.</p>
 
 <p>Transparent is not a content category. It is a rule that affects permitted content.</p>
 
@@ -331,17 +339,15 @@
 <ul>
   <li><strong>Conforming</strong>: The HTML follows all the rules. Nothing is out of place.</li>
   <li><strong>Non-conforming</strong>: The HTML can still be loaded, but it breaks one or more rules.</li>
-  <li><strong>Invalid</strong>: The HTML is broken in a way that the browser cannot read without fixing it first.</li>
 </ul>
 
-<p>Browsers will usually try to “fix” invalid or non-conforming HTML so the page still shows.  
-This is called <strong>error recovery</strong> or <strong>browser repair</strong>.</p>
+<p>HTML parsing never fails. When markup breaks the rules, the browser builds a document anyway, following the error handling steps set out in the specification. This is called <strong>error recovery</strong> or <strong>browser repair</strong>.</p>
 
-<p>However, these repairs are not guaranteed or consistent. </p>
+<p>Because those steps are specified, modern browsers recover from most markup errors in the same way. The problem is what you are left with. The resulting structure may not be the one you intended, and that structure is what assistive technologies work from.</p>
 
-<p>Screen readers and other assistive technologies may see a different structure than what the browser shows visually.</p>
+<p>Other problems are not repaired at all. A nested <code>&lt;button&gt;</code> inside an <code>&lt;a&gt;</code> parses without complaint, and the inconsistency shows up later in focus, activation and how assistive technologies handle the pair.</p>
 
-<p>For accessibility, it’s safest to write HTML that doesn’t rely on repair behaviour.</p>
+<p>For accessibility, it’s safest to write HTML that doesn’t rely on the browser having to repair your markup.</p>
 
 <hr>
 
@@ -350,6 +356,10 @@ This is called <strong>error recovery</strong> or <strong>browser repair</strong
 <p>Content categories provide a mental model for understanding how elements behave.</p>
 
 <p>If you’re ever unsure, look up the element’s content model and permitted content in the HTML Living Standard. It’s the final source of truth for how HTML works.</p>
+
+<h3>Related article</h3>
+
+<p>This article doesn’t cover palpable content, the category that asks whether an element is empty. That one has an article of its own: <a href="https://www.maxdesign.com.au/articles/what-is-palpable-content.html">What is palpable content?</a></p>
 
   </main>
   <footer>

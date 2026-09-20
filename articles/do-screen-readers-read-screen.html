@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Do screen readers actually read the screen? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Screen readers usually don't read the rendered screen. Here's a quick explanation of accessibility trees, accessibility APIs, events and speech queues.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1 id="a1">Do screen readers actually read the screen?</h1>
+    </div>
+  </section>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-09-16">16 September 2026</time></p>
+
+<p>Most screen readers never look at the rendered screen. Instead, they get information from the browser in two ways.</p>
+
+<h2>How it starts</h2>
+
+<ol>
+  <li>The browser builds an accessibility tree from the DOM (and parts of the CSS). In Chrome's case, it actually builds <a href="https://www.maxdesign.com.au/articles/two-trees.html" target="_blank">two of them</a>.</li>
+  <li>The browser exposes that tree through the operating system's accessibility API.</li>
+</ol>
+
+<h2>Path A: the user navigates with the screen reader</h2>
+
+<ol start="3">
+  <li>The user reads or navigates, such as arrowing through content or jumping to the next heading.</li>
+  <li>The screen reader queries the tree through the OS accessibility API for the relevant roles, names, states and properties.</li>
+</ol>
+
+<h2>Path B: something changes</h2>
+
+<ol start="3">
+  <li>When something changes, such as a <a href="https://www.maxdesign.com.au/articles/dom-mutations.html" target="_blank">DOM mutation</a> or focus moving, the browser updates the accessibility tree.</li>
+  <li>The browser then fires accessibility events for anything meaningful that changed (AX notifications on macOS, UIA events on Windows).</li>
+  <li>These events are passed on through the same OS accessibility API.</li>
+  <li>The screen reader receives those events and queries the tree for the relevant roles, names, states and properties.</li>
+</ol>
+
+<h2>How it ends (for both paths)</h2>
+
+<ol start="7">
+  <li>The screen reader builds "utterances" and adds them to the <a href="https://www.maxdesign.com.au/articles/understanding-speech-queues.html" target="_blank">speech queue</a>. When they're actually announced depends on multiple factors, in a mythical and magical order that sort of makes sense but is <a href="https://www.maxdesign.com.au/articles/more-about-speech-queues.html" target="_blank">far more complex</a> than most people would believe.</li>
+</ol>
+
+<p>This is a simplified version. Every step has its own edge cases, and some of them have edge cases too.</p>
+
+<p><img src="../assets/img/do-screen-readers-announce.png" alt="Simplified diagram explaining the steps above"></p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026</p>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What is palpable content? - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="A practical guide to understanding palpable content in HTML, including a simple three-gate checking method and examples of where palpable content and usability differ.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+  <style>
+    .answer-list {
+      margin: 1.5em 0;
+      padding: 0;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">  
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1 id="a1">What is palpable content?</h1>    
+    </div>
+  </section>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-09-20">20 September 2026</time></p>
+
+<p>I wrote an article on <a href="https://www.maxdesign.com.au/articles/html-content-categories.html">HTML content categories</a>. However, it didn&rsquo;t cover one of the key content categories: palpable content.</p>
+
+<p>So, let&rsquo;s look at palpable content now.</p>
+
+<h2 id="the-html-definition-of-palpable-content">The HTML definition of palpable content</h2>
+
+<p>The <a href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content" target="_blank">HTML Living Standard</a> says palpable content:</p>
+
+<blockquote>
+  <p>makes an element non-empty by providing either some descendant non-empty text, or else something users can hear (audio elements) or view (video, img, or canvas elements) or otherwise interact with (for example, interactive form controls).</p>
+</blockquote>
+
+<p>In simple terms, palpable content is something with substance: text, an image, media, or a control.</p>
+
+<h2 id="elements-should-not-be-empty">Elements should not be empty</h2>
+
+<p>In general, elements that can contain flow content or phrasing content should not be empty. They should contain at least one piece of palpable content that is not hidden.</p>
+
+<p>The key word here is &ldquo;should&rdquo;. This means it&rsquo;s a recommendation rather than a strict requirement.</p>
+
+<h2 id="empty-elements-can-be-valid">Empty elements can be valid</h2>
+
+<p>The specification also makes it clear that there are valid reasons for an element to be empty. It might be a placeholder that a script fills in later.</p>
+
+<p>For example, an empty error message container above a form field may be used to provide an error message when one is needed.</p>
+
+<pre><code>&lt;div class="error-message"&gt;
+  &lt;!-- Error message added here when needed --&gt;
+&lt;/div&gt;</code></pre>
+
+<h2 id="how-can-i-check">How can I check if an element contains palpable content?</h2>
+
+<p>Before you start, remember that you are checking the markup rather than testing the user experience.</p>
+
+<p>For example, visually hidden text can still count as palpable content, and an image with empty <code>alt</code> can also count.</p>
+
+<p>So checking only what you can see, or what a screen reader announces, may give you the wrong answer.</p>
+
+<h3 id="gate-1-is-the-element-non-empty">Gate 1: is the element non-empty?</h3>
+
+<ul>
+  <li>Does it contain any child nodes at all, ignoring whitespace and comments?</li>
+</ul>
+
+<p>Answer:</p>
+
+<ul class="answer-list">
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M3 3l10 10M13 3L3 13"
+          fill="none"
+          stroke="#d32f2f"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </span>
+    <b>No</b>: Stop. Nothing palpable here.
+  </li>
+
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M2.5 8.5l3.5 3.5 7.5-8"
+          fill="none"
+          stroke="#2e7d32"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+    <b>Yes</b>: Continue.
+  </li>
+</ul>
+
+<h3 id="gate-2-is-that-content-unhidden">Gate 2: is that content unhidden?</h3>
+
+<ul>
+  <li>Is at least some of that content without a <code>hidden</code> attribute?</li>
+</ul>
+
+<p>Answer:</p>
+
+<ul class="answer-list">
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M3 3l10 10M13 3L3 13"
+          fill="none"
+          stroke="#d32f2f"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </span>
+    <b>No</b>: Stop. Hidden content does not satisfy the rule.
+  </li>
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M2.5 8.5l3.5 3.5 7.5-8"
+          fill="none"
+          stroke="#2e7d32"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+    <b>Yes</b>: Continue.
+  </li>
+</ul>
+
+<h3 id="gate-3-is-at-least-some-of-the-unhidden-content-palpable">Gate 3: is at least some of the unhidden content palpable?</h3>
+
+<p>Work through the four kinds. One yes is enough.</p>
+
+<ul>
+  <li>Can you extract a non-empty text string?</li>
+  <li>Is there an <code>&lt;img&gt;</code>, <code>&lt;canvas&gt;</code> or <code>&lt;video&gt;</code>?</li>
+  <li>Is there an <code>&lt;audio&gt;</code> element?</li>
+  <li>Is there a form control or other interactive element?</li>
+</ul>
+
+<p>Answer:</p>
+
+<ul class="answer-list">
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M3 3l10 10M13 3L3 13"
+          fill="none"
+          stroke="#d32f2f"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+    </span>
+    <b>None</b>: The element has contents, but nothing palpable.
+  </li>
+  <li>
+    <span aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" focusable="false">
+        <path
+          d="M2.5 8.5l3.5 3.5 7.5-8"
+          fill="none"
+          stroke="#2e7d32"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </span>
+    <b>Any</b>: The element has palpable content.
+  </li>
+</ul>
+
+<h3 id="a-note-on-gate-3">A note on gate 3</h3>
+
+<p>These four questions follow the definition closely and will give you the right answer in most cases.</p>
+
+<p>However, the full list of palpable content is longer, and some elements only count as palpable in certain situations. For example:</p>
+
+<ul>
+  <li><code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> are only palpable when they contain at least one <code>&lt;li&gt;</code></li>
+  <li><code>&lt;dl&gt;</code> is only palpable when it contains at least one name-value group</li>
+  <li><code>&lt;audio&gt;</code> is only palpable when it has a <code>controls</code> attribute</li>
+  <li><code>&lt;input&gt;</code> is only palpable when its <code>type</code> is not <code>hidden</code></li>
+</ul>
+
+<p>For example, <code>&lt;ul&gt;&lt;/ul&gt;</code> is not palpable, even though <code>&lt;ul&gt;</code> appears in the list.</p>
+
+<p>If you come across an unusual case, check the <a href="https://html.spec.whatwg.org/multipage/dom.html#palpable-content" target="_blank">full list in the specification</a>.</p>
+
+<h2 id="so-what-does-passing-the-test-tell-you">So what does passing the test tell you?</h2>
+
+<p>Passing the test only tells you that the element contains palpable content. It does not tell you whether that content is actually usable or available to users.</p>
+
+<p>There are four possible outcomes, listed below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Example</th>
+      <th>Palpable?</th>
+      <th>Usable?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1. <code>&lt;a href="#"&gt;Hello world&lt;/a&gt;</code></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>2. <code>&lt;a href="#"&gt;&lt;img src="x.png" alt=""&gt;&lt;/a&gt;</code></td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>3. <code>&lt;button aria-label="Close"&gt;&lt;/button&gt;</code></td>
+      <td>No</td>
+      <td>Partly</td>
+    </tr>
+    <tr>
+      <td>4. <code>&lt;button&gt;&lt;/button&gt;</code></td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The two middle rows are where this gets interesting.</p>
+
+<h3 id="passes-palpable-content-check-usable-yes">1. Passes palpable content check, usable yes</h3>
+
+<pre><code>&lt;a href=&quot;#&quot;&gt;Hello world&lt;/a&gt;</code></pre>
+
+<p>The <code>&lt;a&gt;</code> element contains non-empty text, so it passes the palpable content check. The text also gives the link its accessible name.</p>
+
+<h3 id="passes-palpable-content-check-usable-no">2. Passes palpable content check, usable no</h3>
+
+<pre><code class="language-html">&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;x.png&quot; alt=&quot;&quot;&gt;&lt;/a&gt;</code></pre>
+
+<p>The <code>&lt;a&gt;</code> element passes the palpable content check because it contains an <code>&lt;img&gt;</code>, regardless of whether the image's <code>alt</code> attribute is empty.</p>
+
+<p>Because the image is the only content of the link, it has a functional purpose. It needs a text alternative that describes where the link goes or what it does.</p>
+
+<p>This is a WCAG 2.4.4 failure.</p>
+
+<p>This is an easy case to miss because the element passes the palpable content test and may look fine visually.</p>
+
+<h3 id="fails-palpable-content-check-partly-usable">3. Fails palpable content check, partly usable</h3>
+
+<pre><code class="language-html">&lt;button aria-label=&quot;Close&quot;&gt;&lt;/button&gt;</code></pre>
+
+<p>The <code>&lt;button&gt;</code> is empty, so it does not contain any palpable content.</p>
+
+<p>However, <code>aria-label="Close"</code> gives the button an accessible name. This means a screen reader can identify the button, even though there is nothing visible inside it. For sighted users, the button appears empty.</p>
+
+<p>This shows why the palpable content rule is still useful. The button relies entirely on its <code>aria-label</code> to explain its purpose, and that label is not visible.</p>
+
+<p>Compare it with this:</p>
+
+<pre><code class="language-html">&lt;button&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Close&lt;/span&gt;&lt;/button&gt;</code></pre>
+
+<p>This version contains palpable content and still has the accessible name &ldquo;Close&rdquo;. If the visually hidden styling fails, the text is also still there.</p>
+
+<p>If an element fails the palpable content check, this can be a useful sign that the markup deserves a closer look.</p>
+
+<h3 id="fails-palpable-content-check-usable-no">4. Fails palpable content check, usable no</h3>
+
+<pre><code class="language-html">&lt;button&gt;&lt;/button&gt;</code></pre>
+
+<p>The <code>&lt;button&gt;</code> element is empty and has no accessible name. It fails the palpable content check and is not usable.</p>
+
+<h2 id="wrap-up">Wrap-up</h2>
+
+<p>The palpable content check tells you whether something is there. Usability asks whether people can actually use it.</p>
+
+<p>Ideally, you want both.</p>
+
+  </main>
+</body>
+</html>

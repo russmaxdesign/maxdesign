@@ -9,8 +9,8 @@
 <description>Browser internals, accessibility, ARIA, HTML and CSS articles</description>
 <link>https://www.maxdesign.com.au/articles/</link>
 <language>en-au</language>
-<lastBuildDate>Sunday, 16 August 2026 17:35:00 +1000</lastBuildDate>
-<pubDate>Sunday, 16 August 2026 17:35:00 +1000</pubDate>
+<lastBuildDate>Sun, 20 Sep 2026 09:00:30 +1000</lastBuildDate>
+<pubDate>Sun, 20 Sep 2026 09:00:30 +1000</pubDate>
 
 <atom:link href="https://www.maxdesign.com.au/feed.xml"
            rel="self"
@@ -24,207 +24,210 @@
 
 
 <!--  =========================================================  -->
-<!--  1. Understanding aria-pressed                                -->
+<!--  1. What is palpable content?                               -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-pressed</title>
-<link>https://www.maxdesign.com.au/articles/aria-pressed-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-pressed-explained.html</guid>
-<pubDate>Sun, 16 Aug 2026 09:00:30 +1000</pubDate>
+<title>What is palpable content?</title>
+<link>https://www.maxdesign.com.au/articles/what-is-palpable-content.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/what-is-palpable-content.html</guid>
+<pubDate>Sun, 20 Sep 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>A quick explanation of aria-pressed - including an example, when it can be used, and when it should not be used.</description>
+<description>A practical guide to understanding palpable content in HTML, including a simple three-gate checking method and examples of where palpable content and usability differ.</description>
 <content:encoded>
 <![CDATA[
-<p>A quick explanation of aria-pressed - including an example, when it can be used, and when it should not be used.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-pressed-explained.html">Read the full article</a></p>
+<p>A practical guide to understanding palpable content in HTML, including a simple three-gate checking method and examples of where palpable content and usability differ.</p>
+<p><a href="https://www.maxdesign.com.au/articles/what-is-palpable-content.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  2. Understanding aria-valuemin and aria-valuemax            -->
+<!--  2. What are form controls?                                 -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-valuemin and aria-valuemax</title>
-<link>https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html</guid>
-<pubDate>Sun, 16 Aug 2026 09:00:30 +1000</pubDate>
+<title>What are form controls?</title>
+<link>https://www.maxdesign.com.au/articles/what-are-form-controls.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/what-are-form-controls.html</guid>
+<pubDate>Sat, 19 Sep 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>This article explains aria-valuemin and aria-valuemax in plain language. It shows how assistive technology can understand the boundaries of a range control.</description>
+<description>A practical definition of form controls, including which HTML elements count as form controls, which do not, and examples of each control type.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-valuemin and aria-valuemax in plain language. It shows how assistive technology can understand the boundaries of a range control.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-valuemin-valuemax-explained.html">Read the full article</a></p>
+<p>A practical definition of form controls, including which HTML elements count as form controls, which do not, and examples of each control type.</p>
+<p><a href="https://www.maxdesign.com.au/articles/what-are-form-controls.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  3. Understanding aria-valuetext                             -->
+<!--  3. Do screen readers actually read the screen?             -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-valuetext</title>
-<link>https://www.maxdesign.com.au/articles/aria-valuetext-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuetext-explained.html</guid>
-<pubDate>Sat, 15 Aug 2026 09:00:30 +1000</pubDate>
+<title>Do screen readers actually read the screen?</title>
+<link>https://www.maxdesign.com.au/articles/do-screen-readers-read-screen.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/do-screen-readers-read-screen.html</guid>
+<pubDate>Wed, 16 Sep 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>This article explains aria-valuetext in plain language, building on aria-valuenow to show how a numeric value can be given a more useful text description for assistive technology.</description>
+<description>A quick explanation of how browsers expose accessibility information to screen readers, and how changes ultimately become spoken announcements.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-valuetext in plain language, building on aria-valuenow to show how a numeric value can be given a more useful text description for assistive technology.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-valuetext-explained.html">Read the full article</a></p>
+<p>A quick explanation of how browsers expose accessibility information to screen readers, and how changes ultimately become spoken announcements.</p>
+<p><a href="https://www.maxdesign.com.au/articles/do-screen-readers-read-screen.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  4. Understanding aria-valuenow                              -->
+<!--  4. Simple steps for declaring a dark mode colour scheme    -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-valuenow</title>
-<link>https://www.maxdesign.com.au/articles/aria-valuenow-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-valuenow-explained.html</guid>
-<pubDate>Fri, 14 Aug 2026 09:00:30 +1000</pubDate>
+<title>Simple steps for declaring a dark mode colour scheme</title>
+<link>https://www.maxdesign.com.au/articles/dark-mode-theme.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/dark-mode-theme.html</guid>
+<pubDate>Tue, 15 Sep 2026 09:10:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
+<category>CSS</category>
 <category>Accessibility</category>
-<description>This article explains aria-valuenow in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</description>
+<description>Simple steps for setting up a dark mode colour scheme using color-scheme, prefers-color-scheme, light-dark() and theme-color.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-valuenow in plain language, starting with a familiar native range input and then showing what changes when developers build their own custom slider.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-valuenow-explained.html">Read the full article</a></p>
+<p>Simple steps for setting up a dark mode colour scheme using color-scheme, prefers-color-scheme, light-dark() and theme-color.</p>
+<p><a href="https://www.maxdesign.com.au/articles/dark-mode-theme.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  5. Understanding aria-details                               -->
+<!--  5. Dark mode checklist                                     -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-details</title>
-<link>https://www.maxdesign.com.au/articles/aria-details-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-details-explained.html</guid>
-<pubDate>Thu, 13 Aug 2026 09:00:30 +1000</pubDate>
+<title>Dark mode checklist</title>
+<link>https://www.maxdesign.com.au/articles/dark-mode-checklist.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/dark-mode-checklist.html</guid>
+<pubDate>Tue, 15 Sep 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
-<category>HTML</category>
+<category>CSS</category>
 <category>Accessibility</category>
-<description>This article explains aria-details in plain language, showing how it connects elements on a page to additional content, how that content is exposed to screen reader users, and how it differs from aria-describedby.</description>
+<description>A practical checklist for designing, developing and testing dark mode, including colour choices, contrast, images, CSS colour schemes, toggles and forced colours.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-details in plain language, showing how it connects elements on a page to additional content, how that content is exposed to screen reader users, and how it differs from aria-describedby.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-details-explained.html">Read the full article</a></p>
+<p>A practical checklist for designing, developing and testing dark mode, including colour choices, contrast, images, CSS colour schemes, toggles and forced colours.</p>
+<p><a href="https://www.maxdesign.com.au/articles/dark-mode-checklist.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  6. Understanding aria-roledescription                       -->
+<!--  6. Understanding readonly and aria-readonly                -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-roledescription</title>
-<link>https://www.maxdesign.com.au/articles/aria-roledescription-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-roledescription-explained.html</guid>
-<pubDate>Wed, 12 Aug 2026 09:00:30 +1000</pubDate>
+<title>Understanding readonly and aria-readonly</title>
+<link>https://www.maxdesign.com.au/articles/aria-readonly-readonly-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-readonly-readonly-explained.html</guid>
+<pubDate>Thu, 27 Aug 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>This article explains aria-roledescription in plain language, starting with how native and ARIA roles work, then showing how it can override how a role is announced, without creating a new role.</description>
+<description>The readonly and aria-readonly attributes both communicate that a value cannot be changed, but only one of them changes behaviour.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-roledescription in plain language, starting with how native and ARIA roles work, then showing how it can override how a role is announced, without creating a new role.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-roledescription-explained.html">Read the full article</a></p>
+<p>The readonly and aria-readonly attributes both communicate that a value cannot be changed, but only one of them changes behaviour.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-readonly-readonly-explained.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  7. Understanding aria-activedescendant                      -->
+<!--  7. Understanding aria-controls                             -->
 <!--  =========================================================  -->
 <item>
-<title>Understanding aria-activedescendant</title>
-<link>https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html</guid>
-<pubDate>Tue, 11 Aug 2026 09:00:30 +1000</pubDate>
+<title>Understanding aria-controls</title>
+<link>https://www.maxdesign.com.au/articles/aria-controls-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-controls-explained.html</guid>
+<pubDate>Sun, 23 Aug 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>This article explains aria-activedescendant in plain language, starting with a familiar native select and then showing what changes when developers build their own custom version.</description>
+<description>A plain-English explainer on aria-controls: what it does, when it is useful, and current support.</description>
 <content:encoded>
 <![CDATA[
-<p>This article explains aria-activedescendant in plain language, starting with a familiar native select and then showing what changes when developers build their own custom version.</p>
-<p><a href="https://www.maxdesign.com.au/articles/aria-activedescendant-explained.html">Read the full article</a></p>
+<p>A plain-English explainer on aria-controls: what it does, when it is useful, and current support.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-controls-explained.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  8. A bookmarklet highlighting mismatches between the visible label and accessible name  -->
+<!--  8. Understanding aria-haspopup                             -->
 <!--  =========================================================  -->
 <item>
-<title>A bookmarklet highlighting mismatches between the visible label and accessible name</title>
-<link>https://www.maxdesign.com.au/articles/mismatch-bookmarklet.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/mismatch-bookmarklet.html</guid>
-<pubDate>Mon, 08 Jun 2026 09:00:30 +1000</pubDate>
+<title>Understanding aria-haspopup</title>
+<link>https://www.maxdesign.com.au/articles/aria-haspopup-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-haspopup-explained.html</guid>
+<pubDate>Fri, 21 Aug 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>A bookmarklet that highlights accessible names for links that match, partially match or mismatch.</description>
+<description>A plain-English explainer on aria-haspopup: what it does and the seven values it can take.</description>
 <content:encoded>
 <![CDATA[
-<p>A bookmarklet that highlights accessible names for links that match, partially match or mismatch.</p>
+<p>A plain-English explainer on aria-haspopup: what it does and the seven values it can take.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-haspopup-explained.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  9. A bookmarklet highlighting roles that must never have author-provided names  -->
+<!--  9. Understanding aria-current                              -->
 <!--  =========================================================  -->
 <item>
-<title>A bookmarklet highlighting roles that must never have author-provided names</title>
-<link>https://www.maxdesign.com.au/articles/name-bookmarklet.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/name-bookmarklet.html</guid>
-<pubDate>Sun, 07 Jun 2026 13:10:30 +1000</pubDate>
+<title>Understanding aria-current</title>
+<link>https://www.maxdesign.com.au/articles/aria-current-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-current-explained.html</guid>
+<pubDate>Thu, 20 Aug 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>This bookmarklet highlights elements with name-prohibited roles.</description>
+<description>A plain-English explainer on aria-current: what it does and the seven values it can take.</description>
 <content:encoded>
 <![CDATA[
-<p>A bookmarklet that highlights ARIA roles where author-provided accessible names are forbidden. A practical way to find naming errors and better understand ARIA naming rules.</p>
+<p>A plain-English explainer on aria-current: what it does and the seven values it can take.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-current-explained.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
 
 
 <!--  =========================================================  -->
-<!--  10. Using the browser console for accessibility testing - Part 2  -->
+<!--  10. Understanding aria-posinset and aria-setsize           -->
 <!--  =========================================================  -->
 <item>
-<title>Using the browser console for accessibility testing - Part 2</title>
-<link>https://www.maxdesign.com.au/articles/console2.html</link>
-<guid isPermaLink="true">https://www.maxdesign.com.au/articles/console2.html</guid>
-<pubDate>Sunday, 07 June 2026 10:20:30 +1000</pubDate>
+<title>Understanding aria-posinset and aria-setsize</title>
+<link>https://www.maxdesign.com.au/articles/aria-posinset-aria-setsize-explained.html</link>
+<guid isPermaLink="true">https://www.maxdesign.com.au/articles/aria-posinset-aria-setsize-explained.html</guid>
+<pubDate>Wed, 19 Aug 2026 09:00:30 +1000</pubDate>
 <dc:creator>Russ Weakley</dc:creator>
 <category>HTML</category>
 <category>Accessibility</category>
-<description>Learn how to use browser console scripts to test aria-invalid, aria-hidden, aria-expanded, tabindex, accessible names, required fields and name-prohibited roles.</description>
+<description>A plain-English explainer on aria-posinset and aria-setsize: what they do, which roles support them, and when you actually need them.</description>
 <content:encoded>
 <![CDATA[
-<p>Build on browser-based accessibility testing techniques using the console. This article explores additional JavaScript snippets that help inspect accessible names, descriptions, roles, states and properties directly in the browser.</p>
+<p>A plain-English explainer on aria-posinset and aria-setsize: what they do, which roles support them, and when you actually need them.</p>
+<p><a href="https://www.maxdesign.com.au/articles/aria-posinset-aria-setsize-explained.html">Read the full article</a></p>
 ]]>
 </content:encoded>
 </item>
