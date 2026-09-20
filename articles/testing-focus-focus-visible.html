@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="Testing how browser focus indicators, :focus-visible and :focus behave across HTML form controls in Chrome, Firefox and Safari.">  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="description" content="Testing how browser focus indicators, :focus-visible and :focus behave across HTML form controls in Chrome, Firefox and Safari.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +60,7 @@
 
 <p class="metadetails">Published: <time datetime="2026-09-21">21 September 2026</time></p>
 
-<p>There are two CSS pseudo-classes commonly used to style focus: <code>:focus</code> and <code>:focus-visible</code>. They sound similar, but they behave differently.</p>
+<p>There are two CSS pseudo-classes commonly used to style focus. They are <code>:focus</code> and <code>:focus-visible</code>. They seem similar, but they behave differently.</p>
 
 <hr>
 
@@ -132,11 +133,11 @@
 
 <h2>Test setup</h2>
 
-<h3><a href="https://intopia.github.io/exercise/form-controls-focus.html" target="_blank">Test page 1: browser defaults</a></h3>
+<h3><a href="https://intopia.github.io/exercise/test-page-1-default.html" target="_blank">Test page 1: browser defaults</a></h3>
 
 <p>With no author CSS, to see what the browser does on its own.</p>
 
-<h3><a href="https://intopia.github.io/exercise/form-controls-visible.html" target="_blank">Test page 2: using <code>:focus-visible</code></a></h3>
+<h3><a href="https://intopia.github.io/exercise/test-page-2-focus-visible.html" target="_blank">Test page 2: using <code>:focus-visible</code></a></h3>
 
 <p>With a <code>:focus-visible</code> rule, to see whether an author's rule applies in the same places as the browser's own indicator.</p>
 
@@ -145,7 +146,7 @@
   outline-offset: 2px; 
 }</code></pre>
 
-<h3><a href="https://intopia.github.io/exercise/form-controls-raw.html" target="_blank">Test page 3: using <code>:focus</code></a></h3>
+<h3><a href="https://intopia.github.io/exercise/test-page-3-focus.html" target="_blank">Test page 3: using <code>:focus</code></a></h3>
 
 <p>With a <code>:focus</code> rule, to see where it differs from the first two.</p>
 
@@ -185,6 +186,8 @@
   <li><code>&lt;input type="week"&gt;</code></li>
 </ul>
 
+<p>For the rationale behind the controls included here, see <a href="what-are-form-controls.html">What are form controls?</a></p>
+
 <h3>Browsers and operating systems</h3>
 
 <p>macOS 26.7:</p>
@@ -195,14 +198,14 @@
   <li>Safari 27.0</li>
 </ul>
 
-<p>Windows 11, version 25H2:</p>
+<p>Windows 11:</p>
 
 <ul>
   <li>Chrome 153.0</li>
   <li>Firefox 156.0</li>
 </ul>
 
-<p>Safari was tested with "Press Tab to highlight each item on a webpage" turned on, since it is off by default and, without it, Tab skips many form controls.</p>
+<p>Safari was tested with "Press Tab to highlight each item on a webpage" turned on, since it is off by default and, without it, <kbd>TAB</kbd> skips many form controls.</p>
 
 <hr>
 
@@ -214,7 +217,7 @@
 
 <ul>
   <li><code>&lt;input type="range"&gt;</code> shows no ring at all.</li>
-  <li><code>&lt;input type="color"&gt;</code> can't be reached by Tab.</li>
+  <li><code>&lt;input type="color"&gt;</code> can't be reached by <kbd>TAB</kbd>.</li>
   <li>Date-related controls move focus through their individual segments rather than the whole control.</li>
 </ul>
 
@@ -239,9 +242,9 @@
 <h3>Tabbing:</h3>
 
 <ul>
-  <li>Every control that can be reached by Tab shows the red outline in every browser.</li>
+  <li>Every control that can be reached by <kbd>TAB</kbd> shows the red outline in every browser.</li>
   <li>This includes Safari's <code>&lt;input type="range"&gt;</code>, which gets an outline even though Safari does not draw its own.</li>
-  <li>Safari's <code>&lt;input type="color"&gt;</code> still can't be reached by Tab, so the rule never applies.</li>
+  <li>Safari's <code>&lt;input type="color"&gt;</code> still can't be reached by <kbd>TAB</kbd>, so the rule never applies.</li>
 </ul>
 
 <h3>Clicking:</h3>
@@ -257,13 +260,20 @@
 
 <p>Together with Safari's <code>&lt;input type="range"&gt;</code> when tabbing, this shows that a browser's own focus ring and <code>:focus-visible</code> matching are separate decisions. They usually align, but not always.</p>
 
+<h3>Detailed results</h3>
+
+<ul>
+  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-tabbing.html" target="_blank">Tabbing results for "Test page 1: browser defaults"</a></li>
+  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-clicking.html" target="_blank">Clicking results for "Test page 1: browser defaults"</a></li>
+</ul>
+
 <hr>
 
 <h2>Results for Test page 3: using <code>:focus</code></h2>
 
 <h3>Tabbing:</h3>
 
-<p>Every control that can be reached by Tab shows the purple outline in every browser, including Safari's <code>&lt;input type="range"&gt;</code>.</p>
+<p>Every control that can be reached by <kbd>TAB</kbd> shows the purple outline in every browser, including Safari's <code>&lt;input type="range"&gt;</code>.</p>
 
 <h3>Clicking:</h3>
 
@@ -297,7 +307,7 @@
 
 <h3>Finding 3:</h3>
 
-<p>If you want focus styles to appear whenever a control receives focus, regardless of whether it was reached by Tab or click, use <code>:focus</code>.</p>
+<p>If you want focus styles to appear whenever a control receives focus, regardless of whether it was reached by <kbd>TAB</kbd> or click, use <code>:focus</code>.</p>
 
 <p>In these tests, <code>:focus</code> showed an indicator in almost every case, with two notable exceptions:</p>
 
