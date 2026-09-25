@@ -49,7 +49,7 @@
 
 <ol start="3">
   <li>The user reads or navigates, such as arrowing through content or jumping to the next heading.</li>
-  <li>The screen reader queries the tree through the OS accessibility API for the relevant roles, names, states and properties.</li>
+  <li>The screen reader queries the tree through the OS accessibility API for the relevant roles, names, states and properties. Depending on the screen reader and mode, it may also maintain its own representation of the document for navigation.</li>
 </ol>
 
 <h2>Path B: something changes</h2>
@@ -68,6 +68,12 @@
 </ol>
 
 <p>This is a simplified version. Every step has its own edge cases, and some of them have edge cases too.</p>
+
+<h2>A note about braille:</h2>
+
+<p>Speech isn't the only possible output. A screen reader can also send information to a refreshable braille display, either instead of speech or alongside it. The path through the accessibility tree and accessibility API is broadly the same, but the final output may be braille.</p>
+
+<h2>A simple diagram of the two paths</h2>
 
 <p><img src="../assets/img/do-screen-readers-announce.png" alt="Simplified diagram explaining the steps above"></p>
 

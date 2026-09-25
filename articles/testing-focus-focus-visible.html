@@ -60,7 +60,9 @@
 
 <p class="metadetails">Published: <time datetime="2026-09-21">21 September 2026</time></p>
 
-<p>There are two CSS pseudo-classes commonly used to style focus. They are <code>:focus</code> and <code>:focus-visible</code>. They seem similar, but they behave differently.</p>
+<p>There are two CSS pseudo-classes commonly used to style elements when they receive focus: <code>:focus</code> and <code>:focus-visible</code>.</p>
+
+<p>This article first explains how they differ, then outlines a series of tests used to understand how they behave across different browsers and form controls.</p>
 
 <hr>
 
@@ -70,7 +72,7 @@
 
 <p>With the rule below, a focused button gets a visible ring, including after someone clicks it in browsers where clicking gives the button focus.</p>
 
-<pre><code>button:focus {
+<pre><code>button<span class="highlight">:focus</span> {
   outline: 3px solid #005fcc;
   outline-offset: 2px;
 }</code></pre>
@@ -83,7 +85,7 @@
 
 <p>For example, tabbing to a button will usually show a focus ring, while clicking the same button usually will not.</p>
 
-<pre><code>button:focus-visible {
+<pre><code>button<span class="highlight">:focus-visible</span> {
   outline: 3px solid #005fcc;
   outline-offset: 2px;
 }</code></pre>
@@ -92,11 +94,11 @@
 
 <h2>Try it yourself</h2>
 
-<p>The two groups below use exactly the same focus ring. The only difference is the selector. The buttons don't do anything when activated.</p>
+<p>The two groups below use exactly the same focus ring. The only difference is the selector.</p>
 
 <ol>
-  <li>Press <kbd>Tab</kbd> to move through the buttons in each group. Both groups look the same.</li>
-  <li>Now mouse-click the buttons in each group. The <code>:focus</code> group shows a ring. The <code>:focus-visible</code> group doesn't. This is expected, not a failure.</li>
+  <li>Press <kbd>Tab</kbd> to move through the buttons and text field in each group.</li>
+  <li>Then mouse-click the buttons and text field in each group.</li>
 </ol>
 
 <div class="demo demo-focus">
@@ -115,49 +117,37 @@
   <label>Name <input type="text"></label>
 </div>
 
+<p>When tabbing, the buttons and text fields in both groups should show blue focus rings.</p>
+
+<p>When mouse-clicking:</p>
+
+<ul>
+  <li>Buttons in the <code>:focus</code> group should show a blue focus ring.</li>
+  <li>Buttons in the <code>:focus-visible</code> group should not show a focus ring.</li>
+  <li>Text fields in both groups should show a blue focus ring.</li>
+</ul>
+
 <hr>
 
 <h2>The tests</h2>
 
 <p>The examples above demonstrate the basic difference between <code>:focus</code> and <code>:focus-visible</code>. But the actual browser behaviour is more complex.</p>
 
-<p>These tests aimed to find out:</p>
+<p>These tests aimed to find out, across all form controls tested:</p>
 
 <ol>
   <li>When browsers show a focus indicator.</li>
   <li>When <code>:focus-visible</code> matches.</li>
-  <li>How that differs from <code>:focus</code> across different form controls.</li>
+  <li>How that differs from <code>:focus</code>.</li>
 </ol>
 
 <hr>
 
 <h2>Test setup</h2>
 
-<h3><a href="https://intopia.github.io/exercise/test-page-1-default.html" target="_blank">Test page 1: browser defaults</a></h3>
+<h3>Form controls tested</h3>
 
-<p>With no author CSS, to see what the browser does on its own.</p>
-
-<h3><a href="https://intopia.github.io/exercise/test-page-2-focus-visible.html" target="_blank">Test page 2: using <code>:focus-visible</code></a></h3>
-
-<p>With a <code>:focus-visible</code> rule, to see whether an author's rule applies in the same places as the browser's own indicator.</p>
-
-<pre><code>:focus-visible {
-  outline: 3px solid red;
-  outline-offset: 2px; 
-}</code></pre>
-
-<h3><a href="https://intopia.github.io/exercise/test-page-3-focus.html" target="_blank">Test page 3: using <code>:focus</code></a></h3>
-
-<p>With a <code>:focus</code> rule, to see where it differs from the first two.</p>
-
-<pre><code>:focus {
-  outline: 3px solid purple;
-  outline-offset: 2px;
-}</code></pre>
-
-<p>Each control was checked twice on each test page: once by tabbing to it, and once by clicking it.</p>
-
-<h3>Form controls tested on each page</h3>
+The three test pages all used exactly the same form controls:
 
 <ul>
   <li><code>&lt;button&gt;</code></li>
@@ -187,6 +177,29 @@
 </ul>
 
 <p>For the rationale behind the controls included here, see <a href="what-are-form-controls.html">What are form controls?</a></p>
+
+<h3>Three test pages</h3>
+
+<p><a href="https://intopia.github.io/exercise/test-page-1-default.html" target="_blank">Test page 1: browser defaults</a><br>
+With no author CSS, to see what the browser does on its own.</p>
+
+<p><a href="https://intopia.github.io/exercise/test-page-2-focus-visible.html" target="_blank">Test page 2: using <code>:focus-visible</code></a><br>
+With a <code>:focus-visible</code> rule, to see whether an author's rule applies in the same places as the browser's own indicator.</p>
+
+<pre><code>:focus-visible {
+  outline: 3px solid red;
+  outline-offset: 2px; 
+}</code></pre>
+
+<p><a href="https://intopia.github.io/exercise/test-page-3-focus.html" target="_blank">Test page 3: using <code>:focus</code></a><br>
+With a <code>:focus</code> rule, to see where it differs from the first two.</p>
+
+<pre><code>:focus {
+  outline: 3px solid purple;
+  outline-offset: 2px;
+}</code></pre>
+
+<p>Each control was checked twice on each test page: once by tabbing to it, and once by clicking it.</p>
 
 <h3>Browsers and operating systems</h3>
 
@@ -235,6 +248,13 @@
 
 <p><code>&lt;select&gt;</code> varies by browser and is covered separately.</p>
 
+<h3>Detailed results</h3>
+
+<ul>
+  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-tabbing.html" target="_blank">Tabbing results for "Test page 1: browser defaults"</a></li>
+  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-clicking.html" target="_blank">Clicking results for "Test page 1: browser defaults"</a></li>
+</ul>
+
 <hr>
 
 <h2>Results for Test page 2: using <code>:focus-visible</code></h2>
@@ -258,13 +278,13 @@
 
 <p>There is one exception: <code>&lt;select&gt;</code> in Chrome on Windows. The browser shows no default ring when it is clicked, but the <code>:focus-visible</code> rule does apply. This is the only difference in the click results, out of 120 comparisons.</p>
 
-<p>Together with Safari's <code>&lt;input type="range"&gt;</code> when tabbing, this shows that a browser's own focus ring and <code>:focus-visible</code> matching are separate decisions. They usually align, but not always.</p>
+<p>This shows that a browser's own focus ring and <code>:focus-visible</code> can <strong>produce slightly different results</strong>. They usually align, but not always.</p>
 
 <h3>Detailed results</h3>
 
 <ul>
-  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-tabbing.html" target="_blank">Tabbing results for "Test page 1: browser defaults"</a></li>
-  <li><a href="https://intopia.github.io/exercise/results-browser-defaults-clicking.html" target="_blank">Clicking results for "Test page 1: browser defaults"</a></li>
+  <li><a href="https://intopia.github.io/exercise/results-focus-visible-tabbing.html" target="_blank">Tabbing results for "Test page 2: focus-visible"</a></li>
+  <li><a href="https://intopia.github.io/exercise/results-focus-visible-clicking.html" target="_blank">Clicking results for "Test page 2: focus-visible"</a></li>
 </ul>
 
 <hr>
@@ -283,6 +303,13 @@
 
 <p><code>&lt;input type="file"&gt;</code> shows no outline when clicked in any browser tested. Opening the file picker affects focus, so the <code>:focus</code> outline is not visible during this interaction.</p>
 
+<h3>Detailed results</h3>
+
+<ul>
+  <li><a href="https://intopia.github.io/exercise/results-focus-tabbing.html" target="_blank">Tabbing results for "Test page 3: focus"</a></li>
+  <li><a href="https://intopia.github.io/exercise/results-focus-clicking.html" target="_blank">Clicking results for "Test page 3: focus"</a></li>
+</ul>
+
 <hr>
 
 <h2>Key findings</h2>
@@ -292,6 +319,12 @@
 <p>Tabbing and clicking often produce different focus results, as expected.</p>
 
 <h3>Finding 2:</h3>
+
+<p><code>&lt;input type="file"&gt;</code> behaves differently from the other controls tested. Clicking it opens the system file dialog and moves focus away from the page. After the dialog closes, no visible focus indicator appears on the input.</p>
+
+<p>This occurred in Chrome, Firefox and Safari, with browser defaults, <code>:focus-visible</code> and <code>:focus</code>, and whether a file was selected or the dialog was cancelled.</p>
+
+<h3>Finding 3:</h3>
 
 <p>The controls that don't show a focus ring when clicked vary slightly between browsers, but generally include:</p>
 
@@ -305,7 +338,7 @@
 
 <p>The results are almost identical whether you rely on browser defaults or use your own <code>:focus-visible</code> rule, with the one exception covered above.</p>
 
-<h3>Finding 3:</h3>
+<h3>Finding 4:</h3>
 
 <p>If you want focus styles to appear whenever a control receives focus, regardless of whether it was reached by <kbd>TAB</kbd> or click, use <code>:focus</code>.</p>
 
@@ -316,23 +349,31 @@
   <li>Safari on macOS, where clicking some controls, including buttons, checkboxes and radios, does not give them focus.</li>
 </ul>
 
-<h3>Finding 4:</h3>
-
-<p>The missing focus ring matters most when clicking a control leaves it focused and ready for further keyboard interaction. Controls such as <code>&lt;input type="checkbox"&gt;</code>, <code>&lt;input type="radio"&gt;</code>, <code>&lt;input type="range"&gt;</code> and <code>&lt;select&gt;</code> can remain keyboard-operable after a click, even though there may be nothing on screen to show which control has focus.</p>
-
 <h3>Finding 5:</h3>
 
-<p><code>&lt;input type="file"&gt;</code> behaves differently from the other controls tested. Clicking it opens the system file dialog and moves focus away from the page. After the dialog closes, no visible focus indicator appears on the input.</p>
+<p>Browser default focus styles and <code>:focus-visible</code> generally do not show a focus ring when buttons are clicked.</p>
 
-<p>This occurred in Chrome, Firefox and Safari, with browser defaults, <code>:focus-visible</code> and <code>:focus</code>, and whether a file was selected or the dialog was cancelled.</p>
+<p>This means mouse users may not see a persistent visual indication that the button has received focus, even in browsers where it remains focused after the click.</p>
+
+<h3>Finding 6:</h3>
+
+<p>A missing focus ring matters most when a control keeps focus after it is clicked.</p>
+
+<p>This can happen when you rely on the browser's default focus styles or use <code>:focus-visible</code>. </p>
+
+<p>Some controls, such as <code>&lt;input type="checkbox"&gt;</code>, <code>&lt;input type="radio"&gt;</code>, &<code>lt;input type="range"&gt;</code> and <code>&lt;select&gt;</code>, can then be operated with the keyboard even though no focus ring is shown.</p>
+
+<p>Using <code>:focus</code> avoids this in browsers where clicking gives the control focus, because the focus style remains visible.</p>
+
+<p>This is probably the most compelling reason to use <code>:focus</code> instead of <code>:focus-visible</code>.</p>
 
 <hr>
 
-<h2>What this means in practice</h2>
+<h2>When testing</h2>
 
-<p>Test focus with the keyboard, not just the mouse. A missing focus ring after a click can be expected behaviour and can happen for different reasons.</p>
+<p>A missing focus ring after a click could be expected behaviour.</p>
 
-<p>When a ring doesn't appear, check whether the control actually has focus rather than assuming the focus style has failed.</p>
+<p>However, you need to check whether the control actually received focus rather than assuming that the browser's default focus behaviour or <code>:focus-visible</code> has been used.</p>
 
   </main>
   <footer>

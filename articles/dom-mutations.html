@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <meta name="description" content="DOM mutations are any changes to the browsers DOM tree, and these changes can happen with or without JavaScript">
+  <meta name="description" content="DOM mutations are changes to the nodes, attributes and text in the browser's DOM tree, and these changes can happen with or without JavaScript">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,43 +59,65 @@
 
 <p>The DOM is a tree-like structure that shows all the elements in your HTML document.</p>
 
-<p>It is live", which means it reacts to changes. It is not a passive version of your HTML.</p>
+<p>It is "live", which means it reacts to changes. It is not a passive version of your HTML.</p>
 
-<p>"DOM mutations" are any changes that happen to this tree. These mutations can happen with or without JavaScript.</p>
-
-<p>Browsers constantl check and modify the DOM to reflect things like:</p>
+<p>"DOM mutations" are changes to this tree. There are three types:</p>
 
 <ul>
-  <li><b>state changes</b> — e.g. a checkbox becoming checked, a <code>&lt;details&gt;</code> element becoming open.</li>
-
-  <li><b>attribute changes</b> — e.g. <code>aria-expanded="false"</code> switching to <code>"true"</code> when a disclosure widget opens.</li>
-
-  <li><b>user actions</b> — e.g. typing into an <code>&lt;input&gt;</code> updates its value property automatically.</li>
-
-  <li><b>validation results</b> — e.g. a form control becoming <code>:invalid</code> because of built-in browser validation (JavaScript not required).</li>
-
-  <li><b>interactive behaviour</b> — e.g. a <code>&lt;select&gt;</code> element updating which option is selected.</li>
-
-  <li><b>internal UI logic</b> — e.g. the browser toggling the open attribute on <code>&lt;details&gt;</code> when the summary is clicked.</li>
-
-  <li><b>accessibility behaviours</b> (rare) — e.g. the browser inserting a computed accessible name into the AXTree when a label changes.</li>
-
-  <li><b>parsing corrections</b> — e.g. the browser inserting missing closing tags or restructuring malformed HTML.</li>
-
-  <li><b>autofill</b> — e.g. the browser writing values into <code>&lt;input&gt;</code> fields during autofill.</li>
-
-  <li><b>spellchecking behaviour</b> — e.g. the browser wrapping misspelled words in internal DOM markers for underlining.</li>
+  <li><b>Nodes being added or removed</b> — e.g. a new element being inserted.</li>
+  <li><b>Attributes changing</b> — e.g. an <code>open</code> attribute being added or removed.</li>
+  <li><b>Text changing</b> — e.g. the text inside an element being replaced.</li>
 </ul>
 
-<p>None of these modifications need to be made using JavaScript. Many HTML elements have built-in behaviours. This means that browsers have to update the DOM to keep a range of things "in sync". This includes the element’s internal state, visual UI, and accessibility information.</p>
+<p>These mutations can happen with or without JavaScript.</p>
 
-<p>Here are some quick examples you can try yourself:</p>
 
-<ol>
-  <li>When you type into an <code>&lt;input&gt;</code>, the browser updates the element’s value property.</li>
-  <li>When you select an option in a <code>&lt;select&gt;</code>, the DOM automatically updates which option is selected.</li>
-  <li>When a <code>&lt;details&gt;</code> element opens, the browser sets the open attribute on the <code>&lt;details&gt;</code> element automatically.</li>
-</ol>
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>DOM mutations without JavaScript</h2>
+
+<p>Browsers make some DOM mutations on their own. For example:</p>
+
+<ul>
+  <li><b>internal UI logic</b> — e.g. the browser adding or removing the <code>open</code> attribute on a <code>&lt;details&gt;</code> element when the <code>&lt;summary&gt;</code> is clicked.</li>
+
+  <li><b>dialog behaviour</b> — e.g. the browser removing the <code>open</code> attribute from a modal <code>&lt;dialog&gt;</code> when the user presses <kbd>Esc</kbd>.</li>
+
+  <li><b>parsing</b> — e.g. the browser inserting nodes as it builds the page, including adding missing elements or restructuring malformed HTML.</li>
+</ul>
+
+<p>None of these modifications need to be made using JavaScript. Some HTML elements have built-in behaviours, and browsers update the DOM to keep things "in sync".</p>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>State changes are not DOM mutations</h2>
+
+<p>Many things that feel like DOM changes are actually <b>state changes</b>. The browser tracks these internally, as properties or states, but the DOM tree itself does not change.</p>
+
+<p>Common examples include:</p>
+
+<ul>
+  <li><b>user input</b> — e.g. typing into an <code>&lt;input&gt;</code> updates its <code>value</code> property, not its <code>value</code> attribute.</li>
+
+  <li><b>checkboxes and radio buttons</b> — e.g. checking a checkbox updates its <code>checked</code> property, not its <code>checked</code> attribute.</li>
+
+  <li><b>select menus</b> — e.g. choosing an option in a <code>&lt;select&gt;</code> updates which option is selected, but does not add a <code>selected</code> attribute.</li>
+
+  <li><b>validation results</b> — e.g. a form control matching <code>:invalid</code> because of built-in browser validation.</li>
+
+  <li><b>autofill</b> — e.g. the browser writing values into <code>&lt;input&gt;</code> fields.</li>
+
+  <li><b>focus</b> — e.g. an element receiving keyboard focus.</li>
+</ul>
+
+<p>This difference matters when debugging, as you will see in the <code>MutationObserver</code> section below. But from an accessibility point of view, state changes are just as important as DOM mutations. Both are used to update the accessibility tree.</p>
 
 
 <!--  –––––––––––––––––––––––––
@@ -107,7 +129,7 @@
 
 <p>JavaScript can also be used for DOM mutations.</p>
 
-<p>When your script runs, it can directly change the structure, text, or attributes of elements — and every one of these changes counts as a DOM mutation.</p>
+<p>When your script runs, it can directly change the structure, text, or attributes of elements. Every one of these changes counts as a DOM mutation.</p>
 
 <p>Typical JavaScript-driven mutations include:</p>
 
@@ -116,14 +138,59 @@
 
   <li><b>Removing nodes</b> — deleting elements from the DOM, such as removing a modal, clearing a list, or hiding elements by removing them entirely.</li>
 
-  <li><b>Updating attributes</b> (including ARIA) — changing values like <code>aria-expanded</code>, class, <code>disabled</code>, or value; every attribute update counts as a DOM mutation.</li>
+  <li><b>Updating attributes</b> (including ARIA) — changing values like <code>aria-expanded</code>, <code>class</code>, or <code>disabled</code>. Every attribute update counts as a DOM mutation.</li>
 
-  <li><b>Changing text</b> — modifying the textContent or innerText of an element, such as updating live status messages or replacing placeholder content.</li>
-
-  <li><b>Changing internal state</b> — refers to properties the browser tracks internally, such as whether a <code>&lt;details&gt;</code> element is open, whether a form control is valid, or whether an element is focused.</li>
+  <li><b>Changing text</b> — modifying the <code>textContent</code> or <code>innerText</code> of an element, such as updating live status messages or replacing placeholder content.</li>
 </ul>
 
-<p>These are sometimes called “JavaScript-driven DOM mutations” or “JS mutations”, but they are not really a special category — just another way the DOM changes.</p>
+<p>JavaScript can also change state, and this is where things get a little tricky. Some properties are linked to an attribute, and some are not:</p>
+
+<ul>
+  <li>Setting <code>details.open = true</code> also adds the <code>open</code> attribute. This is a DOM mutation.</li>
+  <li>Setting <code>input.value = "hello"</code> only changes the property. The <code>value</code> attribute stays the same, so this is a state change, not a DOM mutation.</li>
+</ul>
+
+<p>These are sometimes called “JavaScript-driven DOM mutations” or “JS mutations”, but they are not really a special category. They are just another way the DOM changes.</p>
+
+
+<!--  –––––––––––––––––––––––––
+******  SECTION ******
+––––––––––––––––––––––––––  -->
+
+
+<h2>Watching DOM mutations with MutationObserver</h2>
+
+<p>Browsers have a built-in API called <code>MutationObserver</code> that lets you watch DOM mutations as they happen. This can be a handy debugging tool when you want to see exactly what is changing.</p>
+
+<p>Paste this into your browser's console:</p>
+
+<pre><code>const observer = new MutationObserver((mutations) => {
+  mutations.forEach((m) => {
+    console.log(m.type, m.target, m.attributeName || '', m.oldValue || '');
+  });
+});
+
+observer.observe(document.body, {
+  subtree: true,
+  childList: true,
+  attributes: true,
+  attributeOldValue: true,
+  characterData: true
+});</code></pre>
+
+<p>Now try these:</p>
+
+<ol>
+  <li>Open a <code>&lt;details&gt;</code> element. You will see an <code>attributes</code> mutation for the <code>open</code> attribute.</li>
+  <li>Type into an <code>&lt;input&gt;</code>. Nothing is logged.</li>
+  <li>Check a checkbox. Nothing is logged.</li>
+</ol>
+
+<p>Why? Typing changes the input's <code>value</code> property, and checking a checkbox changes its <code>checked</code> property. Neither changes an attribute, so the DOM tree itself has not changed. These are state changes, not DOM mutations. The browser still updates the AXTree, though, so screen readers can announce the new value or state.</p>
+
+<p>To stop watching, run <code>observer.disconnect()</code>.</p>
+
+<p>If you prefer not to use code, most browser DevTools let you right-click an element in the Elements panel and choose "Break on" attribute or subtree modifications.</p>
 
 
 <!--  –––––––––––––––––––––––––
@@ -133,9 +200,9 @@
 
 <h2>Why DOM mutations matter for accessibility</h2>
 
-<p>Every DOM mutation means that browsers need to update the accessibility tree (AXTree). Screen readers and other assistive technologies use this tree.</p>
+<p>When the DOM mutates, or when an element's state changes, browsers need to update the accessibility tree (AXTree). Screen readers and other assistive technologies use this tree.</p>
 
-<p>Whenever the DOM changes:</p>
+<p>Whenever one of these changes happens:</p>
 
 <ul>
   <li>The browser updates the AXTree.</li>
@@ -154,18 +221,18 @@
 
 <p>These AXEvents then travel through the operating system’s accessibility API to the screen reader, which interprets them and decides whether, when, and how to announce the change.</p>
 
-<p>Not all AXEvents result in announcements — screen readers may merge, delay, or ignore certain events based on their behaviour and user settings.</p>
+<p>Not all AXEvents result in announcements. Screen readers may merge, delay, or ignore certain events based on their behaviour and user settings.</p>
 
-<p>If we return to our previous three examples, we can see that they all push information into the AXTree:</p>
+<p>If we return to the examples above, we can see that DOM mutations and state changes both push information into the AXTree:</p>
 
 <ul>
-  <li>The <code>&lt;input&gt;</code> value is exposed as the control’s value</li>
-  <li>The <code>&lt;select&gt;</code> option is exposed as the element’s accessible value</li>
-  <li>The <code>&lt;summary&gt;</code> open/closed state is mapped to accessibility state</li>
+  <li>The <code>&lt;input&gt;</code> value (a state change) is exposed as the control’s value.</li>
+  <li>The <code>&lt;select&gt;</code> option (a state change) is exposed as the element’s accessible value.</li>
+  <li>The <code>&lt;details&gt;</code> open/closed state (a DOM mutation) is mapped to accessibility state.</li>
 </ul>
 
 <p>These updates happen because the browser does not keep a separate copy of your original HTML.
-Instead, it continuously updates accessibility information from the live, constantly changing DOM.</p>
+Instead, it continuously updates accessibility information from the live, constantly changing DOM and the state of each element.</p>
 
 
 <!--  –––––––––––––––––––––––––
@@ -175,16 +242,16 @@ Instead, it continuously updates accessibility information from the live, consta
 
 <h2>Why this matters</h2>
 
-<p>DOM mutations have a directly influence over the following:</p>
+<p>DOM mutations and state changes have a direct influence over:</p>
 
 <ul>
   <li>What screen readers announce.</li>
-  <li>How quickly these announcements occur</li>
-  <li>Which events interrupt others</li>
-  <li>Whether changes are even detectable</li>
+  <li>How quickly these announcements occur.</li>
+  <li>Which events interrupt others.</li>
+  <li>Whether changes are even detectable.</li>
 </ul>
 
-<p>Every DOM mutation means that browsers have to update accessibility information and fire accessibility events.</p>
+<p>Every meaningful DOM mutation or state change means that browsers have to update accessibility information and fire accessibility events.</p>
 
 
 <!--  –––––––––––––––––––––––––
@@ -196,10 +263,12 @@ Instead, it continuously updates accessibility information from the live, consta
 
 <ul>
   <li>The DOM is not static.</li>
-  <li>The browser performs DOM mutations frequently, even without JavaScript.</li>
+  <li>DOM mutations are changes to nodes, attributes, or text.</li>
+  <li>The browser performs some DOM mutations on its own, even without JavaScript.</li>
   <li>JavaScript can also create DOM mutations.</li>
-  <li>All DOM mutations flow into the AXTree.</li>
-  <li>Accessibility updates, announcements, and timing are shaped by these mutations.</li>
+  <li>Many changes, like typing or checking a checkbox, are state changes rather than DOM mutations.</li>
+  <li>You can use <code>MutationObserver</code> to see which changes are DOM mutations.</li>
+  <li>Both DOM mutations and state changes flow into the AXTree, and shape accessibility updates, announcements, and timing.</li>
 </ul>
 
 <hr>
@@ -214,7 +283,7 @@ Instead, it continuously updates accessibility information from the live, consta
   </p>
 
   <p>
-    <a href="https://www.maxdesign.com.au/articles/index.html"><b>What is an AXEvent?</b></a><br>Detailed explanation of AXevents.
+    <a href="https://www.maxdesign.com.au/articles/axevents.html"><b>What is an AXEvent?</b></a><br>Detailed explanation of AXevents.
   </p>
 
   <p>
