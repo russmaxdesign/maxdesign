@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle - Max Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <meta name="description" content="Learn how axe-core, Playwright, Cucumber and Gherkin fit together for accessibility testing in development workflows.">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="alternate" type="application/rss+xml" href="https://www.maxdesign.com.au/feed.xml" title="Max Design articles">
+</head>
+<body>
+  <header>
+    Max Design
+  </header>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../resources/index.html">Resources</a></li>
+      <li><a href="../talks/index.html">Presentations</a></li>
+      <li><a href="../articles/index.html" class="current">Articles</a></li>
+    </ul>
+  </nav>
+  <section class="banner-inner" aria-labelledby="a1">
+    <div class="banner-content">
+      <h1>axe-core, Playwright and Cucumber: accessibility testing in the development lifecycle</h1>
+    </div>
+  </section>  
+  <main>
+
+<p class="metadetails">Published: <time datetime="2026-10-09">9 October 2026</time> | Author: Russ Weakley</p>
+
+<p>If you work in accessibility, you have probably heard of automated testing tools such as axe.</p>
+
+<p>But developers and engineers often approach accessibility testing differently. They can building accessibility checks <b>into the development process</b>, so issues can be caught before they reach the finished product.</p>
+
+<p>This is where tools such as axe-core, Playwright and Cucumber can fit.</p>
+
+<ul>
+  <li><strong>axe-core</strong> finds automatically detectable accessibility problems</li>
+  <li><strong>Playwright</strong> controls a real browser, and can test how the website behaves, including its accessibility</li>
+  <li><strong>Cucumber</strong> describes expected behaviour in a readable format</li>
+</ul>
+
+<p>They can be used independently, but they become especially useful when combined.</p>
+
+<p>One thing worth knowing up front: <strong>Playwright can do accessibility testing on its own, without axe-core.</strong> We'll see how shortly.</p>
+
+<h2>axe-core</h2>
+
+<p>axe-core is an accessibility testing engine.</p>
+
+<p>If you have used the axe DevTools browser extension, you have already used axe-core. It is the engine inside that extension, and inside many other accessibility tools.</p>
+
+<p>axe-core runs inside the web page itself. You load a page, run axe-core against it, and it checks the rendered page for automatically detectable accessibility problems.</p>
+
+<p>These can include things such as:</p>
+
+<ul>
+  <li>missing accessible names</li>
+  <li>invalid ARIA</li>
+  <li>colour contrast</li>
+  <li>form labelling</li>
+  <li>landmark issues</li>
+  <li>heading-related issues</li>
+  <li>structural accessibility problems</li>
+</ul>
+
+<p>At its simplest:</p>
+
+<pre><code>Page loads
+↓
+axe-core runs inside the page
+↓
+axe-core returns its results</code></pre>
+
+<p>Each problem axe-core finds is given an impact level: <strong>minor</strong>, <strong>moderate</strong>, <strong>serious</strong> or <strong>critical</strong>. This helps teams decide what to fix first.</p>
+
+<p>Where axe-core really shines is breadth: it can sweep a whole page for a wide range of common problems in one go, without anyone needing to write a test for each one.</p>
+
+<p>axe-core is also honest about what it doesn't know. Alongside its violations, it returns "incomplete" results: things it couldn't decide automatically and that need a person to check. A common example is colour contrast for text over a background image or gradient.</p>
+
+<p>That points to the important limitation: axe-core can only detect issues that can be determined automatically.</p>
+
+<p>It cannot reliably answer questions such as:</p>
+
+<ul>
+  <li>Is the focus order logical?</li>
+  <li>Is a visible label meaningful?</li>
+  <li>Does the alt text appropriately describe the image?</li>
+  <li>Is the experience understandable with a screen reader?</li>
+  <li>Is the keyboard interaction appropriate for this component?</li>
+</ul>
+
+<p>So axe-core provides <strong>automated accessibility testing</strong>, not a complete accessibility audit.</p>
+
+<h2>Playwright</h2>
+
+<p>Playwright is a browser automation and testing framework.</p>
+
+<p>It can control a browser much like a person would interact with a website.</p>
+
+<p>For example, Playwright can:</p>
+
+<ul>
+  <li>open a page</li>
+  <li>log in</li>
+  <li>click buttons</li>
+  <li>complete forms</li>
+  <li>open dialogs</li>
+  <li>navigate between pages</li>
+  <li>use keyboard commands</li>
+  <li>wait for dynamic content</li>
+  <li>inspect elements and states</li>
+  <li>take screenshots</li>
+</ul>
+
+<p>This means Playwright can get an application into the exact state you want to test.</p>
+
+<p>For example:</p>
+
+<pre><code>Open checkout page
+↓
+Add a product to the cart
+↓
+Open the cart dialog
+↓
+Run an accessibility test</code></pre>
+
+<p>This is one place where Playwright and axe-core fit together well. axe-core can inspect the current page, but it does not navigate through the application itself. Playwright can do that navigation, then run axe-core inside the page it has opened. There is even an official package, <code>@axe-core/playwright</code>, that connects the two.</p>
+
+<p>But Playwright is much more than a way to get pages ready for axe-core.</p>
+
+<h3>Playwright can test accessibility on its own</h3>
+
+<p>Playwright can work with accessibility information such as roles, accessible names and descriptions, much like the information exposed to assistive technologies.</p>
+
+<p>For example, Playwright can find elements by their <strong>role</strong> and <strong>accessible name</strong>:</p>
+
+<pre><code>page.getByRole('button', { name: 'Submit' })</code></pre>
+
+<p>If the button does not expose the expected accessible name, that locator will not match it and the test fails. Just finding elements this way is already a small accessibility check.</p>
+
+<p>axe-core would also flag a button with no accessible name at all. But only a test like this can confirm the name is the <em>right</em> one.</p>
+
+<p>Playwright also has checks (called assertions) built specifically around accessibility, such as:</p>
+
+<ul>
+  <li><code>toHaveAccessibleName</code>: does this element have the expected accessible name?</li>
+  <li><code>toHaveAccessibleDescription</code>: does it have the expected accessible description?</li>
+  <li><code>toHaveRole</code>: does it have the expected role?</li>
+  <li><code>toHaveAccessibleErrorMessage</code>: is the expected error message connected to it?</li>
+  <li><code>toBeFocused</code>: does this element currently have keyboard focus?</li>
+</ul>
+
+<p>It can also take an <strong>ARIA snapshot</strong>, a simple text outline of how part of the page appears in the accessibility tree, and compare it against what you expect.</p>
+
+<p>Here is a complete accessibility test with no axe-core in it at all:</p>
+
+<pre><code>test('Escape closes the dialog and returns focus', async ({ page }) =&gt; {
+  const trigger = page.getByRole('button', { name: 'Open settings' });
+  await trigger.click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+
+  await page.keyboard.press('Escape');
+
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await expect(trigger).toBeFocused();
+});</code></pre>
+
+<p>Even if you don't write code, you can probably read what this does: open the dialog, press Escape, check the dialog has closed, and check focus went back to the button that opened it.</p>
+
+<p>That is <strong>functional accessibility testing</strong>: checking that things actually <em>behave</em> accessibly, not just that the code looks right to an automated scanner.</p>
+
+<h2>Cucumber</h2>
+
+<p>Cucumber sits at a different level.</p>
+
+<p>Rather than controlling the browser or checking accessibility rules, Cucumber lets you describe expected behaviour in plain language, then runs those descriptions as tests.</p>
+
+<p>It uses a language called <strong>Gherkin</strong>.</p>
+
+<p>For example:</p>
+
+<pre><code>Feature: Checkout accessibility
+
+Scenario: Checkout form has no automatically detectable accessibility issues
+  Given I am on the checkout page
+  When I run an accessibility scan
+  Then there should be no serious or critical accessibility violations</code></pre>
+
+<p>Each of those plain-language lines is connected to a small piece of test code called a <strong>step definition</strong>.</p>
+
+<p>For example:</p>
+
+<pre><code>Given I am on the checkout page
+→ Playwright opens the page
+
+When I run an accessibility scan
+→ axe-core runs
+
+Then there should be no serious or critical accessibility violations
+→ the test checks the axe-core results</code></pre>
+
+<p>Cucumber therefore does not perform the accessibility testing itself.</p>
+
+<p>Instead, it provides a <strong>readable behavioural layer around the tests</strong>.</p>
+
+<p>This can be useful when developers, testers, accessibility specialists and product teams need a shared understanding of what behaviour is expected.</p>
+
+<p>A small practical note: Playwright comes with its own test runner, and so does Cucumber. When teams use both tools, Cucumber usually runs the tests and calls on Playwright to control the browser. You don't use both runners at once.</p>
+
+<h2>Gherkin and accessibility acceptance criteria</h2>
+
+<p>One interesting thing about Gherkin is how naturally it can express accessibility requirements.</p>
+
+<p>Its basic structure is:</p>
+
+<pre><code>Given ...
+When ...
+Then ...</code></pre>
+
+<p>For example:</p>
+
+    <pre><code>Scenario: Closing a dialog with Escape
+  Given the dialog is open
+  When I press the Escape key
+  Then the dialog should close
+  And focus should return to the button that opened it</code></pre>
+
+<p>Look familiar? It's the same behaviour as the Playwright test above, just written for people instead of computers.</p>
+
+<p>This is essentially structured acceptance criteria.</p>
+
+<p>Instead of saying:</p>
+
+<blockquote>
+  <p>The dialog must be accessible.</p>
+</blockquote>
+
+<p>we are describing a specific behaviour that can actually be tested.</p>
+
+<p>That makes Gherkin particularly interesting for accessibility requirements involving things such as:</p>
+
+<ul>
+  <li>keyboard interaction</li>
+  <li>focus management</li>
+  <li>form errors</li>
+  <li>dialogs</li>
+  <li>menus</li>
+  <li>dynamic content</li>
+  <li>state changes</li>
+</ul>
+
+<h2>How they fit together</h2>
+
+<p>The three tools operate at different layers.</p>
+
+<p>A useful mental model is:</p>
+
+<pre><code>Cucumber / Gherkin
+"What behaviour are we testing?"
+        ↓
+Playwright
+"Interact with the application and test the expected behaviour."
+        ↓
+Optional: axe-core (runs inside the page Playwright has opened)
+"Check this state for automatically detectable accessibility problems."</code></pre>
+
+<p>Consider a registration form.</p>
+
+<p>You might describe the requirement using Gherkin:</p>
+
+<pre><code>Scenario: Email validation error
+
+  Given I am on the registration form
+  When I submit the form without entering an email address
+  Then the email field should have an accessible error message</code></pre>
+
+<p>Playwright could then:</p>
+
+<pre><code>Open the registration page
+↓
+Submit the form
+↓
+Find the email field
+↓
+Check the error message appears
+↓
+Check the error is connected to the field
+↓
+Check where focus moved</code></pre>
+
+<p>axe-core could then scan the resulting page for automatically detectable accessibility problems.</p>
+
+<p>But notice that axe-core couldn't do the earlier step for us. It cannot reliably infer which text on the page is intended to be the field's error message if that relationship is missing. Playwright can check this directly, using <code>toHaveAccessibleErrorMessage</code> or <code>toHaveAccessibleDescription</code> (depending on how the error is connected).</p>
+
+<h2>The simplest mental model</h2>
+
+<p>If you only remember one thing:</p>
+
+<ul>
+  <li><strong>axe-core</strong>: Scans a page for automatically detectable accessibility problems</li>
+  <li><strong>Playwright</strong>: Drives the website and tests how it behaves, including accessibility behaviour</li>
+  <li><strong>Cucumber</strong>: Runs expected behaviour written as readable scenarios</li>
+  <li><strong>Gherkin</strong>: The structured language used to write those scenarios</li>
+</ul>
+
+<p>Playwright can test accessibility behaviour on its own. axe-core adds a broad automated scan on top. Many teams use both.</p>
+
+<p>Cucumber is optional. It becomes particularly useful when you want accessibility requirements expressed as reusable, human-readable acceptance criteria rather than only as developer test code.</p>
+
+<p>Together, these tools can help move accessibility testing earlier into development, while also expanding testing well beyond a simple automated scan.</p>
+
+<p>And none of them replace testing with real people, including people who use assistive technologies every day.</p>
+
+  </main>
+  <footer>
+    <ul>
+      <li><a href="/sitemap.html">Sitemap</a></li>
+      <li><a href="/feed.xml">Feed</a></li>
+      <li><a href="/contact-us/index.html">Contact</a></li>
+      <li><a href="https://github.com/russmaxdesign" target="_blank">Github</a></li>
+      <li><a href="https://www.linkedin.com/in/russweakley/" target="_blank">Linkedin</a></li>
+    </ul>
+    <p>Copyright &copy; Max Design 2026. ABN 43 922 788 236</p>
+  </footer>
+</body>
+</html>
