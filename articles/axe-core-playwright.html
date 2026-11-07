@@ -82,13 +82,13 @@ axe-core returns its results</code></pre>
 
 <p>Each problem axe-core finds is given an impact level: <strong>minor</strong>, <strong>moderate</strong>, <strong>serious</strong> or <strong>critical</strong>. This helps teams decide what to fix first.</p>
 
-<p>Where axe-core really shines is breadth: it can sweep a whole page for a wide range of common problems in one go, without anyone needing to write a test for each one.</p>
+<p>axe-core can scan a page for a wide range of common accessibility problems at once, without needing a separate test for each one.</p>
 
-<p>axe-core is also honest about what it doesn't know. Alongside its violations, it returns "incomplete" results: things it couldn't decide automatically and that need a person to check. A common example is colour contrast for text over a background image or gradient.</p>
+<p>axe-core also identifies issues it cannot determine automatically. As well as reporting violations, it returns "incomplete" results that need manual checking. A common example is colour contrast for text over a background image or gradient.</p>
 
-<p>That points to the important limitation: axe-core can only detect issues that can be determined automatically.</p>
+<p>However, axe-core can only detect issues that can be determined automatically.</p>
 
-<p>It cannot reliably answer questions such as:</p>
+<p>It cannot automatically determine:</p>
 
 <ul>
   <li>Is the focus order logical?</li>
